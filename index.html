@@ -148,6 +148,8 @@ nav.solid{background:rgba(8,6,15,.82);border-bottom:1px solid var(--line)}
 .shot:hover{border-color:var(--gold);transform:scale(1.02)}
 .shot .ic{font-size:1.3rem;opacity:.5}
 .shot small{color:var(--dim);letter-spacing:.05em}
+.shot.filled{border-style:solid;border-color:rgba(157,143,240,.35);justify-content:flex-end;padding:0;overflow:hidden;text-decoration:none}
+.shot.filled small{width:100%;padding:18px 10px 7px;color:#cfc8f5;background:linear-gradient(transparent,rgba(10,8,24,.88))}
 
 /* ---------- 拆解案卡片 ---------- */
 .cases{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
@@ -269,8 +271,9 @@ footer .logo{font-size:1rem;margin-bottom:8px;display:inline-block}
     <div class="proj-sub">时空穿越 · 二次元回合制 RPG —— 系统 / 数值 / 关卡 / 叙事 / 上线全经手</div>
   </div>
   <div class="reveal d1 video-frame"><div class="ratio">
-    <iframe src="https://www.youtube-nocookie.com/embed/6Jd2jqOS7E8" title="ChronoTraveler 实机演示" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>
+    <iframe src="https://player.bilibili.com/player.html?bvid=BV1hrbY6sE2W&amp;page=1&amp;autoplay=0&amp;danmaku=0&amp;high_quality=1" title="ChronoTraveler 实机演示" scrolling="no" allowfullscreen></iframe>
   </div></div>
+  <p class="reveal d1" style="text-align:right;font-size:.78rem;color:var(--dim);margin-top:8px">完整实机演示 18 分钟 ｜ <a href="https://www.bilibili.com/video/BV1hrbY6sE2W/" target="_blank" rel="noopener" style="color:var(--dim)">B 站原页</a> · <a href="https://youtu.be/6Jd2jqOS7E8" target="_blank" rel="noopener" style="color:var(--dim)">YouTube（海外备用）</a></p>
   <p class="reveal d1 proj-desc">一人完成从立项、系统设计、数值、关卡、叙事到上线的完整流程：五时代世界观、序章开场弧、终局二段式决战，音频 / CG / 立绘全覆盖。</p>
   <div class="hl">
     <div class="hl-card reveal d1"><h4>「知识对决」回合战斗</h4><p>5 大知识域映射五元素、五边形克制环（1.25/1.0/0.8），"答对即命中"；伤害公式驱动，答题速度与正误决定倍率——把知识判定转化为战力。</p></div>
@@ -279,9 +282,9 @@ footer .logo{font-size:1rem;margin-bottom:8px;display:inline-block}
     <div class="hl-card reveal d4"><h4>AI 协同开发管线</h4><p>以 LLM / AI Coding 工作流单人完成 130+ 运行时脚本 + 37 编辑器工具，打通生图→立绘→图生 3D→音频→图生视频的全流程。</p></div>
   </div>
   <div class="shots reveal d2">
-    <div class="shot" data-slot="chrono-1"><span class="ic">✦</span><small>场景截图</small><span class="ph">待填图</span></div>
-    <div class="shot" data-slot="chrono-2"><span class="ic">⚔</span><small>战斗界面</small><span class="ph">待填图</span></div>
-    <div class="shot" data-slot="chrono-3"><span class="ic">★</span><small>Boss / 立绘</small><span class="ph">待填图</span></div>
+    <a class="shot filled" data-slot="chrono-1" href="images/chrono-hub.jpg" target="_blank" style="background-image:url('images/chrono-hub.jpg')"><small>星穹枢纽 · 时代传送门</small></a>
+    <a class="shot filled" data-slot="chrono-2" href="images/chrono-battle.jpg" target="_blank" style="background-image:url('images/chrono-battle.jpg')"><small>「知识对决」回合战斗 · 五元素克制</small></a>
+    <a class="shot filled" data-slot="chrono-3" href="images/chrono-finale.jpg" target="_blank" style="background-image:url('images/chrono-finale.jpg')"><small>终局决战 ·「The Unwritten」</small></a>
   </div>
 </div></section>
 
@@ -345,9 +348,11 @@ footer .logo{font-size:1rem;margin-bottom:8px;display:inline-block}
     <a class="repo" href="https://github.com/Sinthome-Ludens/CSC8507-08" target="_blank" rel="noopener">↗ 团队仓库（源码公开可查）</a>
   </div>
   <div class="shots reveal d2">
+    <!-- 待 Cyber Stealth 截图素材到位后取消注释并填 images/ 路径
     <div class="shot" data-slot="stealth-1"><span class="ic">▣</span><small>玩法 / HUD</small><span class="ph">待填图</span></div>
     <div class="shot" data-slot="stealth-2"><span class="ic">◎</span><small>道具轮盘</small><span class="ph">待填图</span></div>
     <div class="shot" data-slot="stealth-3"><span class="ic">▤</span><small>UI 界面</small><span class="ph">待填图</span></div>
+    -->
   </div>
 </div></section>
 
@@ -435,7 +440,8 @@ footer .logo{font-size:1rem;margin-bottom:8px;display:inline-block}
   <div class="links">
     <a class="btn primary" id="mailbtn" href="#" rel="nofollow">邮箱联系</a>
     <a class="btn" href="https://github.com/linynZ" target="_blank" rel="noopener">GitHub</a>
-    <a class="btn" href="https://youtu.be/6Jd2jqOS7E8" target="_blank" rel="noopener">毕设视频</a>
+    <a class="btn" href="https://www.bilibili.com/video/BV1hrbY6sE2W/" target="_blank" rel="noopener">毕设视频（B 站）</a>
+    <a class="btn" href="https://youtu.be/6Jd2jqOS7E8" target="_blank" rel="noopener">YouTube</a>
   </div>
 </div></section>
 
