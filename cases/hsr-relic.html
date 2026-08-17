@@ -48,6 +48,14 @@ article td{border-bottom:1px solid var(--line);padding:8px 12px;color:#cdc9e0}
 article tr:hover td{background:rgba(157,143,240,.05)}
 article hr{border:0;border-top:1px solid var(--line);margin:40px 0}
 article a{color:var(--ice)}
+article img{max-width:100%;border-radius:12px;border:1px solid var(--line);margin:8px 0 2px;display:block}
+article img+em, article p img+em{display:block}
+.toc{border:1px solid var(--line);border-radius:12px;padding:14px 22px;background:var(--card);font-size:.86rem;margin-bottom:6px}
+.toc ul{margin:0 0 0 1.1em;color:var(--muted)}
+.toc li{margin-bottom:3px}
+.toc a{color:var(--muted);text-decoration:none}
+.toc a:hover{color:var(--gold)}
+.toctitle{color:var(--gold);font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:8px}
 footer{border-top:1px solid var(--line);margin-top:70px;padding-top:28px}
 footer .note{font-size:.85rem;color:var(--muted);margin-bottom:18px}
 footer .note b{color:var(--gold)}
@@ -62,16 +70,32 @@ footer .note b{color:var(--gold)}
   <div class="eyebrow">Case Study · 原创拆解</div>
   <h1 class="title">《崩坏：星穹铁道》遗器系统拆解案</h1>
   <div class="subtitle">概率链求解、速度阈值推导，与一次被自己揪出的模型错误</div>
-  <div class="meta"><span>数值养成 · 概率建模向</span><span>371 行正文 · 476 行计算脚本</span><span>v1.0 · 2026-07</span><span>原创推导 · 配可复现脚本</span></div>
+  <div class="meta"><span>数值养成 · 概率建模向</span><span>394 行正文 · 482 行计算脚本</span><span>v1.1 · 2026-08</span><span>原创推导 · 配可复现脚本与图表</span></div>
   <article>
+<div class="toc"><span class="toctitle">目录 · Contents</span><ul>
+<li><a href="#_1">关于本拆解案的方法说明</a></li>
+<li><a href="#1">1. 选题说明</a></li>
+<li><a href="#2">2. 系统定位</a></li>
+<li><a href="#3">3. 获取链路</a></li>
+<li><a href="#4">4. 速度机制：遗器系统里唯一的离散维度</a></li>
+<li><a href="#5-v01">5. 概率链：把 v0.1 的承诺算穿</a></li>
+<li><a href="#6">6. 一次被自己揪出的模型错误</a></li>
+<li><a href="#7">7. 换算成开拓力与天数</a></li>
+<li><a href="#8">8. 跨游戏对照与配置表设计</a></li>
+<li><a href="#9">9. 亮点与问题</a></li>
+<li><a href="#10">10. 技术实现推断</a></li>
+<li><a href="#11">11. 实测校验计划</a></li>
+<li><a href="#12">12. 参考与附录</a></li>
+</ul>
+</div>
 <blockquote>
 <p>作者：赵鹏淦（Penggan Zhao）｜ Newcastle University · MSc Game Engineering
-版本：v1.0 ｜ 拆解版本：2.x–3.x
+版本：v1.1（v1.0 经对照行业点评标准的评审修订，修订项见文内标注）｜ 拆解版本：2.x–3.x
 拆解范围：遗器的概率结构、养成期望建模、速度机制的离散性、体力经济
 定位：<strong>数值策划向</strong>；与《鸣潮声骸系统拆解案》（系统向）、《鸣潮战斗系统拆解案》（机制向）构成作品集三件套</p>
 </blockquote>
 <hr />
-<h2>关于本拆解案的方法说明</h2>
+<h2 id="_1">关于本拆解案的方法说明</h2>
 <p>v0.1 在第 4 节留了一句承诺：「v0.2 目标：把这条链算穿」。本版兑现它，并额外做了一件公开攻略里没人做的事——<strong>从行动值公式反推社区流传的全部配速阈值</strong>。</p>
 <div class="tablewrap"><table>
 <thead>
@@ -82,12 +106,12 @@ footer .note b{color:var(--gold)}
 </thead>
 <tbody>
 <tr>
-<td>速度 × 行动值 = 10000</td>
-<td><strong>配速阈值的第一性原理推导</strong>，逐个复现社区的"魔法数字"（133.3 / 142.9 / 160.0）</td>
+<td>速度 × 行动值 = 10000；混沌回忆轮制（首轮 150 AV + 每轮 100 AV）</td>
+<td><strong>配速阈值的第一性原理推导</strong>——全部社区"魔法数字"（133.3 / 142.9 / 160.0）从同一条轮制规则落出</td>
 </tr>
 <tr>
 <td>速度副词条三档 2.0/2.3/2.6</td>
-<td>边际收益的<strong>锯齿性量化</strong>：命中率 7.8%，其余 92.2% 情况下收益精确为零</td>
+<td>边际收益的<strong>锯齿性量化</strong>：+2.6 速词条的阈值命中率仅 3.9%~9.1%（随轮数窗口），其余 &gt;90% 情况下收益精确为零</td>
 </tr>
 <tr>
 <td>主属性权重、副词条规则、强化机制</td>
@@ -104,18 +128,19 @@ footer .note b{color:var(--gold)}
 <p>⚠️ <strong>参数声明</strong>：主属性权重、初始副词条条数比例、开拓力参数均标注 [需核验]，取自公开整理与社区统计。§6 的<strong>结论形态</strong>（路径漏算导致系统性高估）不依赖具体取值，<strong>具体天数</strong>依赖。核验方法见 §9。</p>
 </blockquote>
 <hr />
-<h2>1. 选题说明</h2>
+<h2 id="1">1. 选题说明</h2>
 <p>装备词条系统在动作游戏（鸣潮）里承担"刷取玩法"，在回合制里则是<strong>纯数值容器</strong>——没有操作补偿，词条期望直接等于战力。这使遗器成为拆数值的理想标本：整条链路可以完全用概率与期望描述。</p>
 <p>但真正让我选它的是<strong>速度</strong>。遗器里所有其他词条的收益都是连续的，只有速度不是——它经过一个 floor 函数，收益呈阶跃。这个差别造就了崩铁独有的"配速文化"，也造就了玩家侧最强烈的养成挫败感。它值得单独一章。</p>
+<p><strong>给谁看</strong>：本案面向回合制 / 词条养成品类的数值岗——尤其是米哈游的竞争序列。遗器是被验证过的成熟系统，正向说明书式拆解只能体现下限；本案刻意只做说明书不做的三层（阈值推导 / 概率链求解 / 模型证伪），用同一选题展示上限。对已做出该系统的原厂，这些推导是复核；对想做同品类的竞对，它们是可以直接搬走的养成周期估算工具。</p>
 <hr />
-<h2>2. 系统定位</h2>
+<h2 id="2">2. 系统定位</h2>
 <ol>
 <li><strong>角色养成的无上限末端</strong>：等级 / 行迹 / 光锥均有确定性上限，遗器词条是唯一开放式追求</li>
 <li><strong>开拓力的主要消耗出口</strong>：版本中后期开拓力几乎全部流向遗器本，体力价值 ≈ 遗器产出价值，直接锚定月卡的边际价值</li>
 <li><strong>流派构筑的物质基础</strong>：套装效果与主属性组合决定 build 空间</li>
 </ol>
 <hr />
-<h2>3. 获取链路</h2>
+<h2 id="3">3. 获取链路</h2>
 <pre><code>开拓力 → 侵蚀隧洞（散件套装）/ 位面饰品提取（位面球 + 连结绳）
        → 掉落（星级按世界等级分布）
        → 副产物：遗失残骸类经验材料
@@ -123,69 +148,98 @@ footer .note b{color:var(--gold)}
 </code></pre>
 <p>与鸣潮声骸的<strong>根本差异</strong>：遗器获取被开拓力严格门控（约 240/天），声骸大世界无限刷。这个差异的连锁后果贯穿全文，在 §5.3 得到一个反直觉的结论。</p>
 <hr />
-<h2>4. 速度机制：遗器系统里唯一的离散维度</h2>
+<h2 id="4">4. 速度机制：遗器系统里唯一的离散维度</h2>
 <p><strong>本文最独特的一章。</strong></p>
-<h3>4.1 配速阈值的第一性原理推导</h3>
+<h3 id="41">4.1 配速阈值的第一性原理推导</h3>
 <p>公开公式：<code>速度 × 行动值 = 10000</code>。速度为 s 的单位每次行动需要 <code>10000/s</code> 个行动值（AV）。在长度为 W 的战斗窗口内，行动次数为：</p>
 <pre><code>N(s) = floor( W · s / 10000 )
 </code></pre>
 <p><strong>关键在 floor。</strong> 要在窗口 W 内行动 n 次，所需最低速度为：</p>
 <pre><code>s_n = n × 10000 / W
 </code></pre>
-<p>这就是"配速阈值"——不是玄学，是把 floor 的断点解出来。逐窗口列出：</p>
+<p>这就是"配速阈值"——不是玄学，是把 floor 的断点解出来。</p>
+<p><strong>窗口 W 不是任取的。</strong> 配速讨论几乎全部发生在混沌回忆（轮数限时）语境下，其轮制规则为<strong>首轮 150 AV、之后每轮 100 AV</strong>，因此有意义的窗口只有：</p>
+<pre><code>W(c) = 150 + 100 × (c − 1)   →   150 / 250 / 350 / …
+</code></pre>
+<p>逐窗口解出阈值 <code>s_n = n × 10000 / W(c)</code>：</p>
 <div class="tablewrap"><table>
 <thead>
 <tr>
-<th>战斗窗口 W</th>
-<th>阈值序列</th>
+<th>窗口</th>
+<th>覆盖轮数</th>
+<th>阈值序列（速度）</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>200 AV</td>
-<td>100.0 / 150.0 / 200.0</td>
+<td>150 AV</td>
+<td>首轮</td>
+<td>两动 <strong>133.33</strong> ／ 三动 200.00</td>
 </tr>
 <tr>
-<td><strong>300 AV</strong>（常见 BOSS 一阶段）</td>
-<td>100.0 / <strong>133.3</strong> / 166.7 / 200.0</td>
+<td>250 AV</td>
+<td>前两轮</td>
+<td>三动 120.00 ／ 四动 <strong>160.00</strong></td>
 </tr>
 <tr>
-<td><strong>350 AV</strong></td>
-<td>114.3 / <strong>142.9</strong> / 171.4 / 200.0</td>
-</tr>
-<tr>
-<td>400 AV</td>
-<td>100.0 / 125.0 / 150.0 / 175.0</td>
-</tr>
-<tr>
-<td>500 AV</td>
-<td>100.0 / 120.0 / 140.0 / <strong>160.0</strong> / 180.0</td>
+<td>350 AV</td>
+<td>前三轮</td>
+<td>四动 114.29 ／ 五动 <strong>142.86</strong> ／ 六动 171.43</td>
 </tr>
 </tbody>
 </table></div>
 <blockquote>
-<p><strong>结论一：社区流传的配速阈值可以被逐个复现。</strong></p>
+<p><strong>结论一：社区流传的配速阈值全部从轮制规则落出。</strong></p>
 </blockquote>
 <p>对照社区常年流传的"魔法数字"：</p>
 <ul>
-<li><strong>133.4 速</strong> ← W=300 的 n=4 阈值，精确值 133.33</li>
-<li><strong>142.9 速</strong> ← W=350 的 n=5 阈值，精确值 142.86</li>
-<li><strong>160.0 速</strong> ← W=250 的 n=4 阈值，精确值 160.00</li>
+<li><strong>133.4 速</strong> ← 首轮（150 AV）两动，精确值 133.33</li>
+<li><strong>142.9 速</strong> ← 前三轮（350 AV）五动，精确值 142.86</li>
+<li><strong>160.0 / 160.1 速</strong> ← 前两轮（250 AV）四动，精确值 160.00</li>
 </ul>
-<p>全部吻合。玩家社区以口耳相传方式积累的配速表，本质上是<strong>用大量实战反复试出 floor 函数的断点位置</strong>。</p>
+<p>全部吻合，且社区值均取<strong>略高于精确值的圆整</strong>——面板显示会截断隐藏小数，配装必须保证"真实速度 ≥ 边界"，这个上取整的裕量本身就是玩家逆向工程做得有多精确的证据。玩家社区以口耳相传方式积累的配速表，本质上是<strong>用大量实战反复试出 floor 函数的断点位置</strong>。</p>
+<p><img alt="三个轮制窗口下的行动次数阶梯函数，魔法数字标注在断点上" src="img/hsr_threshold_staircase.png" /></p>
+<p><em>图：N(s) = floor(W·s/10000) 在三个轮制窗口下的阶梯，圆圈即三个"魔法数字"所在断点。由 <code>analysis/make_charts.py</code> 生成，可复现。</em></p>
 <blockquote>
+<p>修订说明：v1.0 曾用"W=300（常见 BOSS 一阶段）"解释 133.3——该窗口在轮制下并不存在，它与 133.33 的吻合只是 <code>2/150 = 4/300</code> 的算术巧合。v1.1 换成轮制推导后，全部魔法数字从同一条规则落出，不再需要为每个数字单独挑一个窗口。修正来自评审，保留说明以维持本作品集"修订可追溯"的原则。</p>
 <p><strong>策划视角</strong>：玩家会自发地对离散机制做逆向工程，而且做得相当准。设计带断点的机制时，可以默认断点最终会被公开——真正需要决定的是<strong>要不要主动告诉玩家</strong>。米哈游选择了不告诉，代价见下节。</p>
 </blockquote>
-<h3>4.2 边际收益的锯齿性</h3>
-<p>取 W=300、一条速度副词条按最高档 +2.6 速。解析求解（注意不能从抽样表里数命中率——扫描宽度若不是阈值间隔的整数倍，抽样会有偏，这个坑我自己先踩了一次）：</p>
-<pre><code>阈值间隔 = 10000 / W        = 33.33 速
-命中率   = 2.6 / 33.33      = 7.8%
-期望收益 = 2.6 × 300 / 10000 = 0.078 个行动（相对 3 回合基准 2.6%）
-</code></pre>
+<h3 id="42">4.2 边际收益的锯齿性</h3>
+<p>一条速度副词条按最高档 +2.6 速。相邻阈值的间隔为 <code>10000 / W</code>，命中率即 <code>2.6 ÷ (10000/W)</code>（解析求解——不能从抽样表里数命中率：扫描宽度若不是阈值间隔的整数倍，抽样会有偏，这个坑我自己先踩了一次）：</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>窗口 W</th>
+<th style="text-align: right;">阈值间隔</th>
+<th style="text-align: right;">+2.6 速的命中率</th>
+<th style="text-align: right;">期望收益（行动数）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>150 AV（首轮）</td>
+<td style="text-align: right;">66.67 速</td>
+<td style="text-align: right;"><strong>3.9%</strong></td>
+<td style="text-align: right;">0.039</td>
+</tr>
+<tr>
+<td>250 AV（前两轮）</td>
+<td style="text-align: right;">40.00 速</td>
+<td style="text-align: right;">6.5%</td>
+<td style="text-align: right;">0.065</td>
+</tr>
+<tr>
+<td>350 AV（前三轮）</td>
+<td style="text-align: right;">28.57 速</td>
+<td style="text-align: right;"><strong>9.1%</strong></td>
+<td style="text-align: right;">0.091</td>
+</tr>
+</tbody>
+</table></div>
 <blockquote>
-<p><strong>结论二：速度是遗器系统里唯一一个"期望收益 ≠ 实际收益"的词条。</strong></p>
+<p><strong>结论二：速度是唯一一个离散收益不被战斗内重复采样平滑的词条。</strong></p>
 </blockquote>
-<p>玩家实际拿到的从来不是 0.078 这个平均值，而是 <strong>0 或 1</strong>：</p>
+<p>玩家实际拿到的从来不是百分之几的平均值，而是 <strong>0 或 1</strong>：</p>
 <ul>
 <li>落在阈值前 → 跨过，收益是一整个回合（约 +33%）</li>
 <li>落在阈值后 → 收益<strong>精确为零</strong>，这条词条完全白给</li>
@@ -195,8 +249,8 @@ footer .note b{color:var(--gold)}
 <li><strong>"速度词条要么神要么废"</strong> —— 不是错觉，是 floor 的必然结果</li>
 <li><strong>速度遗器的估值极其两极</strong> —— 同样 +2.6 速，对 A 玩家值一个回合，对 B 玩家一文不值，取决于各自面板落在阈值哪一侧</li>
 </ol>
-<p>对比：暴击率 +3.24% 对任何面板都产生连续正收益，差异只是大小，不存在归零。</p>
-<h3>4.3 这是缺陷还是特性</h3>
+<p>对比暴击率：单次攻击的暴击实现值同样是 0/1，但它在一场战斗内被几十次攻击<strong>反复采样</strong>，大数定律把实际收益拉回期望；速度的 0/1 由面板<strong>一次性</strong>决定，整场战斗停在同一侧——没有任何重复采样来平滑它。这才是速度与其他所有词条的本质区别。</p>
+<h3 id="43">4.3 这是缺陷还是特性</h3>
 <p>倾向认为<strong>是特性，但缺了一半的配套</strong>。</p>
 <p>阶跃收益的正面价值很实在：它制造了明确、可达成、可验证、可炫耀的<strong>离散里程碑</strong>，这是连续词条给不了的成就感，也是配速文化能形成的根源。</p>
 <p>但米哈游只做了机制，没做<strong>信息</strong>：</p>
@@ -212,8 +266,8 @@ footer .note b{color:var(--gold)}
 <p>这与《鸣潮声骸系统拆解案》§5.3 发现的问题<strong>完全同构</strong>：都是做好了深度，却没把判断深度所需的信息交给玩家。两家在这一点上犯了同一个错，说明它是个行业级的盲区，而不是某一款产品的疏忽。</p>
 </blockquote>
 <hr />
-<h2>5. 概率链：把 v0.1 的承诺算穿</h2>
-<h3>5.1 链条分解</h3>
+<h2 id="5-v01">5. 概率链：把 v0.1 的承诺算穿</h2>
+<h3 id="51">5.1 链条分解</h3>
 <p>目标：一件「躯干 · 暴击率主属性 · 双暴副词条 · 强化命中」的遗器。</p>
 <pre><code>P(部位) × P(主属性) × P(初始条数) × P(副词条含目标) × P(强化落点)
 </code></pre>
@@ -283,9 +337,14 @@ footer .note b{color:var(--gold)}
 <td style="text-align: right;">0.0146</td>
 <td style="text-align: right;">0.0156</td>
 </tr>
+<tr>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0.0010</td>
+<td style="text-align: right;">0.0010</td>
+</tr>
 </tbody>
 </table></div>
-<h3>5.2 严格模型的结果</h3>
+<h3 id="52">5.2 严格模型的结果</h3>
 <div class="tablewrap"><table>
 <thead>
 <tr>
@@ -322,13 +381,13 @@ footer .note b{color:var(--gold)}
 </blockquote>
 <p>没有任何一环的概率低得离谱——最低的是主属性 10%。但五环相乘后，高分档达到数千件。</p>
 <p>这是<strong>乘法链</strong>的典型特征：设计师可以通过增删一个环节，在不改动任何单项概率的前提下，把养成周期改变一个数量级。相比调整权重，<strong>增删环节是更隐蔽也更有力的调控手段</strong>——玩家能感知到"暴击率主属性只有 10%"，但很难感知到"多了一层初始条数判定"意味着什么。</p>
-<h3>5.3 与鸣潮的跨产品对照</h3>
+<h3 id="53">5.3 与鸣潮的跨产品对照</h3>
 <div class="tablewrap"><table>
 <thead>
 <tr>
 <th></th>
 <th style="text-align: right;">随机层数</th>
-<th style="text-align: right;">严格毕业期望</th>
+<th style="text-align: right;">期望件数（单路径严格口径）</th>
 <th>获取门控</th>
 </tr>
 </thead>
@@ -347,13 +406,14 @@ footer .note b{color:var(--gold)}
 </tr>
 </tbody>
 </table></div>
+<p><strong>口径声明</strong>：两列同为"单路径严格口径"，同口径内可比。§6 将把崩铁修正到 897 件（路径漏算 5.92×）；鸣潮侧的对应路径修正未做，修正口径下的跨产品对照留待姊妹篇同步后进行——本节结论只在严格口径内声明。</p>
 <blockquote>
-<p>崩铁的随机深度是鸣潮的 20 倍，但崩铁有门控、鸣潮无门控——<strong>两者的实际毕业周期被拉回同一量级</strong>。</p>
+<p>按严格口径，崩铁的随机深度是鸣潮的 20 倍，但崩铁有门控、鸣潮无门控——<strong>两者的实际毕业周期被拉回同一量级</strong>。</p>
 <p><strong>随机深度与获取速度是一对配平参数</strong>，只看其中任何一个都会误判。这是本文与姊妹篇合起来才能得到的结论：单看崩铁会觉得"随机太深"，单看鸣潮会觉得"要求太苛刻"，并排看才知道两家是在用不同旋钮解同一道题。</p>
 </blockquote>
 <hr />
-<h2>6. 一次被自己揪出的模型错误</h2>
-<p>§5.2 的数字（高分档 5313 件，折合近 20 个月）<strong>明显高于玩家实际体感</strong>。当模型结论与体感差一个数量级时，先查模型。</p>
+<h2 id="6">6. 一次被自己揪出的模型错误</h2>
+<p>§5.2 的数字经不起一次量级对照：高分档 5313 件按 §7 参数折合约 <strong>20 个月</strong>开拓力——而混沌回忆满星需要两支队伍共 <strong>8 名成型角色</strong>，大量玩家在开服后的前几个版本就已做到。若单件高分躯干真需 20 个月，"8 角色成型"在时间预算上不可能发生。当模型结论与可观测的玩家群体状态差一个数量级时，先查模型。</p>
 <p>逐条审视 §5 的隐含假设，找到两处遗漏：</p>
 <p><strong>遗漏 1：只算了一个方向。</strong> §5 算的是"暴击率主属性 + 暴伤副词条"。但"暴伤主属性 + 暴击率副词条"同样是一件毕业躯干，权重也是 1000/10000。<strong>有效路径至少两条，漏掉了一半。</strong></p>
 <p><strong>遗漏 2：把 80% 的遗器直接扔了。</strong> §5 只统计初始 4 条的情况（P=0.20）。但初始 3 条的遗器会在 +3 时补上第 4 条，之后还有 4 次强化——它照样能毕业，只是强化次数少一次。<strong>这条路径覆盖 80% 的掉落，完全不该被排除。</strong></p>
@@ -394,6 +454,8 @@ footer .note b{color:var(--gold)}
 </tr>
 </tbody>
 </table></div>
+<p><img alt="四档标准下严格口径与修正口径的期望件数对比（对数轴）" src="img/hsr_expectation.png" /></p>
+<p><em>图：同一目标的期望件数，严格口径（单路径）系统性高出修正口径 4~10 倍；对数轴上的水平距离即高估倍数。由 <code>analysis/make_charts.py</code> 生成，可复现。</em></p>
 <blockquote>
 <p><strong>结论四：概率模型最常见的错误不是算错，是路径漏算。</strong></p>
 </blockquote>
@@ -408,7 +470,7 @@ footer .note b{color:var(--gold)}
 <p>术语澄清：玩家日常说的"毕业"通常指本文的<strong>良品到高分之间</strong>（双暴总量达标即可，不要求单一词条被强化三次以上）。"完美"档（8800 件）在实践中基本属于炫耀品而非目标。</p>
 </blockquote>
 <hr />
-<h2>7. 换算成开拓力与天数</h2>
+<h2 id="7">7. 换算成开拓力与天数</h2>
 <p>参数 [均需核验]：每日开拓力 240，单次隧洞 40 点，期望掉落 1.5 件 → 每日约 9 件。</p>
 <div class="tablewrap"><table>
 <thead>
@@ -457,8 +519,8 @@ footer .note b{color:var(--gold)}
 <p>拆解养成系统时，孤立地看毕业概率会得出"数值离谱"的结论；把止损设计一起看，才能看出真实的养成曲线是被三四个机制共同塑形的。这与《鸣潮声骸拆解案》§6 的结论一致：<strong>单看任何一条都会误判，合起来看才是完整的成本结构。</strong></p>
 </blockquote>
 <hr />
-<h2>8. 跨游戏对照与配置表设计</h2>
-<h3>8.1 遗器 vs 声骸 vs 圣遗物</h3>
+<h2 id="8">8. 跨游戏对照与配置表设计</h2>
+<h3 id="81-vs-vs">8.1 遗器 vs 声骸 vs 圣遗物</h3>
 <div class="tablewrap"><table>
 <thead>
 <tr>
@@ -516,7 +578,7 @@ footer .note b{color:var(--gold)}
 <blockquote>
 <p>三家在同一道题（无上限词条追求）上的分歧完全由<strong>品类</strong>决定：回合制把深度全放进随机层数与离散阈值；动作游戏用获取端玩法化与装备技能分走一部分深度预算。<strong>写数值案时先问品类，再谈概率。</strong></p>
 </blockquote>
-<h3>8.2 配置表设计</h3>
+<h3 id="82">8.2 配置表设计</h3>
 <p><em>对应实际工作中"文档写给程序看"的交付标准。</em></p>
 <ul>
 <li><strong>relic_table</strong>：<code>relic_id(int)</code> / <code>set_id(int)</code> / <code>slot(int 枚举)</code> / <code>rarity(int)</code> / <code>main_pool_id(int)</code> / <code>icon_id(int→资源表)</code></li>
@@ -526,15 +588,15 @@ footer .note b{color:var(--gold)}
 </ul>
 <p>范例策划案在数据列直接写 <code>Assets/.../relic_xxx_head.png</code> 资源路径——按行业规范应改为资源 id 引用，路径由资源表统一管理。范例做对的地方也要学：权重用万分制整型（不用浮点概率）、库 id 按部位分池。</p>
 <hr />
-<h2>9. 亮点与问题</h2>
-<h3>亮点</h3>
+<h2 id="9">9. 亮点与问题</h2>
+<h3 id="_2">亮点</h3>
 <ol>
 <li><strong>头 / 手固定主属性</strong>是教科书级的挫败感封顶设计：保证每次掉落的最低价值</li>
 <li><strong>强化预览 + 分档喂养</strong>给了止损决策点，把一次大赌切成五次小赌</li>
 <li><strong>合成机自选主属性</strong>精准消解最大挫败源，且其本质是砍掉概率链一环（§7）</li>
 <li><strong>速度阈值</strong>创造了连续词条给不了的离散里程碑与配速文化</li>
 </ol>
-<h3>问题与改进</h3>
+<h3 id="_3">问题与改进</h3>
 <p><strong>问题 1：速度阈值不可见（来自 §4.3）。</strong>
 机制做了，信息没给，深度被外包给攻略站。
 → <strong>改进</strong>：遗器详情页显示"距下一阈值还差多少速度"。→ <strong>成本</strong>：极低。</p>
@@ -550,41 +612,41 @@ footer .note b{color:var(--gold)}
 → <strong>成本</strong>：低，且能显著降低"练废了"的挫败。
 → <strong>权衡</strong>：会让部分玩家更早意识到追求完美件不现实，可能降低长期刷取动力——这是一个明确的短期体验 vs 长期留存取舍，需要与运营共同决策。</p>
 <hr />
-<h2>10. 技术实现推断</h2>
+<h2 id="10">10. 技术实现推断</h2>
 <ol>
 <li>掉落 roll 必然服务端执行；权重表结构推断与万分制整型一致（行业标准做法）</li>
 <li>副词条强化指向是否为伪随机（防连续同条）—— 社区大样本可检验：对 5 次强化落点做卡方检验 [实测校验项]</li>
 <li>遗器不堆叠、独立实例存储 → 每件是一行带随机快照的实例数据，仓库上限首先是<strong>存储与同步成本决策</strong>，其次才是玩法约束</li>
-<li>§4 的阈值计算要求客户端能拿到战斗窗口 W —— 而 W 由敌方配置决定，说明"显示距下一阈值差多少"在技术上需要战斗前预读敌方速度表，成本略高于纯客户端计算，但仍属低成本</li>
+<li>§4 的阈值计算要求知道窗口 W——在混沌回忆这类轮数限时模式下，W 由轮制规则直接给出（150 + 100×(c−1)），客户端可静态计算；因此"显示距下一阈值差多少"最自然的落点是<strong>混沌回忆备战界面</strong>，纯客户端实现、成本极低。轮数限时之外的普通战斗没有硬窗口，阈值提示在那里没有明确定义——这也划定了该改进的适用边界</li>
 </ol>
 <hr />
-<h2>11. 实测校验计划</h2>
-<h3>实验 A：主属性权重核验（最高优先级）</h3>
+<h2 id="11">11. 实测校验计划</h2>
+<h3 id="a">实验 A：主属性权重核验（最高优先级）</h3>
 <ul>
 <li><strong>方法</strong>：与 NGA / 米游社的万级样本掉落统计交叉验证</li>
 <li><strong>判据</strong>：卡方检验，p &lt; 0.05 则拒绝本文权重表，重算 §5–§7</li>
 </ul>
-<h3>实验 B：初始 3 条 / 4 条比例</h3>
+<h3 id="b-3-4">实验 B：初始 3 条 / 4 条比例</h3>
 <ul>
 <li><strong>方法</strong>：采集 200+ 件 5 星遗器，统计初始条数</li>
 <li><strong>重要性</strong>：§6 修正的关键参数，直接影响期望件数</li>
 </ul>
-<h3>实验 C：强化落点均匀性</h3>
+<h3 id="c">实验 C：强化落点均匀性</h3>
 <ul>
 <li><strong>方法</strong>：记录 100+ 件遗器的 5 次强化落点，卡方检验是否均匀 1/4</li>
 <li><strong>意义</strong>：若存在伪随机防连续机制，B(5,1/4) 模型需替换</li>
 </ul>
-<h3>实验 D：速度阈值实证（验证 §4）</h3>
+<h3 id="d-4">实验 D：速度阈值实证（验证 §4）</h3>
 <ul>
-<li><strong>方法</strong>：固定队伍，在同一 BOSS 战中逐步微调速度，记录行动次数变化的临界点</li>
-<li><strong>判据</strong>：临界点是否落在 <code>n × 10000 / W</code> 上</li>
-<li><strong>产出</strong>：可反推该 BOSS 战的实际窗口 W，这是攻略站也没有的数据</li>
+<li><strong>方法</strong>：固定队伍，在混沌回忆同一关卡以 133.0 / 133.5 / 134.0 三档面板速度实测首轮行动次数</li>
+<li><strong>判据</strong>：断点是否精确落在 133.33，及面板显示值与真实速度的截断方向</li>
+<li><strong>产出</strong>：断点实证 + 隐藏小数的截断规则——攻略站通常只给结论，不给验证过程</li>
 </ul>
-<h3>产出物</h3>
-<p>Excel 验证表（理论值 / 实测值 / 绝对误差 / 相对误差）。完成后升版 v1.1。</p>
+<h3 id="_4">产出物</h3>
+<p>Excel 验证表（理论值 / 实测值 / 绝对误差 / 相对误差）。完成后升版 v1.2。</p>
 <hr />
-<h2>12. 参考与附录</h2>
-<h3>附录：计算脚本</h3>
+<h2 id="12">12. 参考与附录</h2>
+<h3 id="_5">附录：计算脚本</h3>
 <p><code>analysis/hsr_relic_math.py</code> — 无第三方依赖，<code>python hsr_relic_math.py</code> 复现全部计算。输出存档 <code>analysis/output_hsr.txt</code>。</p>
 <div class="tablewrap"><table>
 <thead>
@@ -616,9 +678,10 @@ footer .note b{color:var(--gold)}
 </tr>
 </tbody>
 </table></div>
-<h3>公开原材料来源</h3>
+<p>配图由 <code>analysis/make_charts.py</code> 生成（阶梯图 / 口径对比图），数据与上述脚本同源。</p>
+<h3 id="_6">公开原材料来源</h3>
 <p>行动值公式、遗器强化机制、副词条池与档位、主属性权重表，取自公开社区整理与游戏内文本。主要参考：崩坏星穹铁道 Wiki（BWIKI）遗器条目、Prydwen.gg Relic Stats、游民星空速度机制解析、知乎配速公式汇总。</p>
-<h3>方法论参考</h3>
+<h3 id="_7">方法论参考</h3>
 <ul>
 <li>遗器系统策划案范例（B 站 V3 库洛洛点评 BV1M7Q7BxEci）：正向策划案结构、随机属性库权重表</li>
 <li>《鸣潮声骸系统拆解案》《鸣潮战斗系统拆解案》（本人）：跨游戏对照的另一半，及乘区分析方法</li>

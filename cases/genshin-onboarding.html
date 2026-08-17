@@ -48,6 +48,14 @@ article td{border-bottom:1px solid var(--line);padding:8px 12px;color:#cdc9e0}
 article tr:hover td{background:rgba(157,143,240,.05)}
 article hr{border:0;border-top:1px solid var(--line);margin:40px 0}
 article a{color:var(--ice)}
+article img{max-width:100%;border-radius:12px;border:1px solid var(--line);margin:8px 0 2px;display:block}
+article img+em, article p img+em{display:block}
+.toc{border:1px solid var(--line);border-radius:12px;padding:14px 22px;background:var(--card);font-size:.86rem;margin-bottom:6px}
+.toc ul{margin:0 0 0 1.1em;color:var(--muted)}
+.toc li{margin-bottom:3px}
+.toc a{color:var(--muted);text-decoration:none}
+.toc a:hover{color:var(--gold)}
+.toctitle{color:var(--gold);font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:8px}
 footer{border-top:1px solid var(--line);margin-top:70px;padding-top:28px}
 footer .note{font-size:.85rem;color:var(--muted);margin-bottom:18px}
 footer .note b{color:var(--gold)}
@@ -62,15 +70,29 @@ footer .note b{color:var(--gold)}
   <div class="eyebrow">Case Study · 原创拆解</div>
   <h1 class="title">《原神》新手关卡拆解案</h1>
   <div class="subtitle">蒙德开场教学序列——留存漏斗、遗忘间隔，与一份可复现的编码协议</div>
-  <div class="meta"><span>关卡 · 引导 + 留存向</span><span>299 行正文 · 287 行计算脚本</span><span>v1.0 · 2026-07</span><span>原创推导 · 配可复现脚本</span></div>
+  <div class="meta"><span>关卡 · 引导 + 留存向</span><span>300 行正文 · 291 行计算脚本</span><span>v1.1 · 2026-08</span><span>原创推导 · 配可复现脚本与图表</span></div>
   <article>
+<div class="toc"><span class="toctitle">目录 · Contents</span><ul>
+<li><a href="#_1">关于本拆解案的方法说明（与另外三份不同，请务必先读）</a></li>
+<li><a href="#1">1. 选题说明</a></li>
+<li><a href="#2-cg-ui">2. 开场序列的引导功能：CG 放置决策与角色化的教学 UI</a></li>
+<li><a href="#3">3. 教学序列还原（教学埋点表）</a></li>
+<li><a href="#4">4. 空间结构与节奏</a></li>
+<li><a href="#5">5. 量化分析</a></li>
+<li><a href="#6">6. 问题分析与改进</a></li>
+<li><a href="#7">7. 引导强度编码协议（为实录准备）</a></li>
+<li><a href="#8">8. 技术实现推断</a></li>
+<li><a href="#9">9. 本案的局限与后续</a></li>
+<li><a href="#10">10. 参考与附录</a></li>
+</ul>
+</div>
 <blockquote>
 <p>作者：赵鹏淦（Penggan Zhao）｜ Newcastle University · MSc Game Engineering
-版本：v1.0 ｜ 拆解范围：开幕 CG → 坠落之地 → 风起地 → 蒙德城
-定位：<strong>关卡 / 引导向</strong>；作品集第四型（已有机制向 / 系统向 / 数值向各一）</p>
+版本：v1.1（v1.0 经对照行业点评标准的评审修订，修订项见文内标注）｜ 拆解范围：开场序列 → 坠落之地 → 风起地 → 蒙德城
+定位：<strong>引导 / 留存向（系统策划方向）</strong>；作品集第四型（已有机制向 / 系统向 / 数值向各一）</p>
 </blockquote>
 <hr />
-<h2>关于本拆解案的方法说明（与另外三份不同，请务必先读）</h2>
+<h2 id="_1">关于本拆解案的方法说明（与另外三份不同，请务必先读）</h2>
 <p>作品集另外三份拆解案的推导都建立在<strong>公开可查的游戏数据</strong>上（伤害公式、词条档位、行动值公式）。这一份不行——新手关卡最关键的指标是<strong>分环节流失率</strong>，那是厂商核心内部数据，不可能公开。任何声称"实测得到各环节流失率"的分析都不可信。</p>
 <p>所以本文换了一套做法，把内容分成三层，并明确标注每一层的可信度：</p>
 <div class="tablewrap"><table>
@@ -102,9 +124,10 @@ footer .note b{color:var(--gold)}
 <p>这个区分不是免责声明，是本文的核心方法：<strong>拿不到数据时，仍然可以把决策规则先确定下来，等数据到位直接代入；而一个会随参数翻转的判断，在拿到真实数据前根本不该被写进结论。</strong></p>
 <p>计算脚本 <code>analysis/genshin_onboarding_funnel.py</code>，运行即可复现。</p>
 <hr />
-<h2>1. 选题说明</h2>
+<h2 id="1">1. 选题说明</h2>
 <p>新手关卡是全游戏<strong>留存压力最大</strong>的关卡：买量成本在这里回收或亏掉，且必须同时完成教学、世界观导入、核心爽点前置三件事。</p>
 <p>选原神蒙德开场，因为它是开放世界"弱引导"教学的行业标杆，与强制式教学（传统 CRPG / MMO 的锁步引导）构成方法论对照，拆它能同时回答"教什么、什么时候教、用多强的力度教"三个核心问题。</p>
+<p><strong>选题风险直说</strong>：原神是被拆得最多的手游之一，且生命周期已过峰值——"又一份原神拆解"在筛选场景里天然减分。本案的差异化因此不押在题材上，而押在方法上：漏斗敏感度、留存预算、遗忘判据均与具体游戏无关，可直接迁移到任何在研项目的新手关卡；原神在此只是一个被市场验证过、且人人可复核的参照系。§7.3 的鸣潮对照速记即是把同一套协议施加于上升期产品的迁移出口。</p>
 <p><strong>定位说明</strong>：新手引导关卡在开发管线中通常是 demo 完成后"最后添加"的部分，展示的是<strong>留存 / 引导设计能力</strong>，而非关卡策划最值钱的"博弈性关卡"能力。因此本案在作品集中的定位是<strong>系统策划 / 引导与留存方向</strong>的证明材料。若目标岗位是关卡策划，应另做"博弈关卡拆解 + Unity 灰盒复现"（见 §9 待办）。</p>
 <p><strong>贯穿全案的核心区分</strong>：</p>
 <ul>
@@ -113,40 +136,15 @@ footer .note b{color:var(--gold)}
 <li>原神开场的设计难题：<strong>用前者的外观（开放世界、可自由走动）完成后者的任务（必修教学）</strong>——本案重点拆它如何伪装强制性</li>
 </ul>
 <hr />
-<h2>2. 开幕 CG 与叙事钩子</h2>
-<div class="tablewrap"><table>
-<thead>
-<tr>
-<th>幕</th>
-<th>内容</th>
-<th>设计功能</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>双子与"神"对峙、战败、分离</td>
-<td>世界观最高冲突前置 + 长线叙事钩（找回血亲）</td>
-</tr>
-<tr>
-<td>2</td>
-<td>选择性别 / 命名</td>
-<td>自我代入的最小成本仪式</td>
-</tr>
-<tr>
-<td>3</td>
-<td>海滩苏醒、遇派蒙</td>
-<td>引导者角色登场（教学的"嘴"）</td>
-</tr>
-</tbody>
-</table></div>
+<h2 id="2-cg-ui">2. 开场序列的引导功能：CG 放置决策与角色化的教学 UI</h2>
+<p>CG 本体的内容与制作归叙事 / 美术 / 外包管线，不在引导策划职权内——本节不复述剧情，只拆开场序列里<strong>两个属于策划的决策</strong>。（开场三幕：神魔对峙战败分离 → 性别 / 命名 → 海滩苏醒遇派蒙，分别完成最高冲突前置、代入仪式、引导者登场。）</p>
 <blockquote>
-<p>把最贵的 CG 放在第 0 分钟，是买量转化逻辑——广告素材与开场体验必须无缝，否则转化流失。</p>
-<p>派蒙的本质是<strong>可对话的教学 UI</strong>：所有强制教学都通过她的台词包装成叙事，规避"系统弹窗感"。这是一个可迁移的设计模式：<strong>给教学系统一个角色身份，就能把"系统在命令你"改写成"同伴在提醒你"</strong>，力度相同而抵触感大幅下降。</p>
+<p><strong>决策一：把最贵的资产放在第 0 分钟</strong>——买量转化逻辑：广告素材与开场体验必须无缝，否则转化流失。CG 在此是引导漏斗的第 1 个环节（见 §5.1 表），它的流失率与素材投放强相关，是唯一能被买量侧数据直接校准的环节。</p>
+<p><strong>决策二：派蒙的本质是可对话的教学 UI</strong>——所有强制教学都通过她的台词包装成叙事，规避"系统弹窗感"。这是一个可迁移的设计模式：<strong>给教学系统一个角色身份，就能把"系统在命令你"改写成"同伴在提醒你"</strong>，力度相同而抵触感大幅下降。</p>
 </blockquote>
 <hr />
-<h2>3. 教学序列还原（教学埋点表）</h2>
-<p><em>本案核心交付物之一。[待实录] 项需重开账号按 §7 协议逐项确认。</em></p>
+<h2 id="3">3. 教学序列还原（教学埋点表）</h2>
+<p><em>本案核心交付物之一。[待实录] 项需重开账号按 §7 协议逐项确认。强制等级严格使用 §7.1 的四级互斥词表（v1.1 修订：第 8 行原写"弱引导（可错过）"，违反自己定义的互斥编码，已改）。</em></p>
 <div class="tablewrap"><table>
 <thead>
 <tr>
@@ -220,8 +218,16 @@ footer .note b{color:var(--gold)}
 <td>元素反应</td>
 <td>火史莱姆场景</td>
 <td>环境预设（草地 + 火）</td>
-<td>弱引导（<strong>可错过</strong>）</td>
+<td><strong>可错过</strong></td>
 <td>后续任务重复暴露</td>
+</tr>
+<tr>
+<td>9</td>
+<td>多角色切换 / 瞄准射击</td>
+<td>安柏入队事件</td>
+<td>剧情锁 + 浮层 [待实录]</td>
+<td>软强制 [待实录]</td>
+<td>是否存在强制换人情境 [待实录]</td>
 </tr>
 </tbody>
 </table></div>
@@ -232,8 +238,8 @@ footer .note b{color:var(--gold)}
 <li><strong>可错过的教学全部有重复暴露设计</strong>：错过第一次，后续任务场景再次预设同样的环境组合。§5.2 会说明为什么这类教学"不占环节"是关键。</li>
 </ol>
 <hr />
-<h2>4. 空间结构与节奏</h2>
-<h3>4.1 地图抽象模型</h3>
+<h2 id="4">4. 空间结构与节奏</h2>
+<h3 id="41">4.1 地图抽象模型</h3>
 <pre><code>[出生海滩]──锁向通路──[坠落之地空地]（教学竞技场：环形封闭，单出口）
      │                     │
      └── 海面（软墙：游泳体力不足即劝退）
@@ -244,7 +250,8 @@ footer .note b{color:var(--gold)}
      ↓
 [蒙德城]（引导密度归零，进入自由探索）远景钩子：风龙废墟轮廓
 </code></pre>
-<h3>4.2 空间引导手法</h3>
+<p><em>上图为工作草稿（ASCII 示意）；成稿（PDF / 面试版）中将替换为 draw.io 绘制的分图层矢量图，见 §7.3 待办。</em></p>
+<h3 id="42">4.2 空间引导手法</h3>
 <ul>
 <li><strong>出生点构图</strong>：睁眼第一帧就是构图完成的取景框</li>
 <li><strong>单出口教学场</strong>：开场区域三面软墙（海、崖），保证教学期不迷路，但用<strong>自然地形而非空气墙</strong>伪装</li>
@@ -254,7 +261,7 @@ footer .note b{color:var(--gold)}
 <blockquote>
 <p>软墙的设计值得单独说：海面用<strong>游泳体力</strong>做边界，本质是"用系统规则代替碰撞体"。玩家撞到的不是一堵墙，而是一个可以理解的规则——<strong>边界因此不破坏世界可信度</strong>。这是开放世界引导里成本最低、效果最好的一个手法。</p>
 </blockquote>
-<h3>4.3 节奏量表</h3>
+<h3 id="43">4.3 节奏量表</h3>
 <div class="tablewrap"><table>
 <thead>
 <tr>
@@ -293,8 +300,8 @@ footer .note b{color:var(--gold)}
 </table></div>
 <p><em>[待实录] 以事件时间戳作横轴画成折线图（教学密度与战斗强度双轴）。</em></p>
 <hr />
-<h2>5. 量化分析</h2>
-<h3>5.1 留存漏斗：优先该修哪个环节？</h3>
+<h2 id="5">5. 量化分析</h2>
+<h3 id="51">5.1 留存漏斗：优先该修哪个环节？</h3>
 <p><strong>模型</strong>：玩家依次经过 n 个环节，各环节流失率 <code>p_i</code>，通关总留存 <code>R = Π(1-p_i)</code>。</p>
 <p>产品侧常见直觉是"优先优化最早的环节，因为经过的人最多"。求偏导：</p>
 <pre><code>∂R/∂p_i = -Π_{j≠i}(1-p_j) = -R / (1-p_i)
@@ -304,7 +311,7 @@ footer .note b{color:var(--gold)}
 <p><strong>结论一（解析层，不依赖参数）：优先该修的是流失率最高的环节，不是最早的环节。</strong></p>
 </blockquote>
 <p>"越早越重要"混淆了<strong>经过的人多</strong>与<strong>损失的人多</strong>。经过的人多但流失率低的环节，优化它的边际收益反而最小。</p>
-<p><strong>【假设演示】</strong> 用一组假设流失率跑通全流程（参数为我编的，仅演示方法）：</p>
+<p><strong>【假设演示】</strong> 用一组假设流失率跑通全流程（参数为我编的，仅演示方法；表格节选 5/10 个环节，完整见 <code>analysis/output_genshin.txt</code>）：</p>
 <div class="tablewrap"><table>
 <thead>
 <tr>
@@ -363,7 +370,7 @@ footer .note b{color:var(--gold)}
 <blockquote>
 <p>⚠️ <strong>"元素视野是最该修的环节"这个具体判断完全来自我假设它流失率 12%，换一组假设就换一个答案。它只是方法演示，不可引用为结论。</strong> 唯一可引用的是上面那条解析规则。</p>
 </blockquote>
-<h3>5.2 环节数就是留存预算</h3>
+<h3 id="52">5.2 环节数就是留存预算</h3>
 <p>设次留目标 D、通关玩家的次留转化率 c，则需 <code>R ≥ D/c</code>。n 个环节均匀分摊时，单环节流失率上限：</p>
 <pre><code>p_max = 1 - (D/c)^(1/n)
 </code></pre>
@@ -409,7 +416,7 @@ footer .note b{color:var(--gold)}
 <blockquote>
 <p>由此得到一个反直觉的判据：拆解新手关卡时，<strong>"教了多少东西"是个坏指标，"占用了几个必过环节"才是好指标</strong>。前者越多越显得内容丰富，后者越多留存越差——两者方向相反。</p>
 </blockquote>
-<h3>5.3 教学与首次应用的间隔</h3>
+<h3 id="53">5.3 教学与首次应用的间隔</h3>
 <p>用 Ebbinghaus 保留曲线的常用形式 <code>R(t) = exp(-t/S)</code>，设计判据为：教学项在<strong>首次被要求应用</strong>时保留率不低于阈值，解得最大间隔</p>
 <pre><code>t_max = -S · ln(R_min)
 </code></pre>
@@ -422,9 +429,9 @@ footer .note b{color:var(--gold)}
 <blockquote>
 <p>所以绑定式教学的价值<strong>不在于它更不打扰玩家</strong>（那是副产品），而在于它把教学—应用间隔压到零，从根本上取消了遗忘损耗。这个原则可以直接迁移到任何教学设计。</p>
 </blockquote>
-<p><strong>交叉印证</strong>：按这个判据审视教学埋点表，高风险项是教学与首次真正应用间隔久的那些——元素视野、任务界面 / 背包、多角色切换。<strong>这三项恰好也是 §6 按漏斗逻辑点名的三项。</strong> 两条独立分析路径指向同一批教学点，比任何单一方法都可靠。</p>
+<p><strong>先验一致性（而非交叉印证，v1.1 修订）</strong>：按这个判据独立审视教学埋点表，高风险项是教学与首次真正应用间隔久的那些——元素视野、任务界面 / 背包、多角色切换。它们正是 §5.1 演示中我为其设定高流失假设的环节。<strong>但这不构成交叉印证</strong>：漏斗那一路的"点名"来自我自设的参数（§5.1 已声明不可引用），两条路径并不独立——v1.0 曾把这里写成"两条独立分析路径互证"，恰好犯了本案自己要杜绝的循环论证。正确的用法是：间隔判据可以在拿到流失数据<strong>之前</strong>为漏斗假设提供先验；待 §7 实录测得真实的教学—应用间隔后，若它与实测流失分布仍指向同一批环节，那才是真正的交叉印证。</p>
 <hr />
-<h2>6. 问题分析与改进</h2>
+<h2 id="6">6. 问题分析与改进</h2>
 <p><strong>问题 1：教学项在进城前过载。</strong>
 背包 / 地图 / 任务 / 元素视野四项 UI 教学挤在同一时段，红点风暴稀释单项注意力。按 §5.2，这还占用了四份容错预算。
 → <strong>改进</strong>：非战斗类 UI 教学延后到"第一次需要时"（首次任务追踪失败时才教任务界面）。
@@ -435,7 +442,7 @@ footer .note b{color:var(--gold)}
 → <strong>改进</strong>：给关键机制加"行为验证"式补课触发器——若玩家 N 场战斗未主动触发反应，派蒙台词补课。
 → <strong>成本</strong>：埋点 + 触发器，低，且完全不打扰已学会的玩家。</p>
 <p><strong>问题 3：多角色切换教学依赖单一事件。</strong>
-安柏入队后若玩家不换人，弓箭机制实质未被教学，且按 §5.3 首次应用时间不可控。
+安柏入队后若玩家不换人，弓箭机制实质未被教学，且按 §5.3 首次应用时间不可控。（改进前提——现版本安柏教学是否已含强制瞄准环节——待 §7 实录确认，见 §3 表第 9 行。）
 → <strong>改进</strong>：城门前空中风史莱姆做成"近战打不到"的硬情境，倒逼一次换人。
 → <strong>成本</strong>：关卡怪物配置微调，极低。</p>
 <p><strong>问题 4（新增，来自 §5.2）：教学项预算没有显式管理。</strong>
@@ -444,9 +451,9 @@ footer .note b{color:var(--gold)}
 → <strong>成本</strong>：流程约束，零开发成本。
 → <strong>理由</strong>：<code>p_max</code> 随 n 单调下降是硬数学约束，不做显式管理就一定会超支——而超支的后果（次留下滑）要到上线后才可见，那时改动成本最高。</p>
 <hr />
-<h2>7. 引导强度编码协议（为实录准备）</h2>
+<h2 id="7">7. 引导强度编码协议（为实录准备）</h2>
 <p><em>本章是本案的方法论交付物：把"强制等级"这类定性判断变成可复现的编码规则，使 §3 的表格能被他人独立复核。</em></p>
-<h3>7.1 强制等级的操作性定义</h3>
+<h3 id="71">7.1 强制等级的操作性定义</h3>
 <div class="tablewrap"><table>
 <thead>
 <tr>
@@ -474,21 +481,21 @@ footer .note b{color:var(--gold)}
 </tbody>
 </table></div>
 <p>编码时逐项实测：<strong>故意不做该操作，观察 60 秒</strong>，按上表归类。这样两个独立编码者应得到相同结果。</p>
-<h3>7.2 实录记录字段</h3>
+<h3 id="72">7.2 实录记录字段</h3>
 <p>每个教学项记录：<code>序号 / 名称 / 触发时间戳 / 触发条件 / 提示形式 / 强制等级 / 首次应用时间戳 / 教学—应用间隔</code>。</p>
 <p>最后一列直接喂给 §5.3 的判据。</p>
-<h3>7.3 待实录清单（约 60–90 分钟）</h3>
+<h3 id="73-6090">7.3 待实录清单（约 60–90 分钟）</h3>
 <ul>
 <li>[ ] 全程录屏，逐教学点按 §7.1 编码（修正 §3 表格）</li>
 <li>[ ] 记录每项的<strong>首次应用时间戳</strong>，算出教学—应用间隔（§5.3 的实证输入）</li>
 <li>[ ] 出生点 / 风起地 / 城门三处构图截图 + 视线分析标注</li>
 <li>[ ] 事件时间戳表 → §4.3 节奏折线图</li>
 <li>[ ] 教学互斥队列验证：制造两个教学同时触发的场景，观察是否排队（§8 推断 1）</li>
-<li>[ ] 手绘地图抽象模型（含软墙 / 地标 / 黄金路线标注）</li>
+<li>[ ] 用 draw.io / Figma 绘制地图抽象模型（软墙 / 地标 / 黄金路线分图层标注，配色贴合原神卡通气质；手绘风格只用于笔试场景，不入正式文档）</li>
 <li>[ ] 可选：与鸣潮开场做 30 分钟对照速记，反哺姊妹篇</li>
 </ul>
 <hr />
-<h2>8. 技术实现推断</h2>
+<h2 id="8">8. 技术实现推断</h2>
 <ol>
 <li><strong>引导系统架构</strong>：教学项推断为数据表驱动的 tutorial entry（触发条件 / 展示形式 / 完成条件 / 优先级），运行时是一个带互斥锁的引导队列——同屏只出一条浮层，解释了教学项的排队现象。</li>
 <li><strong>触发器形态</strong>：情境式教学 = trigger volume + 状态条件（体力条首次可见 = 进入消耗状态，而非进入区域）；剧情锁教学 = quest graph 节点后挂载。</li>
@@ -500,7 +507,7 @@ footer .note b{color:var(--gold)}
 我的答案基于 §5：<strong>不是看总通关率，而是看各环节流失率的分布</strong>。总通关率只告诉你有没有问题，分布才告诉你问题在哪；而按 §5.1，应该优先修流失率最高的环节而非最早的环节。再叠加 §5.3 的教学—应用间隔，可以在拿到流失数据前就预判哪些教学点高风险。</p>
 </blockquote>
 <hr />
-<h2>9. 本案的局限与后续</h2>
+<h2 id="9">9. 本案的局限与后续</h2>
 <p><strong>局限</strong>：本案是四份拆解案里唯一无法用公开数据支撑核心指标的。§5 的解析结论可靠，具体数字全部是演示。这是选题决定的，不是方法问题——但必须说清楚，否则就是拿假设冒充数据。</p>
 <p><strong>后续</strong>：</p>
 <ol>
@@ -508,8 +515,8 @@ footer .note b{color:var(--gold)}
 <li>若目标岗位是关卡策划而非系统 / 引导策划，另做一份"博弈性关卡拆解 + Unity 灰盒复现"——那才是关卡策划能力的直接证明。我有 Unity 工程能力（见 ChronoTraveler 项目），灰盒复现对我是低成本高说服力的选项</li>
 </ol>
 <hr />
-<h2>10. 参考与附录</h2>
-<h3>附录：计算脚本</h3>
+<h2 id="10">10. 参考与附录</h2>
+<h3 id="_2">附录：计算脚本</h3>
 <p><code>analysis/genshin_onboarding_funnel.py</code> — 无第三方依赖，<code>python genshin_onboarding_funnel.py</code> 复现。输出存档 <code>analysis/output_genshin.txt</code>。</p>
 <div class="tablewrap"><table>
 <thead>
@@ -533,9 +540,9 @@ footer .note b{color:var(--gold)}
 </tr>
 </tbody>
 </table></div>
-<h3>参考</h3>
+<h3 id="_3">参考</h3>
 <ul>
-<li>《博德之门 3 新手关卡拆解》范例（B 站 V3 库洛洛点评 BV1Em4y1G7wu）：教学绑定、地图抽象模型、出生点构图分析框架。本案有意选择不同游戏以避免选题撞车，且选手游品类贴合投递市场</li>
+<li>《博德之门 3 新手关卡拆解》范例（B 站 V3 库洛洛点评 BV1Em4y1G7wu）：教学绑定、地图抽象模型、出生点构图分析框架。本案与其差异化不在换一款游戏，而在方法层（漏斗敏感度 / 留存预算 / 遗忘判据，见 §1 选题风险段）</li>
 <li>《以艾尔登法环为例拆解箱庭关卡与节奏》（机核）：区域—通路—节奏量表方法</li>
 <li>"关卡策划的关卡 vs 新手引导的关卡"这一区分：源自上述点评视频</li>
 <li>Ebbinghaus 保留曲线：§5.3 判据的理论基础，参数需按品类标定</li>
