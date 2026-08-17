@@ -161,6 +161,8 @@ nav.solid{background:rgba(8,6,15,.82);border-bottom:1px solid var(--line)}
 .case h4{font-size:1.15rem;margin:10px 0 6px;color:var(--ink)}
 .case .dir{font-size:.78rem;color:var(--ice);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px}
 .case p{font-size:.9rem;color:var(--muted)}
+a.case{display:block;color:inherit;text-decoration:none}
+.case .go{display:inline-block;margin-top:14px;font-size:.82rem;color:var(--gold);letter-spacing:.06em}
 
 /* ---------- AI 管线 ---------- */
 .pipe{display:flex;align-items:stretch;gap:0;flex-wrap:wrap;margin-top:10px}
@@ -383,13 +385,13 @@ footer .logo{font-size:1rem;margin-bottom:8px;display:inline-block}
 <section id="cases"><div class="wrap">
   <div class="reveal"><div class="eyebrow">Deconstructions</div>
     <h2 class="sec">游戏拆解案</h2>
-    <p class="proj-desc">以策划视角深度拆解主流游戏系统，横跨二次元战斗 / 数值养成与单机 3A 关卡设计。<span class="ph">（完整拆解案精修中）</span></p>
+    <p class="proj-desc">四份原创拆解案、四种方法论——解析求解 / 组合优化 / 概率建模 / 漏斗建模。公开数据只当原材料，每个结论都是推导出来的，全部配可复现 Python 计算脚本（共 1800+ 行）。</p>
   </div>
   <div class="cases">
-    <div class="case reveal d1"><div class="num">01</div><div class="dir">战斗系统</div><h4>《鸣潮》战斗系统 · 声骸养成</h4><p>动作战斗节奏、连招与资源循环；声骸养成的数值与掉落结构。</p></div>
-    <div class="case reveal d2"><div class="num">02</div><div class="dir">数值养成</div><h4>《崩坏：星穹铁道》遗器系统</h4><p>遗器数值维度、词条概率与养成成本；玩家追求曲线与付费点。</p></div>
-    <div class="case reveal d3"><div class="num">03</div><div class="dir">关卡设计 · 单机 3A</div><h4>《艾尔登法环》箱庭关卡</h4><p>箱庭拓扑、路径引导与节奏；单向门与探索奖励的设计逻辑。</p></div>
-    <div class="case reveal d4"><div class="num">04</div><div class="dir">数值 · 商业化</div><h4>《原神》命座付费结构</h4><p>命座"离散即时生效"为何优于碎片"集齐兑现"——避免"差一个就流失"。</p></div>
+    <a class="case reveal d1" href="cases/wuwa-combat.html"><div class="num">01</div><div class="dir">战斗系统 · 机制 + 数值向</div><h4>《鸣潮》战斗系统</h4><p>乘区结构数值反推：双爆 1:2 的解析解与失效边界、抗性系数 k=5 唯一性反解，以及一个被自己推翻并保留在正文的防御区假设。</p><span class="go">阅读全文 →</span></a>
+    <a class="case reveal d2" href="cases/wuwa-echo.html"><div class="num">02</div><div class="dir">数值养成 · 组合优化向</div><h4>《鸣潮》声骸系统</h4><p>COST 预算的组合最优化：可行域 Pareto 前沿三点；43311 配置的正确性来自首位声骸技能——临界值 4.55% 的定量证明。</p><span class="go">阅读全文 →</span></a>
+    <a class="case reveal d3" href="cases/hsr-relic.html"><div class="num">03</div><div class="dir">数值养成 · 概率建模向</div><h4>《崩坏：星穹铁道》遗器系统</h4><p>配速阈值第一性原理推导（复现 133.3 / 142.9 / 160）、速度词条锯齿性，以及一次概率链高估 5.9 倍的模型错误与修正。</p><span class="go">阅读全文 →</span></a>
+    <a class="case reveal d4" href="cases/genshin-onboarding.html"><div class="num">04</div><div class="dir">关卡 · 引导 + 留存向</div><h4>《原神》新手关卡</h4><p>蒙德教学序列的留存漏斗建模：优先修流失率最高而非最早的环节、环节数即留存预算、教学间隔的遗忘判据。</p><span class="go">阅读全文 →</span></a>
   </div>
 </div></section>
 

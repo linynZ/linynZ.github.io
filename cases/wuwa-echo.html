@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>《鸣潮》声骸系统拆解案 · 赵鹏淦</title>
+<style>
+:root{--bg:#0b0a1a;--ink:#e8e5f4;--muted:#a09ac0;--gold:#e3c07a;--ice:#9fd8f0;
+  --violet:#9d8ff0;--line:rgba(157,143,240,.18);--card:rgba(20,16,42,.65)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:"Microsoft YaHei","PingFang SC","Source Han Sans SC",sans-serif;
+  font-size:16px;line-height:1.85;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:
+  radial-gradient(900px 500px at 85% -5%,rgba(90,70,180,.25),transparent 60%),
+  radial-gradient(700px 500px at -10% 30%,rgba(40,80,160,.18),transparent 60%)}
+nav{position:sticky;top:0;z-index:9;display:flex;justify-content:space-between;align-items:center;
+  padding:14px 28px;background:rgba(11,10,26,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .logo{color:var(--ink);font-weight:700;text-decoration:none;letter-spacing:.06em}
+nav .logo b{color:var(--gold)}
+nav .back{color:var(--muted);text-decoration:none;font-size:.88rem}
+nav .back:hover{color:var(--gold)}
+.wrap{max-width:880px;margin:0 auto;padding:56px 24px 80px}
+.eyebrow{font-size:.78rem;letter-spacing:.28em;color:var(--gold);text-transform:uppercase;margin-bottom:14px}
+h1.title{font-size:2rem;line-height:1.35;margin-bottom:10px}
+.subtitle{font-size:1.05rem;color:var(--violet);margin-bottom:18px}
+.meta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:40px}
+.meta span{font-size:.78rem;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:3px 12px}
+article h2{font-size:1.35rem;color:var(--gold);margin:52px 0 16px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+article h3{font-size:1.1rem;color:var(--ice);margin:34px 0 12px}
+article p{margin:0 0 14px;color:#cdc9e0}
+article strong{color:var(--ink)}
+article em{color:var(--violet);font-style:normal}
+article ul,article ol{margin:0 0 16px 1.4em;color:#cdc9e0}
+article li{margin-bottom:6px}
+article blockquote{border-left:3px solid var(--gold);background:var(--card);border-radius:0 10px 10px 0;
+  padding:14px 18px;margin:0 0 16px;color:var(--muted)}
+article blockquote p{margin:0}
+article code{font-family:Consolas,"JetBrains Mono",monospace;font-size:.88em;background:rgba(157,143,240,.12);
+  border-radius:4px;padding:1px 6px;color:var(--ice)}
+article pre{background:#100e26;border:1px solid var(--line);border-radius:12px;padding:16px 18px;
+  overflow-x:auto;margin:0 0 18px}
+article pre code{background:none;padding:0;color:#c8d8f0;font-size:.85rem;line-height:1.6}
+.tablewrap{overflow-x:auto;margin:0 0 18px}
+article table{border-collapse:collapse;width:100%;font-size:.88rem}
+article th{color:var(--gold);text-align:left;border-bottom:1.5px solid rgba(227,192,122,.4);padding:8px 12px;white-space:nowrap}
+article td{border-bottom:1px solid var(--line);padding:8px 12px;color:#cdc9e0}
+article tr:hover td{background:rgba(157,143,240,.05)}
+article hr{border:0;border-top:1px solid var(--line);margin:40px 0}
+article a{color:var(--ice)}
+footer{border-top:1px solid var(--line);margin-top:70px;padding-top:28px}
+footer .note{font-size:.85rem;color:var(--muted);margin-bottom:18px}
+footer .note b{color:var(--gold)}
+.backbtn{display:inline-block;color:var(--gold);border:1px solid rgba(227,192,122,.4);border-radius:99px;
+  padding:8px 22px;text-decoration:none;font-size:.88rem}
+.backbtn:hover{background:rgba(227,192,122,.1)}
+</style>
+</head>
+<body>
+<nav><a class="logo" href="../index.html">赵鹏<b>淦</b></a><a class="back" href="../index.html#cases">← 返回作品集</a></nav>
+<div class="wrap">
+  <div class="eyebrow">Case Study · 原创拆解</div>
+  <h1 class="title">《鸣潮》声骸系统拆解案</h1>
+  <div class="subtitle">从掉落到毕业的全链路，与 COST 预算的组合最优化</div>
+  <div class="meta"><span>数值养成 · 组合优化向</span><span>371 行正文 · 484 行计算脚本</span><span>v1.0 · 2026-07</span><span>原创推导 · 配可复现脚本</span></div>
+  <article>
+<blockquote>
+<p>作者：赵鹏淦（Penggan Zhao）｜ Newcastle University · MSc Game Engineering
+版本：v1.0 ｜ 拆解版本：2.x
+拆解范围：声骸全链路（获取 → 筛选 → 养成 → 装备 → 循环），重点在装备端的构筑决策
+定位：系统策划向；与《鸣潮战斗系统拆解案》（机制/数值向）构成姊妹篇</p>
+</blockquote>
+<hr />
+<h2>关于本拆解案的方法说明</h2>
+<p>与姊妹篇一致，本文把公开可查的规则当原材料，内容在其上的推导层：</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>公开原材料</th>
+<th>本文的推导层</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>COST 预算 12、5 槽位、COST ∈ {1,3,4}</td>
+<td><strong>穷举可行域 + Pareto 支配剔除</strong>，得到三个前沿配置（社区只讨论两个）</td>
+</tr>
+<tr>
+<td>各 COST 层主词条池与数值</td>
+<td>三种配置的<strong>乘区收益对比</strong>，及 44111 成立的<strong>交叉点求解</strong>（57.2%）</td>
+</tr>
+<tr>
+<td>首位声骸提供主动技</td>
+<td>补进模型后求出 43311 反超的<strong>临界技能占比</strong>（4.55%~16.25%）</td>
+</tr>
+<tr>
+<td>声骸无体力、大世界掉落</td>
+<td><strong>时间成本模型</strong>，与树脂制换算到同一量纲比较</td>
+</tr>
+</tbody>
+</table></div>
+<p>全部计算由 <code>analysis/wuwa_echo_cost.py</code> 生成，运行即可复现。姊妹篇的超几何结论（双爆同出 12.82%、毕业期望 36/256 件）在 §6 被直接引用。</p>
+<p><strong>本文保留了一次完整的模型翻车与修正过程（§5.2）</strong>：纯主词条模型给出的最优配置与社区实践相反，我没有直接采信任何一方，而是去找模型缺了什么变量——最后定位到首位声骸技能，并把它量化成一个可证伪的门槛。这一段是本文我自己最看重的部分。</p>
+<blockquote>
+<p>⚠️ <strong>关键假设声明</strong>：§5 的全部计算依赖各 COST 层主词条的满级数值（4C 暴伤 44%、3C 属伤 30% 等），这些取自社区通行值，<strong>标注为 [需核验]</strong>。若实测数值偏离，§5.1–5.3 的结论排序可能变化（§5.4 给出敏感度说明）。核验方法见 §9 实验 A。</p>
+</blockquote>
+<hr />
+<h2>1. 选题说明与拆解策略</h2>
+<p>装备词条类系统的拆解难度中等，常规写法上限有限——多数人只拆"装备界面那半个系统"。本案策略是<strong>把链路拆全</strong>。</p>
+<p>声骸区别于原神圣遗物的核心不在词条（词条结构高度同构），而在<strong>获取端</strong>："击败敌人后在大世界实体化掉落、走近吸收"这一设计把刷词条从"副本抽奖"变成了开放世界玩法本身，并连带改写了体力经济。只拆装备界面，等于把这个系统最有设计含量的一半扔掉。</p>
+<p>而在装备端，声骸有一个圣遗物完全没有的东西：<strong>COST 预算</strong>。它是这个系统里唯一的构筑决策点，也是本文计算量最大的一节。</p>
+<hr />
+<h2>2. 系统定位</h2>
+<ol>
+<li><strong>养成终点</strong>：角色与武器养成有明确上限，声骸词条是唯一无上限的随机追求——版本长草期的核心留存工具</li>
+<li><strong>开放世界的奖励反馈器</strong>：大世界战斗的即时掉落物，让"探索—战斗"循环有持续产出</li>
+<li><strong>战斗扩展模块</strong>：首位声骸主动技能 + 合鸣套装效果参与配队构筑（这一条在 §5.2 被证明比看上去重要得多）</li>
+<li><strong>内容消耗调节阀</strong>：无体力门控的可重复刷取，用随机性而非次数限制控制毕业速度</li>
+</ol>
+<hr />
+<h2>3. 全链路总览</h2>
+<pre><code>【获取端】击败敌人 → 声骸实体在场景生成 → 玩家靠近吸收
+          └ 数据坞等级门控掉落星级与概率
+【筛选端】背包管理（锁定 / 弃置 / 批量回收）
+【养成端】强化（+5/+10/…/+25，每 +5 解锁一次调谐）→ 调谐（随机副词条，最多 5 条）
+【装备端】5 槽位 × COST ≤ 12 预算 → 主词条按 COST 分层 → 合鸣套装（2 件 / 5 件）
+【循环】  词条不理想 → 回到获取端（无体力成本，成本 = 时间）
+</code></pre>
+<hr />
+<h2>4. 获取端拆解</h2>
+<h3>4.1 掉落与吸收规则</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>规则项</th>
+<th>观察 / 推断</th>
+<th>状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>掉落触发</td>
+<td>击杀敌人后声骸以可交互实体生成于尸体位置</td>
+<td>掉落率基数 [实测校验项]</td>
+</tr>
+<tr>
+<td>掉落率修正</td>
+<td>数据坞等级提升掉落概率与星级上限</td>
+<td>具体加成 [实测校验项]</td>
+</tr>
+<tr>
+<td>吸收方式</td>
+<td>靠近后吸收，有动画与音效反馈</td>
+<td>判定半径 [实测校验项]</td>
+</tr>
+<tr>
+<td>实体存续</td>
+<td>不吸收时保留时长有限；推断切图 / 下线不持久化（服务端不会为掉落实体长期存储）</td>
+<td>[实测校验项]</td>
+</tr>
+<tr>
+<td>定向刷取</td>
+<td>特定敌人掉落特定声骸——<strong>怪物图鉴即掉落表</strong></td>
+<td>已确认</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p><strong>设计目的推断</strong>：掉落做成大世界实体而非结算面板发放，是花开发成本买"拾取爽感"，把数值产出包装成动作游戏的战利品体验（与魂系灵魂掉落、暗黑地面装备同源）。</p>
+<p>更值钱的一层是「怪物 = 声骸」的一体两面：一份怪物美术资产同时是敌人、掉落物、图鉴收集项和技能来源，<strong>吃四份内容价值</strong>。对独立/中小团队而言这是可直接借鉴的资产复用思路。</p>
+</blockquote>
+<h3>4.2 数据坞：把限制包装成进度</h3>
+<p>数据坞等级由声骸收集度驱动，等级解锁更高星级掉落。本质是<strong>前期防挖矿、后期保底</strong>的双向阀门：新玩家刷不出毕业级声骸（保护养成节奏），老玩家在高等级下有稳定的 5 星产出预期。</p>
+<p>对比原神：圣遗物品质由世界等级门控，鸣潮把门控做成了可见可养成的独立系统。<strong>同样是限制，包装成进度条之后玩家情绪完全不同</strong>——这是一个几乎零成本的体验改造，值得记下来。</p>
+<h3>4.3 体力经济的根本差异</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>维度</th>
+<th>鸣潮声骸</th>
+<th>原神圣遗物</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>获取成本</td>
+<td>时间（无体力，大世界无限刷）</td>
+<td>树脂（可付费回复 → 直接商业化）</td>
+</tr>
+<tr>
+<td>获取场景</td>
+<td>开放世界战斗</td>
+<td>固定副本</td>
+</tr>
+<tr>
+<td>商业化路径</td>
+<td>不卖获取次数，付费集中在角色 / 武器池</td>
+<td>树脂回复构成小额付费点</td>
+</tr>
+<tr>
+<td>设计代价</td>
+<td>肝度上限极高，需要后端随机性刹车</td>
+<td>每日产出封顶，长草感更强</td>
+</tr>
+</tbody>
+</table></div>
+<p>这一栏的定量分析见 §6——"免费"不等于"无成本"，把时间折算成可比的量之后，结论会更清楚。</p>
+<hr />
+<h2>5. 装备端深拆：COST 预算的组合最优化</h2>
+<p><strong>本文的核心章节。</strong> 社区把 COST 分配简化成"43311 还是 44111"两句口诀，本节把它当成一个带约束的整数组合问题穷举求解。</p>
+<h3>5.1 可行域穷举：不被支配的配置有三个</h3>
+<p><strong>约束</strong>：恰好装满 5 槽位，Σ COST ≤ 12，单件 COST ∈ {1,3,4}。</p>
+<p>穷举全部组合得 8 种可行、13 种超预算。用 Pareto 支配剔除（若配置 A 在 4C 与 3C 数量上都不少于 B 且至少一项更多，则 B 无条件劣；1C 是保底层，永远填得满，不参与判定）：</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>配置</th>
+<th style="text-align: right;">ΣCOST</th>
+<th style="text-align: right;">余量</th>
+<th style="text-align: right;">4C</th>
+<th style="text-align: right;">3C</th>
+<th style="text-align: right;">1C</th>
+<th>状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>43311</strong></td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2</td>
+<td>★ Pareto 前沿</td>
+</tr>
+<tr>
+<td><strong>44111</strong></td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">3</td>
+<td>★ Pareto 前沿</td>
+</tr>
+<tr>
+<td><strong>33311</strong></td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">2</td>
+<td>★ Pareto 前沿</td>
+</tr>
+<tr>
+<td>43111</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3</td>
+<td>被支配</td>
+</tr>
+<tr>
+<td>33111</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">3</td>
+<td>被支配</td>
+</tr>
+<tr>
+<td>41111 / 31111 / 11111</td>
+<td style="text-align: right;">≤8</td>
+<td style="text-align: right;">≥4</td>
+<td style="text-align: right;">—</td>
+<td style="text-align: right;">—</td>
+<td style="text-align: right;">—</td>
+<td>被支配</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p><strong>结论一：Pareto 前沿有三个点，不是社区常说的两个。</strong></p>
+</blockquote>
+<p><code>33311</code> 不被 <code>43311</code> 支配（3C 数量更多），却在攻略里长期缺席。<strong>一个配置"没人用"与"不该用"是两件事</strong>——先穷举可行域再谈优劣，可以避免把社区习惯误当成设计约束。</p>
+<p>另外，预算 12 恰好卡在 <code>43311</code>(=12) 可行、<code>44311</code>(=13) 不可行之间。若预算放宽到 13，双 4C 将不再有机会成本，构筑决策会立刻塌缩成"能上双 4C 就上"。<strong>12 这个数字是为了保住取舍而挑的。</strong></p>
+<h3>5.2 一次模型翻车，与它的修正</h3>
+<p><strong>第一轮计算</strong>（只算主词条进乘区，其余作为公共项约去）：</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>外部双爆</th>
+<th style="text-align: right;">43311</th>
+<th style="text-align: right;">44111</th>
+<th style="text-align: right;">33311</th>
+<th>最优</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>无</td>
+<td style="text-align: right;">2.2783</td>
+<td style="text-align: right;">1.9309</td>
+<td style="text-align: right;"><strong>2.6486</strong></td>
+<td>33311</td>
+</tr>
+<tr>
+<td>+30% CR / +60% CD</td>
+<td style="text-align: right;">3.3489</td>
+<td style="text-align: right;">2.8918</td>
+<td style="text-align: right;"><strong>3.5788</strong></td>
+<td>33311</td>
+</tr>
+<tr>
+<td>+60% CR / +120% CD</td>
+<td style="text-align: right;">5.2028</td>
+<td style="text-align: right;">4.4072</td>
+<td style="text-align: right;"><strong>5.4393</strong></td>
+<td>33311</td>
+</tr>
+</tbody>
+</table></div>
+<p><code>33311</code> 在全部五个场景夺冠，<code>43311</code> 一次也没赢。<strong>这与社区共识直接冲突。</strong></p>
+<p>当模型与大规模玩家实践长期冲突时，先假设模型缺了变量，而不是假设几百万玩家一起搞错了。逐一检查省略项：</p>
+<ul>
+<li>5 件套合鸣效果 —— 三种配置都能满足，不构成差异</li>
+<li>副词条 —— 与 COST 层无关，已作公共项处理</li>
+<li>属伤只对本属性生效 —— 主流角色伤害为单一属性，影响有限</li>
+<li><strong>首位声骸技能 —— 模型完全没有计入</strong></li>
+</ul>
+<p>找到了。1 号位声骸提供主动技，而强力技能几乎全挂在 BOSS 级（COST 4）声骸上。<code>33311</code> 的首位只能放 COST 3，等于<strong>主动放弃了一整块输出</strong>，而这块输出根本没进乘区计算。</p>
+<p><strong>第二轮：把它补进模型。</strong> 设常规伤害为 D、首位技能伤害为 K，则 <code>43311</code> 反超条件为 <code>K₄ - K₃ &gt; D₃₃ - D₄₃</code>。换算成占常规伤害的百分比：</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>场景</th>
+<th style="text-align: right;">D(43311)</th>
+<th style="text-align: right;">D(33311)</th>
+<th style="text-align: right;">技能需补足</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>无额外双爆</td>
+<td style="text-align: right;">2.2783</td>
+<td style="text-align: right;">2.6486</td>
+<td style="text-align: right;">16.25%</td>
+</tr>
+<tr>
+<td>+30% CR / +60% CD</td>
+<td style="text-align: right;">3.3489</td>
+<td style="text-align: right;">3.5788</td>
+<td style="text-align: right;">6.87%</td>
+</tr>
+<tr>
+<td>+60% CR / +120% CD</td>
+<td style="text-align: right;">5.2028</td>
+<td style="text-align: right;">5.4393</td>
+<td style="text-align: right;"><strong>4.55%</strong></td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p><strong>结论二：43311 的正确性来自声骸技能，而不是主词条。</strong></p>
+</blockquote>
+<p>门槛只有 4.55%~16.25%，且随双爆副词条增多而下降。BOSS 级声骸技能（变身类、召唤类）的伤害占比实测普遍在 5%~15% [实测校验项]，<strong>远高于这个门槛</strong>。所以：</p>
+<ul>
+<li>社区共识 <code>43311</code> 是对的</li>
+<li>但流传的理由（"4C 主词条最强"）是错的——主词条层面 <code>33311</code> 反而更优</li>
+<li>真实理由是首位声骸技能，一个<strong>不在词条系统里</strong>的因素</li>
+</ul>
+<p><strong>这次翻车暴露的陷阱值得单独写下来：把系统边界画在词条上。</strong> 声骸的价值由「主词条 + 副词条 + 套装 + 技能」四部分构成，只算前两项会得到一个内部逻辑完全正确、数字也算对了、但边界画错的结论。错得很隐蔽——因为模型自洽，不会自己报错。</p>
+<p>我保留完整的翻车过程，是因为它比一个正确结论更有价值：它演示了数值模型如何在自洽的情况下给出错误答案，以及怎样用"与实践冲突"这个信号把缺失变量找出来。</p>
+<h3>5.3 44111 的成立区间：交叉点在 57.2%</h3>
+<p><code>44111</code> 与 <code>43311</code> 都能在首位放 COST 4，技能收益相同，所以两者的差距完全由主词条决定。扫描外部增伤（队友 buff / 武器 / 套装提供）：</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th style="text-align: right;">队友提供增伤</th>
+<th style="text-align: right;">43311</th>
+<th style="text-align: right;">44111</th>
+<th>胜者</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">0%</td>
+<td style="text-align: right;">3.3489</td>
+<td style="text-align: right;">2.8918</td>
+<td>43311</td>
+</tr>
+<tr>
+<td style="text-align: right;">25%</td>
+<td style="text-align: right;">3.8721</td>
+<td style="text-align: right;">3.6148</td>
+<td>43311</td>
+</tr>
+<tr>
+<td style="text-align: right;">50%</td>
+<td style="text-align: right;">4.3954</td>
+<td style="text-align: right;">4.3377</td>
+<td>43311</td>
+</tr>
+<tr>
+<td style="text-align: right;"><strong>75%</strong></td>
+<td style="text-align: right;">4.9186</td>
+<td style="text-align: right;"><strong>5.0607</strong></td>
+<td><strong>44111</strong></td>
+</tr>
+<tr>
+<td style="text-align: right;">150%</td>
+<td style="text-align: right;">6.4884</td>
+<td style="text-align: right;"><strong>7.2295</strong></td>
+<td>44111</td>
+</tr>
+</tbody>
+</table></div>
+<p>二分求得<strong>交叉点：外部增伤 = 57.2%</strong>。</p>
+<blockquote>
+<p><strong>结论三：44111 确实有成立区间，但它由「队伍环境」决定，不是个人偏好。</strong></p>
+</blockquote>
+<p>原因仍是乘区结构：<code>43311</code> 的两个 3C 属伤<strong>加算进增伤区</strong>，当队友已把增伤堆到 57% 以上，再往这个区加 60% 的边际收益已经很薄；而 <code>44111</code> 的暴击率进入相对空的暴击区，仍在线性生效。</p>
+<p>于是配装的正确答案取决于<strong>队友是谁</strong>：</p>
+<ul>
+<li>单人 / 弱增伤队 → 增伤区空 → <code>43311</code></li>
+<li>带强增伤辅助的成型队 → 增伤区饱和 → <code>44111</code> 反超</li>
+</ul>
+<p>这解释了社区两种配置长期并存却谁也说服不了谁：<strong>双方讨论的其实是不同的队伍环境</strong>，而攻略往往只给结论不给前提。一个负责任的攻略应该写成「当队伍增伤总量低于约 57% 时用 43311」。</p>
+<blockquote>
+<p><strong>策划视角</strong>：当一个构筑决策的最优解依赖于队伍中其他成员的配置时，这个系统就具备了配队深度——但前提是玩家<strong>能感知到这层依赖</strong>。鸣潮在 UI 上完全没有暴露"当前增伤区总量"，玩家无从判断自己在交叉点的哪一侧，这层深度因此大部分被浪费掉了。改进方案见 §7 问题 4。</p>
+</blockquote>
+<p><strong>第二个成立条件是资产约束</strong>：3C 属伤主词条随机且必须匹配角色属性。玩家手上没有对味 3C 时，真实选择不是"43311 vs 44111"，而是"44111 vs 43311 但两个 3C 是废主词条"。验证计算显示，一旦 3C 对不上属性，<code>44111</code> 立刻反超。</p>
+<h3>5.4 敏感度声明</h3>
+<p>上述排序依赖主词条数值假设 [需核验]。关键比值是<strong>4C 暴伤（44%）与 3C 属伤（30%）之比</strong>：</p>
+<ul>
+<li>若实测 4C 暴伤显著高于 44%，或 3C 属伤显著低于 30%，<code>43311</code> 可能在主词条层面就胜过 <code>33311</code>，§5.2 的翻车叙事随之失效（但结论仍成立，只是理由变简单）</li>
+<li>交叉点 57.2% 对这两个数值同样敏感，实测后需重算</li>
+</ul>
+<p><strong>结论的形态</strong>（存在 Pareto 前沿三点、存在交叉点、最优解依赖队伍环境）不依赖具体取值，<strong>具体数字</strong>依赖。这个区分在汇报时必须讲清楚。</p>
+<hr />
+<h2>6. 无体力刷取的真实成本</h2>
+<p>沿用姊妹篇 §4.6 的超几何结论：双爆副词条同出 12.82%，4C 毕业件期望 36 件，加档位要求期望 256 件。单件耗时 T 为 [实测校验项]，做参数化扫描：</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th style="text-align: right;">单件耗时 T</th>
+<th style="text-align: right;">刷满 36 件</th>
+<th style="text-align: right;">刷满 256 件</th>
+<th style="text-align: right;">按每天 2 小时</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">30s</td>
+<td style="text-align: right;">0.3h</td>
+<td style="text-align: right;">2.1h</td>
+<td style="text-align: right;">1.1 天</td>
+</tr>
+<tr>
+<td style="text-align: right;"><strong>60s</strong></td>
+<td style="text-align: right;">0.6h</td>
+<td style="text-align: right;"><strong>4.3h</strong></td>
+<td style="text-align: right;"><strong>2.1 天</strong></td>
+</tr>
+<tr>
+<td style="text-align: right;">120s</td>
+<td style="text-align: right;">1.2h</td>
+<td style="text-align: right;">8.5h</td>
+<td style="text-align: right;">4.3 天</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p><strong>结论四：时间成本对"有闲玩家"友好，对"有钱玩家"无解。</strong></p>
+</blockquote>
+<p>以 T=60s 计，一件严格毕业的 4C 声骸期望 4.3 小时，五槽位全毕业在数十小时量级（方差极大）。这与树脂制的总时长并无优势，真正的差别在<strong>分布形态</strong>：</p>
+<ul>
+<li>树脂制：产出被日历强制摊平，付费可以买回一部分</li>
+<li>声骸制：产出可被时间无限压缩，但<strong>付费买不到</strong></li>
+</ul>
+<p>这是一个明确的用户结构选择。声骸制把养成速度的决定权从钱包交给了闲暇，对学生与高活跃玩家极度友好，对付费意愿高但时间少的玩家完全没有出口——而后者恰恰是二游 ARPU 的主力。</p>
+<p>库洛用这个设计换到口碑与差异化宣传点，代价是主动放弃了一条成熟付费通路，把全部收入压力转移到角色与武器卡池。<strong>评价这个取舍不能只看玩家更喜欢哪个，要看它在整体收入结构里被什么补上了。</strong></p>
+<p><strong>交叉验证产出速度</strong>：原神每日树脂约产出 9~18 件五星圣遗物，无压缩空间；鸣潮 T=60s 时约 60 件/小时。即<strong>鸣潮玩家投入 1 小时 ≈ 原神玩家 4 天的产出量</strong>。</p>
+<blockquote>
+<p>由此可得一个重要推论：声骸的<strong>词条要求必须相应更苛刻</strong>，否则内容会被高活跃玩家瞬间消耗完。姊妹篇算出的"严格毕业 256 件"正是对应这个供给速度的刹车片。<strong>两者不是独立设计，是同一个方程的两端</strong>——供给端放开多少，需求端就得收紧多少。</p>
+</blockquote>
+<hr />
+<h2>7. 亮点与问题</h2>
+<h3>亮点</h3>
+<ol>
+<li><strong>获取端实体化掉落</strong>：数值产出被包装成动作游戏战利品，一份怪物资产吃四份内容价值（敌人 / 掉落物 / 图鉴 / 技能来源）</li>
+<li><strong>数据坞把限制包装成进度</strong>：同样的门控，情绪完全不同</li>
+<li><strong>COST 预算把背包约束转化为构筑决策</strong>，且预算值 12 被精确卡在保住取舍的位置（§5.1）</li>
+<li><strong>首位声骸技能让装备系统反哺操作深度</strong>——这也是 §5.2 里那个被我漏掉、却决定了正确答案的变量</li>
+</ol>
+<h3>问题与改进</h3>
+<p><strong>问题 1：后期刷取退化为清怪模拟器。</strong>
+数据坞满级后，刷声骸的动作乐趣被重复磨损，体验趋近跑图打卡。
+→ <strong>改进</strong>：引入"声骸潮汐"限时事件区（高掉率 + 特殊敌人组合），把刷取从匀速消耗改为节奏化窗口。
+→ <strong>成本</strong>：复用现有怪物与区域机制，中低。</p>
+<p><strong>问题 2：调谐五连歪的挫败集中爆发。</strong>
++25 最后一条词条歪掉时，前四次调谐的沉没成本一次性作废，是弃坑情绪高点。
+→ <strong>改进</strong>：满调谐声骸解锁"定向重调"（消耗大量材料重 roll 指定单条），保留随机性但给沉没成本一个出口。
+→ <strong>成本</strong>：需重算毕业周期，中。
+→ <strong>注意</strong>：这会削弱 §6 提到的"刹车片"作用，须同步收紧其他环节，否则内容消耗加速。</p>
+<p><strong>问题 3：套装 5 件占满槽位，构筑空间被绑死。</strong>
+混搭收益几乎恒负，词条系统的理论深度未被释放。
+→ <strong>改进</strong>：增加"2+2+散件"档位的弱化混搭收益。
+→ <strong>成本</strong>：全局数值平衡，高。</p>
+<p><strong>问题 4（新增，来自 §5.3）：交叉点不可见，配队深度被浪费。</strong>
+<code>43311</code> 与 <code>44111</code> 的最优解由队伍增伤总量决定（交叉点 57.2%），但游戏内不显示这个数字，玩家无从判断自己在哪一侧，只能照抄攻略。
+→ <strong>改进</strong>：角色面板增加"当前增伤区总量"显示（含队友 buff 的预估值），或直接在声骸推荐里给出条件式提示。
+→ <strong>成本</strong>：低——数据全在客户端，只是没有暴露。
+→ <strong>收益</strong>：把一层已经做好但玩家看不见的配队深度真正激活，几乎是白捡的设计价值。</p>
+<hr />
+<h2>8. 配置表设计</h2>
+<p><em>本章对应实际工作中"文档写给程序看"的交付标准。字段类型全部显式声明，资源用 int id 引用，浮点转万分比整型存储。</em></p>
+<p><strong>echo_table（声骸表）</strong></p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>echo_id</td>
+<td>int</td>
+<td>主键</td>
+</tr>
+<tr>
+<td>monster_id</td>
+<td>int</td>
+<td>对应怪物（图鉴 / 掉落反查）</td>
+</tr>
+<tr>
+<td>cost</td>
+<td>int</td>
+<td>1 / 3 / 4</td>
+</tr>
+<tr>
+<td>rarity_max</td>
+<td>int</td>
+<td>最高可掉星级</td>
+</tr>
+<tr>
+<td>main_stat_pool_id</td>
+<td>int</td>
+<td>→ main_stat_pool</td>
+</tr>
+<tr>
+<td>skill_id</td>
+<td>int</td>
+<td>首位声骸技能 → 技能表</td>
+</tr>
+<tr>
+<td>sonata_ids</td>
+<td>int[]</td>
+<td>可属套装（一骸多套用数组）</td>
+</tr>
+<tr>
+<td>icon_id / model_id</td>
+<td>int</td>
+<td>资源引用，<strong>禁止直接写路径</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>substat_pool（词条随机库）</strong></p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>substat_id</td>
+<td>int</td>
+<td>主键</td>
+</tr>
+<tr>
+<td>stat_type</td>
+<td>int</td>
+<td>枚举：1=攻击固定值 2=攻击% …</td>
+</tr>
+<tr>
+<td>value_tiers</td>
+<td>int[]</td>
+<td>数值档位（万分比整型，如 630 = 6.3%）</td>
+</tr>
+<tr>
+<td>tier_weights</td>
+<td>int[]</td>
+<td>各档位权重（整型权重，不用浮点概率）</td>
+</tr>
+<tr>
+<td>roll_weight</td>
+<td>int</td>
+<td>该词条被抽中的权重</td>
+</tr>
+<tr>
+<td>exclusive_group</td>
+<td>int</td>
+<td>互斥组（已有词条不重复 roll）</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>sonata_table（套装表，独立于声骸表）</strong></p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sonata_id</td>
+<td>int</td>
+<td>主键</td>
+</tr>
+<tr>
+<td>effect_2pc_id / effect_5pc_id</td>
+<td>int</td>
+<td>buff 引用</td>
+</tr>
+<tr>
+<td>desc_key</td>
+<td>int</td>
+<td>本地化文本 key（不硬编码中文）</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p>三处刻意的规范：<strong>资源用 id 不用路径</strong>（改目录不用动数据表）、<strong>权重用整型不用浮点</strong>（避免概率和不为 1 的浮点误差，且便于策划直接加减）、<strong>套装表独立于声骸表</strong>（一骸多套时避免冗余行）。</p>
+</blockquote>
+<hr />
+<h2>9. 技术实现推断</h2>
+<ol>
+<li><strong>掉落实体生命周期</strong>：推断为客户端表现 + 服务端权威的临时 entity，带 TTL 超时回收，下线不持久化。验证：掉落后挂机计时 / 断线重连观察。</li>
+<li><strong>吸收判定</strong>：推断为球形触发器 + 交互优先级队列（多个声骸重叠时的拾取顺序）。</li>
+<li><strong>随机 roll 归属</strong>：主词条与副词条必然服务端 roll（防篡改），调谐结果在请求返回前不可预测。</li>
+<li><strong>数据坞进度</strong>：账号级持久化，掉落概率修正推断为服务端掉落表的行级权重覆盖。</li>
+<li><strong>主词条与乘区的耦合</strong>：§5 的计算要求每个主词条携带"所属乘区"标签（暴击区 / 增伤区 / 攻击区），否则无法正确结算。这与姊妹篇 §7 对 buff 系统的推断是同一套结构。</li>
+</ol>
+<hr />
+<h2>10. 实测校验计划</h2>
+<p>按优先级排列。</p>
+<h3>实验 A：主词条满级数值核验（最高优先级）</h3>
+<ul>
+<li><strong>目的</strong>：§5 全部结论依赖的数值假设</li>
+<li><strong>方法</strong>：满级各 COST 层声骸各一件，逐一记录主词条数值</li>
+<li><strong>判据</strong>：与本文 [需核验] 数值对比，偏差 &gt; 5% 则重算 §5.2、§5.3</li>
+<li><strong>重要性</strong>：这是唯一能推翻本文核心结论的实验，必须先做</li>
+</ul>
+<h3>实验 B：首位声骸技能伤害占比（验证 §5.2 的修正）</h3>
+<ul>
+<li><strong>方法</strong>：固定配装，记录一轮完整输出循环中声骸技能伤害 / 总伤害</li>
+<li><strong>判据</strong>：占比是否 &gt; 4.55%（成型队门槛）</li>
+<li><strong>意义</strong>：这是 <code>43311</code> 正确性的唯一支柱，若实测低于门槛则 §5.2 结论反转</li>
+</ul>
+<h3>实验 C：副词条概率分布（校验姊妹篇 §4.6 的等概率假设）</h3>
+<ul>
+<li><strong>方法</strong>：采集 200+ 件 4C 声骸副词条，统计频次，卡方检验</li>
+<li><strong>预期</strong>：等概率假设很可能被拒绝，届时毕业成本高于 36 / 256 件</li>
+</ul>
+<h3>实验 D：获取端参数</h3>
+<ul>
+<li>单件耗时 T（§6 的模型参数，录屏计时 20 次取中位数）</li>
+<li>掉落率基数与数据坞各级修正（固定怪 ≥100 次击杀）</li>
+<li>吸收判定半径、实体存续时长</li>
+</ul>
+<h3>产出物</h3>
+<p>Excel 验证表（理论值 / 实测值 / 绝对误差 / 相对误差）。完成后升版 v1.1，在对应结论标注「已实证」或「已修正」。</p>
+<hr />
+<h2>11. 参考与附录</h2>
+<h3>附录：计算脚本</h3>
+<p><code>analysis/wuwa_echo_cost.py</code> — 无第三方依赖，<code>python wuwa_echo_cost.py</code> 复现全部计算。输出存档 <code>analysis/output_echo.txt</code>。</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>脚本章节</th>
+<th>对应正文</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>§1 可行域穷举</td>
+<td>§5.1</td>
+</tr>
+<tr>
+<td>§2 三配置乘区对比</td>
+<td>§5.2 第一轮</td>
+</tr>
+<tr>
+<td>§2b 声骸技能临界占比</td>
+<td>§5.2 修正</td>
+</tr>
+<tr>
+<td>§3 交叉点求解</td>
+<td>§5.3</td>
+</tr>
+<tr>
+<td>§4 时间成本模型</td>
+<td>§6</td>
+</tr>
+</tbody>
+</table></div>
+<h3>公开原材料来源</h3>
+<p>COST 预算与槽位规则、各层主词条池、数据坞机制、掉落规则，取自公开社区整理与游戏内文本。主要参考：鸣潮 Wiki（Fandom）Echo 相关条目、Prydwen.gg 声骸词条整理、游民星空声骸系统讲解。姊妹篇《鸣潮战斗系统拆解案》提供乘区结构与超几何模型。</p>
+<h3>方法论参考</h3>
+<ul>
+<li>声骸系统策划案范例（B 站 V3 库洛洛点评 BV1GkdbBkEUR）：正向策划案结构（设计目的 / 功能说明 / 界面说明 / 美术需求 / 配置表）</li>
+<li>该点评指出的通病——获取端链路缺失、配置表资源路径硬编码——本案 §4、§8 即针对性补强</li>
+</ul>
+  </article>
+  <footer>
+    <div class="note"><b>方法声明</b>：本拆解案为原创独立推导——公开数据（公式 / 词条档位 / 抗性规则）仅作原材料，文中每个结论均来自其上的二次推导（解析求解 / 概率建模 / 敏感度分析），并附可复现的 Python 计算脚本（面谈可提供、可当场复核）。</div>
+    <a class="backbtn" href="../index.html#cases">← 返回作品集</a>
+  </footer>
+</div>
+</body>
+</html>
