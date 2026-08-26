@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>赵鹏淦 · 游戏策划作品集</title>
-<meta name="description" content="赵鹏淦（Penggan Zhao）游戏策划作品集：独立设计并完成回合制 RPG《ChronoTraveler》，团队谍报潜行游戏 UI/系统/数值设计，纽卡斯尔大学游戏工程硕士。">
+<meta name="description" content="赵鹏淦（Penggan Zhao）游戏策划作品集：系统 / 玩法方向。独立设计并完成回合制 RPG《ChronoTraveler》并为其 NPC 开发 LLM 自由对话 Agent；团队谍报潜行游戏系统/数值/UI 设计；纽卡斯尔大学游戏工程硕士。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;1,400;1,500&display=swap" rel="stylesheet">
@@ -244,10 +244,10 @@ footer .logo{font-size:1rem;margin-bottom:8px;display:inline-block}
 <header class="hero">
   <div class="halo"></div>
   <div class="hero-in">
-    <div class="tag">Game Designer · 系统策划</div>
+    <div class="tag">Game Designer · 系统 / 玩法策划</div>
     <h1>赵鹏淦</h1>
     <div class="enname">Penggan Zhao</div>
-    <div class="role">游戏策划 <span>/</span> 系统策划 <span>/</span> 数值 · 玩法 · 商业化</div>
+    <div class="role">游戏策划 <span>/</span> 系统 · 玩法 <span>/</span> 数值 · 商业化</div>
     <p class="lead">独立设计并做完一整款回合制 RPG。<br>既懂系统与数值，也懂玩家心理与商业化。</p>
   </div>
   <div class="scroll-cue">Scroll<i></i></div>
@@ -278,11 +278,42 @@ footer .logo{font-size:1rem;margin-bottom:8px;display:inline-block}
   <p class="reveal d1" style="text-align:right;font-size:.78rem;color:var(--dim);margin-top:8px">完整实机演示 18 分钟 ｜ <a href="https://www.bilibili.com/video/BV1hrbY6sE2W/" target="_blank" rel="noopener" style="color:var(--dim)">B 站原页</a> · <a href="https://youtu.be/6Jd2jqOS7E8" target="_blank" rel="noopener" style="color:var(--dim)">YouTube（海外备用）</a></p>
   <p class="reveal d1 proj-desc">一人完成从立项、系统设计、数值、关卡、叙事到上线的完整流程：五时代世界观、序章开场弧、终局二段式决战，音频 / CG / 立绘全覆盖。</p>
   <div class="hl">
-    <div class="hl-card reveal d1"><h4>「知识对决」回合战斗</h4><p>5 大知识域映射五元素、五边形克制环（1.25/1.0/0.8），"答对即命中"；伤害公式驱动，答题速度与正误决定倍率——把知识判定转化为战力。</p></div>
+    <div class="hl-card reveal d1"><h4>「知识对决」回合战斗</h4><p>5 大知识域映射五元素、五边形克制环（1.25/1.0/0.8）驱动技能切换决策；答题速度与正误决定伤害倍率（快答 1.5× / 答错 0.2× 保底）——使知识掌握度直接决定战斗表现。</p></div>
     <div class="hl-card reveal d2"><h4>成长与 Boss 设计</h4><p>记忆修复度（碎片 + 净化累积驱动进度）、Boss 双条件门、终局觉醒二阶段真形决战。</p></div>
     <div class="hl-card reveal d3"><h4>数据驱动架构</h4><p>五时代加性加载 + 传送门顺序解锁；500 道双语题库 + 对话 / 过场 / 任务全 JSON 配置化。</p></div>
     <div class="hl-card reveal d4"><h4>AI 协同开发管线</h4><p>以 LLM / AI Coding 工作流单人完成 130+ 运行时脚本 + 37 编辑器工具，打通生图→立绘→图生 3D→音频→图生视频的全流程。</p></div>
   </div>
+
+  <div class="dec-wrap reveal">
+    <div class="eyebrow">Design Decisions</div>
+    <div class="dec-h" style="margin-top:12px">四个真实的设计取舍</div>
+    <div class="dec-note">全部来自开发过程中的真实迭代——问题由实机走查发现，结果经数据验证。</div>
+
+    <div class="dec">
+      <div class="row p"><span class="k">问题</span><p>终局 Boss 实测 4~5 回合即被击杀，"最终决战"没有决战感。</p></div>
+      <div class="row d"><span class="k">决策</span><p>不凭感觉加血——按玩家觉醒后的期望伤害逐回合检算，重设 HP 与攻击：良好作答者残血通关，低级失误者战败重试。</p></div>
+      <div class="row o"><span class="k">结果</span><p>战斗时长控制在 <b style="color:var(--ice)">11~16 回合</b>、玩家血线被压至 <b style="color:var(--ice)">22~46%</b>——险胜成为终局的默认体验。</p></div>
+    </div>
+
+    <div class="dec">
+      <div class="row p"><span class="k">问题</span><p>500 道 AI 生成题逐题核对全部正确，但玩家背"选项位"就能通关。</p></div>
+      <div class="row d"><span class="k">决策</span><p>对题库做聚合分布审计——发现 <b style="color:var(--ice)">92–96%</b> 的正确答案聚集在同一选项位（LLM 生成偏置），在显示层洗牌修复，不动数据源。</p></div>
+      <div class="row o"><span class="k">结果</span><p>偏置清零；沉淀出"逐项正确 ≠ 整体无病"的 AIGC 内容质检方法。</p></div>
+    </div>
+
+    <div class="dec">
+      <div class="row p"><span class="k">问题</span><p>精心设计的五元素克制环几乎没被使用——玩家整场只敢用一个技能。</p></div>
+      <div class="row d"><span class="k">决策</span><p>定位到问题不在克制环而在资源：专注每回合净流失，切技能等于浪费。上调回复与初始值，让"换元素"从奢侈变成常规选项。</p></div>
+      <div class="row o"><span class="k">结果</span><p>克制环真正进入每回合决策——资源经济决定一个系统是否被使用。</p></div>
+    </div>
+
+    <div class="dec">
+      <div class="row p"><span class="k">问题</span><p>"答题 = 攻击"的核心规则，新手第一场战斗看不懂。</p></div>
+      <div class="row d"><span class="k">决策</span><p>不加弹窗说明书——把教学拆进首战三拍（选元素 → 对 / 快 / 错反馈 → 克制提示），在真实战斗中逐步揭示规则。</p></div>
+      <div class="row o"><span class="k">结果</span><p>教学融入玩法本身、零打断——与《原神》新手关拆解案的结论互为印证。</p></div>
+    </div>
+  </div>
+
   <div class="shots reveal d2">
     <a class="shot filled" data-slot="chrono-1" href="images/chrono-hub.jpg" target="_blank" style="background-image:url('images/chrono-hub.jpg')"><small>星穹枢纽 · 时代传送门</small></a>
     <a class="shot filled" data-slot="chrono-2" href="images/chrono-battle.jpg" target="_blank" style="background-image:url('images/chrono-battle.jpg')"><small>「知识对决」回合战斗 · 五元素克制</small></a>
@@ -395,11 +426,41 @@ footer .logo{font-size:1rem;margin-bottom:8px;display:inline-block}
   </div>
 </div></section>
 
-<!-- AI 管线 -->
+<!-- AI：LLM Agent + AIGC 管线 -->
 <section id="ai"><div class="wrap">
   <div class="reveal"><div class="eyebrow">Differentiation</div>
-    <h2 class="sec">AI 协同创作管线</h2>
-    <p class="proj-desc">不只是"用"AI——我开发 LLM Agent、跑 AI Coding 工作流、搭多模态 AIGC 管线，单人产出一整款游戏的美术 / 音频 / 演出资产。</p>
+    <h2 class="sec">LLM Agent 开发 · AIGC 管线</h2>
+    <p class="proj-desc">不只是"用"AI——为自己游戏的 NPC 开发了自由对话 Agent 并接入实机，同时以多模态 AIGC 管线单人产出整款游戏的美术 / 音频 / 演出资产。</p>
+  </div>
+
+  <div class="reveal d1" style="margin-top:36px">
+    <div class="proj-title"><span class="en" style="font-size:clamp(1.35rem,3vw,2rem)">chrono-npc-agent</span><span class="badge">个人 · Python / 开源</span></div>
+    <div class="proj-sub">给《ChronoTraveler》NPC 的 LLM 自由对话层——NPC 知道自己是谁、玩家进度到哪，能调工具查任务与知识，受护栏约束</div>
+    <div class="projmeta">
+      <span>双后端：<b>DeepSeek 云 / Ollama 本地</b></span><span><b>RAG</b> 语义检索</span><span><b>LoRA</b> 微调</span><span>已接入 <b>Unity 实机</b></span><span><b>134</b> 项离线测试</span>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="n">100%</div><div class="l">护栏成对测试通过率</div></div>
+      <div class="stat"><div class="n">0</div><div class="l">must-refuse 泄露</div></div>
+      <div class="stat"><div class="n">71.2→95.8%</div><div class="l">RAG 召回率升级</div></div>
+      <div class="stat"><div class="n">&lt;2s</div><div class="l">P50 延迟 · 超时降级保底</div></div>
+    </div>
+  </div>
+
+  <div class="dec-wrap reveal d1" style="margin-top:10px">
+    <div class="dec-h">三个写进文档的翻车发现</div>
+    <div class="dec-note">项目里最值钱的不是跑通，而是三次真实的失效分析（全文见仓库 docs/findings/）。</div>
+    <div class="hl">
+      <div class="hl-card reveal d1"><h4>泄题的威胁模型错了</h4><p>剥离答案字段挡不住泄题——解析文本本身就含答案（实测 500 题 66.8% 命中）。护栏必须建在输出层，而不是数据层。</p></div>
+      <div class="hl-card reveal d2"><h4>选模型漏了第四条标准</h4><p>只比了价格 / 工具调用 / 上下文，没查默认推理行为——默认开思考导致首次调用 100% 空回复，且思考模式下 temperature 静默失效。</p></div>
+      <div class="hl-card reveal d3"><h4>假阳性比漏报更危险</h4><p>子串匹配分不清"使用"与"提及"，三次误报同一根因——误报会诱导你去修改本来正确的行为。</p></div>
+    </div>
+    <a class="repo" href="https://github.com/linynZ/chrono-npc-agent" target="_blank" rel="noopener">↗ 开源仓库（代码 / 评测 / 发现文档公开可查）</a>
+  </div>
+
+  <div class="reveal d2" style="margin-top:44px">
+    <div class="dec-h">多模态资产管线</div>
+    <div class="dec-note">单人产出整款游戏的立绘 / CG / 3D 角色 / 音乐 / 演出片。</div>
   </div>
   <div class="pipe">
     <div class="pnode reveal d1"><div class="big">✎</div><div class="k">TEXT · IMAGE</div><div class="v">文生图<br>ComfyUI / SD</div></div>
@@ -449,7 +510,7 @@ footer .logo{font-size:1rem;margin-bottom:8px;display:inline-block}
 
 <footer>
   <div class="logo">赵鹏<b>淦</b></div>
-  <div>游戏策划 · 系统策划 · 2027 届应届硕士</div>
+  <div>游戏策划 · 系统 / 玩法方向 · 2027 届应届硕士</div>
   <div style="margin-top:6px;opacity:.6">© 2026 赵鹏淦 Penggan Zhao · Portfolio</div>
 </footer>
 
