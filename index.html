@@ -341,7 +341,7 @@ footer .logo{font-size:1rem;margin-bottom:8px;display:inline-block}
   <div class="hl">
     <div class="hl-card reveal d1"><h4>UI 系统架构（UX）</h4><p>从零搭建：<b style="color:var(--ice)">9 个全屏页面 + 7 个 HUD 子模块 + 2 套覆盖系统</b>。严格遵循 ECS 数据流——状态只存在 registry ctx 资源里，UI 渲染函数是纯消费者，禁止系统间直呼。</p></div>
     <div class="hl-card reveal d2"><h4>道具 / 装备系统</h4><p>MGS 风格——网络安全主题道具（木马 / DDOS / 哈希混淆 / 防火墙诱导等）、快捷切换、<b style="color:var(--ice)">径向四扇区道具轮盘</b>（鼠标角度检测 + 冷却可视化）、数据驱动（<code style="color:var(--ice)">.itemspawns</code>）的地图内生成与拾取。</p></div>
-    <div class="hl-card reveal d3"><h4>战役积分与评级（数值）</h4><p>逐动作积分：潜行未被发现 +100 / 击杀 −50 / 倒计时时间奖励，S–D 五档评级；跨关卡状态与积分持久化。<b style="color:var(--ice)">用记分规则把"潜行"而非"清场"变成最优解。</b></p></div>
+    <div class="hl-card reveal d3"><h4>战役积分与评级（数值）</h4><p>扣减制计分：开局 1000 分，逐秒 −1 / 击杀 −10 / 用道具 −5 / 触发倒计时 −200，F 至 SSS 八档评级并实时提示降档；分数跨三关累积，终关 &gt;500 才算通关。<b style="color:var(--ice)">用记分规则把"潜行"而非"清场"变成唯一最优解。</b></p></div>
     <div class="hl-card reveal d4"><h4>对话系统（为手柄设计）</h4><p>方向键组合序列（↑↓←→）+ 前缀匹配的分支对话，配倒计时与可视化输入槽、发言者标记——玩法上正好对应"黑客敲指令麻痹管理员"。</p></div>
     <div class="hl-card reveal d1"><h4>HUD 七模块</h4><p>生命/护甲、小地图（NavMesh 世界坐标 → 屏幕空间投影）、装备栏、罗盘、动作通知（Toast 六条队列）、交互提示（3D → 2D 投影）、聊天叠层——各读各的 ctx 资源，独立渲染。</p></div>
     <div class="hl-card reveal d2"><h4>跨平台与视觉特效</h4><p>参与 PS5 移植与 DualSense 手柄适配；CRT 扫线 / 暗角 / 赛博朋克死亡动画。主题呼应我的网络攻防产品背景——<b style="color:var(--ice)">把安全攻防知识转化成了一套玩法</b>。</p></div>
