@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>「知识对决」回合制战斗系统策划案 · 赵鹏淦</title>
+<style>
+:root{--bg:#0b0a1a;--ink:#e8e5f4;--muted:#a09ac0;--gold:#e3c07a;--ice:#9fd8f0;
+  --violet:#9d8ff0;--line:rgba(157,143,240,.18);--card:rgba(20,16,42,.65)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:"Microsoft YaHei","PingFang SC","Source Han Sans SC",sans-serif;
+  font-size:16px;line-height:1.85;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:
+  radial-gradient(900px 500px at 85% -5%,rgba(90,70,180,.25),transparent 60%),
+  radial-gradient(700px 500px at -10% 30%,rgba(40,80,160,.18),transparent 60%)}
+nav{position:sticky;top:0;z-index:9;display:flex;justify-content:space-between;align-items:center;
+  padding:14px 28px;background:rgba(11,10,26,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .logo{color:var(--ink);font-weight:700;text-decoration:none;letter-spacing:.06em}
+nav .logo b{color:var(--gold)}
+nav .back{color:var(--muted);text-decoration:none;font-size:.88rem}
+nav .back:hover{color:var(--gold)}
+.wrap{max-width:880px;margin:0 auto;padding:56px 24px 80px}
+.eyebrow{font-size:.78rem;letter-spacing:.28em;color:var(--gold);text-transform:uppercase;margin-bottom:14px}
+h1.title{font-size:2rem;line-height:1.35;margin-bottom:10px}
+.subtitle{font-size:1.05rem;color:var(--violet);margin-bottom:18px}
+.meta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
+.meta span{font-size:.78rem;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:3px 12px}
+article h2{font-size:1.35rem;color:var(--gold);margin:52px 0 16px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+article h3{font-size:1.1rem;color:var(--ice);margin:34px 0 12px}
+article p{margin:0 0 14px;color:#cdc9e0}
+article strong{color:var(--ink)}
+article em{color:var(--violet);font-style:normal}
+article ul,article ol{margin:0 0 16px 1.4em;color:#cdc9e0}
+article li{margin-bottom:6px}
+article blockquote{border-left:3px solid var(--gold);background:var(--card);border-radius:0 10px 10px 0;
+  padding:14px 18px;margin:0 0 16px;color:var(--muted)}
+article blockquote p{margin:0}
+article code{font-family:Consolas,"JetBrains Mono",monospace;font-size:.88em;background:rgba(157,143,240,.12);
+  border-radius:4px;padding:1px 6px;color:var(--ice)}
+article pre{background:#100e26;border:1px solid var(--line);border-radius:12px;padding:16px 18px;
+  overflow-x:auto;margin:0 0 18px}
+article pre code{background:none;padding:0;color:#c8d8f0;font-size:.85rem;line-height:1.6}
+.tablewrap{overflow-x:auto;margin:0 0 18px}
+article table{border-collapse:collapse;width:100%;font-size:.88rem}
+article th{color:var(--gold);text-align:left;border-bottom:1.5px solid rgba(227,192,122,.4);padding:8px 12px;white-space:nowrap}
+article td{border-bottom:1px solid var(--line);padding:8px 12px;color:#cdc9e0}
+article tr:hover td{background:rgba(157,143,240,.05)}
+article hr{border:0;border-top:1px solid var(--line);margin:40px 0}
+article a{color:var(--ice)}
+.toc{border:1px solid var(--line);border-radius:12px;padding:14px 22px;background:var(--card);font-size:.86rem;margin-bottom:6px}
+.toc ul{margin:0 0 0 1.1em;color:var(--muted)}
+.toc li{margin-bottom:3px}
+.toc a{color:var(--muted);text-decoration:none}
+.toc a:hover{color:var(--gold)}
+.toctitle{color:var(--gold);font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:8px}
+footer{border-top:1px solid var(--line);margin-top:70px;padding-top:28px}
+footer .note{font-size:.85rem;color:var(--muted);margin-bottom:18px}
+footer .note b{color:var(--gold)}
+.backbtn{display:inline-block;color:var(--gold);border:1px solid rgba(227,192,122,.4);border-radius:99px;
+  padding:8px 22px;text-decoration:none;font-size:.88rem}
+.backbtn:hover{background:rgba(227,192,122,.1)}
+
+/* —— 策划案页补充（沿用模板变量） —— */
+.docinfo{display:grid;grid-template-columns:auto 1fr;gap:6px 18px;border:1px solid var(--line);border-radius:12px;
+  background:var(--card);padding:16px 22px;margin-bottom:16px;font-size:.9rem}
+.docinfo .k{color:var(--gold);font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;white-space:nowrap;padding-top:3px}
+.docinfo .v{color:#cdc9e0}
+@media(max-width:560px){.docinfo{grid-template-columns:1fr;gap:2px 0}.docinfo .v{margin-bottom:8px}}
+.tldr{border-left:3px solid var(--ice);background:rgba(159,216,240,.06);border-radius:0 10px 10px 0;padding:12px 18px;margin-bottom:40px;
+  color:var(--ink);font-size:1rem;line-height:1.7}
+.tldr b{color:var(--ice);font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;margin-right:10px}
+article pre.diagram code{white-space:pre;font-size:.82rem;line-height:1.5}
+article details.pending{border:1px solid var(--line);border-radius:12px;background:var(--card);padding:0 20px;margin-top:40px}
+article details.pending summary{cursor:pointer;list-style:none;padding:14px 0;color:var(--gold);font-size:1.02rem;font-weight:600;display:flex;align-items:center;gap:10px}
+article details.pending summary::-webkit-details-marker{display:none}
+article details.pending summary::before{content:"▸";font-size:.9rem;transition:.25s;color:var(--muted)}
+article details.pending[open] summary::before{transform:rotate(90deg)}
+article details.pending .pend-note{font-size:.86rem;color:var(--muted);margin:0 0 12px}
+article details.pending ol{margin-bottom:18px}
+article .pend{color:var(--gold);font-size:.85em;border:1px dashed rgba(227,192,122,.45);border-radius:6px;padding:0 6px}
+</style>
+</head>
+<body>
+<nav><a class="logo" href="../index.html">赵鹏<b>淦</b></a><a class="back" href="../index.html#designdocs">← 返回作品集</a></nav>
+<div class="wrap">
+  <div class="eyebrow">Design Doc · 系统策划案</div>
+  <h1 class="title">「知识对决」回合制战斗系统策划案</h1>
+  <div class="subtitle">ChronoTraveler · 答题即攻击、知识即战力的回合制战斗规则与数值</div>
+  <div class="meta"><span>系统策划案 · 战斗 / 数值向</span><span>v1.0 · 2026-09</span><span>规则 / 数值 / 字段逐项核对源码与资产</span></div>
+  <div class="docinfo"><span class="k">项目</span><span class="v">ChronoTraveler《编年旅者》— 二次元教育 RPG（PC · Unity URP）</span><span class="k">系统</span><span class="v">知识对决（Knowledge Duel）回合制战斗系统</span><span class="k">角色</span><span class="v">系统策划 / 独立开发（全流程经手）</span><span class="k">状态</span><span class="v">已上线 · 五时代 + 终局决战全流程可玩，含 EditMode 规则单测</span></div>
+  <div class="tldr"><b>TL;DR</b>答题即攻击、知识即战力：五知识域映射五元素克制环，答题质量直接乘进伤害；答错不清进度，学习是战斗本体。</div>
+  <article>
+<div class="toc"><span class="toctitle">目录 · Contents</span><ul>
+<li><a href="#1">1. 文档信息</a></li>
+<li><a href="#2">2. 设计目标与体验目标</a></li>
+<li><a href="#3">3. 系统概述</a></li>
+<li><a href="#4">4. 规则详述</a></li>
+<li><a href="#5">5. 数值设计</a></li>
+<li><a href="#6">6. 交互与表现（设计意图与规则）</a></li>
+<li><a href="#7">7. 配置与数据驱动</a></li>
+<li><a href="#8">8. 验证与迭代</a></li>
+<li><a href="#9">9. 设计取舍与已知局限</a></li>
+<li><a href="#10">10. 附录</a></li></ul>
+</div>
+<h2 id="1">1. 文档信息</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>项</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>项目</td>
+<td>ChronoTraveler《编年旅者》— 二次元教育 RPG（PC，Unity URP）</td>
+</tr>
+<tr>
+<td>系统</td>
+<td>知识对决（Knowledge Duel）回合制战斗系统</td>
+</tr>
+<tr>
+<td>版本</td>
+<td>v1.0（对应游戏 2026-07-21 提交版；数据以仓库当前 <code>.asset</code> / 代码为准）</td>
+</tr>
+<tr>
+<td>作者</td>
+<td>赵鹏淦（系统策划 / 独立开发）</td>
+</tr>
+<tr>
+<td>状态</td>
+<td><strong>已上线</strong>（五时代 + 终局决战全流程可玩，含 EditMode 规则单测）</td>
+</tr>
+<tr>
+<td>依据</td>
+<td><code>docs/GDD.md</code> §2/§4/§5/§6/§9/§10.1；<code>Battle/</code> 规则与数据；<code>docs/eval/</code>；平衡提交记录</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="2">2. 设计目标与体验目标</h2>
+<p><strong>一句话核心体验：答题即攻击，知识即战力——你懂多少历史，就能打出多少伤害。</strong></p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>目标</th>
+<th>对应 GDD 支柱</th>
+<th>落地规则</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>学习不是外挂小游戏，而是战斗本体</td>
+<td>P1 Knowledge IS power</td>
+<td>每次出招必抽一题，答题质量直接乘进伤害</td>
+</tr>
+<tr>
+<td>答错不羞辱、失败不清进度</td>
+<td>P2 Gentle learning</td>
+<td>答错仍造成 0.2× 伤害；战败保留记忆/碎片进度，弹窗重试</td>
+</tr>
+<tr>
+<td>让玩家"自愿"去答不熟悉的领域</td>
+<td>P1 + P3</td>
+<td>五元素克制环 = 五知识域，Boss 分阶段换属性逼迫换域</td>
+</tr>
+<tr>
+<td>米哈游级战斗手感</td>
+<td>P4 Anime game</td>
+<td>碎裂转场、会心切入、卡帧、Boss 换相定格</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>目标玩家</strong>：对历史文明有兴趣的二次元向 RPG 玩家（对标原神/星铁受众）；教育场景下的中学至大学生。设计上不假设玩家有题库知识，"错"是被允许的默认状态。</p>
+<h2 id="3">3. 系统概述</h2>
+<p>玩家与 1~n 个"错乱体"回合制对决。玩家每回合选一个技能，技能绑定一种元素（=知识域），系统从<strong>当前时代</strong>题库的该知识域抽一道四选一限时题；答题结果（快答/答对/答错/超时）转化为伤害倍率。敌人不答题，只按数值回击（±15% 浮动）。Boss 随 HP 下降切换属性，玩家必须轮换知识域。伤害、元素、答题倍率全部是无副作用的纯函数，可离线单测。</p>
+<pre class="diagram"><code>                  ┌──────────────── 回合开始：专注 +3（上限 8）
+                  ▼
+   选技能（元素 E，消耗专注）
+                  │
+   抽题：region=当前时代 ∧ category=E ∧ 本战未出 ∧ [Boss: Bloom≥understand]
+                  │  12s 限时，选项显示层洗牌
+                  ▼
+   答题质量 q ∈ {快答1.5, 答对1.0, 答错0.2, 超时0.1}
+                  │
+   dmg = max(1,(power+ATK-DEF)) × 克制(1.25/1.0/0.8) × q
+                  │
+   结算 → 显示正确答案+解析 → Boss 相位检查（换属性）
+                  │
+   敌方回合：dmg = max(1, ATK敌-DEF玩家) × (1±0.15)
+                  │
+   胜：EXP/分数/记忆+40 ── 败：DefeatPanel 重试（进度保留）
+</code></pre>
+<h2 id="4">4. 规则详述</h2>
+<h3 id="41">4.1 回合流程</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>规则</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>回合起手</td>
+<td>玩家专注按 <code>focusRegenPerTurn</code> 回复，再列出"等级达标且专注够付"的技能</td>
+</tr>
+<tr>
+<td>无可用技能</td>
+<td>提示"专注不足"，跳过本回合（设计上不会发生，见 §5.2 专注契约）</td>
+</tr>
+<tr>
+<td>出招</td>
+<td>扣专注 → 抽题 → 答题 → 结算伤害 → 展示解析 → Boss 相位检查</td>
+</tr>
+<tr>
+<td>群体技</td>
+<td><code>AllEnemies</code> 对所有存活敌人各结算一次同额伤害</td>
+</tr>
+<tr>
+<td>自身技</td>
+<td><code>Self</code> 类型：治疗量 = power × 答题倍率（当前版本无自身技资产，机制保留）</td>
+</tr>
+<tr>
+<td>敌方回合</td>
+<td>每个存活敌人依次：预警演出 → 伤害 → 命中演出</td>
+</tr>
+<tr>
+<td>终止</td>
+<td>敌全灭=胜；玩家 HP=0=败；<strong>100 回合硬上限</strong>视为弃权（防治疗死循环）</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="42">4.2 五元素 = 五知识域</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>元素</th>
+<th>知识域</th>
+<th>题库 <code>category</code></th>
+<th>克制（×1.25）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>建筑 Architecture</td>
+<td>建筑、工程、纪念物</td>
+<td><code>Architecture</code></td>
+<td>文化</td>
+</tr>
+<tr>
+<td>文化 Culture</td>
+<td>艺术、文字、日常生活</td>
+<td><code>Culture</code></td>
+<td>哲思</td>
+</tr>
+<tr>
+<td>哲思 Philosophy</td>
+<td>思想、宗教、律法</td>
+<td><code>Philosophy</code></td>
+<td>地理</td>
+</tr>
+<tr>
+<td>地理 Geography</td>
+<td>疆域、贸易、城市</td>
+<td><code>Geography</code></td>
+<td>历史</td>
+</tr>
+<tr>
+<td>历史 History</td>
+<td>事件、君主、年代</td>
+<td><code>History</code></td>
+<td>建筑</td>
+</tr>
+</tbody>
+</table></div>
+<p>克制环是<strong>闭合五边形</strong>：进攻方克"环上下一个"（×1.25），被"环上上一个"抗（×0.8），其余含同属性为 ×1.0。元素枚举与题库 <code>category</code> 字段 1:1 同名——技能不只决定倍率，还决定<strong>你被问哪个领域的题</strong>。</p>
+<h3 id="43">4.3 答题质量 → 伤害</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>结果</th>
+<th>判定</th>
+<th>倍率</th>
+<th>设计意图</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>快答 CorrectFast</td>
+<td>答对且用时 ≤ <code>fastAnswerThreshold</code>（5s）</td>
+<td>×1.5</td>
+<td>精通奖励，触发会心切入+卡帧</td>
+</tr>
+<tr>
+<td>答对 Correct</td>
+<td>答对</td>
+<td>×1.0</td>
+<td>标准命中</td>
+</tr>
+<tr>
+<td>答错 Wrong</td>
+<td>选错</td>
+<td>×0.2</td>
+<td>"擦伤"——保留行动价值但强耦合知识</td>
+</tr>
+<tr>
+<td>超时 TimedOut</td>
+<td>12s 内未选</td>
+<td>×0.1</td>
+<td>犹豫比犯错更糟，制造时间压力</td>
+</tr>
+<tr>
+<td>无题</td>
+<td>该时代该域无题（数据缺失）</td>
+<td>视为 Correct + 控制台警告</td>
+<td>不惩罚玩家，但暴露配置错误</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="44">4.4 专注经济</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>上限 <code>maxFocus</code></td>
+<td>8</td>
+<td></td>
+</tr>
+<tr>
+<td>起始 <code>startFocus</code></td>
+<td>5</td>
+<td>首回合回复后为 8，可立刻放群体技</td>
+</tr>
+<tr>
+<td>每回合回复 <code>focusRegenPerTurn</code></td>
+<td>3</td>
+<td>≥ 单体技费用，保证任何回合都有招可出</td>
+</tr>
+<tr>
+<td>单体技费用</td>
+<td>3</td>
+<td>建筑/哲思/地理/历史</td>
+</tr>
+<tr>
+<td>群体技费用</td>
+<td>4</td>
+<td>文化（AoE）</td>
+</tr>
+<tr>
+<td>觉醒态额外回复</td>
+<td>+2</td>
+<td>仅终局二阶段</td>
+</tr>
+</tbody>
+</table></div>
+<p>节奏设计：单体技可无限连发；文化 AoE 需要"攒一回合"；专注不会归零锁死（见 §8 迭代 1）。</p>
+<h3 id="45">4.5 抽题规则（四层过滤，顺序固定）</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>层</th>
+<th>规则</th>
+<th>饥饿保护</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>① 地区隔离（硬）</td>
+<td>只抽 <code>region == 当前时代</code> 的题；域内无题则回退到<strong>同地区任意域</strong>；地区无题返回空</td>
+<td>绝不跨地区</td>
+</tr>
+<tr>
+<td>② 本战去重（硬）</td>
+<td>本场已出题排除，直到该池全部出过一遍</td>
+<td>排空则整池回绕</td>
+</tr>
+<tr>
+<td>③ Bloom 偏好（Boss）</td>
+<td>Boss 战优先 <code>bloom ≥ understand</code></td>
+<td>无则回退全池</td>
+</tr>
+<tr>
+<td>④ 跨战去重（软）</td>
+<td>会话内最近 15 题回避</td>
+<td>排空则整池回绕</td>
+</tr>
+<tr>
+<td>显示层</td>
+<td>四个选项 Fisher-Yates 洗牌，点击槽位映射回原 index 再判分</td>
+<td>数据文件不动</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>顺序为什么是②在③前</strong>：Boss 的 understand+ 池极小（每域 3~14 题），若先按 Bloom 过滤再去重，会在 remember 题还没见过时就重复 understand 题——"新鲜度优先于层级"。</p>
+<p>终局 <code>70_Finale</code> 的 <code>regionId</code> 留空 → 走"全 500 题按域抽"路径，作为五时代总复习。</p>
+<h3 id="46-boss">4.6 Boss 门</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>条件</th>
+<th>规则</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>碎片条件</td>
+<td><code>collectedFragments ≥ fragmentCount</code></td>
+</tr>
+<tr>
+<td>记忆条件</td>
+<td>该图记忆修复度达 <code>memoryTarget</code>（碎片 +20 / 净化战 +40 / 勘误道具 +3）</td>
+</tr>
+<tr>
+<td>判定</td>
+<td><strong>两条件同时满足</strong>才可交互；未启用的条件不阻塞</td>
+</tr>
+<tr>
+<td>开门演出</td>
+<td>粒子爆发 + 横幅，明确"你已准备好"</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="47-boss">4.7 Boss 多相位</h3>
+<p><code>phase = floor((1 − HP%) × 相位数)</code>，只升不降；换相时 Boss 元素切换并触发定格演出。</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Boss</th>
+<th>相位序列</th>
+<th>换相血线</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>华夏·大错乱</td>
+<td>历史→建筑→文化</td>
+<td>66.7% / 33.3%</td>
+</tr>
+<tr>
+<td>埃及</td>
+<td>建筑→地理→历史</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>希腊</td>
+<td>哲思→文化→历史</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>罗马</td>
+<td>建筑→历史→地理</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>丝路</td>
+<td>地理→文化→历史</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>终局·本源</td>
+<td>历史→建筑→文化→哲思→地理</td>
+<td>每 20%</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="48">4.8 终局二段式例外</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>规则</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>一阶段 Unyielding</td>
+<td>抽题答题照常，<strong>对 Boss 伤害钳为 0</strong>，飘字"被时间消解"；敌方照常攻击</td>
+</tr>
+<tr>
+<td>觉醒节点</td>
+<td><code>回合 ≥ 3</code> <strong>或</strong> <code>玩家 HP &lt; 50%</code>（先到为准）→ 战斗<strong>脚本化中断</strong>（无胜负、无奖励），存档标记 <code>finaleAwakened</code></td>
+</tr>
+<tr>
+<td>二阶段觉醒态</td>
+<td>ATK ×1.5、专注回复 +2、习得「星芒之契」（power 40 / 费 4，<strong>每次使用元素在五域随机</strong>，赌克制 vs 稳打）</td>
+</tr>
+<tr>
+<td>谬误揭露</td>
+<td>二阶段限定，<strong>同一知识域连续答对 2 题</strong> → Boss DEF ×0.75，每战一次</td>
+</tr>
+<tr>
+<td>重试</td>
+<td>战败后直接以觉醒态重开二阶段，不重播困境戏</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="5">5. 数值设计</h2>
+<h3 id="51">5.1 伤害公式</h3>
+<pre class="diagram"><code>玩家 → 敌：dmg = max(1, round( max(1, power + ATK − DEF) × 克制 × 答题倍率 ))
+敌 → 玩家：dmg = max(1, round( max(1, ATK敌 − DEF玩家) × (1 ± 0.15) ))   // 无元素、无答题
+经验：EXP = baseExp + 敌等级×5；升级需求 = 50 + 25L + 5L²
+</code></pre>
+<h3 id="52-playerloadout_china">5.2 玩家数值（<code>PlayerLoadout_China</code>，五时代共用）</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>Lv1</th>
+<th>每级成长</th>
+<th>Lv6</th>
+<th>Lv13</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HP</td>
+<td>150</td>
+<td>+15</td>
+<td>225</td>
+<td>330</td>
+</tr>
+<tr>
+<td>ATK</td>
+<td>25</td>
+<td>+3</td>
+<td>40</td>
+<td>61</td>
+</tr>
+<tr>
+<td>DEF</td>
+<td>10</td>
+<td>+2</td>
+<td>20</td>
+<td>34</td>
+</tr>
+<tr>
+<td>专注 上限/起始/回复</td>
+<td>8 / 5 / 3</td>
+<td>—</td>
+<td>—</td>
+<td>觉醒回复 5</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="53">5.3 技能表</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>技能</th>
+<th>元素</th>
+<th>power</th>
+<th>费用</th>
+<th>目标</th>
+<th>限时/快答</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>建筑之证</td>
+<td>建筑</td>
+<td>30</td>
+<td>3</td>
+<td>单体</td>
+<td>12s / 5s</td>
+</tr>
+<tr>
+<td>哲思洞悉</td>
+<td>哲思</td>
+<td>30</td>
+<td>3</td>
+<td>单体</td>
+<td>12s / 5s</td>
+</tr>
+<tr>
+<td>地理勘正</td>
+<td>地理</td>
+<td>30</td>
+<td>3</td>
+<td>单体</td>
+<td>12s / 5s</td>
+</tr>
+<tr>
+<td>史实裁决</td>
+<td>历史</td>
+<td>30</td>
+<td>3</td>
+<td>单体</td>
+<td>12s / 5s</td>
+</tr>
+<tr>
+<td>文化共鸣</td>
+<td>文化</td>
+<td>34</td>
+<td>4</td>
+<td><strong>全体</strong></td>
+<td>12s / 5s</td>
+</tr>
+<tr>
+<td>星芒之契（终局）</td>
+<td>随机</td>
+<td>40</td>
+<td>4</td>
+<td>单体</td>
+<td>12s / 5s</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="54-_contentenemies">5.4 敌人表（<code>_Content/*/Enemies</code>）</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>时代</th>
+<th>小怪（Lv/HP/ATK/DEF/元素）</th>
+<th>Boss（Lv/HP/ATK/DEF）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>华夏</td>
+<td>谣言 1/90/18/6/文化 · 谬误 2/130/22/9/哲思 · 遗忘 3/180/26/12/历史</td>
+<td>5 / 360 / 28 / 14</td>
+</tr>
+<tr>
+<td>埃及</td>
+<td>流沙之讹 2/110/20/6/文化 · 伪典 2/130/20/9/哲思 · 湮没之沙 3/180/24/12/历史</td>
+<td>5 / 440 / 27 / 14</td>
+</tr>
+<tr>
+<td>希腊</td>
+<td>诡辩之讹 1/125/22/7 · 谬论 2/150/22/10 · 遗忘之雾 3/205/26/13</td>
+<td>5 / 480 / 29 / 15</td>
+</tr>
+<tr>
+<td>罗马</td>
+<td>讹传 1/140/23/8 · 曲法 2/165/24/11 · 湮没之尘 3/230/28/14</td>
+<td>5 / 520 / 30 / 16</td>
+</tr>
+<tr>
+<td>丝路</td>
+<td>流言之沙 1/155/25/9 · 讹价 2/180/25/12 · 迷途之雾 3/255/30/15</td>
+<td>5 / 560 / 32 / 17</td>
+</tr>
+<tr>
+<td>终局</td>
+<td>—</td>
+<td>6 / <strong>2000</strong> / <strong>50</strong> / 19</td>
+</tr>
+</tbody>
+</table></div>
+<p>所有敌人 <code>damageVariance = 0.15</code>；奖励：小怪 EXP 16/22/30、分数 80/110/150，Boss EXP 120~160、分数 500~800。时代阶梯以埃及为锚，每代约 +15%（2026-07-05 提交）。</p>
+<h3 id="55-boss">5.5 终局 Boss 二阶段调参过程</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>版本</th>
+<th>HP / ATK / DEF</th>
+<th>实机表现（Lv13 觉醒态）</th>
+<th>依据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>07-09 spec</td>
+<td>700 / 36 / 19</td>
+<td>预估 8~10 回合</td>
+<td>丝路 Boss 560/32/17 上浮 15~25%</td>
+</tr>
+<tr>
+<td>07-19 实测</td>
+<td>同上</td>
+<td><strong>4~5 题即杀</strong>；Boss 每回合仅 2 伤（36−34），零威胁</td>
+<td>用户 Play 走查 Q48</td>
+</tr>
+<tr>
+<td>07-19 修正</td>
+<td><strong>2000 / 50 / 19</strong></td>
+<td>检算 <strong>11~16 题</strong>击破，主角 HP 削至 <strong>22~46%</strong>（红血危险感）；良作答生还，答错/低级战败重试</td>
+<td>PR #250</td>
+</tr>
+</tbody>
+</table></div>
+<p>复算校验（Lv13 觉醒 ATK ≈ 92）：单体技对 Boss 中性答对 = 30+92−19 = 103 → 2000/103 ≈ 19 回合；全程克制+快答 = 103×1.25×1.5 ≈ 193 → ≈ 10 回合；混合作答落在 11~16。敌方回合 50−34 = 16 ±15%，14 回合累计 ≈ 224 → 剩 330−224 = 106（32%），与 22~46% 区间吻合。</p>
+<h2 id="6">6. 交互与表现（设计意图与规则）</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>节点</th>
+<th>规则</th>
+<th>意图</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>入战</td>
+<td>碎片碎裂转场（Persona 式，6 条碎片错峰入/出 0.17s/0.20s）→ 双立绘 VS 滑入</td>
+<td>"被拉进对决"的仪式感</td>
+</tr>
+<tr>
+<td>出题</td>
+<td>题干 + 4 选项 + 环形倒计时；倒计时用<strong>非缩放时间</strong>，暂停菜单与查证卡打开时暂停；剩 40%/20% 变色</td>
+<td>卡帧/暂停不偷时间</td>
+</tr>
+<tr>
+<td>证据回响</td>
+<td>题目若链接到<strong>已解锁</strong>的日志条目，每战一次可点开查阅</td>
+<td>奖励探索，读过的知识能救场</td>
+</tr>
+<tr>
+<td>揭晓</td>
+<td>正确答案高亮 + 解析文本（答错也显示）</td>
+<td>每题都是一次教学</td>
+</tr>
+<tr>
+<td>会心</td>
+<td>快答 → 切入横幅（入 0.14s/停 0.44s/出 0.16s）；命中瞬间卡帧 0.07s（timeScale 0.05）</td>
+<td>星铁式"重击"</td>
+</tr>
+<tr>
+<td>Boss 换相</td>
+<td>定格 0.30s + 立绘 1.28× 冲击缩放 + 元素环 + 横幅；与会心卡帧共用一个截止时钟，短卡帧不会截断长定格</td>
+<td>让"该换知识域了"被看见</td>
+</tr>
+<tr>
+<td>星尘托盘</td>
+<td>每答对当场凝聚一颗星尘（快答金色、答对蓝白，答错<strong>不生成</strong>）</td>
+<td>缺席即反馈，无红叉</td>
+</tr>
+<tr>
+<td>结算</td>
+<td>星尘汇聚 → 光芒档位：<strong>星灿</strong>（全对且快答≥半数）/ <strong>星辉</strong>（正确率≥60%）/ <strong>微光</strong>（其余，仍是光）；纯表现无数值奖励</td>
+<td>拒绝 S/A/B 字母评级，贴合"温柔学习"</td>
+</tr>
+<tr>
+<td>战败</td>
+<td>静默模态面板：出生点重试 / 回枢纽</td>
+<td>不是 Game Over 尖叫</td>
+</tr>
+<tr>
+<td>首战教学</td>
+<td>首场真实战斗在关键节点弹 3~4 张提示卡，之后永不再出</td>
+<td>讲清"答题=攻击"</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="7">7. 配置与数据驱动</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>数据</th>
+<th>载体</th>
+<th>关键字段（真实字段名）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>敌人</td>
+<td><code>EnemyDefinition.asset</code></td>
+<td><code>enemyId, level, maxHealth, attack, defense, element, damageVariance, isBoss, phaseElements[], baseExpReward, scoreReward</code></td>
+</tr>
+<tr>
+<td>技能</td>
+<td><code>SkillDefinition.asset</code></td>
+<td><code>skillId, element, wildcardElement, power, focusCost, targetType, unlockLevel, timeLimit, fastAnswerThreshold</code></td>
+</tr>
+<tr>
+<td>玩家</td>
+<td><code>PlayerLoadout.asset</code></td>
+<td><code>maxHealth/attack/defense</code> + <code>*Growth</code>，<code>maxFocus, startFocus, focusRegenPerTurn, startingSkills[]</code></td>
+</tr>
+<tr>
+<td>题库</td>
+<td><code>Resources/QuizData.json</code>（500 题=5 地区×5 域×20，全双语）</td>
+<td><code>question{en,zh}, options[4]{en,zh}, correctIndex, explanation, category, region, bloom, evidenceId</code></td>
+</tr>
+<tr>
+<td>遭遇</td>
+<td>场景内 <code>BattleTrigger</code></td>
+<td><code>encounterId, enemies[], playerLoadout, memoryValue(40), requiresAllFragments, requiresMemoryFull</code></td>
+</tr>
+<tr>
+<td>遥测</td>
+<td><code>answer_telemetry.csv</code></td>
+<td><code>time, session, region, category, bloom, quality, correct, timeTaken, encounterId</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>新增一个时代的战斗内容 = 4 个敌人资产 + 1 条时代构建配置，不改代码；新增 Boss 相位 = 改 <code>phaseElements</code> 数组。</p>
+<h2 id="8">8. 验证与迭代</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>日期</th>
+<th>发现</th>
+<th>修正</th>
+<th>可量化结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>06-23</td>
+<td>专注回复 2 &lt; 平均技能费用 3.4，专注净流失，玩家被逼只用最便宜的建筑技（费 2）→ 五域覆盖塌缩、克制环失效</td>
+<td>回复 2→3、起始 3→5、上限 6→8</td>
+<td>单体技任意回合可出；单测"最便宜进攻技仅靠回复即可支付"</td>
+</tr>
+<tr>
+<td>2</td>
+<td>06-27</td>
+<td>地理技原为治疗，历史系敌人（含 Boss 一阶段）无人能克；建筑技效率碾压；答错 0.4 太宽松</td>
+<td>地理改进攻；5 技拉平 30/3 + AoE 34/4；答错 0.4→0.2、超时 0.4→0.1；敌 ATK 18/22/26，Boss HP 420→360；敌方 ±15% 浮动真正生效</td>
+<td>公式验算："克制+答对=险胜，只答对不克制=会死，乱猜=惨败"；单测"每个敌方元素必有克制技"</td>
+</tr>
+<tr>
+<td>3</td>
+<td>07-04</td>
+<td>题库答案位置偏置：四套题正确答案 <strong>92~96%</strong> 在选项 0（华夏 63% 在选项 1）；最长选项即答案 43~63%（随机应 25%）→ 每回合按同一键即可击穿机制</td>
+<td>显示层 Fisher-Yates 洗牌，JSON 不动留证</td>
+<td>偏置报告 <code>quiz_answer_bias_summary.md</code>；4 个单测</td>
+</tr>
+<tr>
+<td>4</td>
+<td>07-05</td>
+<td>后期时代难度倒挂</td>
+<td>希腊/罗马/丝路以埃及为锚每代 +~15%</td>
+<td>见 §5.4 阶梯</td>
+</tr>
+<tr>
+<td>5</td>
+<td>07-11</td>
+<td>玩家反馈"题库很薄"——实为生日碰撞：20 题池第 6 抽重复率 ≈60%</td>
+<td>本战硬去重 + 跨战软去重（15 题），新鲜度先于 Bloom</td>
+<td>7 个单测 + 8 抽战斗模拟</td>
+</tr>
+<tr>
+<td>6</td>
+<td>07-19</td>
+<td>终局 Boss 4~5 题即杀（§5.5）</td>
+<td>HP 700→2000、ATK 36→50</td>
+<td>11~16 题、残血 22~46%</td>
+</tr>
+</tbody>
+</table></div>
+<p>规则层单测：CombatMath 8、ElementChart 3、BalanceContract 3、QuizPool 7、QuizNoRepeat 7、QuizShuffle 4、BloomPool 5、BattleGate 2、FalsehoodExpose 7、MemoryGlow 3（均为 EditMode、不依赖引擎）。</p>
+<h2 id="9">9. 设计取舍与已知局限</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>取舍</th>
+<th>决策</th>
+<th>理由</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>敌人为什么不答题</td>
+<td>敌人只按数值回击</td>
+<td>对决对象是"玩家 vs 玩家所知"，敌人答题会把焦点变成 AI 演出；±15% 浮动已提供不确定性</td>
+</tr>
+<tr>
+<td>答错为什么是 0.2 不归零</td>
+<td>保留最低 1 点伤害</td>
+<td>教育"再尝试"原则：行动权不被没收；单测锁定 <code>wrong &gt; 0</code></td>
+</tr>
+<tr>
+<td>超时为什么比答错更低</td>
+<td>0.1 &lt; 0.2</td>
+<td>逼玩家在 12s 内做判断，杜绝"等到最后一秒再猜"</td>
+</tr>
+<tr>
+<td>结算不做字母评级</td>
+<td>三档光芒、纯表现</td>
+<td>冷评分与"温柔学习"冲突，且零平衡耦合</td>
+</tr>
+<tr>
+<td>洗牌放显示层不改数据</td>
+<td>JSON 原样保留</td>
+<td>数据即论文证据；显示层修复覆盖全部 500 题</td>
+</tr>
+<tr>
+<td>Bloom 分布</td>
+<td><strong>470 remember / 30 understand / 0 apply / 0 analyze</strong></td>
+<td>AI 批量生题的诚实局限；Boss 调度只能"利用现有深度"，不能凭空创造高阶题</td>
+</tr>
+<tr>
+<td>终局 Boss 无等级缩放</td>
+<td>固定 2000/50/19</td>
+<td>封版审计观察：Lv1 需近乎全对 56 回合、Lv20+ 时 Boss 单次伤害≈2；正常五时代成长曲线下两端不可达，跳关档由开发者补偿指令覆盖</td>
+</tr>
+<tr>
+<td>玩家无元素弱点</td>
+<td>敌方攻击一律中性</td>
+<td>减少一层玩家需记忆的规则，把认知负荷留给题目</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="10">10. 附录</h2>
+<h3 id="101">10.1 术语表</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>术语</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>错乱体 Anomaly</td>
+<td>敌人统称，程序化 Shader 视觉，按"谣言/谬误/遗忘"三档 + Boss</td>
+</tr>
+<tr>
+<td>专注 Focus</td>
+<td>技能资源，回合回复</td>
+</tr>
+<tr>
+<td>记忆修复度</td>
+<td>每时代 0~100 进度条，碎片/净化累积，Boss 门条件之一</td>
+</tr>
+<tr>
+<td>星晶 Starstone</td>
+<td>击败时代 Boss 获得，5 颗开启终局</td>
+</tr>
+<tr>
+<td>Unyielding</td>
+<td>终局一阶段无敌相位</td>
+</tr>
+<tr>
+<td>星芒之契</td>
+<td>觉醒后融合技，元素随机</td>
+</tr>
+<tr>
+<td>谬误揭露</td>
+<td>同域连对 2 题 → Boss DEF ×0.75</td>
+</tr>
+<tr>
+<td>记忆回响</td>
+<td>结算光芒档位（星灿/星辉/微光）</td>
+</tr>
+<tr>
+<td>证据回响</td>
+<td>战中查阅已解锁日志的一次性机会</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="102">10.2 相关系统接口</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>方向</th>
+<th>系统</th>
+<th>交互</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>入</td>
+<td>世界/BattleTrigger</td>
+<td>提供 <code>encounterId, region, enemies, loadout</code>；Boss 门谓词</td>
+</tr>
+<tr>
+<td>入</td>
+<td>题库 QuizManager</td>
+<td><code>DrawRandomByCategory(category, region, minBloom, excludeAsked)</code></td>
+</tr>
+<tr>
+<td>入</td>
+<td>玩家成长 PlayerProgression</td>
+<td>等级决定玩家实体属性</td>
+</tr>
+<tr>
+<td>出</td>
+<td>记忆修复 MemoryProgress</td>
+<td>胜利 +40</td>
+</tr>
+<tr>
+<td>出</td>
+<td>存档 SaveManager</td>
+<td>已净化 encounter、<code>finaleAwakened</code>、教程旗标</td>
+</tr>
+<tr>
+<td>出</td>
+<td>日志 Journal / 遥测</td>
+<td>答题事件、每题 CSV 一行</td>
+</tr>
+<tr>
+<td>出</td>
+<td>过场 Cutscene</td>
+<td>终局中断 → <code>finale_awaken</code>；胜利 → <code>finale_victory</code></td>
+</tr>
+<tr>
+<td>视图</td>
+<td>IBattleView</td>
+<td><code>OnBattleStart / SelectAction / PresentChallenge / OnSkillCast / ShowAttackResult / OnEnemyTelegraph / OnEnemyAction / OnBossPhaseChanged / OnBattleEnd / OnBattleInterrupted</code></td>
+</tr>
+</tbody>
+</table></div>
+<details class="pending"><summary>待核对项</summary><p class="pend-note">以下条目为整理时未能逐一核实的口径 / 数据，<strong>待与团队 / 资产核对</strong>后补正；保留原文不删。</p><ol>
+<li><span class="pend">待核对：终局目标等级</span>GDD §9 写"finale tuned for ≈ Lv 6"，而 07-19 调参提交以 Lv13 主角检算——两处口径不一致，需确认正式目标等级（按 Lv6 复算：ATK 40×1.5=60，单体技 60+30−19=71，2000/71≈28 回合，明显偏长）。</li>
+<li><span class="pend">待核对：五时代 Loadout 一致性</span>华夏、埃及构建工具确认引用 <code>PlayerLoadout_China</code>；希腊/罗马/丝路经 <code>EraBuildEngine</code> 传参，未逐一打开场景核实。</li>
+<li><span class="pend">待核对：各时代 memoryTarget 与碎片数</span>GDD 称"经济总供给 ≥140 无软锁"，各场景 <code>MapDescriptor.memoryTarget</code> 与 <code>fragmentCount</code> 实值未逐图读取。</li>
+<li><span class="pend">待核对：答题遥测汇总</span>遥测字段已核，但 <code>docs/eval/</code> 下无按 quality/时长的汇总报告，无法给出实测正确率/平均作答时长。</li>
+<li><span class="pend">待核对：FinaleScriptTests 用例数</span>该文件未使用 <code>[Test]</code> 标注（可能为 <code>TestCase</code>），未计入 §8 单测统计。</li>
+<li><span class="pend">待核对：07-05 阶梯提交的具体改前数值</span>提交仅有标题，希腊/罗马/丝路改前 HP/ATK 未留记录。</li>
+</ol></details>
+  </article>
+  <footer>
+    <div class="note"><b>文档说明</b>：本策划案为已上线项目的<b>回溯整理稿</b>：规则、数值与字段名逐项核对自仓库 <code>.asset</code> / 源码 / GDD 与平衡提交记录，迭代表中的每一次修正均对应真实 PR。未能逐一核实的口径列于文末「待核对项」，不删不改。</div>
+    <a class="backbtn" href="../index.html#designdocs">← 返回作品集</a>
+  </footer>
+</div>
+</body>
+</html>

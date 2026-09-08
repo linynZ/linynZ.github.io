@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>记忆修复与任务进度系统策划案 · 赵鹏淦</title>
+<style>
+:root{--bg:#0b0a1a;--ink:#e8e5f4;--muted:#a09ac0;--gold:#e3c07a;--ice:#9fd8f0;
+  --violet:#9d8ff0;--line:rgba(157,143,240,.18);--card:rgba(20,16,42,.65)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:"Microsoft YaHei","PingFang SC","Source Han Sans SC",sans-serif;
+  font-size:16px;line-height:1.85;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:
+  radial-gradient(900px 500px at 85% -5%,rgba(90,70,180,.25),transparent 60%),
+  radial-gradient(700px 500px at -10% 30%,rgba(40,80,160,.18),transparent 60%)}
+nav{position:sticky;top:0;z-index:9;display:flex;justify-content:space-between;align-items:center;
+  padding:14px 28px;background:rgba(11,10,26,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .logo{color:var(--ink);font-weight:700;text-decoration:none;letter-spacing:.06em}
+nav .logo b{color:var(--gold)}
+nav .back{color:var(--muted);text-decoration:none;font-size:.88rem}
+nav .back:hover{color:var(--gold)}
+.wrap{max-width:880px;margin:0 auto;padding:56px 24px 80px}
+.eyebrow{font-size:.78rem;letter-spacing:.28em;color:var(--gold);text-transform:uppercase;margin-bottom:14px}
+h1.title{font-size:2rem;line-height:1.35;margin-bottom:10px}
+.subtitle{font-size:1.05rem;color:var(--violet);margin-bottom:18px}
+.meta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
+.meta span{font-size:.78rem;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:3px 12px}
+article h2{font-size:1.35rem;color:var(--gold);margin:52px 0 16px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+article h3{font-size:1.1rem;color:var(--ice);margin:34px 0 12px}
+article p{margin:0 0 14px;color:#cdc9e0}
+article strong{color:var(--ink)}
+article em{color:var(--violet);font-style:normal}
+article ul,article ol{margin:0 0 16px 1.4em;color:#cdc9e0}
+article li{margin-bottom:6px}
+article blockquote{border-left:3px solid var(--gold);background:var(--card);border-radius:0 10px 10px 0;
+  padding:14px 18px;margin:0 0 16px;color:var(--muted)}
+article blockquote p{margin:0}
+article code{font-family:Consolas,"JetBrains Mono",monospace;font-size:.88em;background:rgba(157,143,240,.12);
+  border-radius:4px;padding:1px 6px;color:var(--ice)}
+article pre{background:#100e26;border:1px solid var(--line);border-radius:12px;padding:16px 18px;
+  overflow-x:auto;margin:0 0 18px}
+article pre code{background:none;padding:0;color:#c8d8f0;font-size:.85rem;line-height:1.6}
+.tablewrap{overflow-x:auto;margin:0 0 18px}
+article table{border-collapse:collapse;width:100%;font-size:.88rem}
+article th{color:var(--gold);text-align:left;border-bottom:1.5px solid rgba(227,192,122,.4);padding:8px 12px;white-space:nowrap}
+article td{border-bottom:1px solid var(--line);padding:8px 12px;color:#cdc9e0}
+article tr:hover td{background:rgba(157,143,240,.05)}
+article hr{border:0;border-top:1px solid var(--line);margin:40px 0}
+article a{color:var(--ice)}
+.toc{border:1px solid var(--line);border-radius:12px;padding:14px 22px;background:var(--card);font-size:.86rem;margin-bottom:6px}
+.toc ul{margin:0 0 0 1.1em;color:var(--muted)}
+.toc li{margin-bottom:3px}
+.toc a{color:var(--muted);text-decoration:none}
+.toc a:hover{color:var(--gold)}
+.toctitle{color:var(--gold);font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:8px}
+footer{border-top:1px solid var(--line);margin-top:70px;padding-top:28px}
+footer .note{font-size:.85rem;color:var(--muted);margin-bottom:18px}
+footer .note b{color:var(--gold)}
+.backbtn{display:inline-block;color:var(--gold);border:1px solid rgba(227,192,122,.4);border-radius:99px;
+  padding:8px 22px;text-decoration:none;font-size:.88rem}
+.backbtn:hover{background:rgba(227,192,122,.1)}
+
+/* —— 策划案页补充（沿用模板变量） —— */
+.docinfo{display:grid;grid-template-columns:auto 1fr;gap:6px 18px;border:1px solid var(--line);border-radius:12px;
+  background:var(--card);padding:16px 22px;margin-bottom:16px;font-size:.9rem}
+.docinfo .k{color:var(--gold);font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;white-space:nowrap;padding-top:3px}
+.docinfo .v{color:#cdc9e0}
+@media(max-width:560px){.docinfo{grid-template-columns:1fr;gap:2px 0}.docinfo .v{margin-bottom:8px}}
+.tldr{border-left:3px solid var(--ice);background:rgba(159,216,240,.06);border-radius:0 10px 10px 0;padding:12px 18px;margin-bottom:40px;
+  color:var(--ink);font-size:1rem;line-height:1.7}
+.tldr b{color:var(--ice);font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;margin-right:10px}
+article pre.diagram code{white-space:pre;font-size:.82rem;line-height:1.5}
+article details.pending{border:1px solid var(--line);border-radius:12px;background:var(--card);padding:0 20px;margin-top:40px}
+article details.pending summary{cursor:pointer;list-style:none;padding:14px 0;color:var(--gold);font-size:1.02rem;font-weight:600;display:flex;align-items:center;gap:10px}
+article details.pending summary::-webkit-details-marker{display:none}
+article details.pending summary::before{content:"▸";font-size:.9rem;transition:.25s;color:var(--muted)}
+article details.pending[open] summary::before{transform:rotate(90deg)}
+article details.pending .pend-note{font-size:.86rem;color:var(--muted);margin:0 0 12px}
+article details.pending ol{margin-bottom:18px}
+article .pend{color:var(--gold);font-size:.85em;border:1px dashed rgba(227,192,122,.45);border-radius:6px;padding:0 6px}
+</style>
+</head>
+<body>
+<nav><a class="logo" href="../index.html">赵鹏<b>淦</b></a><a class="back" href="../index.html#designdocs">← 返回作品集</a></nav>
+<div class="wrap">
+  <div class="eyebrow">Design Doc · 系统策划案</div>
+  <h1 class="title">记忆修复与任务进度系统策划案</h1>
+  <div class="subtitle">ChronoTraveler · 记忆修复度 · Boss 双条件门 · 时代主线任务 · 时代链与星晶 · 存档</div>
+  <div class="meta"><span>系统策划案 · 进度 / 任务向</span><span>v1.0 · 2026-09</span><span>17 条防软锁设计逐项对应机制</span></div>
+  <div class="docinfo"><span class="k">项目</span><span class="v">ChronoTraveler《编年旅者》— 二次元教育 RPG（Unity URP，已收官）</span><span class="k">系统</span><span class="v">记忆修复度 · 记忆碎片 · Boss 双条件门 · 时代主线任务 · 时代链与记忆星晶 · 存档点</span><span class="k">角色</span><span class="v">系统策划 / 独立开发（AI 辅助管线）</span><span class="k">状态</span><span class="v">已上线 · 场景序列化值以六张时代图为准，GDD 与实装不一致处已在表中标注</span></div>
+  <div class="tldr"><b>TL;DR</b>探索中的一切动作汇入同一根记忆修复条；任务补记与经济超供保证任意顺序不死锁，每颗星晶都有星醒演出。</div>
+  <article>
+<div class="toc"><span class="toctitle">目录 · Contents</span><ul>
+<li><a href="#1">1. 文档信息</a></li>
+<li><a href="#2">2. 设计目标与体验目标</a></li>
+<li><a href="#3">3. 系统概述与循环</a></li>
+<li><a href="#4">4. 规则详述</a></li>
+<li><a href="#5">5. 数值与配置</a></li>
+<li><a href="#6">6. 交互与表现</a></li>
+<li><a href="#7">7. 防软锁与容错设计</a></li>
+<li><a href="#8">8. 验证与迭代</a></li>
+<li><a href="#9">9. 设计取舍与局限</a></li>
+<li><a href="#10">10. 附录：字段与接口</a></li></ul>
+</div>
+<h2 id="1">1. 文档信息</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>项</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>项目</td>
+<td>ChronoTraveler（编年旅者）— 二次元教育向 RPG，Unity URP，已收官</td>
+</tr>
+<tr>
+<td>系统范围</td>
+<td>记忆修复度 · 记忆碎片 · Boss 双条件门 · 时代主线任务 · 时代链与记忆星晶 · 存档点</td>
+</tr>
+<tr>
+<td>文档角色</td>
+<td>系统策划案（作品集用），规则/数值/字段逐项核对自 GDD、CLAUDE.md、源码与场景/资产文件</td>
+</tr>
+<tr>
+<td>作者</td>
+<td>赵鹏淦（独立开发，AI 辅助管线）</td>
+</tr>
+<tr>
+<td>数据口径</td>
+<td>场景序列化值以 <code>20_China</code>…<code>60_TradeRoutes</code> 六张时代图为准；GDD 口径与实装不一致处已在表中标注</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="2">2. 设计目标与体验目标</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>目标</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>每一件事都在推同一个进度条</strong></td>
+<td>探索里的一切动作——拾碎片、净化错乱体、勘误展台——都汇入本时代唯一的"记忆修复度"；不打架的活动也能可视化地推进 Boss 解锁。玩家不需要理解多套货币，只需看一根条。</td>
+</tr>
+<tr>
+<td><strong>温柔学习支柱</strong></td>
+<td>没有掉落惩罚、没有死亡：掉出地图边界由同伴璇玑"拉回"并讲一句时代科普；答错题只降伤不扣命。进度系统里所有"失败"都只是"还没完成"。</td>
+</tr>
+<tr>
+<td><strong>自由探索永不死锁</strong></td>
+<td>时代图是开放小箱庭，玩家可先摸碎片、先打游荡错乱体、甚至先做后面阶段的事。任务系统承诺：<strong>任何顺序都不会卡住主线</strong>。</td>
+</tr>
+<tr>
+<td><strong>宏观进度可见证</strong></td>
+<td>每颗记忆星晶都对应一个"星醒"演出：回到枢纽时下一扇门当面苏醒，而不是默默变成可交互。</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="3">3. 系统概述与循环</h2>
+<pre class="diagram"><code>枢纽·星引宫 ──进入已苏醒的时代门──▶ 时代浮岛（探索）
+   ▲                                   ├─ 与 NPC 对话 → 任务阶段 / 日志
+   │                                   ├─ 拾取记忆碎片（+20）─┐
+   │                                   ├─ 净化错乱体（+30/+40）├─▶ 记忆修复度 0→target
+   │                                   └─ 勘误展台（+3，仅华夏）┘
+   │                      碎片 3/3 且 记忆满 ──▶ Boss 门解封（粒子+横幅+过场 gate_&lt;era&gt;）
+   │                                   └─ 击败大错乱 → 主线最终阶段完成
+   └──── 授记忆星晶 → 即时存档 → clear 过场 → 自动返枢纽 → 下一扇门&quot;星醒&quot;
+   ×5 ──▶ 五星集齐 → 枢纽中央深渊裂隙 → 终局二段式决战
+</code></pre>
+<p>系统之间只通过事件耦合：<code>碎片拾取</code> / <code>战斗结束</code> / <code>对话完成</code> / <code>记忆满</code> 四类事件广播，任务、门、HUD、存档各自订阅。</p>
+<h2 id="4">4. 规则详述</h2>
+<h3 id="41">4.1 记忆修复度</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>规则</th>
+<th>实装</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>计量单位</td>
+<td>每张时代图独立累计整数"记忆点"，与该图 <code>memoryTarget</code> 相除得 0–1 修复度；HUD 显示百分比</td>
+</tr>
+<tr>
+<td>目标值</td>
+<td>由每张图的 <code>MapDescriptor.memoryTarget</code> 配置：华夏 100，尼罗/爱琴/永恒之城/丝路各 80，枢纽与终局 0（无记忆机制，HUD 隐藏）</td>
+</tr>
+<tr>
+<td>来源</td>
+<td>碎片 +20；游荡错乱体 +40（任务指定那只）/ +30（其余）；华夏勘误展台答对 +3；Boss 本身 +0</td>
+</tr>
+<tr>
+<td>上限</td>
+<td>数值不封顶（可超过 target），显示层钳到 100%；"记忆满"事件<strong>只触发一次</strong>，触发记录随存档持久化，读档不重放</td>
+</tr>
+<tr>
+<td>满条效果</td>
+<td>广播 <code>OnMemoryFull</code> → Boss 门条件之一置真 → 横幅"记忆修复圆满 · 封印松动" → 任务 ReachMemory 类目标可推进</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>经济超供（防软锁核心）</strong>：每图可得记忆总量都显著高于 target，玩家不必"做完所有事"就能开门。</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>时代</th>
+<th>target</th>
+<th>碎片 3×20</th>
+<th>游荡错乱体</th>
+<th>其他</th>
+<th>总供给</th>
+<th>开门最少需做</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>华夏</td>
+<td>100</td>
+<td>60</td>
+<td>谣言 40 + 谬误 40</td>
+<td>勘误 9×3=27</td>
+<td>167</td>
+<td>3 碎片（门硬性）+ 任一 40 错乱体</td>
+</tr>
+<tr>
+<td>尼罗</td>
+<td>80</td>
+<td>60</td>
+<td>流沙 40 + 遗忘 30 + 伪史 30</td>
+<td>—</td>
+<td>160</td>
+<td>3 碎片 + 任一错乱体</td>
+</tr>
+<tr>
+<td>爱琴</td>
+<td>80</td>
+<td>60</td>
+<td>诡辩 40 + 谬误 30 + 遗忘 30</td>
+<td>—</td>
+<td>160</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>永恒之城</td>
+<td>80</td>
+<td>60</td>
+<td>讹传 40 + 谬误 30 + 遗忘 30</td>
+<td>—</td>
+<td>160</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>丝路</td>
+<td>80</td>
+<td>60</td>
+<td>流言 40 + 遗忘 30 + 谬误 30</td>
+<td>—</td>
+<td>160</td>
+<td>同上</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p>GDD §9 写的是"0–100、经济超供 ≥140"，实装后华夏保留 100、后四图降到 80 并各多放一只 30 分错乱体，超供比从 1.4× 提到 2×。但主线任务第二阶段指定净化那只 40 分错乱体，所以<strong>实际最短路径 = 3 碎片 + 任务指定错乱体</strong>，其余错乱体全是可选内容。</p>
+</blockquote>
+<h3 id="42">4.2 碎片系统</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>规则</th>
+<th>实装</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数量与命名</td>
+<td>每图固定 3 枚，id 为 <code>frag_&lt;era&gt;_1..3</code>；Boss 门与任务都按前缀 <code>frag_&lt;era&gt;</code> 计数，不关心具体哪枚</td>
+</tr>
+<tr>
+<td>拾取</td>
+<td>E 键交互；同 id 二次拾取被忽略（去重）</td>
+</tr>
+<tr>
+<td>持久化</td>
+<td><strong>逐 ID 存档</strong>，不存"数量"。读档后进图时已拾碎片在 Start 自毁，杜绝重刷记忆/分数、以及"追踪器显示已收集但场上还有水晶"的错位</td>
+</tr>
+<tr>
+<td>表现</td>
+<td>运行时自动升级为程序化"星空蓝"六棱双锥水晶 + 火花 + 点光；拾取时 HUD 弹 "+20 记忆" 并脉冲</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>悬浮碎片边界与坠落救援</strong>（世界观：每张时代图是漂在"之海"上的记忆碎片）</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>层</th>
+<th>设计</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>视觉填充层</td>
+<td>地图最低点下方铺大面积纯视觉平面（无碰撞），按时代换"海"：记忆之海 / 沙海 / 酒色深海 / 虚空 / 荒原星夜，配远景环与雾，让边界读作地平线而非空气墙</td>
+</tr>
+<tr>
+<td>FallRescue</td>
+<td>每张时代图自动生成；以本图最低出生点为基准，玩家下落超过 <strong>45 m</strong> 即触发；传回 <code>default</code> 出生点并向下射线贴地；2 s 冷却；30 次校准失败后自禁用</td>
+</tr>
+<tr>
+<td>非死亡</td>
+<td>明确不是掉落死亡（参考空洞骑士危害重生但去掉扣血）——把边界 bug 转化为角色时刻</td>
+</tr>
+<tr>
+<td>台词</td>
+<td>璇玑 <code>fall_rescue</code> bark，按时代过滤，每条含一句"XX 之外是什么"的介绍（见 §6）</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="43-boss">4.3 Boss 双条件门</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>规则</th>
+<th>实装</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>条件</td>
+<td><code>requiresAllFragments</code>（前缀碎片数 ≥ <code>fragmentCount</code>=3）<strong>且</strong> <code>requiresMemoryFull</code>（本图记忆满）；五个时代 Boss 两项全开，游荡错乱体两项全关，终局 Boss 无门</td>
+</tr>
+<tr>
+<td>判定</td>
+<td>纯谓词 <code>BattleGate.IsOpen</code>：未启用的条件永不阻塞，启用的条件必须全部满足；7 个 EditMode 用例覆盖无门/只碎片/只记忆/双门</td>
+</tr>
+<tr>
+<td>未开门交互</td>
+<td>E 键无效，提示<strong>第一条未满足的条件</strong>（先碎片"需集齐记忆碎片（n/3）"，再"记忆尚未修复，无法挑战"），让玩家知道下一步做什么</td>
+</tr>
+<tr>
+<td>解封演出</td>
+<td>门从锁到开的那一帧：封印紫粒子爆发 + 横幅"封印松动 · 大错乱苏醒" + 封印破裂音效 + 一次性过场 <code>gate_&lt;era&gt;</code>（五时代各一段，只播一次）</td>
+</tr>
+<tr>
+<td>挑战</td>
+<td>开门后 E 键先播一次性 Boss 前置过场 <code>&lt;era&gt;_boss_intro</code>，再进战斗；Boss 胜利记忆 +0（门已开，不需要）</td>
+</tr>
+<tr>
+<td>工具防回归</td>
+<td>内容重建工具设碎片门时不触碰记忆门标志，所以重跑工具不会把双门降级成单门（这是真踩过的坑）</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="44">4.4 任务系统</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>规则</th>
+<th>实装</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>结构</td>
+<td>每时代一条主线（<code>quest_&lt;era&gt;_main</code>），5 条并行存活；定义为 ScriptableObject：有序阶段列表 → 每阶段若干目标（类型/目标 id/所需次数/追踪器标签）</td>
+</tr>
+<tr>
+<td>目标类型</td>
+<td>TalkTo（npcId）/ Defeat（encounterId 或 any）/ Collect（碎片 id 前缀）/ ReachMemory（地图名）——ReachMemory 已实现但五条主线未使用</td>
+</tr>
+<tr>
+<td>启动</td>
+<td>首次进入某时代自动开始该图主线；已存在则跳过</td>
+</tr>
+<tr>
+<td>推进</td>
+<td>对话完成 / 战斗胜利 / 碎片拾取 / 记忆满 四类事件驱动，<strong>同时推进所有存活任务</strong>（不只当前图）</td>
+</tr>
+<tr>
+<td>阶段激活时补记</td>
+<td>每次进入新阶段先清进度，再从持久记录回填：已拾碎片集合、已净化 encounter 集合、已对话 NPC 集合、记忆是否已满。回填后若阶段已满足则<strong>链式跳到下一阶段</strong>，可连跳多阶</td>
+</tr>
+<tr>
+<td>完成</td>
+<td>最后阶段完成 → 广播完成事件 → 时代收尾控制器授星晶</td>
+</tr>
+<tr>
+<td>追踪器</td>
+<td>只显示当前图的任务；标签文案与错乱体交互提示同用敌人名（"净化「流沙之讹」"），避免玩家对不上</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="45">4.5 时代链与记忆星晶</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>规则</th>
+<th>实装</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>星晶</td>
+<td>每时代主线完成授 1 枚，按 mapId 记录（集合，不可重复得）；只有 <code>quest_&lt;era&gt;_main</code> 形式且非 hub 的任务才算时代主线</td>
+</tr>
+<tr>
+<td>顺序解锁</td>
+<td>固定顺序 china → egypt → greece → rome → trade；第 i 个时代解锁条件 = 持有第 i-1 个时代的星晶（<strong>必须是前一个</strong>，不是任意一个）；新档只开华夏</td>
+</tr>
+<tr>
+<td>已建成白名单</td>
+<td>顺序解锁但内容未建成的时代显示"正在凝聚"（会"微动"但不开）；五时代现已全部建成，此态仅剩机制</td>
+</tr>
+<tr>
+<td>封印门交互</td>
+<td>E 键不是死按钮：璇玑用 <code>portal_sealed</code> / <code>portal_condensing</code> 台词解释（4 s 冷却）</td>
+</tr>
+<tr>
+<td>授晶后流程</td>
+<td>授星晶 → <strong>立即存档</strong> → 播一次 <code>clear_&lt;era&gt;</code> 过场（无过场则等 2 s）→ 传送回枢纽 <code>from&lt;Era&gt;</code> 出生点</td>
+</tr>
+<tr>
+<td>星醒演出</td>
+<td>回枢纽后等进入 Exploring 再 +1.5 s，找到"已解锁但未见证"的门播 <code>Awaken</code>（灰变彩、法阵展开、灯亮）+ 璇玑 <code>star_wake</code> 台词；见证记录按时代 id 持久化，华夏预置为已见证</td>
+</tr>
+<tr>
+<td>终局解锁</td>
+<td>持有<strong>全部已建成时代</strong>的星晶（当前 = 5 枚）→ 回枢纽后播一次 <code>finale_demo</code> → 在五门几何中心召唤深渊裂隙 → 进入 70_Finale</td>
+</tr>
+<tr>
+<td>单测</td>
+<td>EraCompletion 纯函数 28 个 TestCase：首时代恒开、需前一枚而非任一枚、大小写、未知时代锁死、链走查、已建成表与场景名同步</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="46">4.6 存档点与持久化</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>存档时机</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>进入任一地图</td>
+<td>检查点</td>
+</tr>
+<tr>
+<td>战斗胜利</td>
+<td>延迟 1 s 再存，让触发器先写完净化与记忆</td>
+</tr>
+<tr>
+<td>终局一阶段脚本化结束</td>
+<td>觉醒是真实进度拍，也存</td>
+</tr>
+<tr>
+<td>授星晶</td>
+<td>立即存（封包审核加固项）</td>
+</tr>
+<tr>
+<td>退出游戏</td>
+<td>自动存</td>
+</tr>
+<tr>
+<td>终幕</td>
+<td>改写复活点为枢纽后存</td>
+</tr>
+<tr>
+<td>主菜单未开局</td>
+<td><strong>拒绝存档</strong>，防止空档覆盖有效档</td>
+</tr>
+</tbody>
+</table></div>
+<p>写入方式：临时文件 → 原子替换 → 保留 <code>.bak</code>；主档损坏自动用备份恢复；版本号不符（当前 "1.1"）不读不删、改名备份。</p>
+<h2 id="5">5. 数值与配置</h2>
+<h3 id="51">5.1 每时代内容标准包</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>项</th>
+<th>GDD 标准</th>
+<th>实装</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NPC</td>
+<td>3</td>
+<td>3（15/5 时代）</td>
+</tr>
+<tr>
+<td>记忆碎片</td>
+<td>3</td>
+<td>3</td>
+</tr>
+<tr>
+<td>游荡错乱体</td>
+<td>1–2</td>
+<td>华夏 2，其余各 3</td>
+</tr>
+<tr>
+<td>Boss</td>
+<td>1（双门后）</td>
+<td>1</td>
+</tr>
+<tr>
+<td>主线任务</td>
+<td>1</td>
+<td>1，固定 4 阶段</td>
+</tr>
+<tr>
+<td>过场</td>
+<td>进入/Boss 前/通关</td>
+<td>+ 门解封 <code>gate_&lt;era&gt;</code>，共 4 段</td>
+</tr>
+<tr>
+<td>记忆 target</td>
+<td>100</td>
+<td>100 / 80 / 80 / 80 / 80</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="52">5.2 记忆经济表</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>来源</th>
+<th>单次</th>
+<th>每图数量</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>记忆碎片</td>
+<td>+20</td>
+<td>3</td>
+<td>门硬性条件</td>
+</tr>
+<tr>
+<td>任务指定错乱体</td>
+<td>+40</td>
+<td>1</td>
+<td>主线阶段 2</td>
+</tr>
+<tr>
+<td>其他错乱体</td>
+<td>+30（华夏那只为 +40）</td>
+<td>1–2</td>
+<td>全可选</td>
+</tr>
+<tr>
+<td>勘误展台</td>
+<td>+3</td>
+<td>华夏 3 站 × 3 台，仅错位品给分</td>
+<td>试点内容</td>
+</tr>
+<tr>
+<td>大错乱</td>
+<td>+0</td>
+<td>1</td>
+<td>门已开，不再喂条</td>
+</tr>
+<tr>
+<td>Dev F10</td>
+<td>+999</td>
+<td>—</td>
+<td>秒开门录视频用</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="53">5.3 任务阶段表（五条主线同构，以华夏为例）</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>描述</th>
+<th>目标类型</th>
+<th>targetId</th>
+<th>required</th>
+<th>追踪标签</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>前往华夏，寻访史官·墨</td>
+<td>TalkTo</td>
+<td><code>npc_china_historian</code></td>
+<td>1</td>
+<td>拜会史官·墨</td>
+</tr>
+<tr>
+<td>2</td>
+<td>净化游荡的错乱体</td>
+<td>Defeat</td>
+<td><code>china_rumor</code></td>
+<td>1</td>
+<td>净化「谣言」错乱体</td>
+</tr>
+<tr>
+<td>3</td>
+<td>寻回散落的记忆碎片</td>
+<td>Collect</td>
+<td><code>frag_china</code>（前缀）</td>
+<td>3</td>
+<td>寻回记忆碎片</td>
+</tr>
+<tr>
+<td>4</td>
+<td>击败盘踞华夏的大错乱</td>
+<td>Defeat</td>
+<td><code>china_boss</code></td>
+<td>1</td>
+<td>击败大错乱</td>
+</tr>
+</tbody>
+</table></div>
+<p>其余四条：NPC 分别为书记官·塞莎 / 哲人·苏格 / 元老·马可 / 商队首领·阿罗；指定错乱体 <code>egypt_sand</code> / <code>greece_sophist</code> / <code>rome_rumor</code> / <code>trade_rumor</code>；Boss <code>&lt;era&gt;_boss</code>。</p>
+<h3 id="54">5.4 存档字段清单（进度相关）</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>归属系统</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>collectedItemIds</code></td>
+<td>字符串列表</td>
+<td>碎片（逐 ID）</td>
+</tr>
+<tr>
+<td><code>mapMemory</code></td>
+<td>{mapScene, points} 列表</td>
+<td>记忆修复度</td>
+</tr>
+<tr>
+<td><code>fullMemoryMaps</code></td>
+<td>字符串列表</td>
+<td>已触发"满"的图（防重放）</td>
+</tr>
+<tr>
+<td><code>purgedEncounterIds</code></td>
+<td>字符串列表</td>
+<td>已净化错乱体</td>
+</tr>
+<tr>
+<td><code>talkedToNPCIds</code></td>
+<td>字符串列表</td>
+<td>已对话 NPC</td>
+</tr>
+<tr>
+<td><code>quests</code></td>
+<td>{questId, stageIndex, progress[], completed} 列表</td>
+<td>任务运行态</td>
+</tr>
+<tr>
+<td><code>earnedTokens</code></td>
+<td>字符串列表</td>
+<td>记忆星晶</td>
+</tr>
+<tr>
+<td><code>awakensSeen</code></td>
+<td>字符串列表</td>
+<td>星醒已见证（含 <code>&lt;era&gt;@stir</code>）</td>
+</tr>
+<tr>
+<td><code>playedCutscenes</code></td>
+<td>字符串列表</td>
+<td>一次性过场</td>
+</tr>
+<tr>
+<td><code>currentMapScene</code> / <code>currentSpawnId</code></td>
+<td>字符串</td>
+<td>复活位置</td>
+</tr>
+<tr>
+<td><code>finaleAwakened</code> / <code>finaleCompleted</code></td>
+<td>布尔</td>
+<td>终局旗标</td>
+</tr>
+<tr>
+<td><code>tutorialBattleDone</code> / <code>toldCompanionStories</code></td>
+<td>布尔 / 列表</td>
+<td>一次性引导与同伴故事</td>
+</tr>
+<tr>
+<td><code>playerLevel</code> / <code>playerExp</code> / <code>totalScore</code> 等</td>
+<td>数值</td>
+<td>战斗成长与统计</td>
+</tr>
+<tr>
+<td><code>saveVersion</code> = "1.1" / <code>saveDate</code> / <code>playTime</code></td>
+<td>元数据</td>
+<td>版本守卫</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="6">6. 交互与表现</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>触点</th>
+<th>表现</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HUD 记忆条</td>
+<td>左上自建条，记忆青色；仅当前图有 target 且处于探索态时显示；每次增量弹 "+N 记忆" 上浮渐隐 1.1 s、条体白闪脉冲、拾取音效；条体以 0.8/s 速度追赶目标值</td>
+</tr>
+<tr>
+<td>记忆满</td>
+<td>横幅"记忆修复圆满 · 封印松动" + 成功音效</td>
+</tr>
+<tr>
+<td>门解封</td>
+<td>封印紫爆发粒子 + 横幅"封印松动 · 大错乱苏醒" + <code>sfx_seal_break</code> + 过场 <code>gate_&lt;era&gt;</code></td>
+</tr>
+<tr>
+<td>门未开</td>
+<td>交互提示直接告诉缺什么：碎片 n/3，或"记忆尚未修复，无法挑战"</td>
+</tr>
+<tr>
+<td>星醒</td>
+<td>门体 <code>Awaken</code>：爆发粒子 → 灰变彩 → 法阵放大展开 → 灯光渐亮；璇玑："看——那扇门醒了！你点亮的星，正在替你开路。" / "星轨接通了！新的时代在呼唤你呢，旅者。"</td>
+</tr>
+<tr>
+<td>封印门</td>
+<td>璇玑："记忆尚未凝聚的门，推不开的。先把眼前的时代修复好吧。" 等 3 条</td>
+</tr>
+<tr>
+<td>坠落救援</td>
+<td>华夏："哇——接住！浮岛之外是环抱华夏的记忆之海，想游泳也得先问过本座！" / 尼罗："神庙之外是无边的流沙之海，被吞下去的记忆，本座也捞不回来！" / 爱琴："浮岛之外是酒色的深海。诗人掉下去，也只会变成一首挽歌。" / 永恒之城："条条大路通罗马，可没有一条通向那底下。" / 丝路："商路之外是驼队都不敢走的荒原星夜。" + 2 条通用兜底</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="7">7. 防软锁与容错设计</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>可能的死锁 / 失效</th>
+<th>对应机制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>玩家先拾碎片/先打错乱体，任务还停在"拜会 NPC"阶段，事件已过、物体已销毁</td>
+<td><strong>阶段激活时从持久记录补记</strong>：碎片集合、净化集合、对话集合、记忆满状态；链式跳阶</td>
+</tr>
+<tr>
+<td>2</td>
+<td>先做了后面阶段的事再读档</td>
+<td>补记读的是存档里的集合，不是场景对象，跨读档有效</td>
+</tr>
+<tr>
+<td>3</td>
+<td>跨图完成前置（例如任务阶段在别的图激活）</td>
+<td>NPC 对话记录存于全局集合而非场景 NPC；早期版本按场景扫描导致跨图丢记录，已改</td>
+</tr>
+<tr>
+<td>4</td>
+<td>记忆总量刚好等于 target，漏一个就开不了门</td>
+<td>经济超供 1.67×–2×；碎片是硬条件，错乱体只需任一只</td>
+</tr>
+<tr>
+<td>5</td>
+<td>读档后"记忆满"事件重放 → 重复开门/重复推任务</td>
+<td><code>fullMemoryMaps</code> 持久化，满事件一生一次</td>
+</tr>
+<tr>
+<td>6</td>
+<td>读档后已拾碎片/已净化错乱体复活 → 重刷记忆</td>
+<td>二者 Start 时自查记录并自毁 / 隐藏；只有 oneShot 的 encounter 才写净化记录（终局 Boss 可重打）</td>
+</tr>
+<tr>
+<td>7</td>
+<td>授星晶后返枢纽途中崩溃 → 星晶丢失</td>
+<td>授晶后立即存档（07-19 封包审核加固）</td>
+</tr>
+<tr>
+<td>8</td>
+<td>只在退出时存档 → 崩溃丢整局</td>
+<td>进图 + 战斗胜利检查点；战斗后延迟 1 s 保证净化/记忆先落地</td>
+</tr>
+<tr>
+<td>9</td>
+<td>从主菜单退出把空档覆盖有效档</td>
+<td>未开局拒绝写盘</td>
+</tr>
+<tr>
+<td>10</td>
+<td>存档写到一半断电</td>
+<td>临时文件 + 原子替换 + .bak；主档坏自动恢复</td>
+</tr>
+<tr>
+<td>11</td>
+<td>旧版本存档字段错位</td>
+<td>版本不符只备份不加载，也不删除</td>
+</tr>
+<tr>
+<td>12</td>
+<td>星醒演出重复播放"风暴"</td>
+<td>见证标记改为演出开始即写（原来延迟 4.5 s，玩家立刻进门导致标记没落地）</td>
+</tr>
+<tr>
+<td>13</td>
+<td>走出地图边界困死在浮岛下方</td>
+<td>FallRescue 45 m 传回 + 贴地射线；填充层无碰撞是有意为之（有碰撞反而困死）</td>
+</tr>
+<tr>
+<td>14</td>
+<td>顺序解锁但内容没建成的时代</td>
+<td>已建成白名单：门显示"正在凝聚"且不可进，星晶照发</td>
+</tr>
+<tr>
+<td>15</td>
+<td>Boss 门在 Unity 工具重跑后被降级</td>
+<td>碎片门设置不触碰记忆门标志</td>
+</tr>
+<tr>
+<td>16</td>
+<td>终局一阶段与觉醒过场之间退出</td>
+<td>觉醒旗标持久化，重进终局补播过场再上真形</td>
+</tr>
+<tr>
+<td>17</td>
+<td>时代通关但玩家没进过枢纽（未见证星醒）</td>
+<td>见证状态与解锁状态分离，下次回枢纽补播一次</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="8">8. 验证与迭代</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>时间</th>
+<th>发现（实机走查/审核）</th>
+<th>处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>06-23</td>
+<td>华夏 P0：先摸碎片/先打谣言/先杀 Boss 都会把主线卡死</td>
+<td>引入阶段激活补记 + 链式跳阶（QuestManager 重构）</td>
+</tr>
+<tr>
+<td>06-23</td>
+<td>过场每次进图重放</td>
+<td><code>PlayOnce</code> + 已播集合持久化</td>
+</tr>
+<tr>
+<td>07-03</td>
+<td>四路审核：NPC 对话记录跨图丢失；只在退出存档</td>
+<td>对话记录改全局集合；进图/战斗胜利检查点</td>
+</tr>
+<tr>
+<td>07-03</td>
+<td>埃及交互提示"净化错乱体"与追踪器"净化「流沙之讹」"对不上</td>
+<td>提示与标签统一用敌人名</td>
+</tr>
+<tr>
+<td>07-03</td>
+<td>时代顺序链与星醒实装</td>
+<td>纯函数 + 28 用例；F9/F10 演示热键供论文视频</td>
+</tr>
+<tr>
+<td>07-05</td>
+<td>用户报告：星醒在每次回枢纽都全部重放</td>
+<td>见证标记提前到演出开始帧</td>
+</tr>
+<tr>
+<td>07-15</td>
+<td>外部审核：存档非原子</td>
+<td>tmp → Replace → .bak 三段式</td>
+</tr>
+<tr>
+<td>07-19</td>
+<td>封包前审核 23 疑点，9 项高置信度候选逐条读码证伪</td>
+<td>5 项一行级加固，含授星晶即时存档</td>
+</tr>
+<tr>
+<td>07-22</td>
+<td>论文提交版 12/12 走查项通过</td>
+<td>—</td>
+</tr>
+</tbody>
+</table></div>
+<p>自动化验证：<code>BattleGate</code> 7 用例、<code>EraCompletion</code> 28 用例（EditMode，Roslyn 离线编译可跑）；记忆/任务/存档链路依赖实机 Play，由用户走查。</p>
+<h2 id="9">9. 设计取舍与局限</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>取舍</th>
+<th>理由 / 代价</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>门用"碎片全收 + 记忆满"双条件，而不是单一记忆条</td>
+<td>单条会让玩家跳过全部碎片直接刷错乱体；碎片是探索引导，硬性保留。代价：碎片必须都放在单跳可达处，关卡放置成本高（埃及重写过一次放置逻辑）</td>
+</tr>
+<tr>
+<td>记忆超供 2× 而非精确</td>
+<td>宁可让部分错乱体变成"可选内容"，也不让漏一处就卡门；教育游戏的目标是让玩家多打题，不是逼玩家找齐</td>
+</tr>
+<tr>
+<td>任务用"补记"而非"锁门"</td>
+<td>不锁任何世界物体，玩家自由度最高；代价是每个目标类型都要有对应的持久记录，新加目标类型必须同时加记录源</td>
+</tr>
+<tr>
+<td>五条主线完全同构（4 阶段）</td>
+<td>内容产能与工具泛化优先（新增时代=一条配置）；代价是任务缺乏变化，ReachMemory 类型实现了但未被使用</td>
+</tr>
+<tr>
+<td>时代严格顺序解锁</td>
+<td>匹配难度曲线与终局等级预期（≈Lv6）；代价是玩家不能自选时代</td>
+</tr>
+<tr>
+<td>存档只有单槽 + 自动</td>
+<td>减少 UI 与手动步骤；代价是无法回溯多个存档</td>
+</tr>
+<tr>
+<td>勘误展台只做华夏试点</td>
+<td>审计建议的推理型内容，未来推广需每时代写 9 张物品卡</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="10">10. 附录：字段与接口</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>接口 / 字段</th>
+<th>归属</th>
+<th>语义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AddMemory(mapScene, pts)</code> / <code>IsFull(mapScene)</code> / <code>GetProgress</code> / <code>TargetFor</code></td>
+<td>MemoryProgress</td>
+<td>加点、判满、0–1 进度、读取 target</td>
+</tr>
+<tr>
+<td><code>OnMemoryChanged(map, norm)</code> / <code>OnMemoryFull(map)</code></td>
+<td>MemoryProgress</td>
+<td>HUD、门、任务订阅</td>
+</tr>
+<tr>
+<td><code>MapDescriptor.mapId / regionId / memoryTarget / defaultSpawnId</code></td>
+<td>每张图根节点</td>
+<td>图元数据</td>
+</tr>
+<tr>
+<td><code>BattleTrigger.encounterId / memoryValue / oneShot / requiresMemoryFull / requiresAllFragments / fragmentPrefix / fragmentCount</code></td>
+<td>错乱体与 Boss</td>
+<td>门与记忆配置</td>
+</tr>
+<tr>
+<td><code>BattleGate.IsOpen(...)</code> / <code>IsGated(...)</code></td>
+<td>纯谓词</td>
+<td>门判定</td>
+</tr>
+<tr>
+<td><code>CollectibleItem.itemId / isMemoryFragment / memoryValue(20)</code></td>
+<td>碎片</td>
+<td>碎片配置</td>
+</tr>
+<tr>
+<td><code>QuestDefinition.questId / title / description / stages[]</code> → <code>QuestStage.description / objectives[]</code> → <code>QuestObjective.type / targetId / required / label</code></td>
+<td>任务数据</td>
+<td>ScriptableObject</td>
+</tr>
+<tr>
+<td><code>QuestRuntime.questId / stageIndex / progress[] / completed</code></td>
+<td>任务运行态</td>
+<td>入存档</td>
+</tr>
+<tr>
+<td><code>EraProgress.AwardToken(mapId)</code> / <code>HasToken</code> / <code>TokenCount</code></td>
+<td>星晶</td>
+<td>宏进度</td>
+</tr>
+<tr>
+<td><code>EraCompletion.EraOrder / BuiltEras / IsEraUnlocked / NextEra / AllBuiltErasComplete / EraMainQuestMapId / HubReturnSpawnId / SceneForEra</code></td>
+<td>纯函数</td>
+<td>时代链规则</td>
+</tr>
+<tr>
+<td><code>Portal.IsSealed / IsCondensing / IsChainUnlocked</code></td>
+<td>传送门</td>
+<td>门状态三态</td>
+</tr>
+<tr>
+<td><code>SaveManager.MarkEncounterPurged / IsEncounterPurged / MarkNPCTalked / IsNPCTalked / MarkAwakenSeen / IsAwakenSeen / SaveGame / SaveGameAt / LoadGame</code></td>
+<td>存档</td>
+<td>持久记录读写</td>
+</tr>
+<tr>
+<td><code>CutsceneManager.PlayOnce(id) / HasPlayed(id)</code>；命名 <code>enter_&lt;era&gt;</code> / <code>&lt;enc&gt;_intro</code> / <code>gate_&lt;era&gt;</code> / <code>clear_&lt;era&gt;</code></td>
+<td>过场</td>
+<td>一次性演出</td>
+</tr>
+<tr>
+<td><code>FallRescue.fallDistance = 45</code></td>
+<td>边界</td>
+<td>救援阈值</td>
+</tr>
+<tr>
+<td>Dev 热键 F9（按序授下一枚星晶 + 补经验）/ F10（当前图碎片全收 + 记忆 +999）</td>
+<td>DemoTools</td>
+<td>仅编辑器/Dev Build</td>
+</tr>
+</tbody>
+</table></div>
+<details class="pending"><summary>待核对项</summary><p class="pend-note">以下条目为整理时未能逐一核实的口径 / 数据，<strong>待与团队 / 资产核对</strong>后补正；保留原文不删。</p><ol>
+<li>星醒演出的具体时长与阶段节拍（灰变彩/法阵展开各几秒）——源码只读到 <code>PortalVisual.Awaken()</code> 调用，未读 PortalVisual 内部。</li>
+<li>主线 4 阶段以外是否存在支线任务资产——<code>Resources/Quests</code> 仅 5 个 <code>*_main</code>，视为无支线，需用户确认。</li>
+<li>勘误展台（ErrataProp）是否在华夏以外时代有部署——场景扫描仅华夏 9 台，丝路"10 石碑/9 混元道具"为 lore 石碑而非勘误站，需确认。</li>
+<li>玩家等级经验值曲线与终局 ≈Lv6 的具体数值——本案只引用 GDD 结论，未读 PlayerProgression。</li>
+<li>"07-22 论文提交版 12/12 走查项"具体条目——引自记忆库 dev-progress 摘要，未逐条核对走查清单原文。</li>
+<li>GDD §9 的"经济超供 ≥140"与实装（华夏 167、其余 160）——本案按实装写，GDD 是否需回改由用户定。</li>
+</ol></details>
+  </article>
+  <footer>
+    <div class="note"><b>文档说明</b>：本策划案为已上线项目的<b>回溯整理稿</b>：规则、数值与字段逐项核对自 GDD、源码与场景 / 资产序列化文件；GDD 口径与实装不一致处按实装写并在表中标注。未能逐一核实的口径列于文末「待核对项」，不删不改。</div>
+    <a class="backbtn" href="../index.html#designdocs">← 返回作品集</a>
+  </footer>
+</div>
+</body>
+</html>

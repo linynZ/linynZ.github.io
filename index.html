@@ -163,6 +163,14 @@ nav.solid{background:rgba(8,6,15,.82);border-bottom:1px solid var(--line)}
 .case p{font-size:.9rem;color:var(--muted)}
 a.case{display:block;color:inherit;text-decoration:none}
 .case .go{display:inline-block;margin-top:14px;font-size:.82rem;color:var(--gold);letter-spacing:.06em}
+/* 策划案卡（三栏 + 关键词标签，其余沿用 .case） */
+.cases.three{grid-template-columns:repeat(3,1fr)}
+@media(max-width:900px){.cases.three{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:680px){.cases.three{grid-template-columns:1fr}}
+.case .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.case .tags span{font-size:.72rem;color:var(--dim);letter-spacing:.05em;border:1px solid var(--line);
+  border-radius:6px;padding:3px 10px;background:rgba(157,143,240,.04)}
+.case:hover .tags span{color:var(--muted)}
 
 /* ---------- AI 管线 ---------- */
 .pipe{display:flex;align-items:stretch;gap:0;flex-wrap:wrap;margin-top:10px}
@@ -233,6 +241,7 @@ footer .logo{font-size:1rem;margin-bottom:8px;display:inline-block}
     <a href="#chrono">ChronoTraveler</a>
     <a href="#stealth">谍报潜行</a>
     <a href="#engine">引擎技术</a>
+    <a href="#designdocs">策划案</a>
     <a href="#cases">拆解案</a>
     <a href="#ai">AI 管线</a>
     <a href="#bridge">我的视角</a>
@@ -407,6 +416,19 @@ footer .logo{font-size:1rem;margin-bottom:8px;display:inline-block}
     <div class="proj-sub">物理引擎与联网游戏 —— 碰撞 / 同步 / 敌人 AI 全自研</div>
     <div class="projmeta"><span><b>独立开发</b></span><span>C++ / ENet</span><span>2025.10 – 2025.12</span></div>
     <p class="proj-desc">自研碰撞检测（AABB / OBB / 球体的宽相 + 窄相，SAT 分离轴检测、Sequential Impulse 约束求解）；服务器权威网络同步（固定 Tick 快照 + 客户端预测与插值）；NavMesh + A* 寻路配状态机驱动的敌人巡逻 / 追击。<b style="color:var(--ice)">敌人 AI 与延迟补偿这两件事，恰好是"手感"的技术根源。</b></p>
+  </div>
+</div></section>
+
+<!-- 系统策划案（已上线项目） -->
+<section id="designdocs"><div class="wrap">
+  <div class="reveal"><div class="eyebrow">Design Docs</div>
+    <h2 class="sec">系统策划案（已上线项目）</h2>
+    <p class="proj-desc">三份来自已上线 / 已交付项目的系统策划案——规则、数值、字段逐项对照源码与资产整理，迭代记录对应真实提交；未能核实的口径不删不猜，列为待核对项。</p>
+  </div>
+  <div class="cases three">
+    <a class="case reveal d1" href="cases/ct-battle-design.html"><div class="num">01</div><div class="dir">战斗系统 · 规则 + 数值向</div><h4>《ChronoTraveler》知识对决战斗系统</h4><p>答题即攻击：五知识域映射五元素克制环，答题质量直接乘进伤害公式；含专注经济、四层抽题过滤、终局 Boss 调参复算与六轮迭代记录。</p><div class="tags"><span>回合制战斗</span><span>伤害公式</span><span>数值迭代</span></div><span class="go">阅读全文 →</span></a>
+    <a class="case reveal d2" href="cases/ct-progress-design.html"><div class="num">02</div><div class="dir">进度系统 · 任务 + 存档向</div><h4>《ChronoTraveler》记忆修复与任务进度</h4><p>一根进度条统合全部探索动作；Boss 双条件门、任务阶段补记与链式跳阶、时代链星晶——17 条防软锁场景逐项对应机制。</p><div class="tags"><span>进度系统</span><span>防软锁</span><span>存档持久化</span></div><span class="go">阅读全文 →</span></a>
+    <a class="case reveal d3" href="cases/cs-gadget-score-design.html"><div class="num">03</div><div class="dir">道具 + 评级 · 团队项目向</div><h4>《Cyber Stealth》道具装备与积分评级</h4><p>MGS 式道具系统（配装 2+2 槽、径向轮盘、独立冷却、数据驱动生成点）与扣减制战役计分 F–SSS 八档；团队设计与个人实现逐项标注归属。</p><div class="tags"><span>道具系统</span><span>扣减制计分</span><span>团队协作</span></div><span class="go">阅读全文 →</span></a>
   </div>
 </div></section>
 

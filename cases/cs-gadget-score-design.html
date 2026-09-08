@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>谍报潜行游戏「道具 / 装备系统」与「战役积分评级系统」策划案 · 赵鹏淦</title>
+<style>
+:root{--bg:#0b0a1a;--ink:#e8e5f4;--muted:#a09ac0;--gold:#e3c07a;--ice:#9fd8f0;
+  --violet:#9d8ff0;--line:rgba(157,143,240,.18);--card:rgba(20,16,42,.65)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:"Microsoft YaHei","PingFang SC","Source Han Sans SC",sans-serif;
+  font-size:16px;line-height:1.85;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:
+  radial-gradient(900px 500px at 85% -5%,rgba(90,70,180,.25),transparent 60%),
+  radial-gradient(700px 500px at -10% 30%,rgba(40,80,160,.18),transparent 60%)}
+nav{position:sticky;top:0;z-index:9;display:flex;justify-content:space-between;align-items:center;
+  padding:14px 28px;background:rgba(11,10,26,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .logo{color:var(--ink);font-weight:700;text-decoration:none;letter-spacing:.06em}
+nav .logo b{color:var(--gold)}
+nav .back{color:var(--muted);text-decoration:none;font-size:.88rem}
+nav .back:hover{color:var(--gold)}
+.wrap{max-width:880px;margin:0 auto;padding:56px 24px 80px}
+.eyebrow{font-size:.78rem;letter-spacing:.28em;color:var(--gold);text-transform:uppercase;margin-bottom:14px}
+h1.title{font-size:2rem;line-height:1.35;margin-bottom:10px}
+.subtitle{font-size:1.05rem;color:var(--violet);margin-bottom:18px}
+.meta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
+.meta span{font-size:.78rem;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:3px 12px}
+article h2{font-size:1.35rem;color:var(--gold);margin:52px 0 16px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+article h3{font-size:1.1rem;color:var(--ice);margin:34px 0 12px}
+article p{margin:0 0 14px;color:#cdc9e0}
+article strong{color:var(--ink)}
+article em{color:var(--violet);font-style:normal}
+article ul,article ol{margin:0 0 16px 1.4em;color:#cdc9e0}
+article li{margin-bottom:6px}
+article blockquote{border-left:3px solid var(--gold);background:var(--card);border-radius:0 10px 10px 0;
+  padding:14px 18px;margin:0 0 16px;color:var(--muted)}
+article blockquote p{margin:0}
+article code{font-family:Consolas,"JetBrains Mono",monospace;font-size:.88em;background:rgba(157,143,240,.12);
+  border-radius:4px;padding:1px 6px;color:var(--ice)}
+article pre{background:#100e26;border:1px solid var(--line);border-radius:12px;padding:16px 18px;
+  overflow-x:auto;margin:0 0 18px}
+article pre code{background:none;padding:0;color:#c8d8f0;font-size:.85rem;line-height:1.6}
+.tablewrap{overflow-x:auto;margin:0 0 18px}
+article table{border-collapse:collapse;width:100%;font-size:.88rem}
+article th{color:var(--gold);text-align:left;border-bottom:1.5px solid rgba(227,192,122,.4);padding:8px 12px;white-space:nowrap}
+article td{border-bottom:1px solid var(--line);padding:8px 12px;color:#cdc9e0}
+article tr:hover td{background:rgba(157,143,240,.05)}
+article hr{border:0;border-top:1px solid var(--line);margin:40px 0}
+article a{color:var(--ice)}
+.toc{border:1px solid var(--line);border-radius:12px;padding:14px 22px;background:var(--card);font-size:.86rem;margin-bottom:6px}
+.toc ul{margin:0 0 0 1.1em;color:var(--muted)}
+.toc li{margin-bottom:3px}
+.toc a{color:var(--muted);text-decoration:none}
+.toc a:hover{color:var(--gold)}
+.toctitle{color:var(--gold);font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:8px}
+footer{border-top:1px solid var(--line);margin-top:70px;padding-top:28px}
+footer .note{font-size:.85rem;color:var(--muted);margin-bottom:18px}
+footer .note b{color:var(--gold)}
+.backbtn{display:inline-block;color:var(--gold);border:1px solid rgba(227,192,122,.4);border-radius:99px;
+  padding:8px 22px;text-decoration:none;font-size:.88rem}
+.backbtn:hover{background:rgba(227,192,122,.1)}
+
+/* —— 策划案页补充（沿用模板变量） —— */
+.docinfo{display:grid;grid-template-columns:auto 1fr;gap:6px 18px;border:1px solid var(--line);border-radius:12px;
+  background:var(--card);padding:16px 22px;margin-bottom:16px;font-size:.9rem}
+.docinfo .k{color:var(--gold);font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;white-space:nowrap;padding-top:3px}
+.docinfo .v{color:#cdc9e0}
+@media(max-width:560px){.docinfo{grid-template-columns:1fr;gap:2px 0}.docinfo .v{margin-bottom:8px}}
+.tldr{border-left:3px solid var(--ice);background:rgba(159,216,240,.06);border-radius:0 10px 10px 0;padding:12px 18px;margin-bottom:40px;
+  color:var(--ink);font-size:1rem;line-height:1.7}
+.tldr b{color:var(--ice);font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;margin-right:10px}
+article pre.diagram code{white-space:pre;font-size:.82rem;line-height:1.5}
+article details.pending{border:1px solid var(--line);border-radius:12px;background:var(--card);padding:0 20px;margin-top:40px}
+article details.pending summary{cursor:pointer;list-style:none;padding:14px 0;color:var(--gold);font-size:1.02rem;font-weight:600;display:flex;align-items:center;gap:10px}
+article details.pending summary::-webkit-details-marker{display:none}
+article details.pending summary::before{content:"▸";font-size:.9rem;transition:.25s;color:var(--muted)}
+article details.pending[open] summary::before{transform:rotate(90deg)}
+article details.pending .pend-note{font-size:.86rem;color:var(--muted);margin:0 0 12px}
+article details.pending ol{margin-bottom:18px}
+article .pend{color:var(--gold);font-size:.85em;border:1px dashed rgba(227,192,122,.45);border-radius:6px;padding:0 6px}
+</style>
+</head>
+<body>
+<nav><a class="logo" href="../index.html">赵鹏<b>淦</b></a><a class="back" href="../index.html#designdocs">← 返回作品集</a></nav>
+<div class="wrap">
+  <div class="eyebrow">Design Doc · 系统策划案</div>
+  <h1 class="title">谍报潜行游戏「道具 / 装备系统」与「战役积分评级系统」策划案</h1>
+  <div class="subtitle">Cyber Stealth · MGS 式道具装备与扣减制战役计分——团队项目中的个人系统设计</div>
+  <div class="meta"><span>系统策划案 · 道具 / 评级向</span><span>v1.0 · 2026-09</span><span>分工诚实标注 · 以远程 master 源码为准</span></div>
+  <div class="docinfo"><span class="k">项目</span><span class="v">Cyber Stealth — 反乌托邦网络安全题材谍报潜行游戏（7 人团队 · PC + PS5 · C++20 自研 ECS）</span><span class="k">系统</span><span class="v">① 道具 / 装备系统（MGS 风格） ② 战役积分与评级系统</span><span class="k">角色</span><span class="v">UI/UX 系统负责人 + 游戏系统开发（第 4–8 周 · 235 提交 / 9 个合并 PR）</span><span class="k">状态</span><span class="v">已交付 · 对应 PR #49 / #59 / #67 / #72，本文 v1.0 整理于 2026-09</span></div>
+  <div class="tldr"><b>TL;DR</b>道具操纵注意力而非造成伤害；纯扣减制计分让「不被发现」成为唯一最优解，出发前的配装是决策而非仪式。</div>
+  <article>
+<div class="toc"><span class="toctitle">目录 · Contents</span><ul>
+<li><a href="#1">1. 文档信息</a></li>
+<li><a href="#2">2. 设计目标与体验目标</a></li>
+<li><a href="#3">3. 系统概述与使用循环</a></li>
+<li><a href="#4">4. 道具/装备规则详述</a></li>
+<li><a href="#5">5. 道具效果表</a></li>
+<li><a href="#6-pr-59">6. 战役积分与评级（PR #59）</a></li>
+<li><a href="#7">7. 与警戒度系统的耦合</a></li>
+<li><a href="#8">8. 配置与数据</a></li>
+<li><a href="#9">9. 验证与迭代（实机走查记录）</a></li>
+<li><a href="#10">10. 设计取舍与局限</a></li>
+<li><a href="#11">11. 附录</a></li></ul>
+</div>
+<h2 id="1">1. 文档信息</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>项</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>项目</td>
+<td>Cyber Stealth（团队 Sinthome-Ludens，纽卡斯尔大学 CSC8507/08 团队项目）— 反乌托邦网络安全题材、MGS 式第三人称俯视角谍报潜行游戏，PC + PS5</td>
+</tr>
+<tr>
+<td>技术底座</td>
+<td>C++20 · 课程 NCLGL 引擎上自研 ECS 架构 · Jolt Physics · ImGui · nlohmann/json</td>
+</tr>
+<tr>
+<td>本文系统</td>
+<td>① 道具/装备系统（MGS 风格） ② 战役积分与评级系统</td>
+</tr>
+<tr>
+<td>本人角色</td>
+<td>UI/UX 系统负责人 + 游戏系统开发（7 人团队；第 4–8 周，2026-02-24 → 03-24；235 提交 / 9 个合并 PR）</td>
+</tr>
+<tr>
+<td>本文对应周期</td>
+<td>第 7 周（03-17 → 03-20）：PR #49 道具装备系统、PR #59 积分系统、PR #67 仓库装备、PR #72 跨关卡持久化</td>
+</tr>
+<tr>
+<td>数据依据</td>
+<td>远程仓库 <code>master</code>（2026-03-30）源码；团队原始策划文档《CSC8507_08 游戏策划》《游戏设计》；个人贡献矩阵</td>
+</tr>
+<tr>
+<td>版本</td>
+<td>v1.0（2026-09-08 整理）</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>分工说明（诚实标注）</strong></p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>内容</th>
+<th>归属</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>道具清单初版（13 项网络安全主题道具）、携带/库存四条规则、警戒度四态状态机、倒计时归零失败、非暴力约束</td>
+<td><strong>团队设计</strong>（策划文档，Alexander Zaychik 等主笔）</td>
+</tr>
+<tr>
+<td><code>Res_ItemInventory2</code> / <code>Sys_Item</code> / <code>Sys_ItemEffects</code> / <code>C_D_Item</code> 骨架（5 种道具的基础库存与效果）</td>
+<td><strong>林怡含</strong>首版（03-10，"Items and Equipment"分工），本人后续扩展</td>
+</tr>
+<tr>
+<td>存档系统 v1（JSON 读写）</td>
+<td><strong>褚姝良</strong>首版（03-15），本人演进到 v2/v3</td>
+</tr>
+<tr>
+<td>Q/E 快捷装备、HUD 双面板、TAB 径向轮盘、独立冷却、<code>.itemspawns</code> 生成管线与 NavMesh 吸附、拾取/解锁通知、仓库装备/卸装、maxCarry 调整、PhotonRadar 移除与 ID 重映射、跨关卡持久化</td>
+<td><strong>本人设计并实现</strong></td>
+</tr>
+<tr>
+<td>战役积分规则、评级阈值、结算明细 UI、击杀流程 ECS 规范化、警戒阈值/Hunt 增量对齐</td>
+<td><strong>本人设计并实现</strong>（PR #59；积分常量随后由褚姝良提取到 <code>Res_ScoreConfig</code> 配置资源，数值未变）</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="2">2. 设计目标与体验目标</h2>
+<p><strong>一句话核心体验：潜行 = 信息战 + 空间博弈——玩家变强不是因为数值高，而是"信息多 + 判断准 + 操作稳"。</strong>（本人在头脑风暴阶段提出并写入团队设计文档）</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>目标</th>
+<th>来源约束</th>
+<th>落地规则</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>道具是"操纵注意力"的手段，不是伤害来源</td>
+<td>课程硬约束：核心玩法必须非暴力</td>
+<td>道具（Gadget）一律不造成伤害，只影响敌人视野/移动/信息；武器（Weapon）默认锁定，须在图内拾取解锁</td>
+</tr>
+<tr>
+<td>让"不被发现"成为得分最优解</td>
+<td>团队设计原则"重点在操纵敌人注意力"</td>
+<td>积分纯扣减制：击杀、用道具、耗时、触发倒计时全部扣分，唯一的加分方式是"不做这些"</td>
+</tr>
+<tr>
+<td>一命通关的压力要可读</td>
+<td>团队定义：倒计时不可暂停/重置</td>
+<td>警戒条四段色 + 倒计时触发即扣分并弹通知 + 评级实时降级提示</td>
+</tr>
+<tr>
+<td>出发前的配装是决策，不是仪式</td>
+<td>团队规则"同时仅可携带两种"</td>
+<td>道具 2 槽 + 武器 2 槽，进图后由轮盘切换；库存开局扣减、通关才回库</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="3">3. 系统概述与使用循环</h2>
+<p>道具系统的核心状态只有一份：<code>Res_ItemInventory2</code>（5 个 <code>ItemSlot</code>：携带数 / 仓库数 / 解锁 / 冷却时长）。所有 UI（HUD 双面板、轮盘、背包、配装页）都是它的纯消费者，通过 <code>Res_GameState.itemSlots/weaponSlots</code> 显示槽同步（<code>ItemEquipSync</code>）。</p>
+<pre class="diagram"><code>[主菜单·配装 MissionSelect]
+  ITEMS(MAX 2) / WEAPONS(MAX 2) 两栏 → 写入 missionEquippedItems/Weapons
+        │  OnRoundStart：Gadget 携带 = min(maxCarry, 仓库)，仓库同步扣减；
+        │                Weapon 已解锁则补满 2，未解锁为 0
+        ▼
+[进图]  SyncEquipmentToGameState → HUD 槽位；无配装场景 AutoFillHUDSlots 兜底
+        │
+        ├─ 拾取：靠近 2m（XZ）→ Evt_Item_Pickup → 携带+1（≥上限则拒绝）
+        │        武器首次拾取 = 永久解锁 + 补满 → &quot;UNLOCKED&quot; 通知
+        ├─ 切换：长按 TAB 开 4 扇区轮盘（左道具 / 右武器），松手落选为活跃槽
+        ├─ 使用：Q = 当前道具槽，E = 当前武器槽 → 冷却检查 → 携带−1 → Evt_Item_Use
+        │        → 显示槽 cooldown=1.0 按 cooldownDuration 线性归零；面板闪光 0.3s
+        │        → 积分 −5（Sys_ItemEffects），武器击杀另计 −10
+        ▼
+[关卡完成 NextLevel]  携带数 + 警戒度 快照到 Res_UIState → 下一图恢复（跳过 OnRoundStart）
+        ▼
+[战役结束 OnRoundEnd]  通关：Gadget 剩余回库（≤maxStore）；失败：丢失。武器一律清零不回库
+        ▼
+[存档 autosave.save v3]  itemId + storeCount + unlocked
+</code></pre>
+<h2 id="4">4. 道具/装备规则详述</h2>
+<h3 id="41">4.1 分类与数量规则</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>规则</th>
+<th>团队文档定义</th>
+<th>代码落地（<code>Res_ItemInventory2.h</code>）</th>
+<th>归属</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>分类</td>
+<td>道具=不造成伤害；武器=造成伤害</td>
+<td><code>ItemType::Gadget / Weapon</code>，<code>GetItemType(id)</code> 集中查询</td>
+<td>团队设计 / 本人集中化</td>
+</tr>
+<tr>
+<td>携带上限</td>
+<td>各道具独立上限（1–5）</td>
+<td>Gadget <code>kGadgetMaxCarry = 99</code>，Weapon <code>kWeaponMaxCarry = 2</code></td>
+<td>团队设计，本人调整（见 §9）</td>
+</tr>
+<tr>
+<td>库存上限</td>
+<td>各道具独立（1–99）</td>
+<td>Gadget <code>maxStore = 99</code>，Weapon <code>maxStore = 0</code>（不入库）</td>
+<td>团队设计，本人实现</td>
+</tr>
+<tr>
+<td>开局扣减</td>
+<td>库存 = 库存 − 携带</td>
+<td><code>OnRoundStart()</code>：Gadget 取 <code>min(maxCarry, storeCount)</code> 并扣库</td>
+<td>团队设计，林怡含/本人实现</td>
+</tr>
+<tr>
+<td>结算回库</td>
+<td>库存 = 库存 + 携带，超上限遗失</td>
+<td><code>OnRoundEnd(isVictory)</code>：仅通关回库并钳到 <code>maxStore</code>；武器清零</td>
+<td>团队设计，本人加"仅通关回库"分支</td>
+</tr>
+<tr>
+<td>满携禁拾</td>
+<td>携带=上限时禁用拾取</td>
+<td><code>CanPickup()</code>；<code>DetectPickup</code> 跳过并留日志</td>
+<td>团队设计，本人实现</td>
+</tr>
+<tr>
+<td>图内生成上限</td>
+<td>—</td>
+<td><code>mapPickupMax = 99</code>（0 = 不生成）</td>
+<td>本人</td>
+</tr>
+</tbody>
+</table></div>
+<p>配装页限制：<code>ITEMS (MAX 2)</code> / <code>WEAPONS (MAX 2)</code> 两栏，未解锁武器不显示；菜单阶段无库存资源时用默认实例 + 存档缓存 <code>savedStoreCount/savedUnlocked</code> 回填。</p>
+<h3 id="42-res_inputconfig-ui_itemwheel-sys_ui">4.2 快捷键与径向轮盘（<code>Res_InputConfig</code> / <code>UI_ItemWheel</code> / <code>Sys_UI</code>）</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>键</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Q</td>
+<td>使用当前活跃道具槽</td>
+</tr>
+<tr>
+<td>E</td>
+<td>使用当前活跃武器槽</td>
+</tr>
+<tr>
+<td>F</td>
+<td>CQC 近身制服</td>
+</tr>
+<tr>
+<td>G</td>
+<td>伪装（原 E，因 E 让给武器而迁移）</td>
+</tr>
+<tr>
+<td>TAB 长按</td>
+<td>开轮盘；松手确认</td>
+</tr>
+<tr>
+<td>I</td>
+<td>背包（4×3 网格，可直接装备/卸装到 HUD 槽）</td>
+</tr>
+</tbody>
+</table></div>
+<p>轮盘：居中于游戏视区（屏宽减去右侧聊天面板），外径 120 px / 内径 40 px，扇区 0/1 = 武器槽（右半）、2/3 = 道具槽（左半）；鼠标离中心 &gt; 20 px 时按 <code>atan2</code> 角度落扇区并高亮，活跃槽橙色粗弧，各扇区显示名称与实时携带数；开启时显示系统光标并暂停相机旋转。轮盘只切活跃槽、不直接使用，对应团队规则"一次只用一种道具 + 一种武器"，也避免误触。</p>
+<h3 id="43">4.3 独立冷却</h3>
+<p>每种道具自带 <code>cooldownDuration</code>：HoloBait 3 s、DDoS 8 s、RoamAI 5 s、TargetStrike 10 s、RadarMap 10 s（= 小地图激活时长）。使用时显示槽 <code>cooldown = 1.0</code>，每帧按 <code>dt / duration</code> 递减；冷却中按键被拒绝；HUD 面板显示 READY/WAIT + 进度条，使用瞬间边框闪光 0.3 s。</p>
+<h3 id="44">4.4 地图内生成点（数据驱动 + 可行走面吸附）</h3>
+<p><code>MapLoader</code> 第 9 步读取地图配置指向的 <code>.itemspawns</code>（<code>ItemSpawnLoader::LoadItemSpawns</code>），逐条 <code>PrefabFactory::CreateItemPickup</code>：武器用胶囊体 fallback、道具用立方体，按道具类型着色并自发光（<code>emissiveStrength = 2.0</code>），绕 Y 轴旋转（90°/s）便于发现；已在存档中解锁的武器不再生成。<code>GameplayBootstrap</code> 加载 NavMesh 后对所有拾取实体 <code>SnapToNavMesh</code>（最近边投影 fallback，替代早期的重心 fallback），Y 加 <code>pickupSnapYOffset</code>，杜绝浮空/穿地。</p>
+<h3 id="45">4.5 拾取与解锁通知</h3>
+<ul>
+<li>拾取半径 2.0 m（XZ 平面，不依赖物理 Trigger）；每个生成点带 <code>quantity</code>，逐个入包，耗尽销毁实体；播放 <code>ItemPickup</code> 音效。</li>
+<li>通知走 <code>PushActionNotify</code>：<code>PICKED UP &lt;名称&gt;</code>；武器首拾 <code>UNLOCKED &lt;名称&gt;</code>（3 s）。</li>
+<li>拾取后若 HUD 对应类型槽位为空，自动填入。</li>
+</ul>
+<h3 id="46-pr-72">4.6 跨关卡持久化（PR #72）</h3>
+<p>战役 = 5 图池随机取 3（HangerA / HangerB / Helipad / Lab / Dock）。<code>NextLevel</code> 时 <code>Main.cpp</code> 把 <code>alertLevel</code> 和 5 项 <code>carriedCount</code> 快照到 <code>Res_UIState.campaignAlertLevel / campaignCarried[5]</code> 并置 <code>campaignContinue = true</code>；下一图 <code>OnEnter</code> 恢复后置回 false 并<strong>跳过 <code>OnRoundStart</code></strong>（避免二次扣库）。<code>static_assert</code> 保证快照数组覆盖 <code>kItemCount</code>。</p>
+<h3 id="47-savemanager">4.7 存档版本演进（<code>SaveManager</code>）</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>版本</th>
+<th>内容</th>
+<th>作者</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>v1</td>
+<td><code>version / timestamp / player{score,level,lives,playTime} / inventory[{itemId,storeCount}]</code>，按 itemId 匹配而非下标</td>
+<td>褚姝良</td>
+</tr>
+<tr>
+<td>v2</td>
+<td>inventory 增 <code>unlocked</code>；<code>Res_UIState.savedUnlocked[5]</code> 缓存供菜单阶段</td>
+<td>本人</td>
+</tr>
+<tr>
+<td>v3</td>
+<td>删除 PhotonRadar 后 <code>kV2IdRemap = {0,-1,1,2,3,4}</code>：旧 1 跳过，旧 2–5 前移；v1/v2 存档可静默迁移</td>
+<td>本人</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="5">5. 道具效果表</h2>
+<h3 id="51-14-pdf">5.1 团队策划文档原表（14 行，含"纸箱"；PDF 多列错位，按列长对齐还原）</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>名称</th>
+<th>类型</th>
+<th>携带上限</th>
+<th>库存上限</th>
+<th>线上效果（PVP）</th>
+<th>线下效果（PVE）</th>
+<th>作用类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>—</td>
+<td>纸箱</td>
+<td>道具</td>
+<td>1</td>
+<td>10</td>
+<td><span class="pend">待核对：原表无此格</span></td>
+<td>站定时不会被发现</td>
+<td>敌方视野</td>
+</tr>
+<tr>
+<td>001</td>
+<td>全息诱饵弹</td>
+<td>道具</td>
+<td>3</td>
+<td>8</td>
+<td>敌人处于安全态时抛出，敌人移动到道具位置，抵达约 3 s 后恢复</td>
+<td>同上</td>
+<td>敌方移动</td>
+</tr>
+<tr>
+<td>002</td>
+<td>光子雷达</td>
+<td>道具</td>
+<td>1</td>
+<td>1</td>
+<td>显示地图与敌人位置（每 3 s 刷新）</td>
+<td>同上</td>
+<td>玩家信息</td>
+</tr>
+<tr>
+<td>003</td>
+<td>钓鱼链接</td>
+<td>道具</td>
+<td>5</td>
+<td>99</td>
+<td>用预设图片覆盖对方屏幕 6 s</td>
+<td>锁定全局警戒度 6 s</td>
+<td>敌方视野</td>
+</tr>
+<tr>
+<td>004</td>
+<td>防火墙诱导</td>
+<td>道具</td>
+<td>2</td>
+<td>99</td>
+<td>区域内执法者正面朝向中心区域 5 s</td>
+<td>同上</td>
+<td>敌方移动</td>
+</tr>
+<tr>
+<td>005</td>
+<td>对话延长插件</td>
+<td>道具</td>
+<td>5</td>
+<td>10</td>
+<td>聊天界面自动生成虚假回应，未及时回复也自动延长对话 2 s</td>
+<td>同上</td>
+<td>对话界面</td>
+</tr>
+<tr>
+<td>006</td>
+<td>哈希混淆</td>
+<td>道具</td>
+<td>5</td>
+<td>6</td>
+<td>区域内所有执法者失去视野 5 s</td>
+<td>同上</td>
+<td>敌方视野</td>
+</tr>
+<tr>
+<td>007</td>
+<td>DDOS</td>
+<td>道具</td>
+<td>5</td>
+<td>99</td>
+<td>冷冻泡沫枪，命中目标暂停 5 s 不能移动</td>
+<td>同上</td>
+<td>敌方移动</td>
+</tr>
+<tr>
+<td>008</td>
+<td>特洛伊木马</td>
+<td>道具</td>
+<td>3</td>
+<td>99</td>
+<td>近身注入病毒，使其乱巡逻 10 s</td>
+<td>同上</td>
+<td>敌方移动</td>
+</tr>
+<tr>
+<td>009</td>
+<td>触发器</td>
+<td>道具</td>
+<td>5</td>
+<td>6</td>
+<td>布置地面，敌人踩中触电 5 s 不可动</td>
+<td>同上</td>
+<td>敌方移动</td>
+</tr>
+<tr>
+<td>010</td>
+<td>对话干扰插件</td>
+<td>道具</td>
+<td>3</td>
+<td>6</td>
+<td>对敌方玩家聊天界面禁言 20 s</td>
+<td>全局警戒度无法上涨 5 s<span class="pend">待核对：线下使用者/目标列为"无"，与此效果矛盾</span></td>
+<td>对话界面</td>
+</tr>
+<tr>
+<td>011</td>
+<td>流窜 AI</td>
+<td>武器</td>
+<td>1</td>
+<td>1</td>
+<td>释放后随机巡逻，触碰敌人即死亡</td>
+<td>同上</td>
+<td>敌方销毁</td>
+</tr>
+<tr>
+<td>012</td>
+<td>千年虫</td>
+<td>武器</td>
+<td>3</td>
+<td>10</td>
+<td>布置地面，踩中引爆击杀，并吸引一定范围敌人（范围后期定）</td>
+<td>同上</td>
+<td>敌方销毁</td>
+</tr>
+<tr>
+<td>013</td>
+<td>靶向打击</td>
+<td>武器</td>
+<td>3</td>
+<td>99</td>
+<td><span class="pend">待核对：原表右缘被裁切，仅见"击…敌…后方接…亡"</span></td>
+<td>同上</td>
+<td>敌方销毁</td>
+</tr>
+</tbody>
+</table></div>
+<p>获取途径列（地图内获取 / 开局选取）在 PDF 中无法与行一一对应，整列<span class="pend">待核对</span>。</p>
+<h3 id="52-5-res_iteminventory2-sys_itemeffects">5.2 实装版（5 项，<code>Res_ItemInventory2</code> 构造函数 + <code>Sys_ItemEffects</code>）</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>内部名 / 显示名</th>
+<th>类型</th>
+<th>初始库存</th>
+<th>携带上限</th>
+<th>冷却</th>
+<th>默认解锁</th>
+<th>实装效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>HoloBait / 全息诱饵弹</td>
+<td>Gadget</td>
+<td>5</td>
+<td>99</td>
+<td>3 s</td>
+<td>是</td>
+<td>在目标位置生成诱饵实体，吸引安全态敌人；敌人抵达后 3 s 计时销毁</td>
+</tr>
+<tr>
+<td>1</td>
+<td>DDoS</td>
+<td>Gadget</td>
+<td>4</td>
+<td>99</td>
+<td>8 s</td>
+<td>是</td>
+<td>最近敌人挂 <code>C_D_DDoSFrozen</code>（5 s 冻结）+ 囚笼 VFX；可冻结 RoamAI</td>
+</tr>
+<tr>
+<td>2</td>
+<td>RoamAI / 流窜 AI</td>
+<td>Weapon</td>
+<td>0</td>
+<td>2</td>
+<td>5 s</td>
+<td>否</td>
+<td>玩家位置生成流窜 AI（6 m/s，每 2 s 换随机目标），1.5 m 内触碰敌人即击杀，1:1 自毁</td>
+</tr>
+<tr>
+<td>3</td>
+<td>TargetStrike / 靶向打击</td>
+<td>Weapon</td>
+<td>0</td>
+<td>2</td>
+<td>10 s</td>
+<td>否</td>
+<td>发射环绕三角形弹射体，无三角形时 fallback 直接击毙最近敌人</td>
+</tr>
+<tr>
+<td>4</td>
+<td>RadarMap / 雷达地图</td>
+<td>Gadget</td>
+<td>3</td>
+<td>99</td>
+<td>10 s</td>
+<td>是</td>
+<td>激活小地图（NavMesh 可行走三角形填充）+ 雷达显示敌人位置，10 s 自动关闭</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="6-pr-59">6. 战役积分与评级（PR #59）</h2>
+<h3 id="61-res_scoreconfig">6.1 逐动作计分规则（<code>Res_ScoreConfig</code> 默认值，纯扣减制）</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>事件</th>
+<th>触发点</th>
+<th>分值</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>战役开始</td>
+<td><code>ResetCampaignScore</code></td>
+<td>初始 <strong>1000</strong></td>
+<td>三关共享一份分数</td>
+</tr>
+<tr>
+<td>时间流逝</td>
+<td><code>Sys_UI</code>（仅 HUD 画面，暂停不计）</td>
+<td><strong>−1 / s</strong></td>
+<td>子秒累加器，分数 &gt; 0 时才扣</td>
+</tr>
+<tr>
+<td>击杀敌人</td>
+<td>CQC / TargetStrike / RoamAI / 通用 hp≤0</td>
+<td><strong>−10 / 次</strong></td>
+<td>四条路径统一走 <code>Sys_DeathJudgment</code> 死亡流程，已死目标不重复计</td>
+</tr>
+<tr>
+<td>使用道具</td>
+<td><code>Sys_ItemEffects</code> 收到 <code>Evt_Item_Use</code></td>
+<td><strong>−5 / 次</strong></td>
+<td>含道具与武器的"使用"本身</td>
+</tr>
+<tr>
+<td>警戒满触发倒计时</td>
+<td><code>Sys_Countdown</code></td>
+<td><strong>−200</strong>（每关一次）</td>
+<td>通知 <code>ALERT SURGE / COUNTDOWN</code></td>
+</tr>
+<tr>
+<td>倒计时耗尽 / 被抓捕</td>
+<td><code>Sys_Countdown</code> / <code>Sys_DeathJudgment</code></td>
+<td><strong>−500</strong>（每关一次）</td>
+<td>通知 <code>MISSION FAILED</code></td>
+</tr>
+<tr>
+<td>及格线</td>
+<td><code>Sys_LevelGoal</code></td>
+<td>终关结算分 <strong>&gt; 500</strong> 才算通关</td>
+<td>分数不足即使到达终点也判 <code>INSUFFICIENT SCORE</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>每次扣分同时写入分项 <code>scoreLost_time / kills / items / countdown / failure</code> 与计数 <code>scoreKillCount / scoreItemUseCount</code>，供结算明细。</p>
+<h3 id="62-getscorerating">6.2 评级阈值（<code>GetScoreRating</code>）</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>分数</th>
+<th>≤500</th>
+<th>501–599</th>
+<th>600–699</th>
+<th>700–799</th>
+<th>800–899</th>
+<th>900–949</th>
+<th>950–969</th>
+<th>≥970</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>评级</td>
+<td>F</td>
+<td>D</td>
+<td>C</td>
+<td>B</td>
+<td>A</td>
+<td>S</td>
+<td>SS</td>
+<td>SSS</td>
+</tr>
+</tbody>
+</table></div>
+<p>每帧比较档位，降级时弹 <code>RATING DROP  S &gt; A</code> 通知——玩家在关内就能感知"这次击杀让我掉了一档"。</p>
+<h3 id="63">6.3 跨关累积与重置</h3>
+<ul>
+<li><code>campaignScore</code> 存于 Session 级 <code>Res_UIState</code>，三关连续扣减；<code>NextLevel</code> 只重置两个"每关一次"惩罚标记，不重置分数。</li>
+<li><code>StartGame / 返回主菜单 / 重开</code> 调用 <code>ResetCampaignScore</code> 归零所有分项。</li>
+<li>多人模式复用同一套规则，终局按 <code>&gt; passThreshold</code> 判胜/败。</li>
+</ul>
+<h3 id="64">6.4 结算界面</h3>
+<p>Victory（<code>CAMPAIGN COMPLETE</code>）：TOTAL TIME、CLEARED MAPS 三行、<code>FINAL SCORE: N [评级]</code>（评级色）+ BREAKDOWN：TIME (−1/s)、KILLS (×n)、ITEMS (×n)、COUNTDOWN，扣分项统一用独立"扣减红"。GameOver 页额外显示 FAILURE 行，并对"通关但 ≤500"改标题为 <code>MISSION FAILED / INSUFFICIENT SCORE</code>。</p>
+<h3 id="65">6.5 设计意图</h3>
+<ul>
+<li><strong>潜行是唯一最优策略</strong>：满分只能靠"少做事"守住；击杀 −10 看似便宜，但 SSS 只容 30 分损耗，一次击杀或三次道具即掉档。</li>
+<li><strong>击杀有代价但不禁止</strong>：非暴力不靠禁用武器，而是让武器"贵"——默认锁定 + 图内拾取 + 携带 2 + 击杀扣分。</li>
+<li><strong>时间压力来自分数而非警戒条</strong>：−1/s 让玩家不敢无限蹲守，形成"等待 vs 冒险"的持续博弈。</li>
+</ul>
+<h2 id="7">7. 与警戒度系统的耦合</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>项</th>
+<th>团队原定义（策划文档）</th>
+<th>实装</th>
+<th>归属</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>单敌检测值阈值</td>
+<td>Search ≥20 / Alert ≥40 / Hunt ≥80，Hunt 退出计时 3 s</td>
+<td><code>Res_AIConfig</code>（AI 负责人维护）<span class="pend">待核对：实装阈值未读取</span></td>
+<td>团队 / AI 负责人</td>
+</tr>
+<tr>
+<td>全局警戒度状态</td>
+<td>0–100 浮点，敌人进 Hunt 每次 +15</td>
+<td><code>AlertStatus</code>：Safe ≤25 / Search ≤50 / Alert ≤75 / Hunt &gt;75；<code>global_alert_increment = 25</code></td>
+<td>团队定义，<strong>本人在 PR #35 统一四段阈值、PR #59 将 +15 调为 +25</strong></td>
+</tr>
+<tr>
+<td>倒计时</td>
+<td>警戒 100 触发，归零失败，不可暂停</td>
+<td><code>countdownMax = 30 s</code>；触发扣 −200、耗尽扣 −500；倒计时期间禁止暂停</td>
+<td>团队定义，本人 PR #35 标准化为 30 s 并接入积分</td>
+</tr>
+<tr>
+<td>HUD</td>
+<td>与警戒度联动的 UI 退化（可选）</td>
+<td>警戒条四段色（绿/黄/橙/红）、Hunt 时边框呼吸发光</td>
+<td>本人</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="8">8. 配置与数据</h2>
+<p><strong><code>.itemspawns</code> 格式</strong>（<code>Assets/Meshes/&lt;Map&gt;.itemspawns</code>，6 个文件：Dock / HangerA / HangerB / Helipad / Lab / TutorialMap）</p>
+<pre class="diagram"><code># Item spawns for Dock
+# Map range: X ~[-15, 16], Z ~[-16, 27], Y ~5.9
+spawnCount 4
+
+item 0
+itemId 1
+position -8.0 5.9 -8.0
+quantity 1
+...
+</code></pre>
+<p>各图 3–5 个生成点，教程图 5 个且 HoloBait <code>quantity 2</code>；每图必放一个 RadarMap（id 4），武器仅在 HangerB / Lab / Helipad 等图出现一种。</p>
+<p><strong>道具 ID 表（v3）</strong>：0 HoloBait · 1 DDoS · 2 RoamAI · 3 TargetStrike · 4 RadarMap（v2：0 HoloBait · 1 PhotonRadar · 2 DDoS · 3 RoamAI · 4 TargetStrike · 5 GlobalMap）。</p>
+<p><strong>积分常量</strong>（<code>Res_ScoreConfig</code>）：<code>initialScore 1000 · penaltyCountdownSurge 200 · penaltyCountdownExpire 500 · penaltyCapture 500 · penaltyKill 10 · penaltyItemUse 5 · passThreshold 500 · ratingThresholds {500,599,699,799,899,949,969}</code>。</p>
+<p><strong>关联资源</strong>：<code>Res_ItemInventory2</code>（库存真源）→ <code>Res_GameState.itemSlots/weaponSlots</code>（显示槽）→ <code>Res_InventoryState</code>（背包 4×3）；<code>Res_UIState</code>（配装选择、轮盘状态、战役快照、积分）；事件 <code>Evt_Item_Pickup{player, pickupEntity, itemId}</code> / <code>Evt_Item_Use{user, target, itemId, targetPos, isOnline}</code>。</p>
+<h2 id="9">9. 验证与迭代（实机走查记录）</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>日期</th>
+<th>发现</th>
+<th>修改</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>03-17</td>
+<td>PR #49 初版的 <code>Res_CampaignState / Scene_CampaignLevel</code> 与 <code>mapSequence</code> 重复</td>
+<td>审查后删除，Victory 直接读 <code>Res_UIState</code></td>
+</tr>
+<tr>
+<td>03-17</td>
+<td>生成高度错误、武器解锁后携带为 0、HUD 槽空</td>
+<td>修高度；首拾补满；<code>AutoFillHUDSlots</code></td>
+</tr>
+<tr>
+<td>03-18</td>
+<td>CQC 未扣分；RoamAI 一次碰撞销毁多个敌人；三处击杀各自销毁实体绕过死亡动画</td>
+<td>统一 hp=0 → <code>Sys_DeathJudgment</code> → 四阶段死亡动画；RoamAI 首杀即 break</td>
+</tr>
+<tr>
+<td>03-19</td>
+<td>数字键直触道具与 Q/E 冲突</td>
+<td>移除数字键</td>
+</tr>
+<tr>
+<td>03-19</td>
+<td>道具生成在 NavMesh 外/浮空；实体太小难发现</td>
+<td><code>SnapToNavMesh</code>（重心 fallback 改最近边投影）；放大 + 旋转 + 自发光</td>
+</tr>
+<tr>
+<td>03-19</td>
+<td>准星实装后与俯视角潜行"看敌人而非瞄准"相悖</td>
+<td>当日移除</td>
+</tr>
+<tr>
+<td>03-19</td>
+<td>已解锁武器仍在图内生成</td>
+<td>生成时跳过 <code>savedUnlocked</code> 武器；<code>mapPickupMax</code> 改 99</td>
+</tr>
+<tr>
+<td>03-20</td>
+<td>PhotonRadar 与 GlobalMap 功能重叠</td>
+<td>删前者、后者更名 RadarMap、ID 前移、6 个 <code>.itemspawns</code> 同步、存档 v3 重映射、轮盘左右交换</td>
+</tr>
+<tr>
+<td>03-20</td>
+<td>Gadget 携带上限 2 过紧，图内拾取几乎必被拒</td>
+<td><code>kGadgetMaxCarry</code> 2→99，武器保持 2</td>
+</tr>
+<tr>
+<td>03-20</td>
+<td>换图后警戒度归零、道具重新扣库</td>
+<td>PR #72 快照/恢复 + <code>campaignContinue</code> 跳过 <code>OnRoundStart</code></td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="10">10. 设计取舍与局限</h2>
+<ul>
+<li><strong>13 项道具只实装 5 项</strong>：受周期与"评分以编程为主"限制，保留覆盖"视野 / 移动 / 信息 / 销毁"四类的最小集合；纸箱、对话类插件未实装。</li>
+<li><strong>扣减制的代价</strong>：数字只往下走、反馈直观，但"完美通关 = 什么都不做"略显消极；可补"未触发倒计时通关 +N"的正向奖励。</li>
+<li><strong>携带上限 99 事实上取消了 Gadget 携带约束</strong>：为拾取体验让步，代价是配装页的携带数决策变弱。</li>
+<li><strong>积分常量仍是编译期默认值</strong>：未接 JSON 热调，平衡需重新编译。</li>
+<li><strong>无自动化测试</strong>：靠 <code>static_assert</code>、边界守卫与 5 轮 PR 审查保证。</li>
+</ul>
+<h2 id="11">11. 附录</h2>
+<p><strong>本人拥有文件</strong>：<code>ItemEquipSync.*</code>、<code>ItemSpawnLoader.*</code>、<code>UI_ItemWheel.*</code>、<code>UI_Victory.*</code>、<code>UI_HUD_Equipment.cpp</code>、<code>UI_ItemIcons.*</code>、<code>UI_Inventory.*</code>、<code>UI_MissionSelect.*</code>、<code>Sys_Countdown.*</code>、<code>Main.cpp</code> 战役逻辑、<code>*.itemspawns</code>；扩展 <code>Res_ItemInventory2.h</code>、<code>Sys_Item.cpp</code>、<code>Sys_ItemEffects.cpp</code>、<code>SaveManager.cpp</code>、<code>Res_UIState.h</code>。</p>
+<p><strong>相关 PR</strong>：#49（03-17→18）道具装备系统 · #59（03-18）积分系统 · #67（03-19）仓库装备 · #72（03-20）跨关卡持久化。</p>
+<details class="pending"><summary>待核对项</summary><p class="pend-note">以下条目为整理时未能逐一核实的口径 / 数据，<strong>待与团队 / 资产核对</strong>后补正；保留原文不删。</p><ol>
+<li><strong>积分方案口径冲突</strong>：贡献矩阵与作品集网站写的是"潜行未被发现 +100 / 击杀 −50 / 倒计时未触发 +200，S≥900 A≥700 B≥500 C≥300"，但 PR #59 diff 与当前 <code>master</code> 实装均为<strong>扣减制</strong>（初始 1000，−1/s，击杀 −10，道具 −5，倒计时 −200，失败 −500，F–SSS 八档）。本文以代码为准；作品集与贡献矩阵需改口径。PR #49 阶段的 GameOver 曾按累计警戒值给 S(&lt;30)/A(&lt;75)/B 评级，已被 #59 取代。</li>
+<li><strong>Q/E 语义</strong>：贡献矩阵写"Q 键切换道具、E 键切换武器"，代码为 Q/E <strong>使用</strong>当前活跃槽、TAB 轮盘切换；请确认作品集措辞。</li>
+<li>团队道具表"获取途径"整列无法对齐；"纸箱"行 ID 与线上效果格缺失；"靶向打击"线上效果被页边裁切。</li>
+<li>"对话干扰插件"线下使用者/目标为"无"但线下效果列有"全局警戒度无法上涨 5 s"，原表可能错行。</li>
+<li>单敌检测值实装阈值（<code>Res_AIConfig</code> 之外的 <code>Sys_EnemyAI</code> 内部数值）未读取，本文仅引用团队文档的 20/40/80。</li>
+<li>TargetStrike 环绕三角形弹射体（PR #73，褚姝良"OrbitTriangle + DDoS 增强"）为他人后续改动，本文效果表仅按当前代码描述。</li>
+<li>本地仓库副本停在 PR #14 时期，本文所有代码引用来自远程 <code>master</code>（2026-03-30）；<code>ScoreUtils.h/.cpp</code>、<code>Res_CampaignState.h</code>、<code>Scene_CampaignLevel</code> 在最终代码中不存在（前者被 <code>Res_ScoreConfig</code> 取代，后二者在 #49 审查中删除）。</li>
+</ol></details>
+  </article>
+  <footer>
+    <div class="note"><b>文档说明</b>：本策划案为团队项目的<b>回溯整理稿</b>：团队设计与本人设计 / 实现逐项标注归属，规则与数值以远程 <code>master</code> 源码为准，团队原始策划文档中无法对齐的格位不猜测、列为待核对项。</div>
+    <a class="backbtn" href="../index.html#designdocs">← 返回作品集</a>
+  </footer>
+</div>
+</body>
+</html>
