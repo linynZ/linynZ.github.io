@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>合成游戏生成器经济模型拆解案 · 赵鹏淦</title>
+<style>
+:root{--bg:#0b0a1a;--ink:#e8e5f4;--muted:#a09ac0;--gold:#e3c07a;--ice:#9fd8f0;
+  --violet:#9d8ff0;--line:rgba(157,143,240,.18);--card:rgba(20,16,42,.65)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:"Microsoft YaHei","PingFang SC","Source Han Sans SC",sans-serif;
+  font-size:16px;line-height:1.85;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:
+  radial-gradient(900px 500px at 85% -5%,rgba(90,70,180,.25),transparent 60%),
+  radial-gradient(700px 500px at -10% 30%,rgba(40,80,160,.18),transparent 60%)}
+nav{position:sticky;top:0;z-index:9;display:flex;justify-content:space-between;align-items:center;
+  padding:14px 28px;background:rgba(11,10,26,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .logo{color:var(--ink);font-weight:700;text-decoration:none;letter-spacing:.06em}
+nav .logo b{color:var(--gold)}
+nav .back{color:var(--muted);text-decoration:none;font-size:.88rem}
+nav .back:hover{color:var(--gold)}
+.wrap{max-width:880px;margin:0 auto;padding:56px 24px 80px}
+.eyebrow{font-size:.78rem;letter-spacing:.28em;color:var(--gold);text-transform:uppercase;margin-bottom:14px}
+h1.title{font-size:2rem;line-height:1.35;margin-bottom:10px}
+.subtitle{font-size:1.05rem;color:var(--violet);margin-bottom:18px}
+.meta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:40px}
+.meta span{font-size:.78rem;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:3px 12px}
+article h2{font-size:1.35rem;color:var(--gold);margin:52px 0 16px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+article h3{font-size:1.1rem;color:var(--ice);margin:34px 0 12px}
+article p{margin:0 0 14px;color:#cdc9e0}
+article strong{color:var(--ink)}
+article em{color:var(--violet);font-style:normal}
+article ul,article ol{margin:0 0 16px 1.4em;color:#cdc9e0}
+article li{margin-bottom:6px}
+article blockquote{border-left:3px solid var(--gold);background:var(--card);border-radius:0 10px 10px 0;
+  padding:14px 18px;margin:0 0 16px;color:var(--muted)}
+article blockquote p{margin:0}
+article code{font-family:Consolas,"JetBrains Mono",monospace;font-size:.88em;background:rgba(157,143,240,.12);
+  border-radius:4px;padding:1px 6px;color:var(--ice)}
+article pre{background:#100e26;border:1px solid var(--line);border-radius:12px;padding:16px 18px;
+  overflow-x:auto;margin:0 0 18px}
+article pre code{background:none;padding:0;color:#c8d8f0;font-size:.85rem;line-height:1.6}
+.tablewrap{overflow-x:auto;margin:0 0 18px}
+article table{border-collapse:collapse;width:100%;font-size:.88rem}
+article th{color:var(--gold);text-align:left;border-bottom:1.5px solid rgba(227,192,122,.4);padding:8px 12px;white-space:nowrap}
+article td{border-bottom:1px solid var(--line);padding:8px 12px;color:#cdc9e0}
+article tr:hover td{background:rgba(157,143,240,.05)}
+article hr{border:0;border-top:1px solid var(--line);margin:40px 0}
+article a{color:var(--ice)}
+article img{max-width:100%;border-radius:12px;border:1px solid var(--line);margin:8px 0 2px;display:block}
+article img+em, article p img+em{display:block}
+.toc{border:1px solid var(--line);border-radius:12px;padding:14px 22px;background:var(--card);font-size:.86rem;margin-bottom:6px}
+.toc ul{margin:0 0 0 1.1em;color:var(--muted)}
+.toc li{margin-bottom:3px}
+.toc a{color:var(--muted);text-decoration:none}
+.toc a:hover{color:var(--gold)}
+.toctitle{color:var(--gold);font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:8px}
+footer{border-top:1px solid var(--line);margin-top:70px;padding-top:28px}
+footer .note{font-size:.85rem;color:var(--muted);margin-bottom:18px}
+footer .note b{color:var(--gold)}
+.backbtn{display:inline-block;color:var(--gold);border:1px solid rgba(227,192,122,.4);border-radius:99px;
+  padding:8px 22px;text-decoration:none;font-size:.88rem}
+.backbtn:hover{background:rgba(227,192,122,.1)}
+</style>
+</head>
+<body>
+<nav><a class="logo" href="../index.html">赵鹏<b>淦</b></a><a class="back" href="../index.html#cases">← 返回作品集</a></nav>
+<div class="wrap">
+  <div class="eyebrow">Case Study · 原创拆解</div>
+  <h1 class="title">合成游戏（Merge-2）生成器经济模型拆解案</h1>
+  <div class="subtitle">权重表 → 折算期望 → 体力定价——直掉口径为什么错 3 倍，以及"耗 2 体力产高一级"改动的价值不变性</div>
+  <div class="meta"><span>经济 / 数值向</span><span>100 行正文 · 114 行计算脚本</span><span>v1.0 · 2026-09</span><span>解析层结论不依赖具体权重 · 示例层可换表重跑</span></div>
+  <article>
+<div class="toc"><span class="toctitle">目录 · Contents</span><ul><li><a href="#_1">关于本拆解案的方法说明（请先读）</a></li><li><a href="#1">1. 选题说明</a></li><li><a href="#2">2. 示例权重表与基本量</a></li><li><a href="#3-b2">3. 一个 B2 值多少体力</a></li><li><a href="#4-2-1">4. 设计问题："耗 2 体力、产物 +1 级"</a></li><li><a href="#5">5. 定价对权重的敏感度</a></li><li><a href="#6">6. 体感锚点与后续实证（未做）</a></li><li><a href="#7">7. 参考</a></li></ul></div>
+<blockquote>
+<p>作者：赵鹏淦（Penggan Zhao）｜ Newcastle University · MSc Game Engineering
+版本：v1.0（2026-09）｜ 定位：<strong>经济 / 数值向（系统策划方向）</strong>；作品集第五型
+可复现脚本：<code>analysis/merge_generator_economy.py</code></p>
+</blockquote>
+<hr />
+<h2 id="_1">关于本拆解案的方法说明（请先读）</h2>
+<p>本文的输入是一张<strong>示例权重表</strong>，不是任何一款上线产品的实测配置。合成游戏的生成器权重是厂商核心配置，不公开；社区拆包数据版本不一，不足以做严谨推导。因此本文的价值不在"某款游戏的 B2 值多少体力"，而在：</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>层</th>
+<th>内容</th>
+<th>可信度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>解析层</strong></td>
+<td>折算期望公式、体力定价的守恒式、"耗 2 体力产高一级"的价值不变性（§2–§4）</td>
+<td><strong>不依赖具体权重，对任何 Merge-K 生成器成立</strong></td>
+</tr>
+<tr>
+<td><strong>示例层</strong></td>
+<td>代入示例表得到的 90% / 1.08 / 16.7 等数字（§2–§5）</td>
+<td>只对示例表成立，换表重跑脚本即可</td>
+</tr>
+<tr>
+<td><strong>校验层</strong></td>
+<td>一个进游戏能数出来的体感锚点（§6）</td>
+<td>待实证，本文明确标注未做</td>
+</tr>
+</tbody>
+</table></div>
+<p>把示例当实测用是数值分析最容易犯的错误，故在此显式声明。</p>
+<h2 id="1">1. 选题说明</h2>
+<p>合成游戏（Merge Mansion、Gossip Harbor、Seaside Escape、Travel Town 一类）的核心经济只有一条链：<strong>体力 → 生成器点击 → 棋子 → 合成升级 → 交付任务 → 解锁内容</strong>。生成器权重表是整条链的第一环，几乎所有后续设计（任务定价、商店售价、活动产出、付费点）都建立在"一个 N 级棋子值多少体力"之上。</p>
+<p>但这个换算在实践里经常被算错，最常见的错误是<strong>直掉口径</strong>：只看目标棋子的直接掉率，忽略它可以由低级棋子合成而来。本文用一张示例表把正确口径推一遍，并顺手回答一个真实的设计问题：<strong>"把生成器改成每次耗 2 体力、产物等级 +1"，玩家是赚了还是亏了？</strong></p>
+<h2 id="2">2. 示例权重表与基本量</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>item</th>
+<th>weight</th>
+<th>P</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A1</td>
+<td>324</td>
+<td>0.81</td>
+</tr>
+<tr>
+<td>A2</td>
+<td>18</td>
+<td>0.045</td>
+</tr>
+<tr>
+<td>A3</td>
+<td>18</td>
+<td>0.045</td>
+</tr>
+<tr>
+<td>B1</td>
+<td>32</td>
+<td>0.08</td>
+</tr>
+<tr>
+<td>B2</td>
+<td>8</td>
+<td>0.02</td>
+</tr>
+<tr>
+<td>合计</td>
+<td>400</td>
+<td>1.00</td>
+</tr>
+</tbody>
+</table></div>
+<p>规则：二合（K = 2），每次产出耗 1 体力。</p>
+<ul>
+<li><strong>P(产出 A)</strong> = (324 + 18 + 18) / 400 = <strong>90%</strong>。两个坑：权重不是百分比；分母是全表（含 B 与可能的空条目），若权重表分类型/等级两层，则类型概率只在类型层算。</li>
+<li><strong>A1 折算期望</strong>：i 级棋子 = K^(i−1) 个 1 级。E[A1] = 0.81×1 + 0.045×2 + 0.045×4 = <strong>1.08 个 / 次</strong>。交叉验证：条件期望 1.2 × P(A) 0.9 = 1.08。</li>
+<li><strong>B1 折算期望</strong>：E[B1] = 0.08×1 + 0.02×2 = <strong>0.12 个 / 次</strong>。</li>
+</ul>
+<h2 id="3-b2">3. 一个 B2 值多少体力</h2>
+<p><strong>折算口径</strong>：1 体力换 0.12 个 B1 → B1 = 8.33 体力 → <strong>B2 = 16.7 体力</strong>。</p>
+<p><strong>直掉口径</strong>：1 / P(B2) = 50 体力。这是错的——它忽略了每 12.5 次点击就来一个 B1，两个 B1 就是一个 B2。高估 3 倍，若拿它给商店定价，B2 会贵到没人买；若拿它给任务奖励定价，B2 奖励会廉价到破坏经济。</p>
+<p><strong>上限与分摊</strong>：16.7 是把全部体力都记在 B 头上的<strong>上限价</strong>。若 A 系也有价值（通常有，A 是主线任务用料），按价值守恒 <code>1 体力 = v_A1·E[A1] + v_B1·E[B1]</code> 分摊：</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>设 v_A1（体力）</th>
+<th>v_B1</th>
+<th>v_B2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>8.33</td>
+<td>16.7</td>
+</tr>
+<tr>
+<td>0.25</td>
+<td>6.08</td>
+<td>12.2</td>
+</tr>
+<tr>
+<td>0.50</td>
+<td>3.83</td>
+<td>7.7</td>
+</tr>
+</tbody>
+</table></div>
+<p>B2 的合理定价区间约 <strong>[7.7, 16.7] 体力</strong>，具体落点取决于 A 系的市场价（可由 A 系在商店/任务中的既有定价反推）。50 不在区间内。</p>
+<h2 id="4-2-1">4. 设计问题："耗 2 体力、产物 +1 级"</h2>
+<p>把整张表整体抬一级（A1→A2、…、B2→B3），每次点击耗 2 体力。</p>
+<p><strong>价值不变性</strong>：每次产出的 B1 等价物 = 原来的 ×2（每个棋子都翻倍），体力也 ×2，单位体力期望仍是 0.12。<strong>B2 定价不变。</strong> 这个结论对任意权重表、任意 K 都成立，因为"全表 +1 级"等价于对折算期望乘常数 K，而体力乘的是同一个常数（当且仅当新体力 = K × 旧体力）。</p>
+<p>直掉口径在这里会得出"B2 现在 100 体力"或"25 体力"之类的结论，再次说明它不可靠。</p>
+<p><strong>真正变化的三样东西</strong>（同样花 100 体力）：</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>量</th>
+<th>原模式</th>
+<th>新模式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>产出棋子数</td>
+<td>100</td>
+<td>50</td>
+</tr>
+<tr>
+<td>手动合成 / 拖拽次数</td>
+<td>基准</td>
+<td>约减半</td>
+</tr>
+<tr>
+<td>B1 等价物总量的方差</td>
+<td>14.6</td>
+<td>29.1（×2）</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>设计意图反推</strong>：这是<strong>便利性售卖</strong>（省棋盘格、省操作），不是产出加成；同时方差翻倍意味着短期"欧非"体感更强。若产品想把它做成付费加成点，需要叠加真实收益，例如定价 1.8 体力（而非 2）→ 单位体力产出 +11.1%；1.5 体力 → +33.3%。要不要给这个收益，取决于它是长期开关（会永久抬高产出，冲击整条任务定价）还是限时道具（可控）。</p>
+<h2 id="5">5. 定价对权重的敏感度</h2>
+<p>其余权重不变，只动一项：</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>变动</th>
+<th>B2 定价（体力）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>B2 权重 4 / 8 / 16 / 32</td>
+<td>19.8 / <strong>16.7</strong> / 12.8 / 8.8</td>
+</tr>
+<tr>
+<td>B1 权重 16 / 32 / 64</td>
+<td>24.0 / <strong>16.7</strong> / 10.8</td>
+</tr>
+<tr>
+<td>A3 权重 0 / 18 / 72</td>
+<td>15.9 / <strong>16.7</strong> / 18.9</td>
+</tr>
+</tbody>
+</table></div>
+<p>同样翻倍，B1 权重的影响（−35%）大于 B2 自身（−23%）——B1 对 E[B1] 的贡献 0.08 是 B2 贡献 0.04 的两倍。换句话说，<strong>调 B 系稀有度时，动低级权重比动高级权重杠杆更大</strong>，而且对玩家更不可见。A 系权重只通过总权重分母稀释 B。</p>
+<h2 id="6">6. 体感锚点与后续实证（未做）</h2>
+<p>本文所有数字来自示例表，唯一能把模型和真实产品接上的，是一个<strong>进游戏能数出来的量</strong>：</p>
+<blockquote>
+<p>每 <strong>16.7 次点击</strong>应出现 1 个 B2 等价物（含 2 个 B1 合成）。数 200 次点击即可核对。</p>
+</blockquote>
+<p>若实测显著多于 17 次，说明真实表存在保底 / 伪随机，或示例表的 B1 权重偏高；显著少于则反之。这一步需要实际游玩记录，本文未做，标为后续。</p>
+<p>三合（K = 3）下同一张表：E[A1] = 1.35，E[B1] = 0.14，B2 = 21.4 体力——底数换掉即可，方法不变。</p>
+<h2 id="7">7. 参考</h2>
+<ul>
+<li>Merge-2 品类通用生成器机制：Merge Mansion / Gossip Harbor / Seaside Escape 公开玩法说明与社区 wiki（仅用于确认机制形态，不取其权重数据）。</li>
+<li>示例权重表来源：系统策划笔试题面口径（2026-09），本文对其做了扩展推导。</li>
+</ul>
+  </article>
+  <footer>
+    <div class="note"><b>方法声明</b>：本拆解案的输入是一张示例权重表而非某款产品实测配置；解析层结论（折算期望公式、价值守恒式、+1 级改动的不变性）对任意 Merge-K 生成器成立，示例层数字换表即可用附带脚本重算。体感锚点（每 16.7 次点击一个 B2 等价物）为可实证的校验点，本文明确标注未做。</div>
+    <a class="backbtn" href="../index.html#cases">← 返回作品集</a>
+  </footer>
+</div>
+</body>
+</html>

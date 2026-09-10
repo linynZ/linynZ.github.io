@@ -54,7 +54,7 @@ h2.sec{font-size:clamp(1.7rem,4vw,2.6rem);font-weight:600;margin:14px 0 8px;lett
 section{padding:clamp(70px,10vw,120px) 0;position:relative}
 .reveal{opacity:0;transform:translateY(38px);transition:opacity 1s cubic-bezier(.2,.7,.2,1),transform 1s cubic-bezier(.2,.7,.2,1)}
 .reveal.in{opacity:1;transform:none}
-.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}.d5{transition-delay:.40s}
 
 /* ---------- 导航 ---------- */
 nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;
@@ -436,13 +436,14 @@ footer .logo{font-size:1rem;margin-bottom:8px;display:inline-block}
 <section id="cases"><div class="wrap">
   <div class="reveal"><div class="eyebrow">Deconstructions</div>
     <h2 class="sec">游戏拆解案</h2>
-    <p class="proj-desc">四份原创拆解案、四种方法论——解析求解 / 组合优化 / 概率建模 / 漏斗建模。公开数据只当原材料，每个结论都是推导出来的，全部配可复现 Python 计算脚本（共 1800+ 行）。</p>
+    <p class="proj-desc">五份原创拆解案、五种方法论——解析求解 / 组合优化 / 概率建模 / 漏斗建模 / 经济折算。公开数据只当原材料，每个结论都是推导出来的，全部配可复现 Python 计算脚本（共 2100+ 行）。</p>
   </div>
   <div class="cases">
     <a class="case reveal d1" href="cases/wuwa-combat.html"><div class="num">01</div><div class="dir">战斗系统 · 机制 + 数值向</div><h4>《鸣潮》战斗系统</h4><p>乘区结构数值反推：双爆 1:2 的解析解与失效边界、抗性系数 k=5 唯一性反解，以及一个被自己推翻并保留在正文的防御区假设。</p><span class="go">阅读全文 →</span></a>
     <a class="case reveal d2" href="cases/wuwa-echo.html"><div class="num">02</div><div class="dir">数值养成 · 组合优化向</div><h4>《鸣潮》声骸系统</h4><p>COST 预算的组合最优化：可行域 Pareto 前沿三点；43311 配置的正确性来自首位声骸技能——临界值 4.55% 的定量证明。</p><span class="go">阅读全文 →</span></a>
     <a class="case reveal d3" href="cases/hsr-relic.html"><div class="num">03</div><div class="dir">数值养成 · 概率建模向</div><h4>《崩坏：星穹铁道》遗器系统</h4><p>配速阈值第一性原理推导（复现 133.3 / 142.9 / 160）、速度词条锯齿性，以及一次概率链高估 5.9 倍的模型错误与修正。</p><span class="go">阅读全文 →</span></a>
     <a class="case reveal d4" href="cases/genshin-onboarding.html"><div class="num">04</div><div class="dir">关卡 · 引导 + 留存向</div><h4>《原神》新手关卡</h4><p>蒙德教学序列的留存漏斗建模：优先修流失率最高而非最早的环节、环节数即留存预算、教学间隔的遗忘判据。</p><span class="go">阅读全文 →</span></a>
+    <a class="case reveal d5" href="cases/merge-generator-economy.html"><div class="num">05</div><div class="dir">经济 · 数值折算向</div><h4>合成游戏生成器经济模型</h4><p>Merge-2 权重表到体力定价的折算：直掉口径高估 3 倍的证明、B2 定价区间 [7.7, 16.7] 的分摊推导，以及"耗 2 体力产高一级"改动的价值不变性与设计意图反推。</p><span class="go">阅读全文 →</span></a>
   </div>
 </div></section>
 
