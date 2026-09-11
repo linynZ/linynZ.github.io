@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>三消关卡「步数预算与难度曲线」拆解案 · 赵鹏淦</title>
+<style>
+:root{--bg:#0b0a1a;--ink:#e8e5f4;--muted:#a09ac0;--gold:#e3c07a;--ice:#9fd8f0;
+  --violet:#9d8ff0;--line:rgba(157,143,240,.18);--card:rgba(20,16,42,.65)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:"Microsoft YaHei","PingFang SC","Source Han Sans SC",sans-serif;
+  font-size:16px;line-height:1.85;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:
+  radial-gradient(900px 500px at 85% -5%,rgba(90,70,180,.25),transparent 60%),
+  radial-gradient(700px 500px at -10% 30%,rgba(40,80,160,.18),transparent 60%)}
+nav{position:sticky;top:0;z-index:9;display:flex;justify-content:space-between;align-items:center;
+  padding:14px 28px;background:rgba(11,10,26,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .logo{color:var(--ink);font-weight:700;text-decoration:none;letter-spacing:.06em}
+nav .logo b{color:var(--gold)}
+nav .back{color:var(--muted);text-decoration:none;font-size:.88rem}
+nav .back:hover{color:var(--gold)}
+.wrap{max-width:880px;margin:0 auto;padding:56px 24px 80px}
+.eyebrow{font-size:.78rem;letter-spacing:.28em;color:var(--gold);text-transform:uppercase;margin-bottom:14px}
+h1.title{font-size:2rem;line-height:1.35;margin-bottom:10px}
+.subtitle{font-size:1.05rem;color:var(--violet);margin-bottom:18px}
+.meta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:40px}
+.meta span{font-size:.78rem;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:3px 12px}
+article h2{font-size:1.35rem;color:var(--gold);margin:52px 0 16px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+article h3{font-size:1.1rem;color:var(--ice);margin:34px 0 12px}
+article p{margin:0 0 14px;color:#cdc9e0}
+article strong{color:var(--ink)}
+article em{color:var(--violet);font-style:normal}
+article ul,article ol{margin:0 0 16px 1.4em;color:#cdc9e0}
+article li{margin-bottom:6px}
+article blockquote{border-left:3px solid var(--gold);background:var(--card);border-radius:0 10px 10px 0;
+  padding:14px 18px;margin:0 0 16px;color:var(--muted)}
+article blockquote p{margin:0}
+article code{font-family:Consolas,"JetBrains Mono",monospace;font-size:.88em;background:rgba(157,143,240,.12);
+  border-radius:4px;padding:1px 6px;color:var(--ice)}
+article pre{background:#100e26;border:1px solid var(--line);border-radius:12px;padding:16px 18px;
+  overflow-x:auto;margin:0 0 18px}
+article pre code{background:none;padding:0;color:#c8d8f0;font-size:.85rem;line-height:1.6}
+.tablewrap{overflow-x:auto;margin:0 0 18px}
+article table{border-collapse:collapse;width:100%;font-size:.88rem}
+article th{color:var(--gold);text-align:left;border-bottom:1.5px solid rgba(227,192,122,.4);padding:8px 12px;white-space:nowrap}
+article td{border-bottom:1px solid var(--line);padding:8px 12px;color:#cdc9e0}
+article tr:hover td{background:rgba(157,143,240,.05)}
+article hr{border:0;border-top:1px solid var(--line);margin:40px 0}
+article a{color:var(--ice)}
+article img{max-width:100%;border-radius:12px;border:1px solid var(--line);margin:8px 0 2px;display:block}
+article img+em, article p img+em{display:block}
+.toc{border:1px solid var(--line);border-radius:12px;padding:14px 22px;background:var(--card);font-size:.86rem;margin-bottom:6px}
+.toc ul{margin:0 0 0 1.1em;color:var(--muted)}
+.toc li{margin-bottom:3px}
+.toc a{color:var(--muted);text-decoration:none}
+.toc a:hover{color:var(--gold)}
+.toctitle{color:var(--gold);font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:8px}
+footer{border-top:1px solid var(--line);margin-top:70px;padding-top:28px}
+footer .note{font-size:.85rem;color:var(--muted);margin-bottom:18px}
+footer .note b{color:var(--gold)}
+.backbtn{display:inline-block;color:var(--gold);border:1px solid rgba(227,192,122,.4);border-radius:99px;
+  padding:8px 22px;text-decoration:none;font-size:.88rem}
+.backbtn:hover{background:rgba(227,192,122,.1)}
+
+.tldr{border:1px solid rgba(227,192,122,.35);background:rgba(227,192,122,.06);border-radius:12px;padding:14px 18px;margin:0 0 34px;color:#cdc9e0;font-size:.95rem;line-height:1.8}
+.tldr b{color:var(--gold);margin-right:8px}
+footer{margin-top:56px;border-top:1px solid var(--line);padding-top:22px}
+footer .note{color:var(--muted);font-size:.88rem;line-height:1.8;margin-bottom:18px}
+footer .note b{color:var(--ink)}
+.backbtn{display:inline-block;color:var(--gold);text-decoration:none;border:1px solid rgba(227,192,122,.4);border-radius:99px;padding:8px 18px;font-size:.9rem}
+.backbtn:hover{background:rgba(227,192,122,.1)}
+article h1{display:none}
+</style>
+</head>
+<body>
+<nav><a class="logo" href="../index.html">赵鹏<b>淦</b></a><a class="back" href="../index.html#cases">← 返回作品集</a></nav>
+<div class="wrap">
+  <div class="eyebrow">Case Study · 06</div>
+  <h1 class="title">三消关卡「步数预算与难度曲线」拆解案</h1>
+  <div class="subtitle">Candy Crush Saga 1–1505 关公开数据 → 章内难度锯齿、隐含需求速率、卡点密度、新鲜感节奏，以及一次基本失败的模拟器校准</div>
+  <div class="meta"><span>拆解案 · 关卡 / 难度节奏向</span><span>v1.0 · 2026-09</span><span>1,505 关数据 · 三消模拟器 · 可复现脚本</span></div>
+  <div class="tldr"><b>TL;DR</b>步数不是难度，'每步要清多少'才是；官方节奏是每 5 关一峰、峰后必回落；三成关卡是卡点但长期玩家不记得任何一个——留住他们的是新元素节奏，不是难度。模拟器预测社区评级基本失败，失败原因（棋盘拓扑不在数据里）恰是最有用的设计结论。</div>
+  <article>
+<div class="toc"><span class="toctitle">目录 · Contents</span><ul><li><a href="#1">关于本拆解案的方法说明（请先读）</a></li><li><a href="#2">1. 选题说明</a></li><li><a href="#3">2. 章内难度锯齿：第 5 / 10 / 15 关是三个峰</a></li><li><a href="#4">3. 隐含需求速率：步数不是难度，"每步要清多少"才是</a></li><li><a href="#5">4. 卡点密度与间隔：难关不是稀有事件</a></li><li><a href="#6">5. 新鲜感节奏：前 300 关每 11 关一个新元素，之后每 60–300 关一个</a></li><li><a href="#7">6. 模拟器校准：一次基本失败的实验，以及它教会我的事</a></li><li><a href="#8">7. 锚点：一位 300+ 关玩家，和一个预写直觉的分析者</a></li><li><a href="#9">8. 可以直接拿走的设计规则</a></li><li><a href="#10">9. 未做与可证伪之处</a></li><li><a href="#11">10. 参考</a></li></ul></div>
+<h2 id="1">关于本拆解案的方法说明（请先读）</h2>
+<p>三消的关卡数据是公开的：每关的步数、目标、障碍写在关卡开局界面上，社区 wiki 逐关记录了十几年。但"公开"不等于"有结论"。本文的输入只有两样东西：</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>层</th>
+<th>内容</th>
+<th>可信度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>数据层</strong></td>
+<td>Candy Crush Saga 1–1505 关的类型 / 步数 / 目标物数量 / 社区难度评级（fandom wiki，经 Wayback 镜像抓取）</td>
+<td>关卡参数为游戏内可见的硬数据；<strong>难度评级是社区众包主观值</strong>，只用于排序不用于绝对量</td>
+</tr>
+<tr>
+<td><strong>推导层</strong></td>
+<td>章内难度锯齿、隐含需求速率、卡点间隔、新鲜感节奏、模拟器校准（§2–§6）</td>
+<td>我算出来的；每条都给"如果它错了会怎么看出来"</td>
+</tr>
+<tr>
+<td><strong>锚点层</strong></td>
+<td>一位 300+ 关三消玩家的真实流失口述 + 我以玩家身份预写的直觉判断（§7）</td>
+<td>用来证伪模型，不是用来证明模型</td>
+</tr>
+</tbody>
+</table></div>
+<p>方法上最重要的一件事写在 §6：我写了一个三消模拟器去"预测"社区难度评级，<strong>它基本失败了</strong>——模拟通关率与评级的秩相关只有 −0.5，而且这点相关几乎全部来自"目标量÷步数"这两个数本身。失败的原因（棋盘拓扑与障碍布局不在数据里）恰好就是本文最有用的设计结论。</p>
+<h2 id="2">1. 选题说明</h2>
+<p>三消是休闲品类里关卡策划岗位最多的玩法，而关卡策划每天面对的核心问题只有一个：<strong>这一关给多少步？</strong> 步数决定通关率，通关率决定"失败→加步付费"这条最重要的变现链，也决定玩家会不会在某一关放弃。</p>
+<p>行业里的做法（King、Playrix 都公开讲过）是用机器人跑几千局，看通关率再定步数。本文做的事分三段：先用 1,505 关的公开数据反推官方<strong>实际</strong>的难度节奏长什么样；再用一个最小三消模拟器检验"机器人调关"这条路在没有棋盘布局数据时能走多远；最后把方法用在配套的十关关卡包上。</p>
+<p>数据规模与构成：</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>项</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>关卡</td>
+<td>1–1505 关，Reality 前 100 章，连续无缺</td>
+</tr>
+<tr>
+<td>类型</td>
+<td>果冻 597（39.7%）/ 配料 370（24.6%）/ 收集 343（22.8%）/ 混合 179（11.9%）/ 未标 16</td>
+</tr>
+<tr>
+<td>步数</td>
+<td>全部有值；中位 23</td>
+</tr>
+<tr>
+<td>社区难度评级</td>
+<td>九档（极易 … 近乎不可能），覆盖 98% 的关</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="3">2. 章内难度锯齿：第 5 / 10 / 15 关是三个峰</h2>
+<p>把 21 关起的 99 章按"章内第几关"对齐，取每个位置的社区难度均值：</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>章内位置</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th><strong>5</strong></th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+<th><strong>10</strong></th>
+<th>11</th>
+<th>12</th>
+<th>13</th>
+<th>14</th>
+<th><strong>15</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>难度均值</td>
+<td>3.26</td>
+<td>4.36</td>
+<td>3.72</td>
+<td>4.98</td>
+<td><strong>5.74</strong></td>
+<td>4.00</td>
+<td>5.04</td>
+<td>4.14</td>
+<td>5.03</td>
+<td><strong>5.96</strong></td>
+<td>4.23</td>
+<td>5.32</td>
+<td>4.41</td>
+<td>4.94</td>
+<td><strong>6.25</strong></td>
+</tr>
+<tr>
+<td>难关占比（≥难）</td>
+<td>25%</td>
+<td>34%</td>
+<td>21%</td>
+<td>45%</td>
+<td><strong>60%</strong></td>
+<td>29%</td>
+<td>50%</td>
+<td>31%</td>
+<td>47%</td>
+<td><strong>63%</strong></td>
+<td>33%</td>
+<td>51%</td>
+<td>36%</td>
+<td>41%</td>
+<td><strong>67%</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><img src="img/m3_episode_sawtooth.png" alt="章内难度锯齿"><em>章内难度锯齿</em></p>
+<ul>
+<li>5 / 10 / 15 位的均值 5.98，其余位 4.45，Mann-Whitney 单侧 p = 3×10⁻²¹。这不是"章末最难"一条规律，而是<strong>每 5 关一个峰、峰后一关必回落</strong>（第 5→6 关、第 10→11 关平均回落 1.74 档）。</li>
+<li>峰之间还有一层小锯齿：偶数位（2/4/7/9/12/14）普遍高于相邻奇数位。也就是说官方的节奏是"两步一小坎、五步一大坎"。</li>
+<li>章首（第 1 关）是全章最松的位置（3.26），它承担的是"换章的新鲜感"而不是难度。</li>
+</ul>
+<p><strong>如果这条错了会怎么看出来</strong>：把章的起点错开 1–2 关重算，锯齿应该消失；我做了，错开后 5/10/15 位的优势消失，说明对齐是对的而不是巧合。</p>
+<h2 id="4">3. 隐含需求速率：步数不是难度，"每步要清多少"才是</h2>
+<p>对果冻关，定义 <strong>需求速率 = 果冻层总数 ÷ 步数</strong>（单层果冻计 1、双层计 2），即每一步平均必须清掉的果冻层。它是"步数预算公式"的核心量：</p>
+<blockquote>
+<p>步数 = 目标量 ÷ 每步期望清除量 × 松紧系数</p>
+</blockquote>
+<p>数据反推出的官方需求速率：</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>关卡区间</th>
+<th>果冻层/步（中位）</th>
+<th>配料/步（中位）</th>
+<th>步数中位</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1–200</td>
+<td>3.2–3.5</td>
+<td>0.16–0.20</td>
+<td>25–27</td>
+</tr>
+<tr>
+<td><strong>201–800</strong></td>
+<td><strong>5.1–7.0</strong></td>
+<td>0.27–0.60</td>
+<td>19–23</td>
+</tr>
+<tr>
+<td>801–1500</td>
+<td>2.5–3.7</td>
+<td>0.11–0.15</td>
+<td>24–27</td>
+</tr>
+</tbody>
+</table></div>
+<p><img src="img/m3_demand_rate.png" alt="需求速率"><em>需求速率</em></p>
+<p>三个发现：</p>
+<ol>
+<li><strong>三段难度区制</strong>。201 关起需求速率翻倍（3.2→6.2），801 关起又腰斩回 3.5。这与社区记录的产品史一致（2013–2014 年的"地狱期"，之后大规模削弱），但这里是从关卡参数里直接读出来的，不需要知道历史。</li>
+<li><strong>需求速率比步数更能解释评级</strong>。果冻关 n=579：需求速率 vs 评级 Spearman ρ = +0.37（p=4×10⁻²⁰）；步数 vs 评级 ρ = −0.29。方向都对（步数越少越难），但"每步要清多少"解释力更强。按评级档看需求速率中位数：极易 2.70 → 难 4.09 → 很难 5.10 → 近乎不可能 7.07，单调。</li>
+<li><strong>配料关这套完全失效</strong>。配料/步 与评级 ρ = 0.002（n=358）。配料关的难度不在"几个配料"，在配料下落的列有没有被障碍堵死、棋盘有没有传送带。这是本文第一次撞上"棋盘拓扑不在数据里"这堵墙，§6 会再撞一次。</li>
+</ol>
+<p><strong>松紧系数怎么定</strong>：同一需求速率下，评级更高的关通常步数更少而不是目标更多。也就是说官方调难度优先动步数（松紧系数），不动目标量——目标量是给玩家看的"这关要做什么"，步数是策划的隐藏旋钮。</p>
+<h2 id="5">4. 卡点密度与间隔：难关不是稀有事件</h2>
+<p>以社区评级 ≥"很难"定义卡点（21 关起共 1,444 个有评级的关）：</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>指标</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>卡点数</td>
+<td>429 / 1444 = <strong>29.7%</strong></td>
+</tr>
+<tr>
+<td>相邻卡点间隔</td>
+<td>中位 2 关，均值 3.3，P25/P75 = 1 / 4</td>
+</tr>
+<tr>
+<td>连续卡点段</td>
+<td>单个 199 段、连续 2 关 64 段、3 关 16 段、4 关 12 段、6 关 1 段</td>
+</tr>
+<tr>
+<td>卡点前一关 / 后一关难度均值</td>
+<td>5.11 / 4.95（全体均值 4.71）</td>
+</tr>
+</tbody>
+</table></div>
+<p><img src="img/m3_wall_gaps.png" alt="卡点间隔"><em>卡点间隔</em></p>
+<ul>
+<li>近三成关卡被社区评为"很难"以上，中位间隔只有 2 关。<strong>卡点不是每章一两个的稀有事件，而是常态</strong>；付费加步的机会点密度远高于"每章一个付费墙"的直觉。</li>
+<li>一个被证伪的直觉（我在看数据前预写的，见 §7）："卡点之后会给一关喘息"。数据说：卡点后一关的均值 4.95 仍高于全体均值 4.71。喘息只发生在固定位置（第 6、11 关），<strong>不跟随任意卡点</strong>。官方的节奏是按位置排的，不是按"上一关有多难"排的。</li>
+</ul>
+<p>按 100 关分桶的难关密度（评级≥很难 / ≥极难 / 近乎不可能）：</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>区间</th>
+<th>1–100</th>
+<th>101–200</th>
+<th>201–300</th>
+<th>301–400</th>
+<th>401–500</th>
+<th>501–600</th>
+<th><strong>601–700</strong></th>
+<th><strong>701–800</strong></th>
+<th>801–900</th>
+<th>901–1000</th>
+<th>1001–1100</th>
+<th>1101–1200</th>
+<th>1201–1300</th>
+<th>1301–1400</th>
+<th>1401–1500</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>≥很难</td>
+<td>1</td>
+<td>15</td>
+<td>21</td>
+<td>28</td>
+<td>30</td>
+<td>21</td>
+<td><strong>55</strong></td>
+<td><strong>55</strong></td>
+<td>14</td>
+<td>17</td>
+<td>15</td>
+<td>30</td>
+<td>41</td>
+<td>44</td>
+<td>39</td>
+</tr>
+<tr>
+<td>≥极难</td>
+<td>1</td>
+<td>6</td>
+<td>11</td>
+<td>20</td>
+<td>20</td>
+<td>11</td>
+<td>36</td>
+<td>47</td>
+<td>7</td>
+<td>10</td>
+<td>9</td>
+<td>19</td>
+<td>20</td>
+<td>23</td>
+<td>20</td>
+</tr>
+<tr>
+<td>近乎不可能</td>
+<td>0</td>
+<td>0</td>
+<td>4</td>
+<td>9</td>
+<td>13</td>
+<td>2</td>
+<td>11</td>
+<td>17</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>5</td>
+<td>6</td>
+<td>4</td>
+<td>3</td>
+</tr>
+</tbody>
+</table></div>
+<p><img src="img/m3_wall_density.png" alt="难关密度"><em>难关密度</em></p>
+<p>601–800 关每 100 关有 55 个"很难"以上，随后 801–1100 骤降到 14–17，与 §3 的需求速率区制完全对应。混合目标关（两种目标同时要求）均值 5.64，单目标关 4.58——<strong>混合目标本身就是一档难度</strong>。</p>
+<h2 id="6">5. 新鲜感节奏：前 300 关每 11 关一个新元素，之后每 60–300 关一个</h2>
+<p>wiki 备注里记录了每个障碍 / 机制首次出现的关（"X is introduced"），排除"曾经在此引入"的历史条目后共 38 个引入点：</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>区间</th>
+<th>新元素引入数</th>
+<th>平均间隔</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1–300</td>
+<td>27</td>
+<td>每 11 关一个</td>
+</tr>
+<tr>
+<td>301–600</td>
+<td>1</td>
+<td>每 300 关一个</td>
+</tr>
+<tr>
+<td>601–900</td>
+<td>5</td>
+<td>每 60 关一个</td>
+</tr>
+<tr>
+<td>901–1200</td>
+<td>3</td>
+<td>每 100 关一个</td>
+</tr>
+<tr>
+<td>1201–1500</td>
+<td>2</td>
+<td>每 150 关一个</td>
+</tr>
+</tbody>
+</table></div>
+<p><img src="img/m3_novelty_timeline.png" alt="新元素时间线"><em>新元素时间线</em></p>
+<p>前 300 关把几乎所有机制教完，之后 1,200 关靠已有元素的排列组合与难度撑内容。这正是 §7 玩家锚点要对照的东西。</p>
+<p><strong>数据的偏差要先说</strong>：wiki 对早期关卡的备注更完整，后期引入的元素可能漏记；这个表是下限。但 301–600 关只记到 1 个引入点，与 601 关后重新出现引入点的对比，不太可能全是漏记造成的。</p>
+<h2 id="7">6. 模拟器校准：一次基本失败的实验，以及它教会我的事</h2>
+<h3>6.1 实验设计</h3>
+<p>写了一个最小三消模拟器（9×9 可裁形棋盘、5/6 色、条纹/包装/彩球三种特效、果冻与糖霜、贪心一步机器人），对每个难度档抽 8 关，用关卡的真实步数与果冻数构造关卡，每关跑 300 局，看模拟通关率能不能预测社区评级。棋盘形状和障碍布局 wiki 不提供，所以<strong>全部用空棋盘、果冻随机分布</strong>。</p>
+<h3>6.2 结果</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>难度档</th>
+<th>极易</th>
+<th>易</th>
+<th>偏易</th>
+<th>中</th>
+<th>偏难</th>
+<th>难</th>
+<th>很难</th>
+<th>极难</th>
+<th>近乎不可能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>果冻关模拟通关率均值</td>
+<td>0.53</td>
+<td>0.29</td>
+<td>0.33</td>
+<td>0.37</td>
+<td>0.24</td>
+<td>0.24</td>
+<td>0.15</td>
+<td>0.17</td>
+<td>0.12</td>
+</tr>
+<tr>
+<td>松紧系数中位（步数 ÷ 50% 通关所需步数）</td>
+<td>1.07</td>
+<td>0.80</td>
+<td>0.80</td>
+<td>0.82</td>
+<td>0.69</td>
+<td>0.65</td>
+<td>0.54</td>
+<td>0.47</td>
+<td>0.51</td>
+</tr>
+</tbody>
+</table></div>
+<p><img src="img/m3_sim_vs_rating.png" alt="模拟器校准"><em>模拟器校准</em></p>
+<ul>
+<li>果冻关：Spearman ρ（通关率 vs 评级）= <strong>−0.50</strong>。趋势在，但档内离散极大（极易档里 0.03 到 0.94 都有），2/3/4 档基本持平。</li>
+<li>更要命的是：模拟通关率与"目标量÷步数"的 ρ = −0.90，而"目标量÷步数"与评级的 ρ = +0.44。也就是说模拟器没有提供任何超出这两个数的解释力——<strong>它只是一个昂贵的除法器</strong>。</li>
+<li>单色收集关：ρ = −0.06，完全失效。第 971 关的备注说明了原因："第一个要求收集棋盘上不会刷出的颜色的关"——后期收集关的目标色靠彩球与特效组合产出，空棋盘随机刷色的模拟器里它随手可得。</li>
+<li>近失率（败局里估算只差 1–3 步的比例）各档都在 0.11–0.14，没有档间趋势。这个指标在当前模拟器里不带难度信息。</li>
+</ul>
+<h3>6.3 它教会我的事</h3>
+<p>失败的原因不是模拟器写得不好，而是<strong>难度的主体不在关卡参数里，在棋盘上</strong>：</p>
+<ol>
+<li>障碍与锁定物（糖霜、巧克力、甘草锁、炸弹糖、传送门）的布局；</li>
+<li>果冻的位置——角落、窄道、被障碍包围处；</li>
+<li>颜色数（4/5/6 色对连锁率影响巨大，数据里只知道 5 色首次出现在第 3 关）；</li>
+<li>目标色不刷新 / 特效物产出机制。</li>
+</ol>
+<p>配套关卡包的验证过程给了一个可量化的例子：同样 32 层果冻，放在满盘的底部三行，贪心机器人 45 步通关率 55%；放在 H 形棋盘（两根四宽柱子、一格宽的桥）的底部，通关率 14%；放在 H 形棋盘的中段，22 步通关率 33%。<strong>棋盘拓扑对通关率的杠杆，比目标量大一个量级。</strong></p>
+<p>所以"机器人调关"这条路是对的，但它的前提是机器人跑的是真实棋盘。用公开参数做模拟只能得到目标量÷步数已经告诉你的东西。这一节保留在正文，是因为一个会写模拟器的策划最容易犯的错，就是相信自己的模拟器。</p>
+<h2 id="8">7. 锚点：一位 300+ 关玩家，和一个预写直觉的分析者</h2>
+<h3>7.1 玩家锚点</h3>
+<p>一位在开心消消乐（腾讯，三消）玩到 300 多关的玩家，被问到"记得卡得最久的关在哪个区间"时的回答是：</p>
+<blockquote>
+<p>记不清具体区间。我卡关不是因为太难过不去，而是觉得没意思。</p>
+</blockquote>
+<p>这与 §4、§5 的数据合在一起读，得到本文最重要的一条设计判断：</p>
+<ul>
+<li>§4 说卡点密度是三成、中位间隔 2 关，也就是说这位玩家在 300 关里至少撞过几十个"很难"以上的关，<strong>但一个都不记得</strong>。难度墙的确制造了失败与付费机会，却没有留下"被拦住"的记忆。</li>
+<li>§5 说前 300 关每 11 关一个新元素，之后 300 关只有 1 个。这位玩家恰好在 300 关附近因"没意思"离开。个案不能证明因果，但它与数据指向同一处：<strong>对已经跨过几十个难度墙的长期玩家，流失风险来自新鲜感断供，不来自难度。</strong></li>
+</ul>
+<p>对关卡策划的含义：难度曲线是变现的旋钮，新元素节奏才是长期留存的旋钮，两者要分开排。配套关卡包里把"每章至少一个新元素或新组合"作为硬约束写进了验收标准。</p>
+<h3>7.2 分析者的预写直觉（看数据前写下，事后对照）</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>直觉</th>
+<th>数据</th>
+<th>结论</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>每章最难的是最后一关</td>
+<td>第 15 位均值 6.25 最高，但第 10 位 5.96 几乎持平</td>
+<td>半对：是"每 5 关一峰"，不是"章末一峰"</td>
+</tr>
+<tr>
+<td>步数越少越难</td>
+<td>ρ = −0.29，方向对，但需求速率 ρ = +0.37 更强</td>
+<td>对但不够用</td>
+</tr>
+<tr>
+<td>卡点之后会给一关喘息</td>
+<td>卡点后一关均值 4.95 &gt; 全体 4.71</td>
+<td><strong>错</strong>：喘息按固定位置给，不跟随卡点</td>
+</tr>
+<tr>
+<td>底行果冻最难清</td>
+<td>关卡包验证：同样果冻放底部 vs 中段，通关率 55% vs 高得多</td>
+<td>对（模拟器复现）</td>
+</tr>
+<tr>
+<td>混合目标比单目标难</td>
+<td>5.64 vs 4.58</td>
+<td>对</td>
+</tr>
+</tbody>
+</table></div>
+<p>五条里错一条、半对一条。错的那条恰好是最"合理"的：它是一个策划会自然写进设计文档的规则，而数据说官方不是这么排的。</p>
+<h2 id="9">8. 可以直接拿走的设计规则</h2>
+<ol>
+<li><strong>步数由通关率反解，不由目标量正推。</strong> 先定这一关想要的通关率（教学 90%、巩固 80%、卡点 30–35%、章末 20%），再用机器人在真实棋盘上跑出对应步数。配套关卡包就是这么做的。</li>
+<li><strong>节奏按位置排，不按上一关排。</strong> 每 5 关一峰、峰后必回落、偶数位小坎；这比"看上一关难不难再决定这一关"稳定得多，也更容易被玩家的身体记住。</li>
+<li><strong>调难度动步数，不动目标量。</strong> 目标量是玩家看到的"这关要做什么"，步数是策划的隐藏旋钮。</li>
+<li><strong>棋盘拓扑是最大的难度杠杆，其次是障碍，最后才是目标量。</strong> 想让一关难，先想把果冻放在哪，而不是放多少。</li>
+<li><strong>新元素节奏单独排，且不能在 300 关后断供。</strong> 难度留不住已经习惯失败的玩家。</li>
+</ol>
+<h2 id="10">9. 未做与可证伪之处</h2>
+<ul>
+<li>社区评级是众包主观值且与关卡号弱相关（ρ≈0.2–0.4）；若换用官方通关率数据，§2–§4 的形状可能变，但位置效应（5/10/15）不依赖评级的绝对值。</li>
+<li>模拟器只覆盖果冻 / 单色收集 / 配料与糖霜；没有巧克力、甘草、炸弹糖、传送门，也没有多步前瞻。它的用途是验证"反解步数"这个流程，不是复刻官方机器人。</li>
+<li>新元素引入点依赖 wiki 备注完整度，是下限估计。</li>
+<li>玩家锚点是一位玩家的口述，不是样本。</li>
+</ul>
+<h2 id="11">10. 参考</h2>
+<ul>
+<li>Candy Crush Saga Wiki（fandom），各章节页与 <code>Category:*_levels</code> 难度分类页，Wayback Machine 2024 快照。仅使用关卡参数与社区评级字段。</li>
+<li>本文全部数字由 <code>analysis/match3_level_budget.py</code>、<code>analysis/match3_calibrate.py</code>、<code>analysis/m3_level_pack.py</code> 产出，输出日志见 <code>analysis/data/output_m3_*.txt</code>。</li>
+</ul>
+  </article>
+  <footer>
+    <div class="note"><b>说明</b>：本文数据来自 Candy Crush Saga 社区 wiki 的关卡参数与众包难度评级（经 Wayback 镜像抓取），不含任何官方内部数据；全部统计、图表与模拟由文中脚本产出，可重跑复核。</div>
+    <a class="backbtn" href="../index.html#cases">← 返回作品集</a>
+  </footer>
+</div>
+</body>
+</html>

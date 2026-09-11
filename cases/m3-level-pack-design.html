@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>三消新章「灯塔湾」十关关卡包策划案 · 赵鹏淦</title>
+<style>
+:root{--bg:#0b0a1a;--ink:#e8e5f4;--muted:#a09ac0;--gold:#e3c07a;--ice:#9fd8f0;
+  --violet:#9d8ff0;--line:rgba(157,143,240,.18);--card:rgba(20,16,42,.65)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:"Microsoft YaHei","PingFang SC","Source Han Sans SC",sans-serif;
+  font-size:16px;line-height:1.85;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:
+  radial-gradient(900px 500px at 85% -5%,rgba(90,70,180,.25),transparent 60%),
+  radial-gradient(700px 500px at -10% 30%,rgba(40,80,160,.18),transparent 60%)}
+nav{position:sticky;top:0;z-index:9;display:flex;justify-content:space-between;align-items:center;
+  padding:14px 28px;background:rgba(11,10,26,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .logo{color:var(--ink);font-weight:700;text-decoration:none;letter-spacing:.06em}
+nav .logo b{color:var(--gold)}
+nav .back{color:var(--muted);text-decoration:none;font-size:.88rem}
+nav .back:hover{color:var(--gold)}
+.wrap{max-width:880px;margin:0 auto;padding:56px 24px 80px}
+.eyebrow{font-size:.78rem;letter-spacing:.28em;color:var(--gold);text-transform:uppercase;margin-bottom:14px}
+h1.title{font-size:2rem;line-height:1.35;margin-bottom:10px}
+.subtitle{font-size:1.05rem;color:var(--violet);margin-bottom:18px}
+.meta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:40px}
+.meta span{font-size:.78rem;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:3px 12px}
+article h2{font-size:1.35rem;color:var(--gold);margin:52px 0 16px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+article h3{font-size:1.1rem;color:var(--ice);margin:34px 0 12px}
+article p{margin:0 0 14px;color:#cdc9e0}
+article strong{color:var(--ink)}
+article em{color:var(--violet);font-style:normal}
+article ul,article ol{margin:0 0 16px 1.4em;color:#cdc9e0}
+article li{margin-bottom:6px}
+article blockquote{border-left:3px solid var(--gold);background:var(--card);border-radius:0 10px 10px 0;
+  padding:14px 18px;margin:0 0 16px;color:var(--muted)}
+article blockquote p{margin:0}
+article code{font-family:Consolas,"JetBrains Mono",monospace;font-size:.88em;background:rgba(157,143,240,.12);
+  border-radius:4px;padding:1px 6px;color:var(--ice)}
+article pre{background:#100e26;border:1px solid var(--line);border-radius:12px;padding:16px 18px;
+  overflow-x:auto;margin:0 0 18px}
+article pre code{background:none;padding:0;color:#c8d8f0;font-size:.85rem;line-height:1.6}
+.tablewrap{overflow-x:auto;margin:0 0 18px}
+article table{border-collapse:collapse;width:100%;font-size:.88rem}
+article th{color:var(--gold);text-align:left;border-bottom:1.5px solid rgba(227,192,122,.4);padding:8px 12px;white-space:nowrap}
+article td{border-bottom:1px solid var(--line);padding:8px 12px;color:#cdc9e0}
+article tr:hover td{background:rgba(157,143,240,.05)}
+article hr{border:0;border-top:1px solid var(--line);margin:40px 0}
+article a{color:var(--ice)}
+article img{max-width:100%;border-radius:12px;border:1px solid var(--line);margin:8px 0 2px;display:block}
+article img+em, article p img+em{display:block}
+.toc{border:1px solid var(--line);border-radius:12px;padding:14px 22px;background:var(--card);font-size:.86rem;margin-bottom:6px}
+.toc ul{margin:0 0 0 1.1em;color:var(--muted)}
+.toc li{margin-bottom:3px}
+.toc a{color:var(--muted);text-decoration:none}
+.toc a:hover{color:var(--gold)}
+.toctitle{color:var(--gold);font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:8px}
+footer{border-top:1px solid var(--line);margin-top:70px;padding-top:28px}
+footer .note{font-size:.85rem;color:var(--muted);margin-bottom:18px}
+footer .note b{color:var(--gold)}
+.backbtn{display:inline-block;color:var(--gold);border:1px solid rgba(227,192,122,.4);border-radius:99px;
+  padding:8px 22px;text-decoration:none;font-size:.88rem}
+.backbtn:hover{background:rgba(227,192,122,.1)}
+
+.tldr{border:1px solid rgba(227,192,122,.35);background:rgba(227,192,122,.06);border-radius:12px;padding:14px 18px;margin:0 0 34px;color:#cdc9e0;font-size:.95rem;line-height:1.8}
+.tldr b{color:var(--gold);margin-right:8px}
+footer{margin-top:56px;border-top:1px solid var(--line);padding-top:22px}
+footer .note{color:var(--muted);font-size:.88rem;line-height:1.8;margin-bottom:18px}
+footer .note b{color:var(--ink)}
+.backbtn{display:inline-block;color:var(--gold);text-decoration:none;border:1px solid rgba(227,192,122,.4);border-radius:99px;padding:8px 18px;font-size:.9rem}
+.backbtn:hover{background:rgba(227,192,122,.1)}
+article h1{display:none}
+</style>
+</head>
+<body>
+<nav><a class="logo" href="../index.html">赵鹏<b>淦</b></a><a class="back" href="../index.html#designdocs">← 返回作品集</a></nav>
+<div class="wrap">
+  <div class="eyebrow">Design Doc · 关卡策划案</div>
+  <h1 class="title">三消新章「灯塔湾」十关关卡包策划案</h1>
+  <div class="subtitle">棋盘 / 目标 / 障碍手工设计，步数由三消模拟器按目标通关率反解；三个卡点、两次喘息、一个新元素</div>
+  <div class="meta"><span>关卡策划案 · 三消</span><span>v1.0 · 2026-09</span><span>每关 300 局模拟验证 · 通关率阶梯</span></div>
+  <div class="tldr"><b>TL;DR</b>十关的步数全部是算出来的：先定每关想要的通关率（教学 0.90 → 卡点 0.30 → 章末 0.20），再让机器人在真实棋盘上跑出对应步数。验证过程中撞上的两条规律——棋盘切割的难度杠杆比目标量大一个量级、底行果冻是一次性资源——都保留在文中。</div>
+  <article>
+<div class="toc"><span class="toctitle">目录 · Contents</span><ul><li><a href="#1">1. 文档信息</a></li><li><a href="#2">2. 设计目标</a></li><li><a href="#3">3. 章节节奏总表</a></li><li><a href="#4">4. 逐关设计</a></li><li><a href="#5">5. 步数是怎么算出来的</a></li><li><a href="#6">6. 设计发现（做这十关时验证到的）</a></li><li><a href="#7">7. 验收标准（上线后）</a></li><li><a href="#8">8. 风险与取舍</a></li><li><a href="#9">9. 待核清单</a></li></ul></div>
+<h2 id="1">1. 文档信息</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>项</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>项目</td>
+<td>假想三消产品（品类同开心消消乐 / Candy Crush Saga；不使用任何品牌资产）</td>
+</tr>
+<tr>
+<td>系统</td>
+<td>一个新章节的 10 关关卡包（含一个新障碍元素的首次引入）</td>
+</tr>
+<tr>
+<td>版本</td>
+<td>v1.0（2026-09）</td>
+</tr>
+<tr>
+<td>作者</td>
+<td>赵鹏淦（关卡 / 系统策划）</td>
+</tr>
+<tr>
+<td>状态</td>
+<td>设计完成，<strong>步数经模拟器反解并验证</strong>（每关 300 局）</td>
+</tr>
+<tr>
+<td>依据</td>
+<td>《三消关卡步数预算与难度曲线拆解案》§8 五条设计规则；验证脚本 <code>analysis/m3_level_pack.py</code>，模拟器 <code>analysis/match3_sim.py</code></td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="2">2. 设计目标</h2>
+<p><strong>一句话：让玩家在 10 关里经历"学会一件新事 → 被它难住两次 → 带着它离开"，且每一关的步数都是算出来的。</strong></p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>目标</th>
+<th>落地约束</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>步数不拍脑袋</td>
+<td>先定每关的目标通关率，再由机器人在真实棋盘上反解步数（§5）</td>
+</tr>
+<tr>
+<td>节奏按位置排</td>
+<td>第 4 / 8 / 10 关为峰，峰后一关必回落（沿用拆解案 §2 的"每 5 关一峰"，压缩到 10 关）</td>
+</tr>
+<tr>
+<td>新鲜感与难度分开排</td>
+<td>本章引入一个新障碍（糖霜）和一个新棋盘形态（异形 / 切割），新元素只在低难度关首次出现</td>
+</tr>
+<tr>
+<td>付费点明确</td>
+<td>三个峰关是加步付费点；喘息关不设付费诱因</td>
+</tr>
+<tr>
+<td>每关只有一个"为什么"</td>
+<td>每关的设计意图一句话能说清，说不清的关删掉</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>目标玩家</strong>：已通过教学章、熟悉三消基本操作与三种特效糖的玩家；本章位于产品早期（对应拆解案里"前 300 关每 11 关一个新元素"的阶段）。</p>
+<h2 id="3">3. 章节节奏总表</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>关</th>
+<th>名称</th>
+<th>类型</th>
+<th>目标量</th>
+<th>颜色</th>
+<th>障碍</th>
+<th>棋盘</th>
+<th><strong>步数</strong></th>
+<th>设计通关率</th>
+<th><strong>模拟通关率</strong></th>
+<th>少给 2 步</th>
+<th>多给 5 步</th>
+<th>角色</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>灯塔初醒</td>
+<td>果冻</td>
+<td>30 层</td>
+<td>5</td>
+<td>无</td>
+<td>满盘</td>
+<td><strong>14</strong></td>
+<td>0.90</td>
+<td>0.92</td>
+<td>0.85</td>
+<td>1.00</td>
+<td>教学</td>
+</tr>
+<tr>
+<td>2</td>
+<td>潮间带</td>
+<td>果冻</td>
+<td>36 层</td>
+<td>6</td>
+<td>无</td>
+<td>满盘</td>
+<td><strong>25</strong></td>
+<td>0.80</td>
+<td>0.81</td>
+<td>0.76</td>
+<td>0.88</td>
+<td>巩固</td>
+</tr>
+<tr>
+<td>3</td>
+<td>冻住的礁石</td>
+<td>果冻</td>
+<td>25 层</td>
+<td>5</td>
+<td>糖霜×20（1 层）</td>
+<td>满盘</td>
+<td><strong>13</strong></td>
+<td>0.75</td>
+<td>0.80</td>
+<td>0.63</td>
+<td>0.97</td>
+<td><strong>新元素</strong></td>
+</tr>
+<tr>
+<td>4</td>
+<td>双潮汇</td>
+<td>果冻</td>
+<td>24 层</td>
+<td>6</td>
+<td>糖霜×5（竖墙）</td>
+<td>满盘</td>
+<td><strong>22</strong></td>
+<td>0.35</td>
+<td><strong>0.37</strong></td>
+<td>0.29</td>
+<td>0.55</td>
+<td><strong>卡点·付费</strong></td>
+</tr>
+<tr>
+<td>5</td>
+<td>拾贝</td>
+<td>收集</td>
+<td>60 个蓝</td>
+<td>5</td>
+<td>无</td>
+<td>满盘</td>
+<td><strong>21</strong></td>
+<td>0.85</td>
+<td>0.88</td>
+<td>0.77</td>
+<td>0.98</td>
+<td>喘息</td>
+</tr>
+<tr>
+<td>6</td>
+<td>漏斗湾</td>
+<td>配料</td>
+<td>3 个</td>
+<td>5</td>
+<td>无</td>
+<td>漏斗形（73 格）</td>
+<td><strong>24</strong></td>
+<td>0.65</td>
+<td>0.66</td>
+<td>0.62</td>
+<td>0.78</td>
+<td>组合·新棋盘</td>
+</tr>
+<tr>
+<td>7</td>
+<td>冰点星图</td>
+<td>果冻</td>
+<td>39 层</td>
+<td>6</td>
+<td>糖霜×10（散点）</td>
+<td>满盘</td>
+<td><strong>22</strong></td>
+<td>0.55</td>
+<td>0.58</td>
+<td>0.45</td>
+<td>0.75</td>
+<td>组合</td>
+</tr>
+<tr>
+<td>8</td>
+<td>断桥</td>
+<td>果冻</td>
+<td>32 层</td>
+<td>6</td>
+<td>糖霜×1（桥心）</td>
+<td>H 形（75 格）</td>
+<td><strong>22</strong></td>
+<td>0.30</td>
+<td><strong>0.33</strong></td>
+<td>0.26</td>
+<td>0.49</td>
+<td><strong>卡点·付费</strong></td>
+</tr>
+<tr>
+<td>9</td>
+<td>退潮</td>
+<td>收集</td>
+<td>45 个绿</td>
+<td>5</td>
+<td>无</td>
+<td>满盘</td>
+<td><strong>17</strong></td>
+<td>0.85</td>
+<td>0.87</td>
+<td>0.76</td>
+<td>0.99</td>
+<td>喘息</td>
+</tr>
+<tr>
+<td>10</td>
+<td>灯塔之夜</td>
+<td>果冻</td>
+<td>40 层</td>
+<td>6</td>
+<td>糖霜×17（十字）</td>
+<td>满盘四分</td>
+<td><strong>26</strong></td>
+<td>0.20</td>
+<td><strong>0.23</strong></td>
+<td>0.17</td>
+<td>0.36</td>
+<td><strong>章末·付费</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><img src="img/m3_level_pack_staircase.png" alt="通关率阶梯"><em>通关率阶梯</em></p>
+<p>三个峰（L4 / L8 / L10）分别比前一关低 43 / 25 / 64 个百分点，峰后一关（L5 / L9）回到 0.87 以上。"多给 5 步"一列是加步付费后的通关率：三个峰关买一次加步分别升到 0.55 / 0.49 / 0.36，<strong>买了有明显感觉、但不保证过</strong>，这是加步付费点的标准手感。</p>
+<h2 id="4">4. 逐关设计</h2>
+<p>图例：<code>░░</code> 单层果冻 ｜ <code>▓▓</code> 双层果冻 ｜ <code>#n</code> n 层糖霜 ｜ <code>··</code> 空格 ｜ 空白 = 棋盘外</p>
+<h3>L1 灯塔初醒 · 教学</h3>
+<pre><code>··················
+··················
+····░░░░░░░░░░░░··
+····░░░░░░░░░░░░··
+····░░░░░░░░░░░░··
+····░░░░░░░░░░░░··
+····░░░░░░░░░░░░··
+··················
+··················
+</code></pre>
+<ul>
+<li><strong>意图</strong>：只教一件事——消除果冻上的糖果。果冻集中在视线中央 5×6，五色，任何消除都有反馈。</li>
+<li><strong>步数 14 / 通关率 0.92</strong>：松紧系数 1.56（步数是 50% 通关所需步数的 1.56 倍）。少给 2 步仍有 0.85。</li>
+<li><strong>验收</strong>：首次进入的玩家不应在此关失败两次以上；失败两次触发提示"消除果冻上的糖果"。</li>
+</ul>
+<h3>L2 潮间带 · 巩固</h3>
+<pre><code>··················
+··················
+····░░░░░░░░░░░░··
+····░░░░░░░░░░░░··
+····░░░░░░░░░░░░··
+····░░░░░░░░░░░░··
+····░░░░░░░░░░░░··
+····░░░░░░░░░░░░··
+··················
+</code></pre>
+<ul>
+<li><strong>意图</strong>：同一机制放大到 6×6、切到六色，让玩家第一次感到"步数是有限的"。这是本章的基线关：需求速率 1.44 层/步，松紧 1.47。</li>
+<li><strong>步数 25 / 通关率 0.81</strong>。</li>
+</ul>
+<h3>L3 冻住的礁石 · 新元素</h3>
+<pre><code>··················
+··#1#1#1#1#1#1#1··
+··#1░░░░░░░░░░#1··
+··#1░░░░░░░░░░#1··
+··#1░░░░░░░░░░#1··
+··#1░░░░░░░░░░#1··
+··#1░░░░░░░░░░#1··
+··#1#1#1#1#1#1#1··
+··················
+</code></pre>
+<ul>
+<li><strong>意图</strong>：糖霜单独出场。只有一层、只围一圈、圈内目标只有 25 格，让玩家在没有压力的情况下发现"挨着糖霜消除会把它化掉"。新元素永远出现在低难度关——这是拆解案 §5 与 §7 的直接结论。</li>
+<li><strong>步数 13 / 通关率 0.80</strong>：反解出的步数比 L2 少一半，因为目标少；但设计上不给更多，避免玩家用多余步数"绕过"糖霜而没学会化冰。</li>
+<li><strong>验收</strong>：≥80% 的玩家在本关至少化掉 8 块糖霜（埋点）。</li>
+</ul>
+<h3>L4 双潮汇 · 章中卡点（付费点 1）</h3>
+<pre><code>··················
+··················
+········#1········
+▓▓░░░░··#1··░░░░▓▓
+▓▓░░░░··#1··░░░░▓▓
+▓▓░░░░··#1··░░░░▓▓
+········#1········
+··················
+··················
+</code></pre>
+<ul>
+<li><strong>意图</strong>：果冻分成左右两条侧带（最外一列双层），中间一道 5 格竖向糖霜墙把棋盘切成左右两半。玩家必须在两个战场之间分配步数；墙化开之前横向条纹糖是唯一跨区手段。<strong>这一关第一次把上一关学的东西变成障碍而不是目标。</strong></li>
+<li><strong>步数 22 / 通关率 0.37</strong>：需求速率只有 1.09 层/步（比 L2 还低），但松紧系数 0.85——难度全部来自"切割"而不是"数量"。</li>
+<li><strong>付费</strong>：失败时若剩余果冻 ≤ 6 层（约 1/4），弹出加步；模拟显示加 5 步通关率 0.37→0.55。</li>
+<li><strong>验收</strong>：本关首次失败率 55–70%；连续失败 3 次的玩家比例 &lt;25%（超过则把墙缩短到 3 格）。</li>
+</ul>
+<h3>L5 拾贝 · 喘息</h3>
+<ul>
+<li>满盘、五色、无障碍，收集 60 个蓝色糖果。</li>
+<li><strong>意图</strong>：换目标类型、去掉障碍，卡点之后必须给一关"随便玩玩都能过"。同时是收集类目标的软教学（本章之前只见过果冻）。</li>
+<li><strong>步数 21 / 通关率 0.88</strong>。</li>
+</ul>
+<h3>L6 漏斗湾 · 组合 + 新棋盘</h3>
+<pre><code>    ··········    
+    ··········    
+    ··········    
+··  ··········  ··
+··  ··········  ··
+··················
+··················
+··················
+··················
+</code></pre>
+<ul>
+<li><strong>意图</strong>：第二种新目标（3 个配料落底，同时在场 2 个）叠加第一次出现的异形棋盘。漏斗形让玩家直观看到"配料只会沿着列往下走，掉进两侧的死角就要绕路"。</li>
+<li><strong>步数 24 / 通关率 0.66</strong>：需求速率 0.12 个/步，与拆解案里配料关 0.11–0.20 的官方区间一致。</li>
+<li><strong>验收</strong>：配料落入两侧短列（第 0/8 列下 4 格）的对局，失败率应显著高于落入中央列的对局（埋点验证"死角"确实是玩家感知到的难点）。</li>
+</ul>
+<h3>L7 冰点星图 · 组合</h3>
+<pre><code>··················
+··░░░░░░#1░░░░░░··
+··░░#1░░░░░░#1░░··
+··░░░░#1░░░░░░░░··
+··#1░░░░#1░░░░#1··
+··░░░░░░░░░░░░░░··
+··░░#1░░░░░░#1░░··
+··░░░░░░#1░░░░░░··
+··················
+</code></pre>
+<ul>
+<li><strong>意图</strong>：大面积单层果冻 + 10 个散点糖霜。糖霜下面没有果冻，但它们卡住下落路径，考验"先化哪块冰"的顺序判断——这是糖霜从"目标"变成"棋盘变量"的第二步。</li>
+<li><strong>步数 22 / 通关率 0.58</strong>：松紧 1.05，是本章除峰关外最紧的一关，为 L8 蓄势。</li>
+</ul>
+<h3>L8 断桥 · 第二卡点（付费点 2）</h3>
+<pre><code>········  ········
+········  ········
+········  ········
+░░░░░░░░··░░░░░░░░
+░░░░░░░░#1░░░░░░░░
+▓▓▓▓▓▓▓▓··▓▓▓▓▓▓▓▓
+········  ········
+········  ········
+········  ········
+</code></pre>
+<ul>
+<li><strong>意图</strong>：H 形棋盘，两根四宽柱子中段三行铺果冻（最下一行双层），中间横梁只有一格宽、中点一块糖霜。两侧几乎独立，四宽柱子里的合法交换比满盘少一半，条纹糖跨区是唯一捷径。<strong>把 L6 学的"棋盘形状决定路径"变成难度。</strong></li>
+<li><strong>步数 22 / 通关率 0.33</strong>：需求速率 1.45 层/步，松紧 0.79。</li>
+<li><strong>设计过程中的一次失败（保留）</strong>：第一版把果冻放在柱子底部三行，同样 32 层，45 步通关率只有 14%；把同一布局放到满盘也只有 55%。原因是重力下底行糖果极少被替换，底部果冻只能靠正好落在那里的匹配清掉。改到中段后 22 步即达 0.33。<strong>结论：底行果冻是最贵的难度资源，一章只能用一次（本章留给 L10 的中心）。</strong></li>
+<li><strong>付费</strong>：失败剩余 ≤ 8 层弹加步；加 5 步 0.33→0.49。</li>
+</ul>
+<h3>L9 退潮 · 喘息</h3>
+<ul>
+<li>满盘、五色、无障碍，收集 45 个绿色。<strong>步数 17 / 通关率 0.87</strong>。</li>
+<li><strong>意图</strong>：卡点后的第二次减压，也是章末难关前的蓄力。比 L5 略短，让玩家更快到达 L10。</li>
+</ul>
+<h3>L10 灯塔之夜 · 章末难关（付费点 3）</h3>
+<pre><code>········#1········
+··░░░░░░#1··░░░░░░
+··░░▓▓░░#1··░░▓▓░░
+··░░░░░░#1··░░░░░░
+#1#1#1#1#1#1#1#1#1
+········#1········
+··░░░░░░#1··░░░░░░
+··░░▓▓░░#1··░░▓▓░░
+··░░░░░░#1··░░░░░░
+</code></pre>
+<ul>
+<li><strong>意图</strong>：一个单层糖霜十字把满盘切成四个 4×4 小区，每区铺 3×3 果冻、区中心一格双层。每个小区只有 16 格，连锁几乎不可能，玩家必须先化开十字的某一段把两个小区连通，再用特效跨区——本章所有元素（果冻、糖霜、切割、特效跨区）的总考。</li>
+<li><strong>步数 26 / 通关率 0.23</strong>：松紧 0.74，本章最紧。加 5 步 0.23→0.36，是三个付费点里"买了也未必过"感最强的一关，符合章末定位。</li>
+<li><strong>验收</strong>：本关首次失败率 70–85%；通关玩家的平均剩余步数 ≤ 2（说明步数没给多）。</li>
+</ul>
+<h2 id="5">5. 步数是怎么算出来的</h2>
+<ol>
+<li>每关棋盘、目标、障碍先手工设计（§4），并写下目标通关率（教学 0.90 → 卡点 0.30–0.35 → 章末 0.20）。</li>
+<li>用 <code>match3_sim.py</code> 的贪心机器人（枚举全部合法交换，按"目标推进量 &gt; 特效生成数 &gt; 总消除数"打分）每关跑 300 局、每局最多 45 步，记录每局的完成步数。</li>
+<li>"任意步数上限下的通关率"直接从完成步数的经验分布读出：通关率(m) = 完成步数 ≤ m 的局数比例。</li>
+<li><strong>步数 = 使通关率 ≥ 目标的最小 m</strong>。同时报告 m−2、m+5 的通关率，作为"少给 2 步会怎样 / 买一次加步会怎样"的敏感度。</li>
+<li>全部 10 关 16 进程并行约 35 秒，改一个棋盘重跑即可。</li>
+</ol>
+<p>机器人比人弱（一步贪心、不为组合特效铺垫），所以同一步数下真人通关率会高于表中数字；<strong>表中的通关率是下限，步数是上限</strong>。上线后用真实通关率回校"目标通关率"这一列即可，流程不变。</p>
+<h2 id="6">6. 设计发现（做这十关时验证到的）</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>发现</th>
+<th>证据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>棋盘切割的难度杠杆比目标量大一个量级</td>
+<td>L8 需求速率 1.45 层/步、L2 1.44 层/步，通关率 0.33 vs 0.81</td>
+</tr>
+<tr>
+<td>底行果冻最难清，是一次性资源</td>
+<td>同样 32 层果冻放底部三行：满盘 45 步 0.55，H 形 45 步 0.14</td>
+</tr>
+<tr>
+<td>角落果冻次之</td>
+<td>第一版 L4 把 18 层果冻放两个对角，反解步数 31；改成侧带后 22</td>
+</tr>
+<tr>
+<td>配料关难度不在数量</td>
+<td>L6 3 个配料反解 24 步，与官方 0.11–0.20 个/步区间一致；再加 1 个配料几乎不改变通关率，改棋盘形状才改</td>
+</tr>
+<tr>
+<td>新元素首次出现必须"孤立"</td>
+<td>L3 只有糖霜一层一圈，反解步数 13 比 L2 少一半——如果不孤立，玩家会用多余步数绕过它</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="7">7. 验收标准（上线后）</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>指标</th>
+<th>目标</th>
+<th>不达标动作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>L1–L3 首次通过率</td>
+<td>≥ 85% / ≥ 75% / ≥ 70%</td>
+<td>加 2 步</td>
+</tr>
+<tr>
+<td>L4 / L8 / L10 首次失败率</td>
+<td>55–70% / 60–75% / 70–85%</td>
+<td>低于区间：减 2 步；高于区间：减目标量而非加步（保持付费手感）</td>
+</tr>
+<tr>
+<td>峰后回落</td>
+<td>L5、L9 首次通过率 ≥ 80%</td>
+<td>否则本章节奏失效，重排</td>
+</tr>
+<tr>
+<td>连续失败 3 次比例（峰关）</td>
+<td>&lt; 25%</td>
+<td>缩短墙 / 十字</td>
+</tr>
+<tr>
+<td>章内流失</td>
+<td>任一关的 D1 流失 ≤ 上一章均值 ×1.2</td>
+<td>定位到关重做</td>
+</tr>
+<tr>
+<td>新元素学习</td>
+<td>L3 化冰 ≥ 8 块的玩家 ≥ 80%</td>
+<td>L3 加引导</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="8">8. 风险与取舍</h2>
+<ul>
+<li><strong>机器人偏弱 → 步数偏松</strong>：真人通关率会高于模拟，尤其低难度关。取舍：宁可先松后紧（上线后按真实数据减步），因为早期章节偏难的流失代价高于偏易的变现损失。</li>
+<li><strong>付费点集中在三关</strong>：其余七关不设加步诱因，转化率上限受限。取舍：换来的是"喘息关真的能喘息"，这是拆解案玩家锚点（长期玩家因无聊而非难度流失）指向的方向。</li>
+<li><strong>新元素只有糖霜一种</strong>：本章刻意只引入一个障碍 + 一种棋盘形态。拆解案 §5 显示官方前 300 关每 11 关一个新元素，本章 10 关两个，节奏偏快但在区间内。</li>
+<li><strong>模拟器无多步前瞻、无巧克力等增殖障碍</strong>：本章不使用这些元素，正好回避。后续章节若引入增殖障碍，模拟器需先扩展再反解。</li>
+</ul>
+<h2 id="9">9. 待核清单</h2>
+<ul>
+<li>三个付费点的"剩余目标量阈值"（≤6 / ≤8 层）是设计值，需上线后按"弹窗后购买率"校正。</li>
+<li>目标通关率梯度（0.90→0.20）参考拆解案里社区评级与需求速率的对应关系，不是官方通关率；产品有自己的历史数据时应替换。</li>
+</ul>
+  </article>
+  <footer>
+    <div class="note"><b>说明</b>：本策划案为方法演示：产品为假想三消，不使用任何品牌资产。模拟机器人比真人弱，表中通关率是下限、步数是上限；上线后用真实通关率回校即可，流程不变。</div>
+    <a class="backbtn" href="../index.html#designdocs">← 返回作品集</a>
+  </footer>
+</div>
+</body>
+</html>

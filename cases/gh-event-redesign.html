@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>给弃坑玩家的活动重设计 · 赵鹏淦</title>
+<style>
+:root{--bg:#0b0a1a;--ink:#e8e5f4;--muted:#a09ac0;--gold:#e3c07a;--ice:#9fd8f0;
+  --violet:#9d8ff0;--line:rgba(157,143,240,.18);--card:rgba(20,16,42,.65)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:"Microsoft YaHei","PingFang SC","Source Han Sans SC",sans-serif;
+  font-size:16px;line-height:1.85;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:
+  radial-gradient(900px 500px at 85% -5%,rgba(90,70,180,.25),transparent 60%),
+  radial-gradient(700px 500px at -10% 30%,rgba(40,80,160,.18),transparent 60%)}
+nav{position:sticky;top:0;z-index:9;display:flex;justify-content:space-between;align-items:center;
+  padding:14px 28px;background:rgba(11,10,26,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .logo{color:var(--ink);font-weight:700;text-decoration:none;letter-spacing:.06em}
+nav .logo b{color:var(--gold)}
+nav .back{color:var(--muted);text-decoration:none;font-size:.88rem}
+nav .back:hover{color:var(--gold)}
+.wrap{max-width:880px;margin:0 auto;padding:56px 24px 80px}
+.eyebrow{font-size:.78rem;letter-spacing:.28em;color:var(--gold);text-transform:uppercase;margin-bottom:14px}
+h1.title{font-size:2rem;line-height:1.35;margin-bottom:10px}
+.subtitle{font-size:1.05rem;color:var(--violet);margin-bottom:18px}
+.meta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:40px}
+.meta span{font-size:.78rem;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:3px 12px}
+article h2{font-size:1.35rem;color:var(--gold);margin:52px 0 16px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+article h3{font-size:1.1rem;color:var(--ice);margin:34px 0 12px}
+article p{margin:0 0 14px;color:#cdc9e0}
+article strong{color:var(--ink)}
+article em{color:var(--violet);font-style:normal}
+article ul,article ol{margin:0 0 16px 1.4em;color:#cdc9e0}
+article li{margin-bottom:6px}
+article blockquote{border-left:3px solid var(--gold);background:var(--card);border-radius:0 10px 10px 0;
+  padding:14px 18px;margin:0 0 16px;color:var(--muted)}
+article blockquote p{margin:0}
+article code{font-family:Consolas,"JetBrains Mono",monospace;font-size:.88em;background:rgba(157,143,240,.12);
+  border-radius:4px;padding:1px 6px;color:var(--ice)}
+article pre{background:#100e26;border:1px solid var(--line);border-radius:12px;padding:16px 18px;
+  overflow-x:auto;margin:0 0 18px}
+article pre code{background:none;padding:0;color:#c8d8f0;font-size:.85rem;line-height:1.6}
+.tablewrap{overflow-x:auto;margin:0 0 18px}
+article table{border-collapse:collapse;width:100%;font-size:.88rem}
+article th{color:var(--gold);text-align:left;border-bottom:1.5px solid rgba(227,192,122,.4);padding:8px 12px;white-space:nowrap}
+article td{border-bottom:1px solid var(--line);padding:8px 12px;color:#cdc9e0}
+article tr:hover td{background:rgba(157,143,240,.05)}
+article hr{border:0;border-top:1px solid var(--line);margin:40px 0}
+article a{color:var(--ice)}
+article img{max-width:100%;border-radius:12px;border:1px solid var(--line);margin:8px 0 2px;display:block}
+article img+em, article p img+em{display:block}
+.toc{border:1px solid var(--line);border-radius:12px;padding:14px 22px;background:var(--card);font-size:.86rem;margin-bottom:6px}
+.toc ul{margin:0 0 0 1.1em;color:var(--muted)}
+.toc li{margin-bottom:3px}
+.toc a{color:var(--muted);text-decoration:none}
+.toc a:hover{color:var(--gold)}
+.toctitle{color:var(--gold);font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:8px}
+footer{border-top:1px solid var(--line);margin-top:70px;padding-top:28px}
+footer .note{font-size:.85rem;color:var(--muted);margin-bottom:18px}
+footer .note b{color:var(--gold)}
+.backbtn{display:inline-block;color:var(--gold);border:1px solid rgba(227,192,122,.4);border-radius:99px;
+  padding:8px 22px;text-decoration:none;font-size:.88rem}
+.backbtn:hover{background:rgba(227,192,122,.1)}
+
+.tldr{border:1px solid rgba(227,192,122,.35);background:rgba(227,192,122,.06);border-radius:12px;padding:14px 18px;margin:0 0 34px;color:#cdc9e0;font-size:.95rem;line-height:1.8}
+.tldr b{color:var(--gold);margin-right:8px}
+footer{margin-top:56px;border-top:1px solid var(--line);padding-top:22px}
+footer .note{color:var(--muted);font-size:.88rem;line-height:1.8;margin-bottom:18px}
+footer .note b{color:var(--ink)}
+.backbtn{display:inline-block;color:var(--gold);text-decoration:none;border:1px solid rgba(227,192,122,.4);border-radius:99px;padding:8px 18px;font-size:.9rem}
+.backbtn:hover{background:rgba(227,192,122,.1)}
+article h1{display:none}
+</style>
+</head>
+<body>
+<nav><a class="logo" href="../index.html">赵鹏<b>淦</b></a><a class="back" href="../index.html#designdocs">← 返回作品集</a></nav>
+<div class="wrap">
+  <div class="eyebrow">Design Doc · 活动策划案</div>
+  <h1 class="title">给弃坑玩家的活动重设计</h1>
+  <div class="subtitle">Gossip Harbor 活动疲劳三命题验证 + 7 天减负活动《潮汐合成》：换玩法不换皮、里程碑替代排行、每日一次三分钟闭环</div>
+  <div class="meta"><span>活动分析 + 活动策划案 · 合成游戏</span><span>v1.0 · 2026-09</span><span>79 行活动库 · 周历窗口计数 · 体力预算脚本</span></div>
+  <div class="tldr"><b>TL;DR</b>一位玩了两个月、付费数百元后弃坑的玩家给出三条疲劳原因；用公开活动库检验：模板复用成立（6 个模板承载 27 个活动名）、并行窗口成立（日均 7.7 个）、竞争压力部分成立（数量少但曝光长、奖励只发前三）。据此设计一个 7 天活动，每条设计原则回指一条疲劳原因，数值复用生成器经济模型。</div>
+  <article>
+<div class="toc"><span class="toctitle">目录 · Contents</span><ul><li><a href="#1">1. 文档信息</a></li><li><a href="#2">2. 立意：我为什么弃坑，我就设计什么来接住我</a></li><li><a href="#3">3. 分析半：三条疲劳在数据里成不成立</a></li><li><a href="#4">4. 设计半：三条原则</a></li><li><a href="#5">5. 活动规则《潮汐合成》</a></li><li><a href="#6">6. 日程 D1–D7</a></li><li><a href="#7">7. 数值</a></li><li><a href="#8">8. 埋点与验收</a></li><li><a href="#9">9. 风险与取舍</a></li><li><a href="#10">10. 未做与边界</a></li></ul></div>
+<h2 id="1">1. 文档信息</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>项</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>对象</td>
+<td>Gossip Harbor（柠檬微趣，合成类）；设计部分为同品类通用方案</td>
+</tr>
+<tr>
+<td>类型</td>
+<td>活动分析 + 活动策划案（合一）</td>
+</tr>
+<tr>
+<td>版本</td>
+<td>v1.0（2026-09）</td>
+</tr>
+<tr>
+<td>作者</td>
+<td>赵鹏淦（系统 / 活动策划）</td>
+</tr>
+<tr>
+<td>数据</td>
+<td>Gossip Harbor fandom wiki 活动总览页、主页活动日历、更新日志与 10 个存档活动页（经 Wayback 镜像）；脚本 <code>analysis/gh_events_scrape.py</code>、<code>gh_event_fatigue.py</code>、<code>gh_tide_event_budget.py</code></td>
+</tr>
+<tr>
+<td>数值口径</td>
+<td>复用《合成游戏生成器经济模型拆解案》（体力 → 生成器 → B1 等价物）</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="2">2. 立意：我为什么弃坑，我就设计什么来接住我</h2>
+<p>一位玩了 Gossip Harbor 约两个月、付费数百元的玩家（本文作者的合作对象，口述）离开的原因不是卡关、不是体力，而是<strong>活动疲劳</strong>，具体三条：</p>
+<ol>
+<li>活动模板重复——换皮不换玩法；</li>
+<li>排行榜 / 竞争压力——不付费拿不到奖，每次像被逼氪；</li>
+<li>每日打卡链太长——上线像在完成清单，不是在玩。</li>
+</ol>
+<p>个案不是结论。本文先用公开活动库检验这三条是不是结构性问题（§3），再针对成立的那几条设计一个 7 天活动（§4–§8）。原则：<strong>不是再加一个活动，而是设计一个能减负的活动节奏。</strong></p>
+<h2 id="3">3. 分析半：三条疲劳在数据里成不成立</h2>
+<h3>3.1 数据与证据等级</h3>
+<p>Gossip Harbor 的 wiki 只被 Wayback 存档了约 60 页，37 个总览页活动里只有 3 个有独立页快照。因此活动表（79 行）按证据等级分层，正文引用时标明来源：</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>等级</th>
+<th>行数</th>
+<th>来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>有活动页快照</td>
+<td>10</td>
+<td>活动页信息框与奖励表</td>
+</tr>
+<tr>
+<td>仅总览页</td>
+<td>34</td>
+<td>总览页分类说明 + Tips 页</td>
+</tr>
+<tr>
+<td>仅更新日志</td>
+<td>35</td>
+<td>2025-04 至 2025-10 更新日志里出现的活动名（用于计"新名字产出速度"）</td>
+</tr>
+</tbody>
+</table></div>
+<p>规则性文本直接来自 wiki 原文，例如："同一时间只能有一个合成板活动，一个结束后可以立即开始下一个，或间隔至少 2 小时"；"其他类活动通常为 24 小时"；硬币赛"周五 10:00 GMT 开始，周一 10:00 结束"。</p>
+<h3>3.2 命题①：模板复用——成立</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>模板</th>
+<th>活动名数（下限）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>合成板·云雾</td>
+<td>4</td>
+</tr>
+<tr>
+<td>合成板·多层</td>
+<td>5</td>
+</tr>
+<tr>
+<td>合成板·挖掘</td>
+<td>3</td>
+</tr>
+<tr>
+<td>合成板·单层</td>
+<td>3</td>
+</tr>
+<tr>
+<td>装饰（订单产装饰点 → 按阶段买永久装饰）</td>
+<td>9</td>
+</tr>
+<tr>
+<td>硬币赛</td>
+<td>3</td>
+</tr>
+</tbody>
+</table></div>
+<p><img src="img/gh_template_reuse.png" alt="模板复用"><em>模板复用</em></p>
+<ul>
+<li>明确归类的 15 个合成板活动全部落在 4 个模板里，每个模板平均复用 3.8 次；9 个装饰活动是同一个模板。6 个模板承载了 27 个活动名。</li>
+<li>更新日志显示 2025-04 到 2025-10 约 6.5 个月出现了 35 个总览页没有的新活动名，<strong>每月约 5 个新名字</strong>——而玩法模板在同期没有增加（wiki 分类页没有新增子类）。名字的产出速度是模板的十倍以上。</li>
+<li>判定：<strong>成立</strong>。"换皮不换玩法"不是个体感受，是活动生产线的工作方式。</li>
+</ul>
+<h3>3.3 命题②：竞争压力——部分成立</h3>
+<ul>
+<li>可判定的 36 个活动中，排行榜 / 对手制 7 个（19%）。按数量看竞争活动是少数。</li>
+<li>但按<strong>周历权重</strong>看不一样：每周固定一档硬币赛（Beat the Heat Wipeout / Lori's Dough Derby / Ziva's Goldrush 三选一轮换），其中两个是与其他玩家赛跑的排行榜制。玩家每周撞上排行榜硬币赛的概率约 2/3，且它横跨周五到周一四天。</li>
+<li>奖励头部集中：已存档的 3 个竞争活动（Beat the Heat Wipeout 每轮、Tidal Beats Fest 每阶段、24-Hour Player Competitions）奖励<strong>全部只发给前三名</strong>。</li>
+<li>判定：<strong>部分成立</strong>。竞争活动数量不多，但曝光时长高、奖励零和；"不付费拿不到奖"对应的是"只有前三名有奖"这个结构。</li>
+</ul>
+<h3>3.4 命题③：每日窗口数——成立，且比预想严重</h3>
+<p>按 2025-11 主页活动日历 + 各活动时长，一天里同时在线的独立活动窗口：</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th></th>
+<th>周一</th>
+<th>周二</th>
+<th>周三</th>
+<th>周四</th>
+<th>周五</th>
+<th>周六</th>
+<th>周日</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>常驻（合成板 / 周任务 / 赛季 / 集卡 / 装饰）</td>
+<td>5</td>
+<td>5</td>
+<td>5</td>
+<td>5</td>
+<td>5</td>
+<td>5</td>
+<td>5</td>
+</tr>
+<tr>
+<td>周期（硬币赛）</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>随机可能（限时订单 / 24h 活动）</td>
+<td>2</td>
+<td>3</td>
+<td>2</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+</tr>
+<tr>
+<td>合计</td>
+<td>8</td>
+<td>8</td>
+<td>7</td>
+<td>8</td>
+<td>8</td>
+<td>7</td>
+<td>8</td>
+</tr>
+</tbody>
+</table></div>
+<p><img src="img/gh_weekly_windows.png" alt="一周并行窗口"><em>一周并行窗口</em></p>
+<ul>
+<li>只算确定会有的常驻 + 周期，日均 5.6 个；加上随机活动日均 7.7 个。命题设的阈值是 3。</li>
+<li>五个常驻窗口里，赛季通行证自带"24 小时限时任务"，周任务清单（Restaurant Goals）本身就是一张清单——<strong>清单套清单</strong>。</li>
+<li>判定：<strong>成立</strong>。</li>
+</ul>
+<h3>3.5 锚点</h3>
+<ul>
+<li>玩家口述与三个命题的对照：三条里两条成立、一条部分成立。个案与结构一致。</li>
+<li>我以玩家身份的直觉（看数据前写下）："合成板活动 + 24 小时订单赛叠加时最累"。数据只能部分支持：合成板恒有一个，24h 活动"通常"存在但具体频次抓不到。这条标为未验证。</li>
+</ul>
+<h2 id="4">4. 设计半：三条原则</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>疲劳</th>
+<th>原则</th>
+<th>机制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>模板重复</td>
+<td><strong>换玩法不换皮</strong></td>
+<td>合成板加一条新规则"潮汐"：每日一次涨潮，把棋盘上最低两级的棋子各自动合一步。它改变最优操作序列（留低级棋子等涨潮 vs 立刻合），而不是改美术</td>
+</tr>
+<tr>
+<td>排行榜压力</td>
+<td><strong>里程碑替代排行</strong></td>
+<td>主奖励为个人里程碑 5 档；可选"同投入分组赛"：按活动前 3 天体力消耗把玩家分到 20 人组，组内比进度不比氪金；退出无惩罚、不影响里程碑</td>
+</tr>
+<tr>
+<td>打卡链太长</td>
+<td><strong>每日一次三分钟闭环</strong></td>
+<td>一天只有一个必做动作：触发涨潮 + 一次交付。没有编号式领奖、没有子任务清单；错过一天不清进度，只少一次涨潮</td>
+</tr>
+</tbody>
+</table></div>
+<p>附加的日历规则（活动之外的减负）：本活动运行期间，不叠加其他 24 小时活动；这是对命题③的直接回应，也是本案最可能被运营反对的一条，§9 讨论取舍。</p>
+<h2 id="5">5. 活动规则《潮汐合成》</h2>
+<ul>
+<li><strong>时长</strong>：7 天。独立合成板（沿用单层板模板的资产，玩法由潮汐规则改变）。</li>
+<li><strong>产出链</strong>：厨房订单产活动棋子 B1/B2（口径同生成器经济模型：每体力 0.12 个 B1 等价物）；活动板内合成到 B5 交付里程碑。</li>
+<li><strong>潮汐</strong>：每日 0:00 后首次进入活动板可触发一次涨潮。涨潮把棋盘上等级最低的两级棋子（如 B1、B2）各自两两合成一步；剩余的单个不动。效果：当日 B1 等价物期望 +15%（按"平均有 30% 的低级棋子成对且未合"估算，为假设参数，见 §7）。</li>
+<li><strong>策略空间</strong>：涨潮前故意留成对的低级棋子能白得一次合成，但占棋盘格；玩家在"棋盘空间"和"免费合成"之间做选择——这是新玩法，不是新皮。</li>
+<li><strong>里程碑 5 档</strong>：潮标 I–V，阈值见 §7；每档奖励为主线可用资源（能量 / 宝石碎片 / 一件活动装饰），无稀有卡零和奖励。</li>
+<li><strong>分组赛（可选）</strong>：活动第 3 天结束时按前 3 天体力消耗分 20 人组；第 7 天按里程碑进度排名，前 50% 得一个额外装饰变体（同一装饰的配色版，不是更强的东西）。不参加不损失任何里程碑奖励。</li>
+<li><strong>付费点</strong>：只有一个——"再涨一次潮"（当日限一次），定价按体力等价 25（§7）。不卖棋子、不卖里程碑跳档。</li>
+</ul>
+<h2 id="6">6. 日程 D1–D7</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>天</th>
+<th>必做（≤3 分钟）</th>
+<th>可选</th>
+<th>系统动作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>D1</td>
+<td>进入 → 教学一次涨潮 → 交付潮标 I 的第一件</td>
+<td>多玩</td>
+<td>潮标 I 几乎必达（100%）</td>
+</tr>
+<tr>
+<td>D2</td>
+<td>涨潮 + 交付</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>D3</td>
+<td>涨潮 + 交付</td>
+<td>报名分组赛</td>
+<td>分组（按 D1–D3 体力消耗）</td>
+</tr>
+<tr>
+<td>D4</td>
+<td>涨潮 + 交付</td>
+<td>—</td>
+<td>潮标 II 达成提示（轻度 97%）</td>
+</tr>
+<tr>
+<td>D5</td>
+<td>涨潮 + 交付</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>D6</td>
+<td>涨潮 + 交付</td>
+<td>—</td>
+<td>潮标 III 冲刺提示</td>
+</tr>
+<tr>
+<td>D7</td>
+<td>涨潮 + 交付 → 结算</td>
+<td>分组赛结算</td>
+<td>潮标 III（轻度 50%），IV/V 结算</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="7">7. 数值</h2>
+<p>假设参数（无官方值，全部可改，脚本 <code>gh_tide_event_budget.py</code>）：每日一次 3 分钟可花 60 体力；每日免费赠送 40；自然回复 720/天（1 体力/2 分钟）；示例权重表 A1 324 / A2 18 / A3 18 / B1 32 / B2 8。</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>画像</th>
+<th>7 日体力</th>
+<th>B1 等价物期望（含涨潮 +15%）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>轻度（只做每日 3 分钟）</td>
+<td>420</td>
+<td>58</td>
+</tr>
+<tr>
+<td>中度（3 分钟 + 用完赠送）</td>
+<td>700</td>
+<td>97</td>
+</tr>
+<tr>
+<td>重度（60% 自然回复投入活动）</td>
+<td>3,304</td>
+<td>456</td>
+</tr>
+</tbody>
+</table></div>
+<p>里程碑按轻度玩家 7 日期望的 40 / 70 / 100 / 140 / 200% 设：</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>档</th>
+<th>阈值</th>
+<th>轻度达成概率（σ≈9）</th>
+<th>中度</th>
+<th>重度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>潮标 I</td>
+<td>23</td>
+<td>100%</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>潮标 II</td>
+<td>41</td>
+<td>97%</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>潮标 III</td>
+<td>58</td>
+<td><strong>50%</strong></td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>潮标 IV</td>
+<td>81</td>
+<td>1%</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>潮标 V</td>
+<td>116</td>
+<td>0%</td>
+<td>✗</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table></div>
+<p><img src="img/gh_tide_milestones.png" alt="里程碑"><em>里程碑</em></p>
+<ul>
+<li>轻度玩家"只做每日三分钟"恰好到第三档 50%——这是刻意的：第三档是"我认真玩了七天"的心理终点，达成一半的人会满足，另一半在 D6 收到冲刺提示后多花一次赠送体力即可越线（+40 体力 ≈ +5.5 B1，越过 σ）。</li>
+<li>IV 给中度，V 给重度；没有任何一档需要付费才能到。</li>
+<li><strong>付费点定价</strong>：一次额外涨潮对轻度玩家当日增益 ≈ 1.08 B1 等价物，按 B2 ≈ 16.7 体力口径折算价值 9 体力；定价 25 体力等价（溢价 2.8 倍）。它卖的是"今天想多玩一会儿"的便利，不是产出加成——与生成器经济模型案 §4 的结论一致：便利性售卖不能做成产出加成，否则冲击整条任务定价。</li>
+</ul>
+<h2 id="8">8. 埋点与验收</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>指标</th>
+<th>目标</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>D1 / D3 / D7 参与率</td>
+<td>≥ 60% / ≥ 45% / ≥ 35%</td>
+<td>对比同周期合成板活动的历史均值；D7/D1 留存比是核心指标</td>
+</tr>
+<tr>
+<td>潮标 III 达成率</td>
+<td>40–55%</td>
+<td>高于 55% 说明阈值偏松，低于 40% 说明 3 分钟闭环没做到</td>
+</tr>
+<tr>
+<td>单日活动内时长中位</td>
+<td>≤ 4 分钟</td>
+<td>超过说明"必做"没有压缩住</td>
+</tr>
+<tr>
+<td>分组赛报名率 / 退出率</td>
+<td>报名 ≥ 30%，退出 ≤ 10%</td>
+<td>退出率高说明"不比氪金"没有被相信</td>
+</tr>
+<tr>
+<td>付费涨潮购买率</td>
+<td>3–6% 的 DAU</td>
+<td>高于 8% 要检查是否被当成产出加成</td>
+</tr>
+<tr>
+<td>活动后 7 日留存</td>
+<td>≥ 对照组</td>
+<td>对照组 = 同期不参加者；这是"减负"是否真的减负的最终判据</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="9">9. 风险与取舍</h2>
+<ul>
+<li><strong>不叠加其他 24h 活动 → 短期收入下降</strong>。取舍：用活动后 7 日留存与付费涨潮补；若留存不涨，本案失败，恢复叠加。</li>
+<li><strong>涨潮被薅</strong>：玩家囤大量低级棋子等涨潮。缓解：涨潮只合"等级最低的两级"，囤更高级的没用；棋盘空间本身是成本。</li>
+<li><strong>分组匹配失败</strong>（人数不足 / 投入差异大）：回退为纯里程碑，分组赛奖励改为里程碑 IV 的附赠。</li>
+<li><strong>"换玩法"只有一条规则</strong>，可能不够新鲜。取舍：每期活动只加一条规则，是为了规则本身可被学会；三期之后再组合。</li>
+<li><strong>3 分钟闭环与重度玩家的矛盾</strong>：重度玩家会觉得没东西可做。里程碑 V 与分组赛是给他们的，但本案明确把轻中度留存放在重度活跃之前。</li>
+</ul>
+<h2 id="10">10. 未做与边界</h2>
+<ul>
+<li>活动时长、并行数、奖励结构的大部分字段来自分类级描述而非逐活动页面（证据等级见 §3.1）；命题①③的结论在"下限"意义上成立。</li>
+<li>所有体力与产出数值为示例参数；上线前需用产品真实生成器表与体力配置重跑脚本。</li>
+<li>玩家口述为一人个案；三命题的验证只说明"结构上存在"，不说明"多数玩家因此流失"。</li>
+</ul>
+  </article>
+  <footer>
+    <div class="note"><b>说明</b>：活动库来自 Gossip Harbor 社区 wiki（Wayback 仅存档约 60 页，证据等级已在正文分层标注）；所有体力与产出数值为示例参数，脚本可换参数重跑。玩家口述为一人个案，只用于锚定，不作群体结论。</div>
+    <a class="backbtn" href="../index.html#designdocs">← 返回作品集</a>
+  </footer>
+</div>
+</body>
+</html>

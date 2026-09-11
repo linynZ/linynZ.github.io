@@ -54,7 +54,7 @@ h2.sec{font-size:clamp(1.7rem,4vw,2.6rem);font-weight:600;margin:14px 0 8px;lett
 section{padding:clamp(70px,10vw,120px) 0;position:relative}
 .reveal{opacity:0;transform:translateY(38px);transition:opacity 1s cubic-bezier(.2,.7,.2,1),transform 1s cubic-bezier(.2,.7,.2,1)}
 .reveal.in{opacity:1;transform:none}
-.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}.d5{transition-delay:.40s}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}.d5{transition-delay:.40s}.d6{transition-delay:.48s}
 
 /* ---------- 导航 ---------- */
 nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;
@@ -423,12 +423,14 @@ footer .logo{font-size:1rem;margin-bottom:8px;display:inline-block}
 <section id="designdocs"><div class="wrap">
   <div class="reveal"><div class="eyebrow">Design Docs</div>
     <h2 class="sec">系统策划案（已上线项目）</h2>
-    <p class="proj-desc">三份来自已上线 / 已交付项目的系统策划案——规则、数值、字段逐项对照源码与资产整理，迭代记录对应真实提交；未能核实的口径不删不猜，列为待核对项。</p>
+    <p class="proj-desc">三份来三份来自已上线 / 已交付项目的系统策划案（规则、数值、字段逐项对照源码与资产，迭代记录对应真实提交），加两份休闲品类的关卡 / 活动策划案（步数由模拟器反解、活动数值由脚本预算）；未能核实的口径不删不猜，列为待核对项。</p>
   </div>
   <div class="cases three">
     <a class="case reveal d1" href="cases/ct-battle-design.html"><div class="num">01</div><div class="dir">战斗系统 · 规则 + 数值向</div><h4>《ChronoTraveler》知识对决战斗系统</h4><p>答题即攻击：五知识域映射五元素克制环，答题质量直接乘进伤害公式；含专注经济、四层抽题过滤、终局 Boss 调参复算与六轮迭代记录。</p><div class="tags"><span>回合制战斗</span><span>伤害公式</span><span>数值迭代</span></div><span class="go">阅读全文 →</span></a>
     <a class="case reveal d2" href="cases/ct-progress-design.html"><div class="num">02</div><div class="dir">进度系统 · 任务 + 存档向</div><h4>《ChronoTraveler》记忆修复与任务进度</h4><p>一根进度条统合全部探索动作；Boss 双条件门、任务阶段补记与链式跳阶、时代链星晶——17 条防软锁场景逐项对应机制。</p><div class="tags"><span>进度系统</span><span>防软锁</span><span>存档持久化</span></div><span class="go">阅读全文 →</span></a>
     <a class="case reveal d3" href="cases/cs-gadget-score-design.html"><div class="num">03</div><div class="dir">道具 + 评级 · 团队项目向</div><h4>《Cyber Stealth》道具装备与积分评级</h4><p>MGS 式道具系统（配装 2+2 槽、径向轮盘、独立冷却、数据驱动生成点）与扣减制战役计分 F–SSS 八档；团队设计与个人实现逐项标注归属。</p><div class="tags"><span>道具系统</span><span>扣减制计分</span><span>团队协作</span></div><span class="go">阅读全文 →</span></a>
+    <a class="case reveal d4" href="cases/m3-level-pack-design.html"><div class="num">04</div><div class="dir">关卡策划案 · 三消 / 模拟器反解向</div><h4>三消新章「灯塔湾」十关关卡包</h4><p>棋盘、目标、障碍手工设计，步数由三消模拟器按目标通关率反解（每关 300 局）：三个卡点 0.37 / 0.33 / 0.23、两次喘息、一个新元素；附"棋盘切割杠杆大于目标量""底行果冻是一次性资源"两条验证到的规律。</p><div class="tags"><span>关卡设计</span><span>难度曲线</span><span>机器人调关</span></div><span class="go">阅读全文 →</span></a>
+    <a class="case reveal d5" href="cases/gh-event-redesign.html"><div class="num">05</div><div class="dir">活动策划案 · 合成游戏 / 减负向</div><h4>给弃坑玩家的活动重设计</h4><p>Gossip Harbor 活动疲劳三命题验证（模板复用 6→27、日均 7.7 个并行窗口、竞争活动奖励只发前三）+ 7 天活动《潮汐合成》：换玩法不换皮、里程碑替代排行、每日一次三分钟闭环，体力预算与五档里程碑由脚本算出。</p><div class="tags"><span>活动设计</span><span>留存</span><span>经济预算</span></div><span class="go">阅读全文 →</span></a>
   </div>
 </div></section>
 
@@ -436,7 +438,7 @@ footer .logo{font-size:1rem;margin-bottom:8px;display:inline-block}
 <section id="cases"><div class="wrap">
   <div class="reveal"><div class="eyebrow">Deconstructions</div>
     <h2 class="sec">游戏拆解案</h2>
-    <p class="proj-desc">五份原创拆解案、五种方法论——解析求解 / 组合优化 / 概率建模 / 漏斗建模 / 经济折算。公开数据只当原材料，每个结论都是推导出来的，全部配可复现 Python 计算脚本（共 2100+ 行）。</p>
+    <p class="proj-desc">六份原创拆解案、六种方法论——解析求解 / 组合优化 / 概率建模 / 漏斗建模 / 经济折算 / 关卡数据统计 + 模拟器校准。公开数据只当原材料，每个结论都是推导出来的，全部配可复现 Python 计算脚本（共 3400+ 行）。</p>
   </div>
   <div class="cases">
     <a class="case reveal d1" href="cases/wuwa-combat.html"><div class="num">01</div><div class="dir">战斗系统 · 机制 + 数值向</div><h4>《鸣潮》战斗系统</h4><p>乘区结构数值反推：双爆 1:2 的解析解与失效边界、抗性系数 k=5 唯一性反解，以及一个被自己推翻并保留在正文的防御区假设。</p><span class="go">阅读全文 →</span></a>
@@ -444,6 +446,7 @@ footer .logo{font-size:1rem;margin-bottom:8px;display:inline-block}
     <a class="case reveal d3" href="cases/hsr-relic.html"><div class="num">03</div><div class="dir">数值养成 · 概率建模向</div><h4>《崩坏：星穹铁道》遗器系统</h4><p>配速阈值第一性原理推导（复现 133.3 / 142.9 / 160）、速度词条锯齿性，以及一次概率链高估 5.9 倍的模型错误与修正。</p><span class="go">阅读全文 →</span></a>
     <a class="case reveal d4" href="cases/genshin-onboarding.html"><div class="num">04</div><div class="dir">关卡 · 引导 + 留存向</div><h4>《原神》新手关卡</h4><p>蒙德教学序列的留存漏斗建模：优先修流失率最高而非最早的环节、环节数即留存预算、教学间隔的遗忘判据。</p><span class="go">阅读全文 →</span></a>
     <a class="case reveal d5" href="cases/merge-generator-economy.html"><div class="num">05</div><div class="dir">经济 · 数值折算向</div><h4>合成游戏生成器经济模型</h4><p>Merge-2 权重表到体力定价的折算：直掉口径高估 3 倍的证明、B2 定价区间 [7.7, 16.7] 的分摊推导，以及"耗 2 体力产高一级"改动的价值不变性与设计意图反推。</p><span class="go">阅读全文 →</span></a>
+    <a class="case reveal d6" href="cases/match3-level-budget.html"><div class="num">06</div><div class="dir">关卡 · 难度节奏 + 模拟器校准向</div><h4>三消关卡步数预算与难度曲线</h4><p>Candy Crush 1,505 关公开数据：每 5 关一峰、峰后必回落的章内锯齿（p≈10⁻²¹）；"每步要清多少"比步数更能解释难度；三成关卡是卡点但 300 关玩家一个都不记得；以及一次基本失败的三消模拟器校准——失败原因就是设计结论。</p><span class="go">阅读全文 →</span></a>
   </div>
 </div></section>
 
