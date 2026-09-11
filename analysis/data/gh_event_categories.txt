@@ -1,0 +1,43 @@
+Gossip Harbor wiki /wiki/Events 各分类说明（Wayback 快照 2025-11-01，原文英文）
+
+## Coins Events  [category=Coins; subcategory=]
+Coin events are events where a certain number of coins are needed to advance to the next stage. In some events excess coins needed for a round are added to the next round, for other events they aren't.
+
+## Decoration Events  [category=Decoration; subcategory=]
+Decoration events are events that improve permanent decorations, such as the ones found in the park square or at Quinn's garden. The former is far more common for decoration events. Examples of Decoration Events include: For more information and tips, see the article Decoration Events .
+
+## Merging Events  [category=Merging; subcategory=]
+Merging events are events that involve a merging board other than the kitchen board. There are different types of merging events. There are single level events, multilevel events, scrolling events, and cloudy single level events.
+
+## Cloudy Events  [category=Merging; subcategory=Cloudy]
+Cloudy events (or Cloud events) are events where certain parts of the board are “locked” by clouds. To unlock it and clear the cloud, you have to get the key, which you will obtain when you create the corresponding item (look at the item bar at the top to see the key icon). There are usually 5 clouds covering the board, and only the one with a lock shown on the cloud can be unlocked. The clouds must be unlocked in certain orders, making it different from Multilevel and Single Level Events, which can be uncovered in any order the player chooses. For these types of events, the main merging items are consistent. They are always a plant (usually fruits, vegetables, or flowers). The unlocked areas contain items like crates or bags of feed. The crates will contain various items like gems, energy potion, coins, or more of the main mergeable items, but the bags of feed will do one of two things. It will either be fed to an animal that’ll give you another type of mergeable item, or be plant feed for the main mergeable item. If it is plant feed, it will unlock another plot of land for the main mergeable plant item. The most plots of land a player can have is 4. Unlocking additional plots of land puts your main mergeable plant item output up by +1 when it time to harvest them. To harvest it, you must have sickles. Sickles can only be gained by completing orders and one sickle will cut all your plots of land. So if the player only has 1 plot of land, 1 sickle will give 1 main mergeable plant item. If the player has 2 plots of land, it will give 2 mergeable plant items, and so on. Originally Cloudy Events were single-level, none scrolling events, but there have been some Cloudy Events that scroll upwards. The following are Cloudy Events: For more information, see Cloudy Events .
+
+## Multilevel Events  [category=Merging; subcategory=Multilevel]
+Multilevel events work the same way as single level events, except that the boards are smaller and the player will gain a key when they have created the item that is marked by a key in the items bar. The key unlocks a door that leads to another level. Sometimes the known areas of the boards will be covered by clouds, other times it will be covered by fauna, but unlike cloudy events the player does not have the explore the board in a certain order. There are also rewards for reaching a new level. Level one doesn’t have any special rewards, but the board will be filled with rewards for the final three levels right at the beginning. Level 2 will have A Coin everywhere, level 3 will have Blast of Energy, and level 4 will have gem shards. The following are Multilevel Events: For more information, see Multilevel Events .
+
+## Digging Events  [category=Merging; subcategory=Digging(Scrolling)]
+Digging events work the same way as single level events, except that once all preexisting items have been merged or found, the level will scroll down revealing more items to merge and uncover. For these types of events, there are usually a points system. Once a certain amount of points have been reached, the player is rewards with item(s). These events were formerly called ‘Scrolling Events’ on the wiki due to them being the only ones where the screen scrolls. This is not the case anymore as other events now do the same. The following are Digging Events: For more information, see Scrolling Events .
+
+## Single level events  [category=Merging; subcategory=Single level]
+Single level events are events where there are preexisting items on the board and you must merge them with the mergeable items you get from orders. Once all the preexisting items are merged and the final item levels are reached, the event is over. On rare occasions, these levels will scroll upwards (this makes them different from digging events (formerly called scrolling events, a type of event that always scrolls downwards). The following are Single Level Events: Since completed orders can only give out 1 type of mergable item, there can only be one mergeable event happening at any time. Completed orders only give out level 1 or 2 of the main mergeable items and never give out the side mergeable item for events. Once a merging event ends, a new one can immediately start, or there can be a waiting period of at least 2 hours or more. For more information, see Single Level Events .
+
+## Order Events  [category=Order; subcategory=]
+Order events are events where specific orders must be completed.
+
+## Other Events  [category=Other; subcategory=]
+These events are often 24-hour events (with the exception of Disco Party and Restaurant Goals, the latter lasting 1 week before starting all over again) that give rewards for competing order and/or getting points.
+
+## Purchasing Events  [category=Purchasing; subcategory=]
+These are events where using real money is needed. Disco Party is partially an exception since Coconut gives you 1 free spin for a guaranteed 25 energy. All other spins will cost money.
+
+## Random Events  [category=Random; subcategory=]
+These are events that are not advertised 24 hours ahead of time. They may last over 24 hours, or less than 24 in the case of Raccoon orders and Mutineer Mayhem.
+
+## Rare and Obsolete Events  [category=Rare and Obsolete; subcategory=]
+These are events that seemingly never appear anymore. In some cases they have been replaced with similar events, in other cases there is nothing similar to them in the game anymore. Coconut's Sky Journey
+
+## Kitchen Merging Events  [category=Rare and Obsolete; subcategory=Kitchen Merging]
+At one point Gossip Harbor had merging events that took place in a replicate of the kitchen board at the beginning of the game (i.e., being dirty with limited space). These events often had the player making orders for items not found in the kitchen board for characters who don't normally have orders (such as Sophia or even Quinn). For more information videos of these past events, see Rare and Obsolete Events .
+
+## 补充: 主页 Event Calendar（2025-11-01 快照）
+Sunday: possibly Banana Peel (2-2:30am) | Monday: possibly Banana Peel; Restaurant Goals ends and starts again (2am GMT); Beat the Heat Wipeout, Lori's Dough Derby, or Ziva's Goldrush ends (10am) | Tuesday: possibly Raccoon Rascals; Mutineer Mayhem (12-2am GMT) | Wednesday: possibly Mutineer Mayhem | Thursday: possibly Banana Peel, possibly Mutineer Mayhem | Friday: possibly Raccoon Rascals; Beat the Heat Wipeout, Lori's Dough Derby, or Ziva's Goldrush begins (10am) | Saturday: (空)

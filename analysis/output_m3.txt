@@ -1,0 +1,217 @@
+候选池：Jelly 单值 405 关，Order 单色 31 关；抽样 103 关
+共 175 个模拟任务，每任务 300 局，20 进程 …
+  [  1/175] Jelly/spec L956   rank=1 moves=32 goal= 10 win=0.86 m50=18 slack=1.78 (31s)
+  [  2/175] Jelly/spec L844   rank=1 moves=20 goal= 12 win=0.52 m50=20 slack=1.0 (33s)
+  [  3/175] Jelly/icon L40    rank=1 moves=25 goal= 22 win=0.94 m50=14 slack=1.79 (43s)
+  [  4/175] Jelly/spec L40    rank=1 moves=25 goal= 22 win=0.94 m50=14 slack=1.79 (44s)
+  [  5/175] Jelly/spec L621   rank=1 moves=25 goal= 26 win=0.41 m50=28 slack=0.89 (48s)
+  [  6/175] Jelly/icon L621   rank=1 moves=25 goal= 26 win=0.41 m50=28 slack=0.89 (49s)
+  [  7/175] Jelly/spec L1100  rank=1 moves=32 goal= 24 win=0.61 m50=28 slack=1.14 (50s)
+  [  8/175] Jelly/spec L381   rank=1 moves=20 goal= 31 win=0.16 m50=30 slack=0.67 (52s)
+  [  9/175] Jelly/icon L956   rank=1 moves=32 goal= 10 win=0.59 m50=29 slack=1.1 (54s)
+  [ 10/175] Jelly/spec L336   rank=2 moves=15 goal= 46 win=0.03 m50=36 slack=0.42 (55s)
+  [ 11/175] Jelly/icon L844   rank=1 moves=20 goal= 12 win=0.09 m50=35 slack=0.57 (60s)
+  [ 12/175] Jelly/icon L24    rank=1 moves=24 goal= 66 win=0.70 m50=20 slack=1.2 (64s)
+  [ 13/175] Jelly/spec L24    rank=1 moves=24 goal= 66 win=0.70 m50=20 slack=1.2 (64s)
+  [ 14/175] Jelly/spec L432   rank=1 moves=18 goal= 54 win=0.03 m50=39 slack=0.46 (65s)
+  [ 15/175] Jelly/spec L193   rank=2 moves=25 goal= 65 win=0.10 m50=41 slack=0.61 (69s)
+  [ 16/175] Jelly/icon L336   rank=2 moves=15 goal= 46 win=0.00 m50=None slack=None (71s)
+  [ 17/175] Jelly/icon L381   rank=1 moves=20 goal= 31 win=0.00 m50=50 slack=0.4 (77s)
+  [ 18/175] Jelly/icon L432   rank=1 moves=18 goal= 54 win=0.00 m50=None slack=None (83s)
+  [ 19/175] Jelly/icon L1100  rank=1 moves=32 goal= 24 win=0.22 m50=47 slack=0.68 (84s)
+  [ 20/175] Jelly/spec L831   rank=2 moves=28 goal= 24 win=0.52 m50=28 slack=1.0 (58s)
+  [ 21/175] Jelly/spec L867   rank=2 moves=25 goal= 17 win=0.53 m50=24 slack=1.04 (51s)
+  [ 22/175] Jelly/icon L193   rank=2 moves=25 goal= 65 win=0.00 m50=65 slack=0.38 (102s)
+  [ 23/175] Jelly/spec L1090  rank=2 moves=26 goal= 48 win=0.21 m50=37 slack=0.7 (72s)
+  [ 24/175] Jelly/icon L867   rank=2 moves=25 goal= 17 win=0.11 m50=40 slack=0.62 (80s)
+  [ 25/175] Jelly/spec L906   rank=2 moves=35 goal= 53 win=0.40 m50=39 slack=0.9 (75s)
+  [ 26/175] Jelly/icon L831   rank=2 moves=28 goal= 24 win=0.13 m50=45 slack=0.62 (90s)
+  [ 27/175] Jelly/spec L1163  rank=2 moves=35 goal= 45 win=0.41 m50=39 slack=0.9 (74s)
+  [ 28/175] Jelly/spec L68    rank=3 moves=28 goal= 47 win=0.85 m50=19 slack=1.47 (66s)
+  [ 29/175] Jelly/spec L83    rank=3 moves=20 goal= 37 win=0.62 m50=18 slack=1.11 (65s)
+  [ 30/175] Jelly/icon L83    rank=3 moves=20 goal= 37 win=0.62 m50=18 slack=1.11 (65s)
+  [ 31/175] Jelly/spec L1336  rank=2 moves=25 goal= 62 win=0.13 m50=40 slack=0.62 (77s)
+  [ 32/175] Jelly/icon L1090  rank=2 moves=26 goal= 48 win=0.01 m50=56 slack=0.46 (104s)
+  [ 33/175] Jelly/spec L185   rank=3 moves=27 goal= 71 win=0.12 m50=43 slack=0.63 (83s)
+  [ 34/175] Jelly/icon L1163  rank=2 moves=35 goal= 45 win=0.10 m50=56 slack=0.62 (106s)
+  [ 35/175] Jelly/icon L906   rank=2 moves=35 goal= 53 win=0.05 m50=62 slack=0.56 (116s)
+  [ 36/175] Jelly/icon L185   rank=3 moves=27 goal= 71 win=0.12 m50=43 slack=0.63 (83s)
+  [ 37/175] Jelly/icon L68    rank=3 moves=28 goal= 47 win=0.52 m50=27 slack=1.04 (102s)
+  [ 38/175] Jelly/icon L1336  rank=2 moves=25 goal= 62 win=0.00 m50=64 slack=0.39 (109s)
+  [ 39/175] Jelly/spec L880   rank=3 moves=35 goal= 81 win=0.25 m50=44 slack=0.8 (90s)
+  [ 40/175] Jelly/spec L1004  rank=3 moves=35 goal= 81 win=0.31 m50=43 slack=0.81 (87s)
+  [ 41/175] Jelly/spec L1350  rank=3 moves=18 goal= 33 win=0.07 m50=33 slack=0.55 (64s)
+  [ 42/175] Jelly/spec L931   rank=4 moves=35 goal= 18 win=0.75 m50=25 slack=1.4 (54s)
+  [ 43/175] Jelly/spec L1436  rank=3 moves=25 goal= 59 win=0.14 m50=40 slack=0.62 (75s)
+  [ 44/175] Jelly/icon L1350  rank=3 moves=18 goal= 33 win=0.00 m50=53 slack=0.34 (87s)
+  [ 45/175] Jelly/spec L1438  rank=3 moves=35 goal= 81 win=0.29 m50=44 slack=0.8 (89s)
+  [ 46/175] Jelly/spec L427   rank=4 moves=23 goal= 72 win=0.06 m50=44 slack=0.52 (83s)
+  [ 47/175] Jelly/icon L880   rank=3 moves=35 goal= 81 win=0.02 m50=70 slack=0.5 (130s)
+  [ 48/175] Jelly/spec L997   rank=4 moves=25 goal= 27 win=0.36 m50=30 slack=0.83 (62s)
+  [ 49/175] Jelly/spec L1098  rank=4 moves=20 goal= 24 win=0.21 m50=29 slack=0.69 (59s)
+  [ 50/175] Jelly/icon L1004  rank=3 moves=35 goal= 81 win=0.04 m50=70 slack=0.5 (128s)
+  [ 51/175] Jelly/spec L1181  rank=4 moves=28 goal= 25 win=0.52 m50=28 slack=1.0 (58s)
+  [ 52/175] Jelly/icon L931   rank=4 moves=35 goal= 18 win=0.33 m50=42 slack=0.83 (84s)
+  [ 53/175] Jelly/icon L1436  rank=3 moves=25 goal= 59 win=0.00 m50=65 slack=0.38 (117s)
+  [ 54/175] Jelly/spec L1234  rank=4 moves=21 goal= 21 win=0.30 m50=26 slack=0.81 (55s)
+  [ 55/175] Jelly/icon L427   rank=4 moves=23 goal= 72 win=0.00 m50=64 slack=0.36 (108s)
+  [ 56/175] Jelly/spec L1149  rank=4 moves=33 goal= 54 win=0.29 m50=41 slack=0.8 (82s)
+  [ 57/175] Jelly/icon L1098  rank=4 moves=20 goal= 24 win=0.01 m50=47 slack=0.43 (85s)
+  [ 58/175] Jelly/icon L997   rank=4 moves=25 goal= 27 win=0.05 m50=47 slack=0.53 (90s)
+  [ 59/175] Jelly/icon L1438  rank=3 moves=35 goal= 81 win=0.03 m50=69 slack=0.51 (128s)
+  [ 60/175] Jelly/spec L1414  rank=4 moves=35 goal= 42 win=0.48 m50=36 slack=0.97 (72s)
+  [ 61/175] Jelly/icon L1181  rank=4 moves=28 goal= 25 win=0.09 m50=48 slack=0.58 (91s)
+  [ 62/175] Jelly/icon L1234  rank=4 moves=21 goal= 21 win=0.02 m50=41 slack=0.51 (84s)
+  [ 63/175] Jelly/icon L1149  rank=4 moves=33 goal= 54 win=0.02 m50=62 slack=0.53 (117s)
+  [ 64/175] Jelly/spec L878   rank=5 moves=20 goal= 74 win=0.02 m50=41 slack=0.49 (78s)
+  [ 65/175] Jelly/spec L907   rank=5 moves=22 goal= 56 win=0.07 m50=40 slack=0.55 (78s)
+  [ 66/175] Jelly/spec L814   rank=5 moves=25 goal= 81 win=0.06 m50=43 slack=0.58 (85s)
+  [ 67/175] Jelly/spec L1324  rank=5 moves=35 goal= 25 win=0.65 m50=29 slack=1.21 (61s)
+  [ 68/175] Jelly/spec L1326  rank=5 moves=25 goal= 25 win=0.40 m50=28 slack=0.89 (60s)
+  [ 69/175] Jelly/spec L1255  rank=5 moves=25 goal= 36 win=0.26 m50=34 slack=0.74 (71s)
+  [ 70/175] Jelly/spec L1096  rank=5 moves=31 goal= 52 win=0.28 m50=39 slack=0.79 (79s)
+  [ 71/175] Jelly/icon L1414  rank=4 moves=35 goal= 42 win=0.10 m50=56 slack=0.62 (108s)
+  [ 72/175] Jelly/spec L1391  rank=5 moves=20 goal= 29 win=0.14 m50=31 slack=0.65 (64s)
+  [ 73/175] Jelly/icon L878   rank=5 moves=20 goal= 74 win=0.00 m50=None slack=None (102s)
+  [ 74/175] Jelly/icon L907   rank=5 moves=22 goal= 56 win=0.00 m50=61 slack=0.36 (102s)
+  [ 75/175] Jelly/icon L814   rank=5 moves=25 goal= 81 win=0.00 m50=67 slack=0.37 (116s)
+  [ 76/175] Jelly/icon L1255  rank=5 moves=25 goal= 36 win=0.02 m50=52 slack=0.48 (97s)
+  [ 77/175] Jelly/icon L1326  rank=5 moves=25 goal= 25 win=0.06 m50=47 slack=0.53 (88s)
+  [ 78/175] Jelly/icon L1324  rank=5 moves=35 goal= 25 win=0.19 m50=47 slack=0.74 (94s)
+  [ 79/175] Jelly/spec L372   rank=6 moves=17 goal= 61 win=0.02 m50=41 slack=0.41 (73s)
+  [ 80/175] Jelly/icon L1096  rank=5 moves=31 goal= 52 win=0.01 m50=62 slack=0.5 (116s)
+  [ 81/175] Jelly/icon L1391  rank=5 moves=20 goal= 29 win=0.02 m50=51 slack=0.39 (88s)
+  [ 82/175] Jelly/spec L864   rank=6 moves=30 goal= 22 win=0.60 m50=27 slack=1.11 (54s)
+  [ 83/175] Jelly/icon L372   rank=6 moves=17 goal= 61 win=0.00 m50=None slack=None (91s)
+  [ 84/175] Jelly/spec L419   rank=6 moves=20 goal= 62 win=0.02 m50=41 slack=0.49 (77s)
+  [ 85/175] Jelly/spec L1042  rank=6 moves=33 goal= 25 win=0.67 m50=28 slack=1.18 (60s)
+  [ 86/175] Jelly/spec L1422  rank=6 moves=23 goal= 24 win=0.33 m50=29 slack=0.79 (57s)
+  [ 87/175] Jelly/spec L1185  rank=6 moves=24 goal= 45 win=0.18 m50=37 slack=0.65 (74s)
+  [ 88/175] Jelly/icon L419   rank=6 moves=20 goal= 62 win=0.00 m50=None slack=None (100s)
+  [ 89/175] Jelly/icon L864   rank=6 moves=30 goal= 22 win=0.16 m50=45 slack=0.67 (92s)
+  [ 90/175] Jelly/icon L1042  rank=6 moves=33 goal= 25 win=0.18 m50=47 slack=0.7 (97s)
+  [ 91/175] Jelly/spec L1482  rank=6 moves=27 goal= 81 win=0.12 m50=41 slack=0.66 (82s)
+  [ 92/175] Jelly/spec L786   rank=6 moves=25 goal=179 win=0.00 m50=68 slack=0.37 (118s)
+  [ 93/175] Jelly/spec L464   rank=7 moves=17 goal= 74 win=0.01 m50=43 slack=0.4 (78s)
+  [ 94/175] Jelly/icon L786   rank=6 moves=25 goal=179 win=0.00 m50=68 slack=0.37 (118s)
+  [ 95/175] Jelly/icon L1422  rank=6 moves=23 goal= 24 win=0.02 m50=48 slack=0.48 (89s)
+  [ 96/175] Jelly/icon L1185  rank=6 moves=24 goal= 45 win=0.01 m50=58 slack=0.41 (103s)
+  [ 97/175] Jelly/spec L500   rank=7 moves=23 goal= 66 win=0.06 m50=44 slack=0.52 (83s)
+  [ 98/175] Jelly/spec L1143  rank=8 moves=29 goal=  1 win=0.99 m50=2 slack=14.5 (9s)
+  [ 99/175] Jelly/icon L464   rank=7 moves=17 goal= 74 win=0.00 m50=None slack=None (93s)
+  [100/175] Jelly/spec L607   rank=7 moves=20 goal= 79 win=0.03 m50=43 slack=0.47 (79s)
+  [101/175] Jelly/spec L1263  rank=7 moves=20 goal= 41 win=0.11 m50=34 slack=0.59 (68s)
+  [102/175] Jelly/spec L1266  rank=7 moves=30 goal= 17 win=0.72 m50=23 slack=1.3 (50s)
+  [103/175] Jelly/spec L619   rank=7 moves=28 goal= 76 win=0.15 m50=43 slack=0.65 (84s)
+  [104/175] Jelly/icon L1143  rank=8 moves=29 goal=  1 win=0.94 m50=4 slack=7.25 (17s)
+  [105/175] Jelly/icon L1482  rank=6 moves=27 goal= 81 win=0.00 m50=70 slack=0.39 (123s)
+  [106/175] Jelly/icon L607   rank=7 moves=20 goal= 79 win=0.00 m50=None slack=None (103s)
+  [107/175] Jelly/icon L500   rank=7 moves=23 goal= 66 win=0.00 m50=64 slack=0.36 (109s)
+  [108/175] Jelly/spec L1276  rank=7 moves=21 goal= 49 win=0.06 m50=38 slack=0.55 (73s)
+  [109/175] Jelly/icon L1263  rank=7 moves=20 goal= 41 win=0.00 m50=58 slack=0.34 (94s)
+  [110/175] Jelly/icon L1266  rank=7 moves=30 goal= 17 win=0.25 m50=41 slack=0.73 (82s)
+  [111/175] Jelly/spec L1342  rank=7 moves=17 goal= 35 win=0.06 m50=34 slack=0.5 (64s)
+  [112/175] Jelly/icon L619   rank=7 moves=28 goal= 76 win=0.00 m50=65 slack=0.43 (117s)
+  [113/175] Jelly/spec L967   rank=8 moves=15 goal= 51 win=0.02 m50=37 slack=0.41 (66s)
+  [114/175] Jelly/icon L1342  rank=7 moves=17 goal= 35 win=0.00 m50=50 slack=0.34 (83s)
+  [115/175] Jelly/icon L967   rank=8 moves=15 goal= 51 win=0.00 m50=None slack=None (80s)
+  [116/175] Jelly/icon L1276  rank=7 moves=21 goal= 49 win=0.00 m50=58 slack=0.36 (99s)
+  [117/175] Jelly/spec L1196  rank=8 moves=16 goal= 62 win=0.01 m50=40 slack=0.4 (74s)
+  [118/175] Jelly/spec L1303  rank=8 moves=21 goal= 28 win=0.22 m50=31 slack=0.68 (62s)
+  [119/175] Jelly/icon L1196  rank=8 moves=16 goal= 62 win=0.00 m50=None slack=None (85s)
+  [120/175] Jelly/spec L1246  rank=8 moves=20 goal= 80 win=0.03 m50=43 slack=0.47 (83s)
+  [121/175] Jelly/spec L655   rank=8 moves=21 goal=416 win=0.00 m50=None slack=None (107s)
+  [122/175] Jelly/icon L655   rank=8 moves=21 goal=416 win=0.00 m50=None slack=None (107s)
+  [123/175] Jelly/spec L1402  rank=8 moves=18 goal= 50 win=0.03 m50=39 slack=0.46 (71s)
+  [124/175] Jelly/icon L1303  rank=8 moves=21 goal= 28 win=0.00 m50=48 slack=0.44 (88s)
+  [125/175] Jelly/spec L1334  rank=8 moves=22 goal= 75 win=0.05 m50=44 slack=0.5 (82s)
+  [126/175] Jelly/icon L1246  rank=8 moves=20 goal= 80 win=0.00 m50=None slack=None (103s)
+  [127/175] Jelly/spec L380   rank=9 moves=20 goal= 78 win=0.05 m50=42 slack=0.48 (79s)
+  [128/175] Order/spec L1     rank=1 moves=15 goal= 15 win=1.00 m50=4 slack=3.75 (17s)
+  [129/175] Jelly/spec L300   rank=9 moves=23 goal= 81 win=0.05 m50=45 slack=0.51 (85s)
+  [130/175] Jelly/icon L1402  rank=8 moves=18 goal= 50 win=0.00 m50=None slack=None (92s)
+  [131/175] Jelly/spec L415   rank=9 moves=20 goal= 81 win=0.03 m50=42 slack=0.48 (82s)
+  [132/175] Jelly/icon L1334  rank=8 moves=22 goal= 75 win=0.00 m50=65 slack=0.34 (109s)
+  [133/175] Order/spec L1439  rank=2 moves=13 goal=  3 win=1.00 m50=1 slack=13.0 (4s)
+  [134/175] Jelly/spec L490   rank=9 moves=18 goal= 57 win=0.02 m50=41 slack=0.44 (73s)
+  [135/175] Order/spec L1154  rank=2 moves=35 goal= 11 win=1.00 m50=6 slack=5.83 (14s)
+  [136/175] Jelly/spec L1378  rank=9 moves=25 goal= 14 win=0.63 m50=21 slack=1.19 (46s)
+  [137/175] Order/spec L7     rank=1 moves=25 goal= 40 win=1.00 m50=11 slack=2.27 (40s)
+  [138/175] Jelly/icon L380   rank=9 moves=20 goal= 78 win=0.00 m50=None slack=None (102s)
+  [139/175] Order/spec L1114  rank=4 moves=20 goal=  9 win=1.00 m50=4 slack=5.0 (10s)
+  [140/175] Order/spec L1141  rank=3 moves=23 goal= 12 win=1.00 m50=6 slack=3.83 (14s)
+  [141/175] Jelly/icon L300   rank=9 moves=23 goal= 81 win=0.00 m50=None slack=None (113s)
+  [142/175] Order/spec L1174  rank=4 moves=22 goal= 10 win=1.00 m50=6 slack=3.67 (13s)
+  [143/175] Order/spec L1248  rank=4 moves=23 goal= 11 win=1.00 m50=6 slack=3.83 (13s)
+  [144/175] Order/spec L972   rank=5 moves=27 goal=  9 win=1.00 m50=4 slack=6.75 (10s)
+  [145/175] Jelly/icon L490   rank=9 moves=18 goal= 57 win=0.00 m50=None slack=None (95s)
+  [146/175] Jelly/spec L1268  rank=9 moves=24 goal= 64 win=0.09 m50=43 slack=0.56 (81s)
+  [147/175] Jelly/icon L415   rank=9 moves=20 goal= 81 win=0.00 m50=None slack=None (103s)
+  [148/175] Order/spec L323   rank=5 moves=15 goal= 16 win=0.94 m50=9 slack=1.67 (19s)
+  [149/175] Jelly/spec L1297  rank=9 moves=24 goal= 63 win=0.08 m50=41 slack=0.59 (79s)
+  [150/175] Order/spec L971   rank=8 moves=14 goal=  5 win=1.00 m50=3 slack=4.67 (7s)
+  [151/175] Jelly/icon L1378  rank=9 moves=25 goal= 14 win=0.23 m50=35 slack=0.71 (72s)
+  [152/175] Order/spec L883   rank=2 moves=15 goal= 50 win=0.01 m50=29 slack=0.52 (57s)
+  [153/175] Order/spec L1117  rank=7 moves=21 goal= 10 win=1.00 m50=5 slack=4.2 (13s)
+  [154/175] Order/spec L1103  rank=7 moves=31 goal= 12 win=1.00 m50=6 slack=5.17 (14s)
+  [155/175] Order/spec L1412  rank=7 moves=30 goal= 12 win=1.00 m50=6 slack=5.0 (14s)
+  [156/175] Jelly/icon L639   rank=9 moves=20 goal=218 win=0.00 m50=None slack=None (106s)
+  [157/175] Order/spec L1072  rank=6 moves=16 goal= 20 win=0.85 m50=11 slack=1.45 (23s)
+  [158/175] Jelly/spec L639   rank=9 moves=20 goal=218 win=0.00 m50=None slack=None (109s)
+  [159/175] Order/spec L1111  rank=5 moves=20 goal= 28 win=0.78 m50=16 slack=1.25 (32s)
+  [160/175] Order/spec L1345  rank=8 moves=12 goal= 13 win=0.93 m50=7 slack=1.71 (14s)
+  [161/175] Jelly/icon L1268  rank=9 moves=24 goal= 64 win=0.00 m50=62 slack=0.39 (111s)
+  [162/175] Order/spec L1299  rank=9 moves=24 goal= 17 win=1.00 m50=9 slack=2.67 (17s)
+  [163/175] Jelly/icon L1297  rank=9 moves=24 goal= 63 win=0.00 m50=66 slack=0.36 (108s)
+  [164/175] Order/spec L1239  rank=9 moves=26 goal= 20 win=1.00 m50=12 slack=2.17 (20s)
+  [165/175] Order/spec L1258  rank=9 moves=20 goal= 20 win=0.97 m50=11 slack=1.82 (20s)
+  [166/175] Order/spec L668   rank=2 moves=23 goal= 85 win=0.00 m50=48 slack=0.48 (85s)
+  [167/175] Order/spec L951   rank=3 moves=19 goal= 79 win=0.00 m50=46 slack=0.41 (76s)
+  [168/175] Order/spec L728   rank=2 moves=21 goal=500 win=0.00 m50=None slack=None (103s)
+  [169/175] Order/spec L1186  rank=5 moves=20 goal= 99 win=0.00 m50=59 slack=0.34 (80s)
+  [170/175] Order/spec L1022  rank=6 moves=25 goal= 99 win=0.00 m50=57 slack=0.44 (82s)
+  [171/175] Order/spec L1365  rank=6 moves=24 goal=100 win=0.00 m50=58 slack=0.41 (80s)
+  [172/175] Order/spec L672   rank=6 moves=20 goal=200 win=0.00 m50=None slack=None (84s)
+  [173/175] Order/spec L1043  rank=8 moves=35 goal= 99 win=0.02 m50=58 slack=0.6 (73s)
+  [174/175] Order/spec L677   rank=8 moves=24 goal=175 win=0.00 m50=None slack=None (94s)
+  [175/175] Order/spec L1168  rank=8 moves=27 goal=300 win=0.00 m50=None slack=None (101s)
+
+================ 校准结果 ================
+
+[Jelly/spec] 72 关  Spearman(win,rank)=-0.496  Spearman(slack,rank)=-0.459  Spearman(goal/move,rank)=+0.435  M50 未达 cap 关数=2
+rank 难度                  n      通关率均值   slack中位      近失率均值
+   1 Very easy           8      0.531     1.071      0.109
+   2 Easy                8      0.290     0.800      0.120
+   3 Somewhat easy       8      0.332     0.795      0.144
+   4 Medium              8      0.372     0.821      0.112
+   5 Somewhat hard       8      0.236     0.690      0.120
+   6 Hard                8      0.243     0.654      0.118
+   7 Very hard           8      0.150     0.538      0.142
+   8 Extremely hard      8      0.167     0.465      0.115
+   9 Nearly impossible   8      0.118     0.511      0.124
+
+[Jelly/icon] 72 关  Spearman(win,rank)=-0.452  Spearman(slack,rank)=-0.379  Spearman(goal/move,rank)=+0.435  M50 未达 cap 关数=17
+rank 难度                  n      通关率均值   slack中位      近失率均值
+   1 Very easy           8      0.369     0.893      0.108
+   2 Easy                8      0.049     0.565      0.081
+   3 Somewhat easy       8      0.168     0.504      0.112
+   4 Medium              8      0.080     0.532      0.080
+   5 Somewhat hard       8      0.039     0.481      0.069
+   6 Hard                8      0.047     0.446      0.063
+   7 Very hard           8      0.033     0.361      0.034
+   8 Extremely hard      8      0.118     0.438      0.023
+   9 Nearly impossible   8      0.029     0.387      0.039
+
+[Order/spec] 31 关  Spearman(win,rank)=-0.057  Spearman(slack,rank)=-0.056  Spearman(goal/move,rank)=+0.022  M50 未达 cap 关数=4
+rank 难度                  n      通关率均值   slack中位      近失率均值
+   1 Very easy           2      0.998     3.011      0.000
+   2 Easy                5      0.403     3.175      0.012
+   3 Somewhat easy       2      0.500     2.123      0.003
+   4 Medium              3      1.000     3.833      0.000
+   5 Somewhat hard       4      0.681     1.458      0.220
+   6 Hard                4      0.212     0.439      0.114
+   7 Very hard           3      1.000     5.000      0.000
+   8 Extremely hard      5      0.389     1.714      0.105
+   9 Nearly impossible   3      0.989     2.167      0.481
+
+总耗时 715s；输出 D:\Career pursuit plan\04-拆解案\策划-游戏拆解案\03-我的拆解案\analysis\data\m3_calibration.json 与 D:\Career pursuit plan\04-拆解案\策划-游戏拆解案\03-我的拆解案\analysis\charts\m3_sim_vs_rating.png

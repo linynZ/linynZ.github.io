@@ -1,0 +1,3 @@
+[Jelly/icon] n=72  ρ(win,rank)=-0.452 95%CI[-0.65,-0.22]  ρ(win,goal/move)=-0.801  ρ(goal/move,rank)=0.435  偏相关 ρ(win,rank|goal/move)=-0.116
+[Jelly/spec] n=72  ρ(win,rank)=-0.496 95%CI[-0.67,-0.28]  ρ(win,goal/move)=-0.901  ρ(goal/move,rank)=0.435  偏相关 ρ(win,rank|goal/move)=-0.168
+[Order/spec] n=31  ρ(win,rank)=-0.057 95%CI[-0.40,0.29]  ρ(win,goal/move)=-0.937  ρ(goal/move,rank)=0.022  偏相关 ρ(win,rank|goal/move)=-0.058

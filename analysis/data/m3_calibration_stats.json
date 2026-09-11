@@ -1,0 +1,35 @@
+{
+ "Jelly/icon": {
+  "n": 72,
+  "rho_win_rank": -0.4515034881677448,
+  "rho_win_goalpermove": -0.8014252565980202,
+  "rho_goalpermove_rank": 0.4353750966756112,
+  "partial_win_rank_given_gpm": -0.11637872134302803,
+  "ci95": [
+   -0.6525350551656701,
+   -0.2233284602444334
+  ]
+ },
+ "Jelly/spec": {
+  "n": 72,
+  "rho_win_rank": -0.49560805970350114,
+  "rho_win_goalpermove": -0.9010171721320113,
+  "rho_goalpermove_rank": 0.4353750966756112,
+  "partial_win_rank_given_gpm": -0.16818477828793496,
+  "ci95": [
+   -0.6718793792143174,
+   -0.2784261810194438
+  ]
+ },
+ "Order/spec": {
+  "n": 31,
+  "rho_win_rank": -0.05677946214582026,
+  "rho_win_goalpermove": -0.9374227536470656,
+  "rho_goalpermove_rank": 0.02183909707705625,
+  "partial_win_rank_given_gpm": -0.05806451612903227,
+  "ci95": [
+   -0.39846518346641857,
+   0.29063101132075997
+  ]
+ }
+}
