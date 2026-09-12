@@ -10,6 +10,7 @@
 | 合成游戏生成器经济模型 | merge_generator_economy.py | output_merge.txt |
 | 三消关卡步数预算与难度曲线 | cc_scrape.py · match3_level_budget.py · novelty_rules.py · match3_sim.py · match3_calibrate.py · m3_calibration_stats.py | data/cc_levels.csv · data/m3_*.json · data/output_m3_*.txt |
 | 三消十关关卡包 | m3_level_pack.py · m3_level_pack_variants.py | data/m3_level_pack.json · data/m3_variants.json |
+| 天刀战斗属性与论剑 / 身份与日常时间预算 | tianya_attr_math.py · tianya_daily_budget.py | data/tianya_sources.md（数据源档案）· data/tianya_priors.md · data/ty_*.json |
 | Gossip Harbor 活动疲劳 + 潮汐合成 | gh_events_scrape.py · gh_event_fatigue.py · gh_tide_event_budget.py | data/gh_events.csv · data/gh_*.json |
 | 配图 | make_charts.py + 各脚本内出图 | charts/*.png |
 
