@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>《天涯明月刀》身份与日常时间预算拆解案 · 赵鹏淦</title>
+<style>
+:root{--bg:#0b0a1a;--ink:#e8e5f4;--muted:#a09ac0;--gold:#e3c07a;--ice:#9fd8f0;
+  --violet:#9d8ff0;--line:rgba(157,143,240,.18);--card:rgba(20,16,42,.65)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:"Microsoft YaHei","PingFang SC","Source Han Sans SC",sans-serif;
+  font-size:16px;line-height:1.85;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:
+  radial-gradient(900px 500px at 85% -5%,rgba(90,70,180,.25),transparent 60%),
+  radial-gradient(700px 500px at -10% 30%,rgba(40,80,160,.18),transparent 60%)}
+nav{position:sticky;top:0;z-index:9;display:flex;justify-content:space-between;align-items:center;
+  padding:14px 28px;background:rgba(11,10,26,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .logo{color:var(--ink);font-weight:700;text-decoration:none;letter-spacing:.06em}
+nav .logo b{color:var(--gold)}
+nav .back{color:var(--muted);text-decoration:none;font-size:.88rem}
+nav .back:hover{color:var(--gold)}
+.wrap{max-width:880px;margin:0 auto;padding:56px 24px 80px}
+.eyebrow{font-size:.78rem;letter-spacing:.28em;color:var(--gold);text-transform:uppercase;margin-bottom:14px}
+h1.title{font-size:2rem;line-height:1.35;margin-bottom:10px}
+.subtitle{font-size:1.05rem;color:var(--violet);margin-bottom:18px}
+.meta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:40px}
+.meta span{font-size:.78rem;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:3px 12px}
+article h2{font-size:1.35rem;color:var(--gold);margin:52px 0 16px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+article h3{font-size:1.1rem;color:var(--ice);margin:34px 0 12px}
+article p{margin:0 0 14px;color:#cdc9e0}
+article strong{color:var(--ink)}
+article em{color:var(--violet);font-style:normal}
+article ul,article ol{margin:0 0 16px 1.4em;color:#cdc9e0}
+article li{margin-bottom:6px}
+article blockquote{border-left:3px solid var(--gold);background:var(--card);border-radius:0 10px 10px 0;
+  padding:14px 18px;margin:0 0 16px;color:var(--muted)}
+article blockquote p{margin:0}
+article code{font-family:Consolas,"JetBrains Mono",monospace;font-size:.88em;background:rgba(157,143,240,.12);
+  border-radius:4px;padding:1px 6px;color:var(--ice)}
+article pre{background:#100e26;border:1px solid var(--line);border-radius:12px;padding:16px 18px;
+  overflow-x:auto;margin:0 0 18px}
+article pre code{background:none;padding:0;color:#c8d8f0;font-size:.85rem;line-height:1.6}
+.tablewrap{overflow-x:auto;margin:0 0 18px}
+article table{border-collapse:collapse;width:100%;font-size:.88rem}
+article th{color:var(--gold);text-align:left;border-bottom:1.5px solid rgba(227,192,122,.4);padding:8px 12px;white-space:nowrap}
+article td{border-bottom:1px solid var(--line);padding:8px 12px;color:#cdc9e0}
+article tr:hover td{background:rgba(157,143,240,.05)}
+article hr{border:0;border-top:1px solid var(--line);margin:40px 0}
+article a{color:var(--ice)}
+article img{max-width:100%;border-radius:12px;border:1px solid var(--line);margin:8px 0 2px;display:block}
+article img+em, article p img+em{display:block}
+.toc{border:1px solid var(--line);border-radius:12px;padding:14px 22px;background:var(--card);font-size:.86rem;margin-bottom:6px}
+.toc ul{margin:0 0 0 1.1em;color:var(--muted)}
+.toc li{margin-bottom:3px}
+.toc a{color:var(--muted);text-decoration:none}
+.toc a:hover{color:var(--gold)}
+.toctitle{color:var(--gold);font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:8px}
+footer{border-top:1px solid var(--line);margin-top:70px;padding-top:28px}
+footer .note{font-size:.85rem;color:var(--muted);margin-bottom:18px}
+footer .note b{color:var(--gold)}
+.backbtn{display:inline-block;color:var(--gold);border:1px solid rgba(227,192,122,.4);border-radius:99px;
+  padding:8px 22px;text-decoration:none;font-size:.88rem}
+.backbtn:hover{background:rgba(227,192,122,.1)}
+
+.tldr{border:1px solid rgba(227,192,122,.35);background:rgba(227,192,122,.06);border-radius:12px;padding:14px 18px;margin:0 0 34px;color:#cdc9e0;font-size:.95rem;line-height:1.8}
+.tldr b{color:var(--gold);margin-right:8px}
+footer{margin-top:56px;border-top:1px solid var(--line);padding-top:22px}
+footer .note{color:var(--muted);font-size:.88rem;line-height:1.8;margin-bottom:18px}
+footer .note b{color:var(--ink)}
+.backbtn{display:inline-block;color:var(--gold);text-decoration:none;border:1px solid rgba(227,192,122,.4);border-radius:99px;padding:8px 18px;font-size:.9rem}
+.backbtn:hover{background:rgba(227,192,122,.1)}
+article table.docinfo td:first-child{white-space:nowrap;color:var(--gold);font-weight:600}
+article table.wide{min-width:760px}
+.srcbox{border:1px solid var(--line);border-radius:12px;padding:12px 18px;background:var(--card);font-size:.88rem;color:var(--muted);margin:0 0 28px}
+.srcbox a{color:var(--ice)}
+</style>
+</head>
+<body>
+<nav><a class="logo" href="../index.html">赵鹏<b>淦</b></a><a class="back" href="../index.html#cases">← 返回作品集</a></nav>
+<div class="wrap">
+  <div class="eyebrow">Case Study · 原创拆解 08</div>
+  <h1 class="title">《天涯明月刀》身份与日常时间预算拆解案</h1>
+  <div class="subtitle">官方必做清单的时间预算、九种身份的时间-产出效率、一天 14 个打卡窗口、紫神兵免费 18 周 vs 付费 4.5 周</div>
+  <div class="meta"><span>拆解案 · 系统 / 长线运营向（MMO）</span><span>v1.0 · 2026-09</span><span>官方清单 + 次数上限 · 估计项明标 · 与合成游戏活动疲劳案同口径</span></div>
+  <div class="tldr"><b>TL;DR</b>官方'必做'约 1 小时且被当作产品参数在卖减负；同名'身份'时间成本差 16 倍，押镖整个外置到手机 APP；一天要打开约 14 个窗口，是 Gossip Harbor 的 2.5 倍，八个周购商店是最大来源；一件紫神兵免费 18 周、付费 4.5 周——付费买掉 75% 的等待而非上限；保底砍的是尾部不是均值。</div>
+  <div class="srcbox">脚本、数据与图（可重跑复核）：<a href="https://github.com/linynZ/linynZ.github.io/tree/main/analysis">github.com/linynZ/linynZ.github.io · analysis/</a>：tianya_daily_budget.py；数据源档案 data/tianya_sources.md</div>
+  <article>
+<div class="toc"><span class="toctitle">目录 · Contents</span><ul><li><a href="#1">关于本拆解案的方法说明（请先读）</a></li><li><a href="#2">1. 选题说明</a></li><li><a href="#3">2. 时间预算：官方"必做"约 1 小时，"全做"接近 3 小时</a></li><li><a href="#4">3. 身份效率：押镖被挪出游戏，捕快最重</a></li><li><a href="#5">4. 打卡窗口：一天 14 个，是 Gossip Harbor 的 2.5 倍</a></li><li><a href="#6">5. 养成周期：免费 18 周、付费 4.5 周，付费买掉 75% 的等待</a></li><li><a href="#7">6. 外观抽卡：保底砍的是尾部，不是均值</a></li><li><a href="#8">7. 对照：作者本人的 460 小时，和看数据前写下的直觉</a></li><li><a href="#9">8. 可以直接拿走的设计规则</a></li><li><a href="#10">9. 未做与可证伪之处</a></li><li><a href="#11">10. 参考</a></li></ul></div>
+<h2 id="1">关于本拆解案的方法说明（请先读）</h2>
+<p>MMO 的"日常"是留存与付费的骨架，但公开资料里<strong>没有任何一条"完整日常要多少分钟"的官方口径</strong>。本文的处理：</p>
+<div class="tablewrap"><table class="docinfo">
+<thead>
+<tr>
+<th>层</th>
+<th>内容</th>
+<th>可信度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>数据层</strong></td>
+<td>官方必做清单（2023）、各身份的每日次数上限（2017 / 2023 官方）、有据可查的单项时长（缉拿 20 分钟/次、论剑场均 61 秒、王府乱斗 7.5 分钟/局、合璧 10 分钟/局）、神兵材料需求与周产出、抽卡保底规则</td>
+<td>逐条标年份</td>
+</tr>
+<tr>
+<td><strong>假设层</strong></td>
+<td>其余单项时长为作者估计（脚本里标 <code>est</code>），三种玩家画像的组合</td>
+<td>明标为估计，换参数重跑</td>
+</tr>
+<tr>
+<td><strong>推导层</strong></td>
+<td>时间预算表、身份效率、打卡窗口计数、养成周期与付费替代率、保底期望（§2–§6）</td>
+<td>我算出来的</td>
+</tr>
+<tr>
+<td><strong>对照层</strong></td>
+<td>作者本人 460 小时中度玩家的口述 + 看数据前写下的五条直觉（§7）</td>
+<td>找漏洞用</td>
+</tr>
+</tbody>
+</table></div>
+<p>估计值多，所以本文的结论都写成<strong>区间和方向</strong>，不写成精确分钟数。</p>
+<h2 id="2">1. 选题说明</h2>
+<p>天刀 2023 年官方给出了一份"每日必做 / 每日必买 / 每周勿忘 / 每周玩法"清单，身份系统从 7 种扩到 8 种再到 2026 年的第 9 种"市井"（无属性、纯扮演）。把这份清单按时间、窗口数、产出稀缺度、可替代性四个维度拆开，能回答四个策划问题：<strong>一个中度玩家一天到底要花多久？哪些身份值得做？一天要打开多少个界面？付费买掉的是什么？</strong></p>
+<h2 id="3">2. 时间预算：官方"必做"约 1 小时，"全做"接近 3 小时</h2>
+<p>2023 官方每日必做九项，加每周内容摊到每日，再加一个身份：</p>
+<div class="tablewrap"><table class="">
+<thead>
+<tr>
+<th>项</th>
+<th>分钟</th>
+<th>依据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>帮派委任前 10 次</td>
+<td>15</td>
+<td>est</td>
+</tr>
+<tr>
+<td>势力日常 2 个</td>
+<td>10</td>
+<td>est</td>
+</tr>
+<tr>
+<td>师妹排课 / 游历</td>
+<td>3</td>
+<td>est</td>
+</tr>
+<tr>
+<td>别业收水果 / 茶话会</td>
+<td>5</td>
+<td>est</td>
+</tr>
+<tr>
+<td>天波府 或 羽林宫</td>
+<td>15</td>
+<td>est</td>
+</tr>
+<tr>
+<td>门派打坐（可存 3 日）</td>
+<td>5</td>
+<td>est，可用减负令一键</td>
+</tr>
+<tr>
+<td>怪物阅历（可叠 7 日）</td>
+<td>10</td>
+<td>est，可用减负令一键</td>
+</tr>
+<tr>
+<td>每日必买 ×2 + 商城免费抽</td>
+<td>2</td>
+<td>est</td>
+</tr>
+<tr>
+<td>游戏外礼包（助手 / 同人 SHOW）</td>
+<td>2</td>
+<td>est，手机</td>
+</tr>
+<tr>
+<td><strong>每日必做小计</strong></td>
+<td><strong>67</strong></td>
+<td>9/9 为估计值</td>
+</tr>
+<tr>
+<td>每周内容（话本 6 本、论剑 5 场、合璧 / 王府乱斗、宅邸、三个周活动、八个商店）</td>
+<td>333 / 周 → <strong>48 / 日</strong></td>
+<td>论剑 61 秒/场、王府乱斗 7.5 分/局、合璧 10 分/局为官方；其余 est</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tablewrap"><table class="">
+<thead>
+<tr>
+<th>画像</th>
+<th>每日</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>轻度：只做必做，打坐 / 阅历用减负令</td>
+<td>52 分 ≈ 0.9 h</td>
+</tr>
+<tr>
+<td>中度：必做 + 周常摊薄 + 一个轻身份（押镖走 APP）</td>
+<td>120 分 ≈ 2.0 h</td>
+</tr>
+<tr>
+<td>中度：必做 + 周常摊薄 + 一个重身份（捕快）</td>
+<td>195 分 ≈ 3.2 h</td>
+</tr>
+<tr>
+<td>重度：以上全做 + 两身份 + 帮会 / 论剑加练 60 分</td>
+<td>303 分 ≈ 5.0 h</td>
+</tr>
+</tbody>
+</table></div>
+<p><img src="img/ty_daily_budget.png" alt="图 1：四种画像的每日时间预算（左）与身份日耗时 vs 产出稀缺度（右）"><em>图 1：四种画像的每日时间预算（左）与身份日耗时 vs 产出稀缺度（右）</em></p>
+<ul>
+<li>官方"必做"约一小时，是给"上班族"的最小闭环；官方同时卖"上班族减负令"一键完成打坐与阅历，把这一小时再压掉 15 分钟。<strong>最小闭环的时长是被官方当作产品参数在调的。</strong></li>
+<li>"全做"取决于身份：捕快 4 次缉拿每次 20 分钟（2018 攻略原话"带上合格飞机 20 分钟足以"）就是 80 分钟，押镖走天刀助手 APP 几乎不占游戏时间。<strong>同样叫"做身份"，时间差 16 倍。</strong></li>
+<li>我自己的口述是"中度、每天 1–2 小时、日常全做加身份"。模型给中度 2.0–3.2 小时，只有轻身份档落进口述区间。两种解释：一是我当年的"全做"没包含全部周常和重身份，二是 est 项偏高。前者更可能——玩家说的"全做"是"我觉得该做的都做了"，与官方清单不是一回事。这条分歧留在正文，不调参数去凑。</li>
+</ul>
+<p><strong>如果这条错了会怎么看出来</strong>：把 est 项全部砍半，必做小计从 67 降到约 40 分钟，中度重身份档仍在 2.5 小时以上；"身份决定时长量级"的结论不依赖估计精度。</p>
+<h2 id="4">3. 身份效率：押镖被挪出游戏，捕快最重</h2>
+<p>每日次数上限是官方数据，单次时长除缉拿外为估计；产出稀缺度按 2023 官方产出描述定性打分（砭石 / 心法残页 / 神兵材料 = 4，修为 / 珍本 = 3，银两 / 碎银 = 2）：</p>
+<div class="tablewrap"><table class="">
+<thead>
+<tr>
+<th>身份</th>
+<th>次数上限</th>
+<th>日耗时（分）</th>
+<th>稀缺度</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>捕快·缉拿</td>
+<td>4 / 日</td>
+<td>80</td>
+<td>4</td>
+<td>官府奖励箱（砭石 / 心法残页 / 精铁）；用时最长</td>
+</tr>
+<tr>
+<td>游侠·怜花宝藏</td>
+<td>8 / 日</td>
+<td>48</td>
+<td>4</td>
+<td>5 人队、队长须游侠、找队难（2017）</td>
+</tr>
+<tr>
+<td>杀手·悬赏令</td>
+<td>13 / 日</td>
+<td>39</td>
+<td>4</td>
+<td>砭石 / 心法残页 / 洛阳铲</td>
+</tr>
+<tr>
+<td>镖师·押镖（游戏内）</td>
+<td>10 / 日</td>
+<td>30</td>
+<td>2</td>
+<td>银两 / 碎银</td>
+</tr>
+<tr>
+<td>镖师·押镖（助手 APP）</td>
+<td>10 / 日</td>
+<td>5</td>
+<td>2</td>
+<td>官方：APP 可完成每日押镖</td>
+</tr>
+<tr>
+<td>乐伶 / 文士</td>
+<td>—</td>
+<td>15</td>
+<td>3</td>
+<td>修为抄本、演奏 buff</td>
+</tr>
+<tr>
+<td>猎户</td>
+<td>半小时刷猎物</td>
+<td>15</td>
+<td>3</td>
+<td>皮毛 / 砭石 / 宠物</td>
+</tr>
+<tr>
+<td>厨师</td>
+<td>—</td>
+<td>10</td>
+<td>3</td>
+<td>永久属性菜、buff</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li><strong>押镖是设计上最聪明的一个身份</strong>：产出最普通，但官方把它整个搬进了手机 APP——时间成本从游戏内挪到通勤路上。"身份"在这里不是玩法，是一条留存触点。2023 官方推荐新服身份就是厨师、镖师，两个最轻的。</li>
+<li><strong>捕快 / 游侠 / 杀手是"用时间换稀缺材料"的三个重身份</strong>，官方把它们的次数上限设在 4 / 8 / 13，正好让日耗时落在 40–80 分钟区间；三者稀缺度相同，差别只在组队门槛（游侠 5 人）和时长（捕快最长）。</li>
+<li>2026 年新增的"市井"身份<strong>无属性、无技能点</strong>，纯扮演——是第一次把身份从"日常产出源"改成"内容消费"，与 §2 的减负方向一致。</li>
+</ul>
+<h2 id="5">4. 打卡窗口：一天 14 个，是 Gossip Harbor 的 2.5 倍</h2>
+<p>用本作品集《Gossip Harbor 活动疲劳分析》的口径——"一天要打开多少个独立界面 / 完成多少个独立动作"：</p>
+<div class="tablewrap"><table class="">
+<thead>
+<tr>
+<th>类别</th>
+<th>窗口数</th>
+<th>明细</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>每日必做</td>
+<td>11</td>
+<td>帮派、势力 NPC、师妹、别业、副本入口、门派、野外、商城 ×2、手机 APP ×2</td>
+</tr>
+<tr>
+<td>周常</td>
+<td>17 → 摊到每日 2.4</td>
+<td>话本、论剑、两个战场、同心 / 宅邸、三个周活动、<strong>八个周购商店</strong></td>
+</tr>
+<tr>
+<td>身份</td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>中度玩家每日合计</strong></td>
+<td><strong>≈ 14.4</strong></td>
+<td>Gossip Harbor 需操作窗口日均 5.7</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>八个周购商店（碎银 / 天魁币 / 胜负令 / 宋钱 / 伙伴 / 师妹 / 精选 / 风云令）是窗口数最大的单一来源。它们各自绑定一种货币，每种货币又绑定一类玩法——<strong>货币越多，商店越多，打卡链越长</strong>。天刀的多货币是历史累积，不是一次设计出来的。</li>
+<li>MMO 的窗口数是合成游戏的 2.5 倍，但两者的疲劳来源不同：合成游戏是"并行活动太多"，天刀是"常驻系统太多"——前者可以靠日历减负，后者只能靠"一键完成"类道具（减负令）和 APP 外置来砍。</li>
+<li>官方 2023 清单里"每日必买 ×2 + 免费抽 1"三个商城动作是纯打卡：它们不产玩法，只产"来过"。</li>
+</ul>
+<h2 id="6">5. 养成周期：免费 18 周、付费 4.5 周，付费买掉 75% 的等待</h2>
+<p>一件紫色神兵（三质料）需 240 质料 + 29,640 缘材·初 + 8,160 金碎银 + 296 缘材·进（2018）。按 2025 年的周产出：</p>
+<div class="tablewrap"><table class="">
+<thead>
+<tr>
+<th>材料</th>
+<th>需求</th>
+<th>免费周产（来源）</th>
+<th>周期</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>缘材·初</td>
+<td>29,640</td>
+<td>话本 2,750 + 帮派礼盒 240 + 海战 360 [+ 帮派商店 1,120，需 10,220 帮贡]</td>
+<td>6.6–8.8 周</td>
+</tr>
+<tr>
+<td>缘材·进</td>
+<td>296</td>
+<td>修为商店 5 + 神魄商店 ≈ 11.4（周活跃 700 档 500 神魄 + 势力日常 70 / 周，50 神魄换 1 个）</td>
+<td><strong>18 周 ≈ 4.2 个月</strong></td>
+</tr>
+<tr>
+<td>缘材·进（加商城）</td>
+<td>296</td>
+<td>+ 商城每周 50 个（阶梯价，最后 10 个 3,000 绑点/个）</td>
+<td><strong>4.5 周</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><img src="img/ty_daily_ascension.png" alt="图 2：一件紫神兵的缘材·进累积曲线，免费 vs 付费"><em>图 2：一件紫神兵的缘材·进累积曲线，免费 vs 付费</em></p>
+<ul>
+<li>免费玩家的瓶颈不在大宗材料（缘材·初 7–9 周），在<strong>稀有材料缘材·进（18 周）</strong>；商城周限 50 个正好把它压到 4.5 周。<strong>付费买掉的是 75% 的等待时间</strong>，不是产出上限——上限被周限锁死，付费玩家也要 4.5 周。</li>
+<li>"时间价格"的上界：商城最后 10 个 3,000 绑点/个，而免费口径 1 个缘材·进 ≈ 0.43 天的全部日常。这个比值就是官方对"一天日常值多少绑点"的隐含定价。</li>
+<li>2018 年攻略说"常规玩法约 6 个多月解锁全部蓝色神兵"，与本文 18 周（4.2 个月）一件紫神兵的量级一致。</li>
+</ul>
+<p><strong>如果这条错了会怎么看出来</strong>：若周产出漏了一个大来源（例如某活动大量掉缘材·进），免费周期会显著短于 18 周；档案里能找到的所有免费来源已计入，漏项只会让结论更保守。</p>
+<h2 id="7">6. 外观抽卡：保底砍的是尾部，不是均值</h2>
+<p>神池问影点券池保底：161 抽至少 1 神影宝契、200 抽至少 1 限定、240 抽必得普通池 10 件；绑点池 400 抽 1 限定。基础概率未公开，按几档假设算限定的期望抽数：</p>
+<div class="tablewrap"><table class="">
+<thead>
+<tr>
+<th>基础概率</th>
+<th>点券池期望（保底 200）</th>
+<th>触发保底的比例</th>
+<th>绑点池期望（保底 400）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.5%</td>
+<td>127 抽</td>
+<td>37%</td>
+<td>227 抽</td>
+</tr>
+<tr>
+<td>1%</td>
+<td>113 抽</td>
+<td>13%</td>
+<td>105 抽</td>
+</tr>
+<tr>
+<td>2%</td>
+<td>53 抽</td>
+<td>2%</td>
+<td>50 抽</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>0.5% 概率下无保底的期望是 200 抽且方差无穷；保底把尾部截到 200，期望降到 127。<strong>保底的产品价值是"最坏情况可承诺"，均值只降三成。</strong></li>
+<li>点券池与绑点池限定保底 200 vs 400，是同一件外观对"付费货币"和"免费货币"的两种定价。</li>
+</ul>
+<h2 id="8">7. 对照：作者本人的 460 小时，和看数据前写下的直觉</h2>
+<h3>7.1 个案对照</h3>
+<p>我是中度玩家（每天 1–2 小时，日常全做加身份，唐门 / 天香 / 五毒）。§2 已经写了模型与口述的分歧：模型的"全做"比我记忆里的多约一小时。回想起来，我确实没有每周把八个商店逛完、也很少打齐三个周活动——<strong>玩家的"全做"是主观清单，官方的"必做"是产品清单，两者的差就是可以减负的空间</strong>。</p>
+<h3>7.2 看数据前写下的直觉（<code>analysis/data/tianya_priors.md</code>）</h3>
+<div class="tablewrap"><table class="">
+<thead>
+<tr>
+<th>直觉</th>
+<th>数据</th>
+<th>结论</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>拿满每日活跃度要 60–90 分钟，帮会 + 话本 + 剑荡占一半以上</td>
+<td>官方必做约 67 分钟（估）；话本是周常不是日常；活跃度体系 2023 改为周活跃</td>
+<td>半对：总时长对，构成错</td>
+</tr>
+<tr>
+<td>一天要打开的窗口 ≥ 8 个，比 Gossip Harbor 多</td>
+<td>约 14 个，是 5.7 的 2.5 倍</td>
+<td>对，且低估</td>
+</tr>
+<tr>
+<td>乐伶 / 文士时间效率最高，杀手 / 游侠效率最低但产出稀缺</td>
+<td>效率最高的是<strong>押镖 APP</strong>（被外置）；乐伶 / 文士 / 厨师次之；捕快最低</td>
+<td>半对：漏了 APP 外置这个变量</td>
+</tr>
+<tr>
+<td>中度玩家刚好拿满活跃 + 一个身份，做不了第二个</td>
+<td>模型中度 2.0–3.2 h，第二个重身份要再加 40–80 分钟</td>
+<td>对</td>
+</tr>
+<tr>
+<td>付费能替代的必做时间不到 30%</td>
+<td>养成材料上付费买掉 75% 的等待；但"必做在线内容"（话本 / 帮会 / 战场）付费买不掉</td>
+<td>半对：看你说的是哪种时间</td>
+</tr>
+</tbody>
+</table></div>
+<p>五条里一条对、三条半对、一条被数据补足。最大的盲点是"APP 外置"——我没把手机端当成游戏时间预算的一部分，而官方早就把它当成了。</p>
+<h2 id="9">8. 可以直接拿走的设计规则</h2>
+<ol>
+<li><strong>最小闭环时长是产品参数，要显式定义并单独卖减负。</strong> 天刀：必做约 1 小时 + 减负令再砍 15 分钟。</li>
+<li><strong>同名"身份"的时间成本可以差一个量级，用次数上限和单次时长两个旋钮分别调。</strong> 重身份用次数上限（4 / 8 / 13）把日耗时锁在 40–80 分钟；轻身份可以整个外置到 APP。</li>
+<li><strong>打卡窗口数随货币种类线性增长。</strong> 新增一种货币前先问它会不会带来一个新商店。</li>
+<li><strong>付费替代的是等待时间，不是产出上限。</strong> 用周限锁上限、用商城压等待，付费玩家和免费玩家到达同一终点，只是快慢不同——这是长线 MMO 避免"付费即碾压"的标准解。</li>
+<li><strong>保底承诺的是最坏情况。</strong> 定保底抽数时看的是"愿意让多少比例的玩家触发保底"（0.5% 概率下 37%），不是期望抽数。</li>
+</ol>
+<h2 id="10">9. 未做与可证伪之处</h2>
+<ul>
+<li>单项时长 9/9 必做项为估计，公开资料无官方口径；结论只写区间与方向。</li>
+<li>产出稀缺度是作者定性打分。</li>
+<li>神兵材料需求是 2018 数据，周产出是 2018 / 2025 混合口径，中间版本可能调过。</li>
+<li>活跃度分值表（现行）与商城标价未公开，未纳入。</li>
+<li>个案为作者本人一人口述，且与模型有约一小时分歧，已在正文说明，不作群体结论。</li>
+</ul>
+<h2 id="11">10. 参考</h2>
+<ul>
+<li>天涯明月刀官方百晓集《升级宝典与必做日常》（2023-04）、各身份玩法篇（2023-03）、神兵篇（2025-07）、神池问影公告（2025-03 / 2026-03）、市井身份公告（2026-05）。</li>
+<li>逍遥客栈身份系统说明（2016-08）；游民星空身份与日常整理（2017-09、2018）；17173 日常性价比（2018-02）。</li>
+<li>全部数字由 <code>analysis/tianya_daily_budget.py</code> 产出，输出见 <code>analysis/data/output_ty_daily.txt</code>；数据源逐条索引见 <code>analysis/data/tianya_sources.md</code>。</li>
+</ul>
+  </article>
+  <footer>
+    <div class="note"><b>说明</b>：公开资料没有任何'完整日常 X 分钟'的口径，单项时长为作者估计并在脚本中标 est，结论只写区间与方向；作者本人的口述与模型有约一小时分歧，如实写在正文。</div>
+    <a class="backbtn" href="../index.html#cases">← 返回作品集</a>
+  </footer>
+</div>
+</body>
+</html>
