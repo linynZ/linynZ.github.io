@@ -440,18 +440,18 @@ footer .logo{font-size:1rem;margin-bottom:8px;display:inline-block}
   </div>
 
   <div class="reveal d1" style="margin-top:44px">
-    <div class="proj-title"><span class="en" style="font-size:clamp(1.35rem,3vw,2rem)">Real-Time Rendering Engine</span><span class="badge">个人 · C++ / OpenGL</span></div>
-    <div class="proj-sub">实时渲染引擎 —— 前向 + 延迟双管线</div>
-    <div class="projmeta"><span><b>独立开发</b></span><span>OpenGL 4.6 / GLSL</span><span>2025.10 – 2026.01</span></div>
-    <p class="proj-desc">PBR 材质（Cook-Torrance BRDF）、级联阴影映射、骨骼动画与 glTF 模型加载、后处理链（SSAO / Bloom / FXAA / 色调映射）。<b style="color:var(--ice)">懂渲染，才知道美术需求在实现上贵在哪、哪里可以省。</b></p>
-    <a class="repo" href="https://github.com/linynZ/CSC8502-final-coursework" target="_blank" rel="noopener">↗ 仓库公开可查</a>
+    <div class="proj-title"><span class="en" style="font-size:clamp(1.35rem,3vw,2rem)">Real-Time Rendering Engine</span><span class="badge">个人 · C++ / OpenGL · 代码公开</span></div>
+    <div class="proj-sub">实时渲染课程作业 —— 多 Pass 前向管线 · 卡通渲染 · 三时代场景</div>
+    <div class="projmeta"><span><b>独立开发</b></span><span>OpenGL 4.6 / GLSL</span><span>2025.10 – 2025.11</span></div>
+    <p class="proj-desc">场景图 + 多 Pass 前向渲染（阴影深度 → 主场景 → 水面 → 天空盒 → 后处理）；卡通渲染（分级光照 + 边缘光，6 灯）；阴影贴图 + PCF 软阴影；单 Pass 后处理链（SSAO / Bloom / FXAA / 暗角 / 色调映射）；heightmap 地形按高度与坡度混合贴图；正弦位移水面；三套天空盒昼夜与时代切换；glTF 2.0 蒙皮角色与骨骼动画播放；四路分屏。约 3,700 行 C++ + 23 个 GLSL。<b style="color:var(--ice)">懂渲染，才知道美术需求在实现上贵在哪、哪里可以省。</b></p>
+    <a class="repo" href="https://github.com/linynZ/CSC8502-final-coursework" target="_blank" rel="noopener">↗ 源码公开（Coursework/ + Shaders/ + 截图 + 演示视频）</a>
   </div>
 
   <div class="reveal d2" style="margin-top:48px">
-    <div class="proj-title"><span class="en" style="font-size:clamp(1.35rem,3vw,2rem)">Physics · Net · AI</span><span class="badge">个人 · C++ 自研</span></div>
-    <div class="proj-sub">物理引擎与联网游戏 —— 碰撞 / 同步 / 敌人 AI 全自研</div>
+    <div class="proj-title"><span class="en" style="font-size:clamp(1.35rem,3vw,2rem)">Physics · Net · AI</span><span class="badge">个人 · C++</span></div>
+    <div class="proj-sub">物理与联网游戏课程作业 —— 在课程框架上实现碰撞 / 约束 / 同步 / 敌人 AI</div>
     <div class="projmeta"><span><b>独立开发</b></span><span>C++ / ENet</span><span>2025.10 – 2025.12</span></div>
-    <p class="proj-desc">自研碰撞检测（AABB / OBB / 球体的宽相 + 窄相，SAT 分离轴检测、Sequential Impulse 约束求解）；服务器权威网络同步（固定 Tick 快照 + 客户端预测与插值）；NavMesh + A* 寻路配状态机驱动的敌人巡逻 / 追击。<b style="color:var(--ice)">敌人 AI 与延迟补偿这两件事，恰好是"手感"的技术根源。</b></p>
+    <p class="proj-desc">碰撞检测（AABB / OBB / 球体的宽相 + 窄相，SAT 分离轴检测、Sequential Impulse 约束求解）；服务器权威网络同步（固定 Tick 快照 + 客户端预测与插值）；NavMesh + A* 寻路配状态机驱动的敌人巡逻 / 追击。<b style="color:var(--ice)">敌人 AI 与延迟补偿这两件事，恰好是"手感"的技术根源。</b></p>
   </div>
 </div></section>
 
