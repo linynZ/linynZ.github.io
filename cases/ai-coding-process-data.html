@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI Coding 实战过程数据拆解案 · 赵鹏淦</title>
+<style>
+:root{--bg:#0b0a1a;--ink:#e8e5f4;--muted:#a09ac0;--gold:#e3c07a;--ice:#9fd8f0;
+  --violet:#9d8ff0;--line:rgba(157,143,240,.18);--card:rgba(20,16,42,.65)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:"Microsoft YaHei","PingFang SC","Source Han Sans SC",sans-serif;
+  font-size:16px;line-height:1.85;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:
+  radial-gradient(900px 500px at 85% -5%,rgba(90,70,180,.25),transparent 60%),
+  radial-gradient(700px 500px at -10% 30%,rgba(40,80,160,.18),transparent 60%)}
+nav{position:sticky;top:0;z-index:9;display:flex;justify-content:space-between;align-items:center;
+  padding:14px 28px;background:rgba(11,10,26,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .logo{color:var(--ink);font-weight:700;text-decoration:none;letter-spacing:.06em}
+nav .logo b{color:var(--gold)}
+nav .back{color:var(--muted);text-decoration:none;font-size:.88rem}
+nav .back:hover{color:var(--gold)}
+.wrap{max-width:880px;margin:0 auto;padding:56px 24px 80px}
+.eyebrow{font-size:.78rem;letter-spacing:.28em;color:var(--gold);text-transform:uppercase;margin-bottom:14px}
+h1.title{font-size:2rem;line-height:1.35;margin-bottom:10px}
+.subtitle{font-size:1.05rem;color:var(--violet);margin-bottom:18px}
+.meta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:40px}
+.meta span{font-size:.78rem;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:3px 12px}
+article h2{font-size:1.35rem;color:var(--gold);margin:52px 0 16px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+article h3{font-size:1.1rem;color:var(--ice);margin:34px 0 12px}
+article p{margin:0 0 14px;color:#cdc9e0}
+article strong{color:var(--ink)}
+article em{color:var(--violet);font-style:normal}
+article ul,article ol{margin:0 0 16px 1.4em;color:#cdc9e0}
+article li{margin-bottom:6px}
+article blockquote{border-left:3px solid var(--gold);background:var(--card);border-radius:0 10px 10px 0;
+  padding:14px 18px;margin:0 0 16px;color:var(--muted)}
+article blockquote p{margin:0}
+article code{font-family:Consolas,"JetBrains Mono",monospace;font-size:.88em;background:rgba(157,143,240,.12);
+  border-radius:4px;padding:1px 6px;color:var(--ice)}
+article pre{background:#100e26;border:1px solid var(--line);border-radius:12px;padding:16px 18px;
+  overflow-x:auto;margin:0 0 18px}
+article pre code{background:none;padding:0;color:#c8d8f0;font-size:.85rem;line-height:1.6}
+.tablewrap{overflow-x:auto;margin:0 0 18px}
+article table{border-collapse:collapse;width:100%;font-size:.88rem}
+article th{color:var(--gold);text-align:left;border-bottom:1.5px solid rgba(227,192,122,.4);padding:8px 12px;white-space:nowrap}
+article td{border-bottom:1px solid var(--line);padding:8px 12px;color:#cdc9e0}
+article tr:hover td{background:rgba(157,143,240,.05)}
+article hr{border:0;border-top:1px solid var(--line);margin:40px 0}
+article a{color:var(--ice)}
+article img{max-width:100%;border-radius:12px;border:1px solid var(--line);margin:8px 0 2px;display:block}
+article img+em, article p img+em{display:block}
+.toc{border:1px solid var(--line);border-radius:12px;padding:14px 22px;background:var(--card);font-size:.86rem;margin-bottom:6px}
+.toc ul{margin:0 0 0 1.1em;color:var(--muted)}
+.toc li{margin-bottom:3px}
+.toc a{color:var(--muted);text-decoration:none}
+.toc a:hover{color:var(--gold)}
+.toctitle{color:var(--gold);font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:8px}
+footer{border-top:1px solid var(--line);margin-top:70px;padding-top:28px}
+footer .note{font-size:.85rem;color:var(--muted);margin-bottom:18px}
+footer .note b{color:var(--gold)}
+.backbtn{display:inline-block;color:var(--gold);border:1px solid rgba(227,192,122,.4);border-radius:99px;
+  padding:8px 22px;text-decoration:none;font-size:.88rem}
+.backbtn:hover{background:rgba(227,192,122,.1)}
+
+.tldr{border:1px solid rgba(227,192,122,.35);background:rgba(227,192,122,.06);border-radius:12px;padding:14px 18px;margin:0 0 34px;color:#cdc9e0;font-size:.95rem;line-height:1.8}
+.tldr b{color:var(--gold);margin-right:8px}
+footer{margin-top:56px;border-top:1px solid var(--line);padding-top:22px}
+footer .note{color:var(--muted);font-size:.88rem;line-height:1.8;margin-bottom:18px}
+footer .note b{color:var(--ink)}
+.backbtn{display:inline-block;color:var(--gold);text-decoration:none;border:1px solid rgba(227,192,122,.4);border-radius:99px;padding:8px 18px;font-size:.9rem}
+.backbtn:hover{background:rgba(227,192,122,.1)}
+article table.docinfo td:first-child{white-space:nowrap;color:var(--gold);font-weight:600}
+article table.wide{min-width:720px}
+.srcbox{border:1px solid var(--line);border-radius:12px;padding:12px 18px;background:var(--card);font-size:.88rem;color:var(--muted);margin:0 0 28px}
+.srcbox a{color:var(--ice)}
+article figure{margin:0 0 30px;break-inside:avoid;page-break-inside:avoid}
+article figure img{display:block;max-width:100%;border-radius:10px;border:1px solid var(--line)}
+article figcaption{color:var(--muted);font-size:.86rem;line-height:1.7;margin-top:10px;font-style:italic}
+</style>
+</head>
+<body>
+<nav><a class="logo" href="../index.html">赵鹏<b>淦</b></a><a class="back" href="../index.html#ai">← 返回作品集</a></nav>
+<div class="wrap">
+  <div class="eyebrow">Case Study · AI 产品 / AI 开发向</div>
+  <h1 class="title">AI Coding 实战过程数据拆解案</h1>
+  <div class="subtitle">一个人用 AI 协作做完一款 RPG 的 480 次提交：返工集中在哪、多久被修掉、人机接口在哪打滑，以及三个产品机会</div>
+  <div class="meta"><span>拆解案 · AI 产品 / 过程数据向</span><span>v1.1 · 2026-09 · 独立审核后修订</span><span>git 历史 + 会话日志聚合 · n=1 明标 · 标注表可核对</span></div>
+  <div class="tldr"><b>TL;DR</b>用自己项目的一手过程数据回答 AI Coding 工具该补什么：105 条缺陷 fix 里只有 5% 是编译器能报出的，约四分之一可由测试覆盖，七成只能靠看，空间 / 视觉类无论按提交（50%）还是按缺陷去重（41%）都是最大一类；修复间隔是双峰的——41% 一小时内被 agent 自己修掉、16% 等到 3–7 天后的下一轮走查或审核；51 次工具出错里 25% 是编辑守卫与编码转义这类接口摩擦。v1.0 一条「状态类暴露最慢」的结论在双口径重算后反转，已撤回并写明。三个产品机会各附过程指标，并列出我自己已做的那部分。</div>
+  <div class="srcbox">脚本、数据与图（可重跑复核）：<a href="https://github.com/linynZ/linynZ.github.io/tree/main/analysis">github.com/linynZ/linynZ.github.io · analysis/</a>：aic_process_metrics.py；输出 output_aic.txt；明细 data/aic_commits.csv · data/aic_tool_calls.csv</div>
+  <article>
+<div class="toc"><span class="toctitle">目录 · Contents</span><ul><li><a href="#1">关于本拆解案的方法说明（请先读）</a></li><li><a href="#2">1. 选题说明</a></li><li><a href="#3">2. 数据与口径</a></li><li><a href="#4">3. 返工集中在哪：按提交算一半是空间视觉，按缺陷去重后四成</a></li><li><a href="#5">4. 缺陷多久被修掉：一条撤回的结论，和一个更有用的形状</a></li><li><a href="#6">5. 工作节奏</a></li><li><a href="#7">6. 人机接口在哪里打滑</a></li><li><a href="#8">7. 批量内容的失效模式：逐条看不出，聚合才暴露</a></li><li><a href="#9">8. 三个产品机会，以及我自己先做了哪一部分</a></li><li><a href="#10">9. 局限与不做的推断</a></li><li><a href="#11">10. 复现与核对</a></li></ul></div>
+<h2 id="1">关于本拆解案的方法说明（请先读）</h2>
+<p>这份不是"AI Coding 工具评测"。市面上的评测大多是基准分数或使用感受，我手里有一份更少见的东西：<strong>一个人用 AI Coding 工作流做完一款可玩游戏的 git 历史，以及后续一个月的会话日志</strong>。它们是过程的副产品，不是为了写文章而记录的，没有被"表现好"的动机污染——但有另一种污染：<strong>提交信息由 agent 生成、作者审阅</strong>，fix / feat 的边界是 agent 定的，本文全程记着这一点。</p>
+<p>本文回答三个产品问题：AI 生成的东西<strong>返工集中在哪一类</strong>、缺陷<strong>多久被修掉</strong>、人机接口<strong>在哪里打滑</strong>。每个结论由脚本从日志算出，并按可信度分层：</p>
+<div class="tablewrap"><table class="">
+<thead>
+<tr>
+<th>层</th>
+<th>内容</th>
+<th>可信度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>数据层</strong></td>
+<td>提交时间 / 前缀 / 触及文件；会话内工具调用与出错记录</td>
+<td>一手记录，完整</td>
+</tr>
+<tr>
+<td><strong>标注层</strong></td>
+<td>fix 提交的"缺陷领域"与"暴露手段"由作者人工标注，以正则初标 + 逐条覆盖的形式固化在脚本里；工具错误按正则分八类</td>
+<td>人工标注，可逐条核对，有主观性</td>
+</tr>
+<tr>
+<td><strong>推断层</strong></td>
+<td>"编译抓不到的返工占七成"这类判断，以及由此推出的产品机会</td>
+<td>单项目、单开发者、单工具（n=1），只主张方向</td>
+</tr>
+</tbody>
+</table></div>
+<p>四条硬约束：会话日志<strong>只做聚合统计</strong>，不导出任何对话内容；不与任何其他产品做数值比较（本文只描述作者使用的这一个工具、这两个版本）；两个数据源<strong>时间窗口不同</strong>（游戏开发期 vs 之后的文档 / 作品集期），不拼成一条曲线；下文的"用户"一律指<strong>作为工具使用者的作者本人</strong>，不是玩家。</p>
+<hr />
+<h2 id="2">1. 选题说明</h2>
+<p>AI Coding 产品的公开讨论几乎都围绕"生成质量"：基准通过率、一次成功率、代码接受率。但一个真实项目的成本不在生成那一刻，而在生成之后——错的东西<strong>什么时候</strong>被发现、被<strong>谁</strong>发现、发现它要<strong>多贵</strong>。这三个量决定了 AI 加速到底能不能兑现。</p>
+<p>我的项目是一个方便的观察对象：Unity 回合制 RPG，代码与内容由 agent 生成、本人审阅与实机验证；提交按 conventional commits 写，fix 提交的主题句写清了"错在哪"，让事后标注成为可能。而且它有一个特殊性：<strong>游戏是空间的、视觉的、有状态的</strong>，很多错误不会让编译器报错，正好放大了"验证缺口"这个问题。</p>
+<hr />
+<h2 id="3">2. 数据与口径</h2>
+<p><strong>数据源 A（git）</strong>：仓库首提交是 ECS 重构前的基线快照，此前约一个月的原型期没有 git 记录；游戏本体主开发期到 2026-07-22，共 480 条非 merge 提交、30 个活跃天。前缀分布 feat 201 / fix 108 / docs 99 / chore 38 / 其他 34。fix 与 feat 之比 0.54。仓库另有 08-10 的 4 条提交属于 NPC Agent 接入，不计。</p>
+<p><strong>数据源 B（会话日志）</strong>：同一项目目录下、论文交付后的 15 个 Claude Code 会话（NPC Agent 接入、作品集与拆解案、文档、少量本机运维；已排除正在写本文的那个会话以避免自指）。用户文本消息 173 条（剔除系统占位与斜杠命令回显），工具调用 1,236 次，出错 51 次（4.1%）。</p>
+<p>两个自定义指标：</p>
+<ul>
+<li><strong>引入到修复间隔</strong>：一条 fix 提交触及的文件，距离它们上一次被非 fix 提交改动的小时数。它<strong>不是</strong>"缺陷被发现的时间"——发现时刻在 git 里不可观测；多文件时取最近一次或最早一次触碰是两种口径，本文两种都算（§4）。</li>
+<li><strong>每条用户消息触发的工具调用数</strong>：近似"AI 在一句话之后能自己走多远"。没有参照值，只作本项目描述。</li>
+</ul>
+<hr />
+<h2 id="4">3. 返工集中在哪：按提交算一半是空间视觉，按缺陷去重后四成</h2>
+<p>108 条 fix 里 3 条不是缺陷（数值调整、美术升级、开发工具功能），剔除后 105 条，按缺陷领域人工标注。同一缺陷常被连续多条 fix 追打（接地修了 5 版、海面 7 条），所以再按"缺陷链"去重（同类别、与上一条 fix 共享文件、间隔 ≤ 3 天的连续 fix 合并）：</p>
+<div class="tablewrap"><table class="wide">
+<thead>
+<tr>
+<th>领域</th>
+<th>按提交</th>
+<th>占比</th>
+<th>按缺陷链</th>
+<th>占比</th>
+<th>典型主题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>空间 / 视觉 / 布局</td>
+<td>53</td>
+<td>50%</td>
+<td>34</td>
+<td>41%</td>
+<td>浮空、穿模、出生点掉到安全层、立绘遮住文本、海面朝下被剔除</td>
+</tr>
+<tr>
+<td>流程 / 状态 / 持久化</td>
+<td>24</td>
+<td>23%</td>
+<td>24</td>
+<td>29%</td>
+<td>任务乱序软锁、一次性演出被重复触发、菜单 BGM 槽位从未被播放</td>
+</tr>
+<tr>
+<td>编译 / API / 环境</td>
+<td>10</td>
+<td>10%</td>
+<td>9</td>
+<td>11%</td>
+<td>CS0104 歧义、URP 与内置管线材质、视频编码链路</td>
+</tr>
+<tr>
+<td>审核批次（混合）</td>
+<td>10</td>
+<td>10%</td>
+<td>9</td>
+<td>11%</td>
+<td>多路审核后一条提交修多处</td>
+</tr>
+<tr>
+<td>AI 生成资产质量</td>
+<td>4</td>
+<td>4%</td>
+<td>2</td>
+<td>2%</td>
+<td>多手、身体比例、题库答案位置偏置</td>
+</tr>
+<tr>
+<td>文本 / 术语 / 本地化</td>
+<td>4</td>
+<td>4%</td>
+<td>4</td>
+<td>5%</td>
+<td>术语收敛、说话人名本地化</td>
+</tr>
+</tbody>
+</table></div>
+<figure><img src="img/aic_fix_taxonomy.png" alt="图 1：105 条缺陷 fix 的领域分布，按提交与按缺陷链去重两种口径"><figcaption>图 1：105 条缺陷 fix 的领域分布，按提交与按缺陷链去重两种口径</figcaption></figure>
+<p>再按<strong>暴露手段</strong>标注：编译器或测试程序集直接报出的只有 5 条（5%）；流程 / 状态类 24 条（23%）原则上可由单测或运行时断言覆盖（项目本身有 EditMode 测试）；其余 76 条（72%）依赖目视或实机走查。</p>
+<blockquote>
+<p><strong>结论一：在本项目里，能被编译器直接报出的返工约 5%，测试原则上可覆盖约四分之一，剩下七成只能靠看。</strong> 空间视觉类无论按提交（50%）还是按缺陷去重（41%）都是最大一类。</p>
+</blockquote>
+<p>这对 AI Coding 产品的含义：当前工具的验证闭环是"编译 + 测试"，它覆盖的是<strong>较小的那部分</strong>。对游戏这类"结果是看出来的"领域，生成得越快，看不见的返工堆得越快——这是本项目的观察，不外推到其他领域。</p>
+<p>一个佐证：提交信息明确写了"由作者本人实机验证 / 走查发现"的 fix 有 10 条（10%，只数写明来源的，是下限），其中 8 条是空间视觉类——人眼是这一类缺陷的主要探测器。</p>
+<hr />
+<h2 id="5">4. 缺陷多久被修掉：一条撤回的结论，和一个更有用的形状</h2>
+<p>v1.0 曾写"状态类缺陷暴露最慢，是视觉类的 3.6 倍"。审核指出这个数字完全由口径决定，重算后<strong>方向在两种口径之间反转</strong>：</p>
+<div class="tablewrap"><table class="wide">
+<thead>
+<tr>
+<th>口径</th>
+<th>n</th>
+<th>中位</th>
+<th>P75</th>
+<th>一天内</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>多文件取最近一次触碰（含 docs）</td>
+<td>100</td>
+<td>1.3 h</td>
+<td>13.4 h</td>
+<td>81%</td>
+</tr>
+<tr>
+<td>取最近一次触碰（剔除 docs）</td>
+<td>95</td>
+<td>2.5 h</td>
+<td>15.4 h</td>
+<td>79%</td>
+</tr>
+<tr>
+<td>取最早一次触碰（含 docs）</td>
+<td>100</td>
+<td>12.2 h</td>
+<td>117.5 h</td>
+<td>58%</td>
+</tr>
+<tr>
+<td>取最早一次触碰（剔除 docs）</td>
+<td>95</td>
+<td>13.6 h</td>
+<td>119.7 h</td>
+<td>56%</td>
+</tr>
+</tbody>
+</table></div>
+<p>流程状态类与空间视觉类的中位之比：最近触碰口径 0.7×，最早触碰口径 7.8×。<strong>一个指标换个合理口径就反转，它就不能支持任何"哪类更慢"的结论</strong>，v1.0 那条结论撤回。原因也清楚：状态类 fix 往往是一条大提交改十几个文件，其中有的文件很久没动、有的刚动过，取最近还是最早差一个数量级。</p>
+<p>真正稳健的是分布的<strong>形状</strong>（剔除 docs、最近触碰口径）：</p>
+<figure><img src="img/aic_fix_latency.png" alt="图 2：引入到修复间隔的分布，注意 3–7 天的第二峰"><figcaption>图 2：引入到修复间隔的分布，注意 3–7 天的第二峰</figcaption></figure>
+<p>41% 的 fix 落在一小时内——这是 agent 在同一个工作块里连续迭代（接地 v1→v5 就是这样）；另有 16%（15 条）聚在 3–7 天，逐条看：10 条是空间视觉类、3 条是审核批次，日期集中在 07-03 的海面批修、07-11 的丝路修复、封包前审核与走查编号 Q43——它们不是被"发现得慢"，是<strong>在下一次走查或审核时才被看到</strong>。</p>
+<blockquote>
+<p><strong>结论二：修复间隔是双峰的——要么一小时内被 agent 自己修掉，要么等到几天后的下一轮人工走查 / 审核。</strong> 中间几乎是空的。对产品而言，这意味着人工验证是<strong>批处理</strong>的，而 agent 的迭代是<strong>流式</strong>的；两者之间的缺口就是"看不见的返工"停留的地方。</p>
+</blockquote>
+<hr />
+<h2 id="6">5. 工作节奏</h2>
+<p>提交间隔超过 2 小时视为工作块边界，得到 59 个块，其中 47 个含两次以上提交，块时长中位 1.3 小时、块内提交中位 7 次；最长一块 9.6 小时 28 次提交，提交最多的一块 33 次 8.8 小时；单日最高 38 次；按提交记录自带的 +08:00 时区，22:00–06:00 的提交占 39%。</p>
+<figure><img src="img/aic_cadence.png" alt="图 3：提交按小时分布"><figcaption>图 3：提交按小时分布</figcaption></figure>
+<p>含 audit / 审核 / review / 走查 / playtest / 封包 字样的提交 25 条（5%），其中 fix 11 条，占 fix 的 10%——多路审核后成批修复在本项目是固定工作模式，但不算频繁。</p>
+<p>会话侧：173 条用户消息对应 1,236 次工具调用，平均每条 7.1 次；用户主动打断 2 次（1.2%）；派遣子代理 19 次；上下文压缩 1 次。这些数字<strong>没有参照系</strong>，也没有记录人工验证耗时，所以本文不据此推断"瓶颈在哪"；它们只说明在本项目里，人主动介入的频率很低，而验证成本是这份数据的盲区。</p>
+<hr />
+<h2 id="7">6. 人机接口在哪里打滑</h2>
+<p>51 次工具出错按正则分类（词典见脚本 <code>ERR_TAXO</code>）：</p>
+<div class="tablewrap"><table class="">
+<thead>
+<tr>
+<th>类别</th>
+<th>条数</th>
+<th>占比</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>路径 / 文件不存在</td>
+<td>12</td>
+<td>24%</td>
+</tr>
+<tr>
+<td>其他 / 仅退出码</td>
+<td>11</td>
+<td>22%</td>
+</tr>
+<tr>
+<td>权限 / 护栏 / 用户拒绝</td>
+<td>8</td>
+<td>16%</td>
+</tr>
+<tr>
+<td>编辑守卫：未先读就写</td>
+<td>8</td>
+<td>16%</td>
+</tr>
+<tr>
+<td>编码 / 转义</td>
+<td>5</td>
+<td>10%</td>
+</tr>
+<tr>
+<td>网络 / 代理（用户侧环境）</td>
+<td>3</td>
+<td>6%</td>
+</tr>
+<tr>
+<td>脚本语法 / 运行时</td>
+<td>3</td>
+<td>6%</td>
+</tr>
+<tr>
+<td>依赖 / 命令缺失</td>
+<td>1</td>
+<td>2%</td>
+</tr>
+</tbody>
+</table></div>
+<figure><img src="img/aic_tool_errors.png" alt="图 4：51 次工具出错的分类"><figcaption>图 4：51 次工具出错的分类</figcaption></figure>
+<p>按工具看：PowerShell 出错率 10.1%，Bash 5.2%，Edit 4.7%，Read / Grep / Write / Agent 为 0。PowerShell 的出错大多是 agent 用了该版本不支持的语法（把它当成了另一个 shell），这是模型知识适配问题，不归入接口摩擦。</p>
+<blockquote>
+<p><strong>结论三：25% 的出错是接口摩擦（编辑守卫 + 编码 / 转义，每千次调用约 11 次），不是任务失败。</strong></p>
+</blockquote>
+<p>具体到本项目：Bash 工具会把脚本里的反斜杠序列转成真实字符，含反斜杠的 Python 补丁反复失败，最后的工作方式是"用文件写入工具整体重写脚本再执行"——这是工具层可以直接消灭的摩擦。"未先读就写"的守卫触发 8 次：守卫本身是对的（防止盲写），但它可以做成<strong>自动补读再交回模型决策</strong>，省掉的是报错那一跳，不是读取本身。"其他 / 仅退出码"占 22%，说明错误词典还漏得多，这一类需要人工补标。</p>
+<hr />
+<h2 id="8">7. 批量内容的失效模式：逐条看不出，聚合才暴露</h2>
+<p>这一节引用项目里已写进论文证据的一个案例（<code>docs/eval/quiz_answer_bias_summary.md</code>）。500 道 AI 批量生成的四选一题目，抽查未见事实错误（未做全量核验）；做分布统计后发现：五个题集里有四个的正确答案 <strong>92%–96% 落在第一个选项</strong>，另一个 63% 落在第二个；最长的选项是正确答案的比例也远高于 25% 的随机水平。战斗 UI 原来按数据顺序渲染选项，玩家每回合按同一个键就能赢——"答题即攻击"的核心机制被无声地绕过。修复是显示层洗牌；数据原样保留作证据。</p>
+<blockquote>
+<p><strong>结论四：AI 批量生产的内容需要"分布级"质检，逐条审核发现不了聚合层面的偏置。</strong></p>
+</blockquote>
+<hr />
+<h2 id="9">8. 三个产品机会，以及我自己先做了哪一部分</h2>
+<p>每条机会锚在上面的一个数字上；验收指标改为<strong>过程指标</strong>（v1.0 用的结果指标要么不可测、要么可以靠"不写提交信息"达标，审核已指出）。</p>
+<p><strong>机会 A：把"看"接进验证循环。</strong> 七成返工靠目视暴露，空间视觉类占四到五成。对游戏引擎、UI 这类领域，agent 的验证步骤应包含<strong>自动运行 + 截帧 + 视觉断言</strong>（浮空、遮挡、布局溢出），而不止步于编译通过。难点我自己撞过：接地检测在本项目做了 v1→v5 五版才稳定（蒙皮包围盒会撒谎，得烘焙姿势取最低点）——"可计算"不等于"容易算对"。<strong>已做的部分</strong>：<code>GroundSnap</code> 运行时接地 + 离线 <code>verify_compile.sh</code>。<strong>过程指标</strong>：视觉类改动附带截帧或断言的比例；走查清单里视觉项的首次通过率。</p>
+<p><strong>机会 B：把验证清单做成交付物。</strong> 修复间隔的第二峰说明缺陷在等下一次走查；agent 生成代码时同步生成<strong>状态路径清单</strong>（存档 / 读档、乱序进入、重复触发、暂停恢复）和<strong>批量内容的分布统计</strong>（第 7 节），作为交付物的一部分让人勾选或自动跑。<strong>已做的部分</strong>：封包前的多路审核 + 12 项走查清单、题库偏置报告与显示层洗牌。<strong>过程指标</strong>：每次走查新发现的状态类缺陷数（绝对数，不是份额）；批量内容交付时附带分布统计的比例。</p>
+<p><strong>机会 C：把接口摩擦从报错变成自动恢复。</strong> 编辑守卫触发时自动补读再交回决策；跨 shell 的转义与编码在工具层统一。<strong>已做的部分</strong>：改用"整体重写脚本文件再执行"的工作方式绕过转义问题。<strong>过程指标</strong>：每千次工具调用的守卫报错数（本项目 6.5）与编码类报错数（4.0）。</p>
+<p>排序依据：C 最轻、最确定；B 与 A 共享"自动运行"的基础设施，B 更接近现有工作流（清单已经存在，只是没有产品化）；A 收益最大也最重。</p>
+<hr />
+<h2 id="10">9. 局限与不做的推断</h2>
+<ul>
+<li><strong>n = 1</strong>。一个项目、一个开发者、一个工具的两个版本。本文相信的是方向——编译覆盖不了的返工是大头、修复间隔双峰、接口摩擦可观——不相信任何绝对值。</li>
+<li><strong>标注是人工的</strong>。v1.0 称之为"关键词分类"，审核指出词典是照着提交主题反向拟合的；v1.1 坦白为人工标注并逐条固化，<code>aic_commits.csv</code> 的 fix 行可逐条核对。混合型提交按主要内容归一类。</li>
+<li><strong>提交信息是 agent 写的</strong>。fix 的边界、"由走查发现"的标记都取决于 agent 是否写明；返工也可能藏在 feat / chore 里，本文未还原。</li>
+<li><strong>会话日志窗口不含主开发期</strong>，且任务混杂；主开发期（Unity 代码）的接口摩擦可能不同。</li>
+<li><strong>修复间隔不等于发现时间</strong>，且随口径变动一个数量级，本文只用它的分布形状。</li>
+<li><strong>验证成本没有被记录</strong>。"人验"是本数据的盲区，本文不推断瓶颈在哪。</li>
+<li><strong>数据的产生者就是分析者</strong>。防走偏的办法只有一个：标注先于结论，且把标注表公开让人核对。</li>
+</ul>
+<hr />
+<h2 id="11">10. 复现与核对</h2>
+<pre><code>PYTHONUTF8=1 python analysis/aic_process_metrics.py --repo &lt;仓库路径&gt; --logs &lt;会话日志目录&gt; --exclude &lt;自指会话id&gt;
+</code></pre>
+<p>脚本只读 git 历史与 <code>*.jsonl</code>，输出聚合表与图，不写入任何对话内容。仓库与会话日志不公开；外部读者可核对的是 <code>data/aic_commits.csv</code>（fix 行含主题句、人工标签与"编译器可报出"标记；非 fix 行只保留前缀、时间与文件数）和 <code>data/aic_tool_calls.csv</code>。</p>
+  </article>
+  <footer>
+    <div class="note"><b>说明</b>：数据为作者本人项目的 git 历史与 Claude Code 会话日志的聚合统计，不含任何对话内容；单项目单开发者单工具（n=1），只主张方向；fix 分类为作者人工标注并逐条固化在脚本里，外部读者可核对 data/aic_commits.csv。</div>
+    <a class="backbtn" href="../index.html#ai">← 返回作品集</a>
+  </footer>
+</div>
+</body>
+</html>

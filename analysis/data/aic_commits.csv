@@ -1,0 +1,481 @@
+hash,time,prefix,label,compiler_detectable,n_files,subject(fix only)
+d46f427,2026-06-11T06:03:23+08:00,chore,,False,462,
+0b331f5,2026-06-11T06:13:02+08:00,feat,,False,21,
+76f3f76,2026-06-11T06:19:59+08:00,fix,编译/API/环境,True,1,fix(quiz): qualify UnityEngine.Random to resolve CS0104 ambiguity
+16a11cc,2026-06-11T06:22:12+08:00,chore,,False,1,
+b71c334,2026-06-11T06:27:21+08:00,feat,,False,1,
+62b9d08,2026-06-11T06:39:18+08:00,chore,,False,31,
+fd2bbfd,2026-06-11T06:58:18+08:00,feat,,False,3,
+d679769,2026-06-11T07:04:57+08:00,fix,空间/视觉/布局,False,4,fix(ui): Chinese font support — generate dynamic CJK TMP font asset
+8cf17f7,2026-06-11T10:25:36+08:00,feat,,False,2,
+ed54937,2026-06-11T10:54:20+08:00,chore,,False,3,
+e777ab8,2026-06-11T21:04:25+08:00,chore,,False,2,
+45d9958,2026-06-15T03:56:19+08:00,feat,,False,8,
+0789d64,2026-06-15T03:56:29+08:00,chore,,False,6,
+d4d61e5,2026-06-15T04:01:36+08:00,feat,,False,2,
+82d87a2,2026-06-15T04:36:56+08:00,docs,,False,1,
+2ac4954,2026-06-15T04:50:41+08:00,feat,,False,44,
+a24f092,2026-06-15T05:08:17+08:00,docs,,False,1,
+a083c59,2026-06-15T05:16:28+08:00,feat,,False,25,
+580a6c9,2026-06-15T05:42:37+08:00,chore,,False,1,
+bf5e378,2026-06-15T06:34:56+08:00,fix,流程/状态/持久化,False,11,fix(world): 修复多场景启动流程崩溃 + 传送阵发光/出生点 + DDOL 警告
+7e87ce1,2026-06-15T06:50:14+08:00,fix,空间/视觉/布局,False,4,"fix(world): Hub 传送阵移出立柱环(消除""立柱""重叠) + 发光降到不过曝"
+1517755,2026-06-15T06:59:54+08:00,docs,,False,1,
+b51aa19,2026-06-15T07:03:09+08:00,feat,,False,3,
+58cd905,2026-06-15T07:18:46+08:00,docs,,False,1,
+d0224ff,2026-06-15T07:22:15+08:00,feat,,False,27,
+9b2ce97,2026-06-15T07:29:34+08:00,fix,流程/状态/持久化,False,1,fix(ui): 交互提示仅在 Exploring 显示(战斗/对话/暂停时隐藏)
+bdbd1c1,2026-06-15T07:37:01+08:00,feat,,False,6,
+b7c7d07,2026-06-15T07:50:31+08:00,feat,,False,9,
+2ad7fd9,2026-06-15T08:05:47+08:00,feat,,False,16,
+d51e169,2026-06-15T11:08:32+08:00,feat,,False,8,
+f820e23,2026-06-15T15:44:54+08:00,fix,流程/状态/持久化,False,2,fix(ui): PauseMenu重启/Result 多场景适配——重载 Core 而非当前地图
+ccce0a8,2026-06-15T20:07:24+08:00,feat,,False,21,
+a3517e5,2026-06-15T20:47:01+08:00,feat,,False,22,
+8986315,2026-06-15T20:59:24+08:00,feat,,False,46,
+8088f49,2026-06-15T21:23:20+08:00,docs,,False,1,
+13ba00f,2026-06-15T21:33:27+08:00,feat,,False,8,
+b2a210c,2026-06-16T00:08:47+08:00,feat,,False,9,
+7ff2a1f,2026-06-16T00:13:25+08:00,feat,,False,26,
+9ecf7dd,2026-06-16T02:17:00+08:00,feat,,False,19,
+d1961c3,2026-06-16T02:37:38+08:00,feat,,False,19,
+c1280d3,2026-06-16T03:06:36+08:00,feat,,False,1,
+2c93136,2026-06-16T03:38:42+08:00,feat,,False,6,
+2e20884,2026-06-16T03:52:46+08:00,fix,空间/视觉/布局,False,1,fix(battle-ui): show player 立绘 in original orientation (no mirror)
+0ca4bd9,2026-06-16T04:23:56+08:00,feat,,False,32,
+f27527d,2026-06-16T04:49:34+08:00,fix,空间/视觉/布局,False,1,fix(dialogue): move NPC 立绘 left of the dialogue box (no longer covers text)
+bba09ae,2026-06-16T05:13:19+08:00,feat,,False,5,
+782f6c7,2026-06-16T05:39:33+08:00,feat,,False,3,
+3d42385,2026-06-16T05:59:02+08:00,feat,,False,5,
+6530b88,2026-06-16T06:10:27+08:00,fix,空间/视觉/布局,False,1,fix(player): add runBlend to narrow the run's wide stance (tunable)
+bf8b555,2026-06-16T06:17:19+08:00,feat,,False,2,
+3a401b5,2026-06-16T06:44:41+08:00,feat,,False,4,
+1fa987b,2026-06-16T06:56:13+08:00,feat,,False,185,
+d3c5a2f,2026-06-16T07:12:25+08:00,docs,,False,1,
+a967457,2026-06-16T07:20:20+08:00,feat,,False,7,
+18ad7f0,2026-06-16T07:25:59+08:00,chore,,False,3,
+69f887f,2026-06-16T08:09:51+08:00,fix,空间/视觉/布局,False,3,"fix(level): China look — fog, closer/bigger centred temple, tamed portal, tighter ground"
+134f5c4,2026-06-16T08:31:22+08:00,fix,空间/视觉/布局,False,4,fix(level): remove overlapping legacy NPCs + reliable runtime fog
+9349302,2026-06-16T08:57:00+08:00,feat,,False,3,
+56f999a,2026-06-16T09:10:56+08:00,feat,,False,3,
+9859bb0,2026-06-16T09:53:20+08:00,fix,空间/视觉/布局,False,1,fix(level): ground all China gameplay objects via downward raycast (no more floating)
+c095373,2026-06-16T10:05:29+08:00,fix,空间/视觉/布局,False,1,"fix(level): clean walkable approach (plaza+ramp), temple grounded, boss at door"
+36182a5,2026-06-16T16:11:36+08:00,fix,空间/视觉/布局,False,1,fix(level): spawn ON the ramp (was dropping to the safety floor far below)
+6752661,2026-06-16T16:23:04+08:00,fix,空间/视觉/布局,False,2,fix(level): side walls (no falling off path) + restore NPCs + fix rerun height-creep
+952d268,2026-06-16T16:29:45+08:00,fix,空间/视觉/布局,False,1,fix(level): lift NPCs onto ground + spread NPCs/fragments into separate lanes
+6ae47e4,2026-06-16T16:38:17+08:00,feat,,False,1,
+80aee68,2026-06-16T16:40:41+08:00,feat,,False,1,
+0b2c2cc,2026-06-16T16:43:37+08:00,feat,,False,1,
+a9d53b5,2026-06-16T16:44:56+08:00,feat,,False,1,
+2fdd2b8,2026-06-16T17:06:01+08:00,feat,,False,1,
+d3c0c36,2026-06-16T17:31:35+08:00,feat,,False,49,
+8f8aadf,2026-06-16T17:48:44+08:00,chore,,False,267,
+9311314,2026-06-17T21:15:25+08:00,feat,,False,34,
+eda75bf,2026-06-17T23:52:16+08:00,refactor,,False,7,
+92e9b3b,2026-06-18T02:13:00+08:00,feat,,False,5,
+fde6bd4,2026-06-18T02:19:54+08:00,feat,,False,2,
+25f228b,2026-06-18T02:29:32+08:00,content,,False,1,
+d26df14,2026-06-18T03:41:28+08:00,content,,False,1,
+3e93922,2026-06-18T04:29:07+08:00,content,,False,1,
+c1c531c,2026-06-18T04:37:48+08:00,content,,False,1,
+841f2c4,2026-06-18T05:07:05+08:00,fix,流程/状态/持久化,False,7,"fix(core): Phase 0 stability — save robustness, manager bootstrapping, dead-code cleanup"
+6351efb,2026-06-18T05:14:21+08:00,feat,,False,7,
+06b3972,2026-06-18T05:26:03+08:00,feat,,False,2,
+1f6c34e,2026-06-18T05:38:52+08:00,feat,,False,4,
+7c9e364,2026-06-18T05:56:38+08:00,chore,,False,6,
+56323bc,2026-06-19T07:55:18+08:00,docs,,False,1,
+00d9244,2026-06-19T08:12:21+08:00,feat,,False,4,
+afc5f03,2026-06-19T08:14:46+08:00,feat,,False,2,
+b5eeccf,2026-06-19T08:21:04+08:00,test,,False,8,
+2151fa2,2026-06-19T08:22:05+08:00,docs,,False,1,
+d9a708a,2026-06-19T08:25:14+08:00,chore,,False,8,
+b9bfdfb,2026-06-19T08:54:26+08:00,fix,流程/状态/持久化,False,1,fix(eval): PerfRecorder sampleSeconds wrong (0.0) on Play-exit flush
+e993c14,2026-06-20T01:49:26+08:00,test,,False,6,
+0e450b4,2026-06-20T07:00:29+08:00,docs,,False,1,
+1b8feac,2026-06-20T07:05:44+08:00,docs,,False,1,
+e23091c,2026-06-20T07:17:05+08:00,docs,,False,1,
+02cb558,2026-06-20T07:26:09+08:00,feat,,False,4,
+e85e5b4,2026-06-20T07:30:56+08:00,feat,,False,2,
+98b6161,2026-06-20T07:34:59+08:00,fix,流程/状态/持久化,False,1,fix(world): SetFragmentGate no longer clobbers requiresMemoryFull (preserve dual gate)
+d18cd41,2026-06-20T07:37:22+08:00,feat,,False,4,
+f9e418c,2026-06-20T07:40:47+08:00,feat,,False,4,
+ef9e715,2026-06-20T07:44:34+08:00,feat,,False,2,
+223cefd,2026-06-20T07:48:11+08:00,feat,,False,1,
+9ef6904,2026-06-20T07:51:46+08:00,docs,,False,1,
+8e65845,2026-06-20T07:52:37+08:00,docs,,False,1,
+f8d17aa,2026-06-20T08:00:30+08:00,fix,流程/状态/持久化,False,1,fix(ui): reset EraProgress on New Game (clear earned 记忆星晶)
+806c35d,2026-06-20T08:26:29+08:00,docs,,False,1,
+e722277,2026-06-20T08:32:11+08:00,feat,,False,4,
+07f4cd6,2026-06-20T08:34:34+08:00,feat,,False,1,
+8826957,2026-06-20T08:37:20+08:00,feat,,False,4,
+46e1cd2,2026-06-20T08:41:34+08:00,feat,,False,2,
+5383631,2026-06-20T08:45:18+08:00,feat,,False,2,
+7d410fc,2026-06-20T08:49:20+08:00,feat,,False,3,
+0d61251,2026-06-20T08:54:46+08:00,fix,流程/状态/持久化,False,1,fix(cutscene): demo_intro uses real audio clips (MainMenu-BGM / sequence_success)
+52341f8,2026-06-20T17:22:24+08:00,docs,,False,1,
+9fe4fda,2026-06-20T17:31:08+08:00,feat,,False,4,
+9e85f62,2026-06-20T17:32:00+08:00,chore,,False,1,
+398b706,2026-06-20T17:34:41+08:00,feat,,False,1,
+aedc5cf,2026-06-20T17:37:22+08:00,feat,,False,3,
+126ffb2,2026-06-20T17:40:15+08:00,feat,,False,1,
+db83fe3,2026-06-20T17:42:26+08:00,feat,,False,3,
+a9907e1,2026-06-20T17:46:15+08:00,feat,,False,1,
+be1f64a,2026-06-20T17:49:20+08:00,feat,,False,1,
+3707143,2026-06-20T17:52:00+08:00,docs,,False,1,
+e2cd174,2026-06-20T18:52:36+08:00,fix,流程/状态/持久化,False,2,fix: audio un-pause volume restore + cutscene run try/finally guard
+ecd5f60,2026-06-20T18:57:29+08:00,refactor,,False,17,
+e657851,2026-06-20T19:00:23+08:00,chore,,False,1,
+462fb15,2026-06-20T19:06:20+08:00,refactor,,False,5,
+6db239d,2026-06-21T00:05:32+08:00,chore,,False,5,
+91f675a,2026-06-21T01:17:17+08:00,feat,,False,14,
+56a18a3,2026-06-21T07:49:44+08:00,feat,,False,13,
+0af6efd,2026-06-21T08:08:01+08:00,fix,空间/视觉/布局,False,3,"fix(hub/cutscene): bottom-anchor portraits, portal destination prompts, portal-ring-based floor/spawn"
+76d4d1e,2026-06-21T08:21:43+08:00,fix,空间/视觉/布局,False,8,"fix(cutscene): real-transparent Xuanji portraits, lift portraits above dialogue box, China intro shows protagonist"
+056aba6,2026-06-22T01:51:04+08:00,chore,,False,2,
+8a889ef,2026-06-22T02:08:25+08:00,fix,空间/视觉/布局,False,1,fix(npc): ground swapped-in model to capsule floor (no more floating feet)
+ffe082d,2026-06-22T02:29:13+08:00,feat,,False,1,
+57e9f6f,2026-06-22T02:50:02+08:00,feat,,False,1,
+d8a7d4f,2026-06-22T05:16:37+08:00,docs,,False,2,
+144046c,2026-06-22T05:26:59+08:00,fix,编译/API/环境,False,1,fix(comfyui): node renamed ImagePadForOutpainting → ImagePadForOutpaint (ComfyUI 0.25.1)
+666c3be,2026-06-22T05:31:06+08:00,tune,,False,1,
+e4d88ef,2026-06-22T05:38:34+08:00,fix,AI 生成资产质量,False,1,fix(comfyui): kill extra-hands in outpaint — drop conflicting 'arms at sides' pose
+562fe4d,2026-06-22T05:50:19+08:00,fix,AI 生成资产质量,False,1,fix(comfyui): correct body proportions in outpaint — deeper lower-body canvas
+03bb02f,2026-06-22T05:58:04+08:00,fix,AI 生成资产质量,False,1,"fix(comfyui): faithful robe continuation, stop the weird invented lower body"
+c21ea44,2026-06-22T06:32:31+08:00,feat,,False,2,
+2594401,2026-06-23T04:05:42+08:00,fix,编译/API/环境,False,1,fix(editor): default NPC materials to URP/Lit — ToonOutline is Built-in-RP (magenta in URP)
+f3da6c2,2026-06-23T04:13:16+08:00,fix,空间/视觉/布局,False,1,"fix(editor): default Face Yaw to 180 — Hunyuan exports face -Z, NPC turns +Z to player"
+267ff39,2026-06-23T04:43:05+08:00,feat,,False,1,
+953f004,2026-06-23T04:50:30+08:00,feat,,False,17,
+ee25720,2026-06-23T05:19:41+08:00,feat,,False,1,
+c1ff678,2026-06-23T05:25:41+08:00,feat,,False,6,
+2658169,2026-06-23T05:27:16+08:00,docs,,False,1,
+b1e1570,2026-06-23T05:45:50+08:00,fix,审核批次（混合）,False,7,"fix: correctness batch from full project review (defeat dead-end, loops, leaks, save-guard)"
+b21893b,2026-06-23T06:02:35+08:00,fix,非缺陷,False,4,fix(battle): unlock all 5 China element skills at level 1 (was 1/2/2/3/4)
+1054587,2026-06-23T06:21:34+08:00,balance,,False,1,
+4935bac,2026-06-23T18:23:40+08:00,feat,,False,6,
+06e03aa,2026-06-23T18:30:03+08:00,chore,,False,2,
+8472af7,2026-06-23T18:33:08+08:00,feat,,False,2,
+e04e93d,2026-06-23T18:42:32+08:00,chore,,False,1,
+e10d5e8,2026-06-23T18:46:19+08:00,feat,,False,2,
+1820bff,2026-06-23T18:59:18+08:00,chore,,False,2,
+d968892,2026-06-23T18:59:18+08:00,polish,,False,1,
+3ab9dab,2026-06-23T19:10:25+08:00,polish,,False,1,
+babf978,2026-06-23T19:13:53+08:00,polish,,False,1,
+06d3d7b,2026-06-23T19:16:06+08:00,polish,,False,1,
+cdebab8,2026-06-23T19:20:33+08:00,polish,,False,1,
+a3e5363,2026-06-23T19:22:57+08:00,chore,,False,1,
+7e897ed,2026-06-23T19:23:53+08:00,docs,,False,1,
+43d640c,2026-06-27T22:15:23+08:00,docs,,False,3,
+c2f72cd,2026-06-27T22:32:39+08:00,feat,,False,16,
+ed13679,2026-06-27T22:32:40+08:00,chore,,False,1809,
+9f8e6ef,2026-06-27T22:40:16+08:00,feat,,False,5,
+145c9d8,2026-06-27T22:42:03+08:00,docs,,False,1,
+2103bab,2026-06-28T01:11:15+08:00,docs,,False,1,
+999d31d,2026-06-28T01:23:21+08:00,feat,,False,5,
+999d80c,2026-06-28T01:28:33+08:00,feat,,False,5,
+4828199,2026-06-28T01:31:18+08:00,feat,,False,3,
+d817a85,2026-06-28T01:32:01+08:00,fix,流程/状态/持久化,False,2,fix(companion): gate body + idle chatter to a loaded map (never at main menu)
+684bd32,2026-06-28T01:32:48+08:00,docs,,False,1,
+f5ecc43,2026-06-28T01:47:13+08:00,fix,编译/API/环境,True,1,fix(companion): qualify CompanionLines.ParseMood in CompanionLine.Mood (CS0103)
+066803e,2026-06-28T02:15:29+08:00,fix,空间/视觉/布局,False,2,fix(companion): state-aware show/position + faster banter pacing
+d531f06,2026-06-28T02:39:51+08:00,feat,,False,3,
+3371929,2026-06-28T02:56:03+08:00,fix,流程/状态/持久化,False,7,fix: Xuanji shows in hub (timeScale gate) + env backdrop auto-spawns
+58d50f0,2026-06-28T03:14:12+08:00,docs,,False,1,
+b9a5f87,2026-06-28T03:22:17+08:00,fix,空间/视觉/布局,False,1,"fix(companion): move battle speaker to centre (was top, blocked enemy HP bars)"
+e7c2a62,2026-06-28T03:57:35+08:00,feat,,False,6,
+5973ea6,2026-06-28T04:15:30+08:00,fix,空间/视觉/布局,False,2,fix(env): ocean is now a RING around the island (land stays dry) + China-only
+95da5e4,2026-06-28T04:45:27+08:00,fix,空间/视觉/布局,False,2,fix(env): visible-by-default ocean (plane below land + land occlusion) + scene-poll spawn + diagnostics
+39212ef,2026-06-28T05:01:31+08:00,feat,,False,1,
+9f13543,2026-06-28T05:05:29+08:00,fix,空间/视觉/布局,False,1,fix(env): sea level from player feet (not centre raycast) + default rise 0.5->0.1
+78dac99,2026-06-28T05:10:42+08:00,tune,,False,1,
+3245990,2026-06-28T05:22:20+08:00,feat,,False,1,
+93d09ed,2026-06-28T05:35:36+08:00,feat,,False,1,
+d5c5372,2026-06-28T05:44:23+08:00,fix,流程/状态/持久化,False,2,fix(companion): delay idle chatter at start (quiet during tutorial overlay + 30s map-entry grace)
+dc5536d,2026-06-28T05:46:10+08:00,feat,,False,2,
+81038c1,2026-06-28T05:55:47+08:00,fix,编译/API/环境,True,5,"fix+feat(env/vfx): fix AmbientVFX compile + add post-FX, sky birds, wind sway (advanced VFX batch)"
+343048c,2026-06-28T06:06:12+08:00,fix,空间/视觉/布局,False,1,fix(companion): hide speaker at ALL phases when not presentable (no overlap with NPC dialogue)
+9c8d47a,2026-06-28T06:44:10+08:00,fix,审核批次（混合）,False,6,fix(china): P0 quest backfill (no out-of-order soft-lock) + P1/P2 batch
+e8cbfc7,2026-06-28T06:46:17+08:00,docs,,False,2,
+34ba63b,2026-06-28T08:44:13+08:00,feat,,False,1,
+a6ebe25,2026-06-28T09:02:48+08:00,fix,空间/视觉/布局,False,1,fix(egypt): ground-snap gameplay via downward raycast (bounds.min.y was a -12 foundation)
+9779f34,2026-06-28T09:05:14+08:00,fix,空间/视觉/布局,False,1,fix(egypt): add MeshColliders to pack env (walkable + raycast ground works)
+d595071,2026-06-28T09:24:00+08:00,feat,,False,1,
+532eaf1,2026-06-28T09:31:05+08:00,fix,空间/视觉/布局,False,1,fix(egypt): keep only demo env (remove desert/backdrop) + spawn at perimeter facing buildings + clamp placement to ground (no roof/air)
+edb1d48,2026-06-28T09:38:59+08:00,feat,,False,1,
+c4f4ec1,2026-06-28T09:57:16+08:00,wip,,False,271,
+aee4345,2026-07-02T23:57:06+08:00,fix,空间/视觉/布局,False,21,fix(egypt): anchor placement on user-tuned spawn + per-spot walkability (single-jump reachable)
+702e01a,2026-07-03T00:19:36+08:00,feat,,False,5,
+911de8f,2026-07-03T01:04:24+08:00,fix,流程/状态/持久化,False,3,fix(companion): era-scope barks + per-era chatter for all five eras
+d953468,2026-07-03T01:25:20+08:00,fix,空间/视觉/布局,False,2,fix(egypt): return portal + hub fromEgypt spawn + ground-snapped arrivals
+ac91710,2026-07-03T01:49:45+08:00,content,,False,2,
+625b78a,2026-07-03T01:57:13+08:00,feat,,False,4,
+a3c8632,2026-07-03T02:09:44+08:00,fix,空间/视觉/布局,False,3,fix(vfx): starry-blue crystal fragments + restore China ocean (sea level from outer ground)
+ad3407f,2026-07-03T02:33:06+08:00,fix,空间/视觉/布局,False,1,fix(ocean): sanitize stale negative rise tuning + median-based outer ground probe
+448e956,2026-07-03T02:38:05+08:00,fix,空间/视觉/布局,False,1,"fix(ocean): flip annulus winding — water/beach faced DOWN, culled invisible from above"
+e62a49c,2026-07-03T02:52:02+08:00,fix,空间/视觉/布局,False,1,fix(ocean): shoreline dips under the beach — no more hovering water edge
+624d389,2026-07-03T03:05:48+08:00,chore,,False,1,
+ad2a650,2026-07-03T03:43:01+08:00,fix,审核批次（混合）,False,6,"fix(hardening): batch-1 audit fixes — asset recycling, NPC persistence, checkpoints, silent SFX"
+db970e0,2026-07-03T04:17:56+08:00,feat,,False,13,
+c1b7b70,2026-07-03T04:37:37+08:00,fix,流程/状态/持久化,False,13,"fix(audio): purge assassin-pack leftovers — seal-break cue, cutscene BGM retarget, battle impact SFX"
+3f3ca16,2026-07-03T04:38:06+08:00,chore,,False,8,
+c2cda46,2026-07-03T04:45:59+08:00,chore,,False,3,
+e576b71,2026-07-03T04:48:54+08:00,feat,,False,2,
+a6cbd0f,2026-07-03T05:09:27+08:00,feat,,False,6,
+1194380,2026-07-03T05:16:38+08:00,feat,,False,1,
+d625ddd,2026-07-03T05:22:40+08:00,feat,,False,1,
+908bba0,2026-07-03T05:24:22+08:00,feat,,False,3,
+0ad0121,2026-07-03T05:50:20+08:00,feat,,False,9,
+dd55fb9,2026-07-03T06:09:20+08:00,feat,,False,7,
+0976be2,2026-07-03T07:57:41+08:00,chore,,False,6,
+bd3e7e3,2026-07-03T08:02:48+08:00,feat,,False,2,
+9507885,2026-07-03T09:03:32+08:00,fix,非缺陷,False,1,fix(bench): F2 benchmark mode is one-way with a visible watermark
+fc6db27,2026-07-03T09:26:00+08:00,results,,False,8,
+26be1d8,2026-07-03T09:30:10+08:00,docs,,False,1,
+5728b9d,2026-07-04T02:47:24+08:00,chore,,False,6,
+2010282,2026-07-04T03:00:56+08:00,perf,,False,2,
+e5b82cc,2026-07-04T03:23:44+08:00,fix,AI 生成资产质量,False,8,fix(quiz): neutralise answer-position bias with display-layer shuffle
+c89bf12,2026-07-04T03:31:34+08:00,fix,审核批次（混合）,False,12,fix: compliance + correctness batch from the 4th full audit
+5ca0e83,2026-07-04T03:36:00+08:00,feat,,False,14,
+7ea1e8c,2026-07-04T03:41:53+08:00,feat,,False,7,
+5aeadf3,2026-07-04T03:43:32+08:00,docs,,False,1,
+d7a36c0,2026-07-04T06:51:18+08:00,fix,编译/API/环境,True,3,fix(tests): restore vendored UniVRM package test assets - unbreak VRM10.Tests
+22177ad,2026-07-04T06:55:56+08:00,fix,编译/API/环境,True,38,fix(tests): drop vendored VRM10.Tests - unrunnable outside the UniVRM dev repo
+4567906,2026-07-04T07:03:10+08:00,feat,,False,4,
+0dcb481,2026-07-04T07:06:43+08:00,docs,,False,1,
+e01d908,2026-07-04T07:22:09+08:00,tools,,False,1,
+4b5f494,2026-07-04T07:46:46+08:00,feat,,False,8,
+2c805e3,2026-07-04T08:13:32+08:00,feat,,False,1,
+62edb25,2026-07-04T08:13:36+08:00,assets,,False,3,
+80902e8,2026-07-04T08:22:38+08:00,assets,,False,3,
+a90d7ac,2026-07-04T08:39:35+08:00,feat,,False,22,
+f3a4125,2026-07-04T08:49:03+08:00,assets,,False,3,
+46e52ef,2026-07-04T08:52:32+08:00,feat,,False,2,
+8eac925,2026-07-04T08:54:00+08:00,feat,,False,2,
+63698d3,2026-07-04T09:18:35+08:00,feat,,False,3,
+538bf61,2026-07-04T09:21:13+08:00,feat,,False,1,
+03fcfb4,2026-07-04T09:22:40+08:00,feat,,False,1,
+b66a9ef,2026-07-04T09:41:46+08:00,feat,,False,12,
+10681ee,2026-07-04T09:42:13+08:00,chore,,False,1,
+e0d4e37,2026-07-04T09:53:14+08:00,docs,,False,1,
+4bcb31e,2026-07-04T10:05:44+08:00,docs,,False,1,
+72b3eca,2026-07-04T10:50:27+08:00,fix,文本/术语/本地化,False,2,"fix(docs): Xuanji canon correction — she is a white fox (awakened: nine-tailed celestial fox), not a dumpling"
+2549ed7,2026-07-04T11:19:40+08:00,feat,,False,9,
+fe86d51,2026-07-04T11:28:51+08:00,fix,流程/状态/持久化,False,1,fix(title): texture-type fallback + diagnostic warning when key art fails to load
+a2cdea8,2026-07-04T11:33:39+08:00,art,,False,1,
+9e59238,2026-07-04T11:56:38+08:00,feat,,False,8,
+9541ecd,2026-07-04T11:57:21+08:00,chore,,False,3,
+d22fec2,2026-07-04T12:05:52+08:00,feat,,False,4,
+fa55c38,2026-07-05T00:03:08+08:00,chore,,False,2,
+94446fe,2026-07-05T01:03:14+08:00,fix,审核批次（混合）,False,3,"fix(battle/video): review P1 batch - portrait anim ownership, timeScale safety net, self-owned VideoGate cleanup"
+cd366e3,2026-07-05T01:32:18+08:00,fix,审核批次（混合）,False,10,"fix(polish): review P2 batch - unified freeze clock, video volume, click-sound semantics, settings single-source"
+b93c775,2026-07-05T01:55:01+08:00,fix,文本/术语/本地化,False,5,"fix(i18n): SOText key families + live language refresh - quest tracker stuck in Chinese, Xuanji name/line language mismatch"
+a997d4b,2026-07-05T01:58:15+08:00,docs,,False,1,
+e25bb48,2026-07-05T05:11:03+08:00,docs,,False,7,
+e7b4331,2026-07-05T05:17:02+08:00,docs,,False,1,
+22aa44c,2026-07-05T05:19:01+08:00,feat,,False,2,
+cec3285,2026-07-05T05:19:34+08:00,docs,,False,1,
+a3560e5,2026-07-05T05:19:50+08:00,refactor,,False,2,
+14747a1,2026-07-05T05:21:44+08:00,fix,流程/状态/持久化,False,1,fix(collectible): already-collected fragments self-destruct on map re-entry (audit P1)
+e082769,2026-07-05T05:22:57+08:00,feat,,False,1,
+5a25e35,2026-07-05T05:32:32+08:00,feat,,False,1,
+d055afc,2026-07-05T05:33:07+08:00,chore,,False,2,
+1394e04,2026-07-05T05:34:10+08:00,balance,,False,12,
+89b6ea7,2026-07-05T05:36:42+08:00,content,,False,1,
+3e65696,2026-07-05T05:41:06+08:00,content,,False,1,
+26358d2,2026-07-05T05:44:57+08:00,docs,,False,2,
+2d05077,2026-07-05T06:14:58+08:00,audio,,False,8,
+f3c1f76,2026-07-05T08:26:27+08:00,fix,文本/术语/本地化,False,6,fix(era): promote Greece/Rome/Trade to BuiltEras + localize cutscene speaker names
+cae07ab,2026-07-05T08:26:27+08:00,content,,False,4,
+0f26eea,2026-07-05T09:02:44+08:00,feat,,False,150,
+729bd71,2026-07-05T09:29:14+08:00,content,,False,1,
+cf25e13,2026-07-05T23:55:12+08:00,docs,,False,1,
+2d0e5b2,2026-07-06T00:06:48+08:00,docs,,False,1,
+58f0a3a,2026-07-06T00:11:41+08:00,docs,,False,1,
+78241fb,2026-07-06T00:12:38+08:00,feat,,False,1,
+41ea6ae,2026-07-06T00:13:38+08:00,feat,,False,1,
+685052b,2026-07-06T00:15:12+08:00,feat,,False,2,
+a503358,2026-07-06T00:15:37+08:00,feat,,False,1,
+ea57364,2026-07-06T00:17:29+08:00,docs,,False,1,
+8920ead,2026-07-06T00:54:07+08:00,content,,False,2,
+0f5c2b0,2026-07-06T01:14:43+08:00,feat,,False,7,
+81b6353,2026-07-06T01:36:04+08:00,fix,流程/状态/持久化,False,2,fix(greece): swap sage/historian GLBs (user Play verification caught mismatch)
+a8bd922,2026-07-06T01:59:23+08:00,fix,流程/状态/持久化,False,44,fix(world): portal star-wake replay storm + era skyboxes lost on scene rebuilds; feat: Greek NPC prefabs
+1dbc949,2026-07-06T02:22:36+08:00,fix,空间/视觉/布局,False,1,fix(world): backdrop ring skirt closes the Egypt horizon seam; hazy-blue Greece islands
+2630151,2026-07-06T03:09:44+08:00,feat,,False,291,
+7766444,2026-07-06T04:14:14+08:00,fix,空间/视觉/布局,False,2,fix(era-tool): particle bounds poisoned the placement anchor (Q21 Rome void row)
+de2f0dd,2026-07-06T04:49:18+08:00,feat,,False,3,
+f203639,2026-07-06T04:57:56+08:00,docs,,False,1,
+69e7bb1,2026-07-06T05:05:10+08:00,docs,,False,1,
+4cbd5de,2026-07-06T05:12:00+08:00,feat,,False,9,
+8552314,2026-07-06T06:25:14+08:00,feat,,False,7,
+40f7193,2026-07-06T06:37:06+08:00,feat,,False,15,
+16f62af,2026-07-06T07:06:36+08:00,docs,,False,1,
+ec2d732,2026-07-06T07:30:37+08:00,feat,,False,7,
+e4b8369,2026-07-06T08:02:58+08:00,feat,,False,16,
+f971a89,2026-07-06T08:07:49+08:00,feat,,False,12,
+c9431cd,2026-07-06T08:33:26+08:00,feat,,False,32,
+a8234c0,2026-07-06T08:52:15+08:00,docs,,False,1,
+92a8f5a,2026-07-06T08:54:10+08:00,feat,,False,4,
+a9e90af,2026-07-06T08:54:41+08:00,feat,,False,2,
+dd2d9c7,2026-07-06T08:56:18+08:00,feat,,False,1,
+168a3f7,2026-07-06T08:56:49+08:00,feat,,False,4,
+85ae618,2026-07-06T08:58:05+08:00,feat,,False,1,
+fcad43d,2026-07-06T08:59:57+08:00,feat,,False,3,
+1639d93,2026-07-06T20:34:20+08:00,feat,,False,3,
+b343617,2026-07-06T20:34:50+08:00,feat,,False,2,
+b37127a,2026-07-06T20:37:55+08:00,docs,,False,1,
+380e3f3,2026-07-06T23:04:36+08:00,feat,,False,6,
+8664e8b,2026-07-06T23:08:43+08:00,feat,,False,15,
+0fd78dd,2026-07-06T23:12:38+08:00,docs,,False,1,
+c48a042,2026-07-08T21:14:13+08:00,fix,审核批次（混合）,False,5,"fix: audit P2 cleanup — remove dead self-test, harden FallRescue, cache portraits"
+8e757dc,2026-07-09T00:54:30+08:00,docs,,False,1,
+3063e0a,2026-07-09T01:35:31+08:00,docs,,False,1,
+1c68700,2026-07-09T02:33:17+08:00,docs,,False,1,
+e2b2036,2026-07-09T03:12:58+08:00,docs,,False,1,
+03da45b,2026-07-09T03:18:59+08:00,feat,,False,4,
+3d14de8,2026-07-09T03:20:51+08:00,feat,,False,5,
+5f9f51a,2026-07-09T03:23:51+08:00,feat,,False,9,
+5b31cb3,2026-07-09T03:26:11+08:00,feat,,False,7,
+8709c9e,2026-07-09T03:28:03+08:00,feat,,False,4,
+1dbc276,2026-07-09T03:30:18+08:00,feat,,False,2,
+3d5b31d,2026-07-09T03:31:42+08:00,feat,,False,3,
+5663604,2026-07-09T03:33:35+08:00,feat,,False,2,
+2ae3fe9,2026-07-09T04:44:15+08:00,feat,,False,5,
+d3411e1,2026-07-09T05:22:28+08:00,feat,,False,9,
+4381b21,2026-07-09T05:30:11+08:00,fix,空间/视觉/布局,False,2,fix(finale): double-faced rift (back read as plain black plate) + spawn clear of return gate (camera sat inside its quads)
+e49ac7e,2026-07-09T05:36:12+08:00,fix,空间/视觉/布局,False,3,fix(finale): sync camera yaw to spawn facing on teleport + raise the colossus clear of the sea
+5e3ba0f,2026-07-09T05:43:58+08:00,feat,,False,8,
+d8f95fb,2026-07-09T05:55:13+08:00,docs,,False,1,
+1078528,2026-07-09T06:14:13+08:00,docs,,False,1,
+c75691f,2026-07-09T06:47:11+08:00,docs,,False,1,
+61f3e91,2026-07-09T07:26:08+08:00,feat,,False,6,
+b83491d,2026-07-09T07:37:52+08:00,feat,,False,10,
+be5441e,2026-07-09T07:37:54+08:00,feat,,False,19,
+2942142,2026-07-09T07:51:17+08:00,feat,,False,14,
+cca41fd,2026-07-09T08:08:00+08:00,fix,空间/视觉/布局,False,6,"fix(finale): playtest round 1 - player-paced CG advance with hint, trueform facing, F9 level compensation"
+79fcc5d,2026-07-09T08:11:42+08:00,feat,,False,6,
+25f4f59,2026-07-10T21:10:33+08:00,docs,,False,1,
+a183cb4,2026-07-10T21:11:28+08:00,docs,,False,1,
+3cd8926,2026-07-11T01:38:52+08:00,feat,,False,13,
+52c9077,2026-07-11T02:02:16+08:00,feat,,False,2,
+ee28566,2026-07-11T02:28:30+08:00,fix,审核批次（混合）,False,20,fix: pre-ship audit round - 6 P1 + P2 batch from four parallel reviews
+40525e7,2026-07-11T04:11:43+08:00,fix,流程/状态/持久化,False,6,"fix(quiz): no-repeat question scheduling - never repeat within a battle, avoid recent cross-battle repeats"
+ca5b440,2026-07-11T04:27:07+08:00,feat,,False,1,
+be1c3b4,2026-07-11T04:34:43+08:00,fix,空间/视觉/布局,False,4,"fix(trade): lore card actually shows, black tents re-meshed, prop blocker colliders"
+87b32ed,2026-07-11T10:14:18+08:00,fix,空间/视觉/布局,False,1,"fix(trade): repaired scene baked - tents re-meshed, 9 prop blocker colliders fitted"
+f65de6f,2026-07-11T10:17:57+08:00,feat,,False,3,
+5da526d,2026-07-11T10:33:11+08:00,fix,空间/视觉/布局,False,5,"fix(trade): lore card as a self-booting UI (root fix), slim-pole blocker colliders"
+c8a2f7f,2026-07-11T10:54:55+08:00,fix,空间/视觉/布局,False,1,"fix(ui): lore card auto-height - grows to fit the text, font-shrink backstop (Q29)"
+60cb676,2026-07-11T10:58:51+08:00,fix,空间/视觉/布局,False,1,fix(trade): repair round-2 baked - post/pole capsules + fire bowl colliders in scene
+9760126,2026-07-11T11:00:59+08:00,fix,空间/视觉/布局,False,3,fix(finale): trueform hovered above the platform - animated-pose ground snap
+fc2dac5,2026-07-11T11:09:59+08:00,fix,空间/视觉/布局,False,1,"fix(finale): trueform STILL hovered (Q30) - skinned bounds lie, bake the pose instead"
+373126d,2026-07-11T11:15:12+08:00,fix,空间/视觉/布局,False,1,"fix(finale): residual hover - sample the idle loop's lowest point, not one frame"
+89c36d7,2026-07-11T11:18:38+08:00,fix,空间/视觉/布局,False,1,fix(finale): grounding v4 - unambiguous scale math (bake raw + localToWorld) + settle margin
+dc81a43,2026-07-11T11:26:57+08:00,fix,空间/视觉/布局,False,1,fix(finale): grounding v5 - stable reading + empirically calibrated settle
+7bfccc1,2026-07-11T15:13:25+08:00,fix,流程/状态/持久化,False,1,fix(audio): one unbroken act-1 theme from abyss entry to act-2 battle
+625490e,2026-07-11T16:00:18+08:00,feat,,False,2,
+28a3d0b,2026-07-11T16:19:20+08:00,feat,,False,2,
+4b581a4,2026-07-11T17:33:57+08:00,feat,,False,6,
+238d1c5,2026-07-12T05:05:55+08:00,fix,流程/状态/持久化,False,3,fix(ui): title-screen leakage sealed + Xuanji silent in the finale (Q31/Q32)
+b76dd41,2026-07-12T05:28:54+08:00,feat,,False,1,
+dae0b9b,2026-07-12T05:47:59+08:00,feat,,False,3,
+576c853,2026-07-12T10:08:41+08:00,chore,,False,9,
+b91ad03,2026-07-15T14:22:49+08:00,chore,,False,17,
+2de7310,2026-07-15T14:31:12+08:00,docs,,False,1,
+2bf2cfd,2026-07-15T14:35:36+08:00,docs,,False,1,
+37e5b4e,2026-07-15T15:07:28+08:00,feat,,False,4,
+c217b9b,2026-07-15T15:08:10+08:00,feat,,False,2,
+3b321ec,2026-07-15T15:09:32+08:00,feat,,False,1,
+a107e09,2026-07-15T15:12:06+08:00,docs,,False,1,
+95cf232,2026-07-15T15:30:47+08:00,fix,空间/视觉/布局,False,2,fix(companion): stand the Xuanji medallion upright + camera-facing billboard (Q33)
+9e985b0,2026-07-15T15:32:33+08:00,fix,流程/状态/持久化,False,1,fix(tools): Xuanji bake overwrites its material instead of stacking _1 copies
+288327d,2026-07-15T15:35:56+08:00,fix,空间/视觉/布局,False,1,"fix(tools): flip Xuanji head-up (pitch +90/yaw 0 keeps face forward, inverts head axis)"
+a870939,2026-07-15T15:43:38+08:00,chore,,False,9,
+4ceeafc,2026-07-15T16:33:33+08:00,docs,,False,1,
+bdb6dfd,2026-07-15T17:09:08+08:00,docs,,False,1,
+b9c30a9,2026-07-15T17:23:38+08:00,fix,文本/术语/本地化,False,6,fix(canon): terminology convergence across all text data (batch A)
+d05e3b4,2026-07-15T17:23:38+08:00,feat,,False,7,
+86abcca,2026-07-15T17:36:29+08:00,feat,,False,5,
+53b53a5,2026-07-15T19:26:28+08:00,feat,,False,4,
+9789bdb,2026-07-15T19:44:31+08:00,feat,,False,4,
+c8fbda7,2026-07-15T19:59:34+08:00,feat,,False,5,
+6199253,2026-07-16T02:04:41+08:00,feat,,False,25,
+892604d,2026-07-16T02:19:55+08:00,fix,空间/视觉/布局,False,1,fix(companion): star cushion velocity curves must share one mode
+e2bd1c4,2026-07-16T02:21:26+08:00,chore,,False,2,
+6a8a7d5,2026-07-16T02:39:55+08:00,fix,审核批次（混合）,False,3,fix(gameplay): audit-trio self-review pass - echo answer lock + errata target ambiguity
+9f67a32,2026-07-16T03:20:46+08:00,docs,,False,1,
+c3d1be0,2026-07-16T03:21:26+08:00,chore,,False,2,
+4624441,2026-07-16T03:34:30+08:00,feat,,False,3,
+be27438,2026-07-16T03:40:33+08:00,feat,,False,2,
+28752a5,2026-07-16T11:29:31+08:00,feat,,False,25,
+18fb1aa,2026-07-16T12:14:41+08:00,fix,流程/状态/持久化,False,6,fix(prologue): CG 开场黑屏点击 bug + 记忆之海缩写统一为「忆海」+ 熄灭 montage 语序
+411ad1f,2026-07-16T13:02:34+08:00,feat,,False,12,
+d203c9a,2026-07-16T13:39:29+08:00,docs,,False,1,
+000e14d,2026-07-16T13:43:52+08:00,docs,,False,1,
+b2e2dab,2026-07-16T14:02:37+08:00,feat,,False,5,
+59fac53,2026-07-16T14:22:53+08:00,docs,,False,2,
+1105f75,2026-07-17T02:28:42+08:00,feat,,False,2,
+427e619,2026-07-17T11:42:00+08:00,docs,,False,1,
+fbe3f65,2026-07-17T11:45:41+08:00,docs,,False,2,
+59715e0,2026-07-17T12:07:49+08:00,fix,编译/API/环境,False,1,fix(video): newgame.mp4 转码 Constrained Baseline 无B帧修 Unity 黑屏噪音（High profile+B帧时间戳被 WindowsVideoMedia 判偏斜致画面不呈现/音频劣化）
+c6ae8cf,2026-07-17T12:10:52+08:00,docs,,False,1,
+258bbbe,2026-07-17T12:18:11+08:00,fix,编译/API/环境,False,4,fix(video): 召唤片改 VP8 webm 走 Unity 内置解码器 + VideoGate 容器回退与错误日志（本机 MF H.264 解码链路不可用，baseline mp4 仍黑屏，根治=绕开系统解码）
+a5c4e23,2026-07-17T12:19:34+08:00,docs,,False,1,
+aef0a1f,2026-07-17T12:28:33+08:00,fix,空间/视觉/布局,False,1,fix(ui): 暂停菜单皮肤塌缩修复（Q43）——skinRoot 从 GameCanvas 子级改为场景根 Canvas（嵌套 Canvas 使 Overlay/Scaler/sortingOrder 失效、rect 缩成小方块）
+43c92aa,2026-07-17T12:44:19+08:00,feat,,False,4,
+1de0b61,2026-07-17T12:47:46+08:00,docs,,False,1,
+b5b398a,2026-07-17T17:18:06+08:00,fix,流程/状态/持久化,False,2,fix(audio): 标题界面 BGM 接线——bgmMenu 槽位自始存在但从未被播放（状态机只管探索/战斗/暂停）；MainMenuUI.Show 播主题曲+PlayMenuTheme 按需加载防启动顺序竞态
+9468ea2,2026-07-17T17:21:44+08:00,docs,,False,2,
+8a17bc1,2026-07-17T17:41:06+08:00,docs,,False,1,
+b2a7307,2026-07-18T09:35:19+08:00,docs,,False,4,
+dabef5e,2026-07-18T09:38:53+08:00,docs,,False,9,
+1dca11f,2026-07-18T09:39:17+08:00,chore,,False,7,
+2f4e55e,2026-07-18T09:55:24+08:00,docs,,False,8,
+2aa4819,2026-07-18T10:03:45+08:00,docs,,False,2,
+830f063,2026-07-18T11:01:45+08:00,feat,,False,1,
+d87b454,2026-07-18T11:20:54+08:00,feat,,False,2,
+cf3d9bc,2026-07-18T11:30:25+08:00,feat,,False,2,
+1def826,2026-07-18T11:34:26+08:00,feat,,False,1,
+23653eb,2026-07-19T00:39:36+08:00,feat,,False,8,
+f4970a4,2026-07-19T07:14:38+08:00,feat,,False,3,
+6b62175,2026-07-19T12:37:48+08:00,feat,,False,14,
+aa9835b,2026-07-19T13:10:44+08:00,fix,非缺陷,False,3,fix(finale): 觉醒真身 splash 抠底合成暗星云 + 二阶段 boss 大幅强化
+6e004be,2026-07-19T14:14:24+08:00,feat,,False,2,
+27e2504,2026-07-19T14:24:40+08:00,chore,,False,1,
+4c67a08,2026-07-19T14:39:32+08:00,docs,,False,1,
+a8ff720,2026-07-19T18:33:54+08:00,feat,,False,5,
+a9949c8,2026-07-19T19:27:54+08:00,feat,,False,4,
+4ba8a1b,2026-07-19T20:17:27+08:00,fix,审核批次（混合）,False,7,fix(audit): 封包前审核——5 项防御性加固 + 审核报告入库
+218c9d0,2026-07-19T20:38:18+08:00,feat,,False,5,
+45aaa68,2026-07-19T20:45:14+08:00,fix,编译/API/环境,False,1,fix(tools): 变身装配脚本按扩展名分支编码器（.mp4=H.264 预览 / .webm=VP8 游戏）
+46bbb97,2026-07-19T21:05:57+08:00,docs,,False,1,
+25f1b26,2026-07-20T01:06:08+08:00,feat,,False,4,
+ae12943,2026-07-20T01:07:09+08:00,docs,,False,1,
+122d345,2026-07-20T10:24:55+08:00,fix,空间/视觉/布局,False,1,fix(cutscene): 过场文本框英文溢出（Q49/Q50）——整行预计算自适应高度 + hint 预留行 + 字号缩退保险
+297c2fd,2026-07-20T10:42:15+08:00,fix,空间/视觉/布局,False,1,fix(editor): 石碑视觉↔交互同步 + 传送点隔离修复菜单（用户手移视觉后交互点脱位）
+fa7cc4c,2026-07-20T11:32:20+08:00,chore,,False,2,
+279bbc5,2026-07-20T11:54:38+08:00,docs,,False,6,
+e9fda33,2026-07-20T12:31:58+08:00,docs,,False,4,
+afa22af,2026-07-20T12:42:18+08:00,docs,,False,20,
+4af3bf3,2026-07-20T12:55:21+08:00,docs,,False,3,
+f7e3286,2026-07-20T13:08:55+08:00,docs,,False,2,
+b64c5a2,2026-07-20T13:12:21+08:00,docs,,False,3,
+34c5538,2026-07-20T13:49:25+08:00,docs,,False,4,
+90c6564,2026-07-20T14:12:41+08:00,docs,,False,5,
+4420963,2026-07-20T14:18:22+08:00,docs,,False,10,
+7ca5552,2026-07-20T14:29:50+08:00,docs,,False,1,
+250e7b8,2026-07-20T14:33:47+08:00,docs,,False,2,
+704cce2,2026-07-20T14:43:42+08:00,docs,,False,16,
+e69dc56,2026-07-20T15:37:26+08:00,docs,,False,14,
+8697448,2026-07-20T15:46:35+08:00,docs,,False,11,
+f8b57ed,2026-07-20T15:54:45+08:00,chore,,False,1,
+a76d9e2,2026-07-20T16:05:21+08:00,docs,,False,9,
+b619da4,2026-07-21T12:05:17+08:00,docs,,False,21,
+4aae5fb,2026-07-21T14:38:28+08:00,fix,空间/视觉/布局,False,13,fix(ui): 对话框统一过场样式 + 左键推进 + 立绘变体修复 + 移除B键测试战斗
+909b096,2026-07-21T15:16:30+08:00,docs,,False,3,
+bb6e428,2026-07-22T11:43:08+08:00,docs,,False,5,
+d06b1be,2026-07-22T11:58:26+08:00,docs,,False,3,
+66d35a0,2026-07-22T12:16:05+08:00,docs,,False,4,
+117fae9,2026-07-22T12:40:26+08:00,docs,,False,6,
+c85c73f,2026-07-22T16:21:43+08:00,docs,,False,1,
+35685b1,2026-07-22T16:34:10+08:00,feat,,False,7,

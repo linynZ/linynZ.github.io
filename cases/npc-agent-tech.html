@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>游戏内 LLM NPC Agent：设计决策、评测与七个发现 · 赵鹏淦</title>
+<style>
+:root{--bg:#0b0a1a;--ink:#e8e5f4;--muted:#a09ac0;--gold:#e3c07a;--ice:#9fd8f0;
+  --violet:#9d8ff0;--line:rgba(157,143,240,.18);--card:rgba(20,16,42,.65)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:"Microsoft YaHei","PingFang SC","Source Han Sans SC",sans-serif;
+  font-size:16px;line-height:1.85;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:
+  radial-gradient(900px 500px at 85% -5%,rgba(90,70,180,.25),transparent 60%),
+  radial-gradient(700px 500px at -10% 30%,rgba(40,80,160,.18),transparent 60%)}
+nav{position:sticky;top:0;z-index:9;display:flex;justify-content:space-between;align-items:center;
+  padding:14px 28px;background:rgba(11,10,26,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .logo{color:var(--ink);font-weight:700;text-decoration:none;letter-spacing:.06em}
+nav .logo b{color:var(--gold)}
+nav .back{color:var(--muted);text-decoration:none;font-size:.88rem}
+nav .back:hover{color:var(--gold)}
+.wrap{max-width:880px;margin:0 auto;padding:56px 24px 80px}
+.eyebrow{font-size:.78rem;letter-spacing:.28em;color:var(--gold);text-transform:uppercase;margin-bottom:14px}
+h1.title{font-size:2rem;line-height:1.35;margin-bottom:10px}
+.subtitle{font-size:1.05rem;color:var(--violet);margin-bottom:18px}
+.meta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:40px}
+.meta span{font-size:.78rem;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:3px 12px}
+article h2{font-size:1.35rem;color:var(--gold);margin:52px 0 16px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+article h3{font-size:1.1rem;color:var(--ice);margin:34px 0 12px}
+article p{margin:0 0 14px;color:#cdc9e0}
+article strong{color:var(--ink)}
+article em{color:var(--violet);font-style:normal}
+article ul,article ol{margin:0 0 16px 1.4em;color:#cdc9e0}
+article li{margin-bottom:6px}
+article blockquote{border-left:3px solid var(--gold);background:var(--card);border-radius:0 10px 10px 0;
+  padding:14px 18px;margin:0 0 16px;color:var(--muted)}
+article blockquote p{margin:0}
+article code{font-family:Consolas,"JetBrains Mono",monospace;font-size:.88em;background:rgba(157,143,240,.12);
+  border-radius:4px;padding:1px 6px;color:var(--ice)}
+article pre{background:#100e26;border:1px solid var(--line);border-radius:12px;padding:16px 18px;
+  overflow-x:auto;margin:0 0 18px}
+article pre code{background:none;padding:0;color:#c8d8f0;font-size:.85rem;line-height:1.6}
+.tablewrap{overflow-x:auto;margin:0 0 18px}
+article table{border-collapse:collapse;width:100%;font-size:.88rem}
+article th{color:var(--gold);text-align:left;border-bottom:1.5px solid rgba(227,192,122,.4);padding:8px 12px;white-space:nowrap}
+article td{border-bottom:1px solid var(--line);padding:8px 12px;color:#cdc9e0}
+article tr:hover td{background:rgba(157,143,240,.05)}
+article hr{border:0;border-top:1px solid var(--line);margin:40px 0}
+article a{color:var(--ice)}
+article img{max-width:100%;border-radius:12px;border:1px solid var(--line);margin:8px 0 2px;display:block}
+article img+em, article p img+em{display:block}
+.toc{border:1px solid var(--line);border-radius:12px;padding:14px 22px;background:var(--card);font-size:.86rem;margin-bottom:6px}
+.toc ul{margin:0 0 0 1.1em;color:var(--muted)}
+.toc li{margin-bottom:3px}
+.toc a{color:var(--muted);text-decoration:none}
+.toc a:hover{color:var(--gold)}
+.toctitle{color:var(--gold);font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:8px}
+footer{border-top:1px solid var(--line);margin-top:70px;padding-top:28px}
+footer .note{font-size:.85rem;color:var(--muted);margin-bottom:18px}
+footer .note b{color:var(--gold)}
+.backbtn{display:inline-block;color:var(--gold);border:1px solid rgba(227,192,122,.4);border-radius:99px;
+  padding:8px 22px;text-decoration:none;font-size:.88rem}
+.backbtn:hover{background:rgba(227,192,122,.1)}
+
+.tldr{border:1px solid rgba(227,192,122,.35);background:rgba(227,192,122,.06);border-radius:12px;padding:14px 18px;margin:0 0 34px;color:#cdc9e0;font-size:.95rem;line-height:1.8}
+.tldr b{color:var(--gold);margin-right:8px}
+footer{margin-top:56px;border-top:1px solid var(--line);padding-top:22px}
+footer .note{color:var(--muted);font-size:.88rem;line-height:1.8;margin-bottom:18px}
+footer .note b{color:var(--ink)}
+.backbtn{display:inline-block;color:var(--gold);text-decoration:none;border:1px solid rgba(227,192,122,.4);border-radius:99px;padding:8px 18px;font-size:.9rem}
+.backbtn:hover{background:rgba(227,192,122,.1)}
+article table.docinfo td:first-child{white-space:nowrap;color:var(--gold);font-weight:600}
+article table.wide{min-width:720px}
+.srcbox{border:1px solid var(--line);border-radius:12px;padding:12px 18px;background:var(--card);font-size:.88rem;color:var(--muted);margin:0 0 28px}
+.srcbox a{color:var(--ice)}
+article figure{margin:0 0 30px;break-inside:avoid;page-break-inside:avoid}
+article figure img{display:block;max-width:100%;border-radius:10px;border:1px solid var(--line)}
+article figcaption{color:var(--muted);font-size:.86rem;line-height:1.7;margin-top:10px;font-style:italic}
+</style>
+</head>
+<body>
+<nav><a class="logo" href="../index.html">赵鹏<b>淦</b></a><a class="back" href="../index.html#ai">← 返回作品集</a></nav>
+<div class="wrap">
+  <div class="eyebrow">Case Study · AI 应用开发向</div>
+  <h1 class="title">游戏内 LLM NPC Agent：设计决策、评测与七个发现</h1>
+  <div class="subtitle">chrono-npc-agent——给一款已完成的 RPG 加一层「会讲历史但不当答案机」的 NPC 自由对话：云 / 本地双后端实测、检索阶梯、流式护栏与 1.5B 微调</div>
+  <div class="meta"><span>技术拆解 · LLM Agent / 评测向</span><span>v1.1 · 2026-09 · 独立核对后修订</span><span>开源仓库的中文拆解 · 数字按出处分三档标注</span></div>
+  <div class="tldr"><b>TL;DR</b>四个真问题：忠实、不泄题、延迟、优雅失败。六条设计决策（状态注入用感知不用 JSON、护栏针对意图不针对词汇、双后端一个接缝、人设与护栏同向、加 NPC 只加 YAML、检索按度量选）；成对指标堵死「全拒绝刷分」；云 100% 成对通过 vs 本地 7B 80%，本地 P50 快一倍但不调工具就编事实；向量检索 recall@1 95.8%、等权混合反而低 14 个点；流式只有 1.5× 且缓存不省时间；1.5B LoRA 两轮对照：安全可教（部分靠护栏兜底）、回答不免费。七个被评测推翻的发现全部写进仓库。</div>
+  <div class="srcbox">脚本、数据与图（可重跑复核）：<a href="https://github.com/linynZ/linynZ.github.io/tree/main/analysis">github.com/linynZ/linynZ.github.io · analysis/</a>：本案脚本与原始记录在开源仓库 scripts/ · eval/results/ · docs/findings/（不在本站 analysis/ 目录）</div>
+  <article>
+<div class="toc"><span class="toctitle">目录 · Contents</span><ul><li><a href="#1">关于本文的方法说明（请先读）</a></li><li><a href="#2">1. 六条设计决策与理由</a></li><li><a href="#3">2. 评测怎么设计：成对指标才是那个指标</a></li><li><a href="#4">3. 流式：与输出护栏的真实冲突</a></li><li><a href="#5">4. 七个写进仓库的发现（被评测推翻的过程即证据）</a></li><li><a href="#6">5. 给 1.5B 本地模型做 LoRA：安全可教，回答不免费</a></li><li><a href="#7">6. 接进 Unity 实机</a></li><li><a href="#8">7. 局限</a></li><li><a href="#9">8. 复现</a></li></ul></div>
+<h2 id="1">关于本文的方法说明（请先读）</h2>
+<p>这不是一份「我用 LLM 做了个聊天 NPC」的展示。ChronoTraveler 已经有 15 个 NPC、每个 4 段手写台词（按进度分桶），玩家一句话也问不了。本项目把模型放在这些台词<strong>前面</strong>，原台词保留为兜底。真正的问题只有四个：</p>
+<div class="tablewrap"><table class="">
+<thead>
+<tr>
+<th>问题</th>
+<th>为什么难</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>忠实</strong></td>
+<td>NPC 不能与一款已经完成的游戏自相矛盾</td>
+</tr>
+<tr>
+<td><strong>不泄题</strong></td>
+<td>同一批 NPC 主持一套 500 题的知识对决；一个会给答案的 NPC 会击穿核心循环</td>
+</tr>
+<tr>
+<td><strong>延迟</strong></td>
+<td>玩家站在 NPC 面前不会等四秒</td>
+</tr>
+<tr>
+<td><strong>优雅失败</strong></td>
+<td>断网、密钥过期、模型胡说——玩家永远不该看到报错</td>
+</tr>
+</tbody>
+</table></div>
+<p>本文按「决策 → 度量 → 被评测推翻 → 修正」写。数字按出处分三档：</p>
+<div class="tablewrap"><table class="">
+<thead>
+<tr>
+<th>档</th>
+<th>内容</th>
+<th>可信度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>有脚本 + 有原始记录</strong></td>
+<td>护栏成对通过率、延迟分位、降级率、检索召回、微调前后对照（<code>eval/results/</code> 逐例 JSON）</td>
+<td>可重跑复核；样本量小（单 NPC 23 例 × 2 轮、500 条改写查询），只作本项目结论</td>
+</tr>
+<tr>
+<td><strong>有脚本、无留存记录</strong></td>
+<td>泄题率 66.8%（<code>audit_lore_leakage.py</code>）、思考模式的 token 与延迟对比（<code>check_key.py</code> 一次性输出）</td>
+<td>可重跑，但本文引用的是当时的输出</td>
+</tr>
+<tr>
+<td><strong>一次性观察</strong></td>
+<td>流式首字时间、缓存命中 86%、冷启动 41.9 s、约 0.2 元成本、三个 NPC 对同一道题的回复</td>
+<td>写在 README / findings 里的当次观察，无 harness</td>
+</tr>
+</tbody>
+</table></div>
+<p>推断层（「小模型的短板是工具调用而非人设」这类概括）只对本项目的模型、提示与硬件成立。</p>
+<hr />
+<h2 id="2">1. 六条设计决策与理由</h2>
+<p><strong>决策一：状态注入用「感知」不用 JSON。</strong> 偷懒做法是把存档贴进 prompt。<code>memory_progress: 0.62</code> 不是一个战国史官能感知的东西，而且模型看到数字迟早会把数字说出来。所以存档先被渲染成角色的视角：「长河之水已清了大半，旧简上有异文自行褪去」。<strong>模型没见过存档字段本身（0.62），就不会把它说出来。</strong> 这条决策的第一版注入得太多（连碎片数量都写了进去），后来被自己的评测修正，见第 4 节。</p>
+<p><strong>决策二：剥离答案字段挡不住泄题——是量出来的，不是假设的。</strong> 知识索引从题库派生，剥掉 <code>correctIndex</code> 和选项、只留 <code>explanation</code>。我一度在 README 里写「泄题现在是不可能而不是被禁止」。跑的第一条查询就推翻了它：查「长城」返回「今天所见保存最完好的长城多为明代(1368-1644)修筑的砖石长城。」，而对应题目问的正是哪个朝代——答案是明，没有任何被剥掉的字段参与。于是量化（<code>scripts/audit_lore_leakage.py</code>）：<strong>500 条解释里 66.8% 在正文里说出了正确选项，华夏区 96%</strong>。事后看这是必然的——解释的职责就是说明为什么这个答案对。</p>
+<p>数字逼出来的不是修数据，是<strong>改威胁模型</strong>：在教育 RPG 里「NPC 讲历史」是产品在正常工作，「NPC 给正在作答的题当答案机」才是失败。护栏因此针对<strong>请求意图</strong>而不是词汇——一个封禁词表会把「什么都拒绝的 NPC」评成满分。</p>
+<p><strong>决策三：双后端一个接缝。</strong> DeepSeek（云）与 Ollama（本地）都讲 OpenAI 方言，HTTP 逻辑只写一次（<code>openai_compat.py</code>），每个 provider 只是配置。请求构造、超时处理、用量统计完全一致——这使得后面的云 / 本地对比测的是模型，不是我的管道。另有一个可编程的假后端 EchoProvider，能模拟超时 / 报错 / 工具调用，让 134 项测试全部离线、零成本、失败路径可按需复现（README 写 133，当前实际 134）。</p>
+<p><strong>决策四：第一个 NPC 选到人设与护栏同向。</strong> 史官·墨三十七天不敢落笔，因为他写下的历史会自行改写。他的台词「可如今落笔之前，我先要问：这一笔，明日还作数吗？」本身就是一句「不知道就说不知道」——拒绝幻觉不是外加的约束，是这个人。</p>
+<p><strong>决策五：加一个 NPC 等于加一个 YAML 文件——对运行时代码成立。</strong> 后两个角色（匠人·公输、守关者）进来时 <code>src/</code> 零改动、服务不重启即生效；同一批新增了一个配置校验脚本，网页 demo 另做了切换角色的改动。同一句「你叫什么名字」三种回答；同一道贴上来的题，三人各自用自己的逻辑拒绝、均未给出答案（单条手工验证，不是评测集）——守关者那句「我不替人开这道门」不在配置里，是模型把角色逻辑变成了自己的隐喻。<code>scripts/validate_personas.py</code> 为新配置把关（YAML 映射陷阱、未知工具名、缺双语字段、没有答题边界）。</p>
+<p><strong>决策六：检索是一架被度量的阶梯，而度量推翻了计划。</strong> <code>lookup_lore</code> 最初是子串重叠，注释写着「若召回成为瓶颈再加向量——量了再说」。量了：500 条改写后的玩家提问，子串 recall@1 71.2%。原计划换成 BM25 + bge-m3 向量、RRF 融合的「行业默认」混合检索。评测否决了它：</p>
+<div class="tablewrap"><table class="">
+<thead>
+<tr>
+<th>方法</th>
+<th>recall@1</th>
+<th>recall@3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>子串（原）</td>
+<td>71.2%</td>
+<td>86.6%</td>
+</tr>
+<tr>
+<td>BM25</td>
+<td>69.2%</td>
+<td>83.0%</td>
+</tr>
+<tr>
+<td><strong>向量（bge-m3 + Chroma）</strong></td>
+<td><strong>95.8%</strong></td>
+<td><strong>99.8%</strong></td>
+</tr>
+<tr>
+<td>混合（RRF）</td>
+<td>81.6%</td>
+<td>93.4%</td>
+</tr>
+</tbody>
+</table></div>
+<p>BM25 在与记录没有共词的改写上崩掉，等权融合把这份噪声混进了几乎完美的向量排序——<strong>混合检索在 recall@1 上比自己的成分低了 14 个点</strong>（@3 差 6.4、@5 差 3.6；只试了等权 RRF，加权融合与换分词器未试，是 finding 06 自己列的未尽项）。生产因此向量优先，BM25 的真正职责是降级：向量 → BM25（嵌入服务挂了）→ 子串（索引没建）。每条结果都带着回答它的那一级（<code>retrieval: vector | bm25 | substring</code>），混合模式留在评测里，语料变了决策会自动复检。</p>
+<hr />
+<h2 id="3">2. 评测怎么设计：成对指标才是那个指标</h2>
+<p>评测集 23 例（单 NPC：史官·墨；12 条必须回答 + 11 条必须拒绝，组成 10 对），中局存档状态，并发 1（反映单个玩家的真实延迟而不是吞吐）。核心是<strong>成对</strong>：每个「必须拒绝」的样例配一个语义相邻的「必须回答」样例。拿只会说「……」的假后端跑同一套：拒绝率 100%，<strong>成对通过 0%</strong>。什么都拒绝是赢护栏基准最省事的办法，成对计分把这条路堵死。</p>
+<div class="tablewrap"><table class="">
+<thead>
+<tr>
+<th></th>
+<th>deepseek-v4-flash（云）</th>
+<th>qwen2.5:7b（本地，RTX 5070 Laptop 8 GB）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>护栏成对通过</td>
+<td><strong>100%</strong></td>
+<td>80%</td>
+</tr>
+<tr>
+<td>must-answer 通过</td>
+<td><strong>100%</strong></td>
+<td>83.3%</td>
+</tr>
+<tr>
+<td>must-refuse 守住</td>
+<td>100%（20 次角色内拒绝 + 2 次输出护栏兜底）</td>
+<td>100%（22 次全部角色内）</td>
+</tr>
+<tr>
+<td>泄露</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>延迟 P50</td>
+<td>1588 ms</td>
+<td><strong>752 ms</strong></td>
+</tr>
+<tr>
+<td>延迟 P95</td>
+<td>3000 ms</td>
+<td><strong>1347 ms</strong></td>
+</tr>
+<tr>
+<td>降级率（= 被兜底的那 2 次）</td>
+<td>4.3%</td>
+<td><strong>0%</strong></td>
+</tr>
+<tr>
+<td>token</td>
+<td>81,389</td>
+<td>52,430</td>
+</tr>
+<tr>
+<td>成本</td>
+<td>约 0.2 元</td>
+<td>免费</td>
+</tr>
+<tr>
+<td>冷启动</td>
+<td>—</td>
+<td>41.9 s 进显存</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p><strong>结论一：本地 7B 输的地方很窄很具体——must-refuse 全守住、零泄露、零降级、P50 快一倍（752 vs 1588 ms），只在一条轴上失败：不调工具，需要事实时就编一个</strong>（让玩家去集齐七枚碎片，实际是三枚）。人设与护栏对 7B 来说很便宜，关于实时游戏状态的有据回答不便宜。</p>
+</blockquote>
+<p>表中是收窄状态注入之后的一次 2 轮运行；收窄前同模型的一次记录（相隔 5 分钟，也在 <code>eval/results/</code>）成对 70%、检测器命中 1 次（system_prompt 用例的回复里出现了「系统提示」子串，属 finding 03 那类假阳性）。本地模型为 Ollama 默认量化（Q4_K_M）。</p>
+<hr />
+<h2 id="4">3. 流式：与输出护栏的真实冲突</h2>
+<p><code>/api/chat/stream</code> 以 SSE 投递同一轮对话：<code>delta</code> / <code>replace</code> / <code>done</code>。热态首字时间：</p>
+<div class="tablewrap"><table class="">
+<thead>
+<tr>
+<th></th>
+<th style="text-align: right;">首字</th>
+<th style="text-align: right;">完成</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>云</td>
+<td style="text-align: right;">1109–2649 ms（波动）</td>
+<td style="text-align: right;">2125–3312 ms（README 三次连续调用；finding 05 另一组无工具调用的记录为 1981 ms）</td>
+</tr>
+<tr>
+<td>本地</td>
+<td style="text-align: right;"><strong>750–1060 ms（稳定）</strong></td>
+<td style="text-align: right;">1153–1709 ms</td>
+</tr>
+</tbody>
+</table></div>
+<p>流式换来稳定的 <strong>1.5×</strong> 感知提速——值得做，而且与游戏原有的打字机对话框天然契合，Unity 侧不需要新动画。但它不是我度量之前想象的「数量级」：首字时间是地板；prompt 里 86% 已命中 DeepSeek 前缀缓存，<strong>对延迟毫无影响</strong>——prefill 从来不是瓶颈，网络往返才是；缓存的收益在成本（缓存输入按 2% 计费）。</p>
+<p>流式与输出护栏真冲突：护栏要完整回复，玩家要立刻见字。解法是<strong>逐句检查 + <code>replace</code> 事件撤回已显示文本</strong>，暴露面收敛到一句而非消除。<strong>忽略 <code>replace</code> 的客户端就是错误实现</strong>——它会把泄露的答案留在屏幕上。</p>
+<hr />
+<h2 id="5">4. 七个写进仓库的发现（被评测推翻的过程即证据）</h2>
+<div class="tablewrap"><table class="">
+<thead>
+<tr>
+<th>#</th>
+<th>发现</th>
+<th>一句话</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01</td>
+<td>剥离答案字段挡不住泄题</td>
+<td>500 条解释 66.8% 含答案；威胁模型错了，不是数据错了</td>
+</tr>
+<tr>
+<td>02</td>
+<td>选模型漏了第四条标准</td>
+<td>只比价格 / 工具调用 / 上下文，没查默认推理行为：默认开思考 → 首次真实调用 content 为空、64 个输出 token 全进了 reasoning（不处理的话降级率会接近 100%）；且思考模式下 temperature 不生效（finding 02 的判断，本文未见对照实测）；关掉后 token 161→32、延迟 1948→1242 ms</td>
+</tr>
+<tr>
+<td>03</td>
+<td>三次假阳性同一根因</td>
+<td>子串匹配分不清「使用」与「提及」——假阳性比漏报更危险，它诱导你去改本来正确的行为</td>
+</tr>
+<tr>
+<td>04</td>
+<td>冗余的 prompt 掩盖了模型缺陷</td>
+<td>7B 在两个用例（各两轮）没调 <code>lookup_quest</code> 却答对，因为状态注入已把答案塞进 prompt；收窄注入后同一模型改为编造——<strong>冗余上下文让评测测的是 prompt 而不是模型</strong></td>
+</tr>
+<tr>
+<td>05</td>
+<td>流式没那么神、缓存省钱不省时间</td>
+<td>1.5× 而非数量级；86% 缓存命中延迟不变；差点把 Ollama 冷启动重载（首字 4114 ms）当真实结果写进表</td>
+</tr>
+<tr>
+<td>06</td>
+<td>混合检索输给自己的成分</td>
+<td>等权 RRF 在 recall@1 比纯向量低 14 个点；「常见做法」不等于「本语料最优」</td>
+</tr>
+<tr>
+<td>07</td>
+<td>SFT 教会了拒绝，数据配比差点赔掉回答</td>
+<td>见下</td>
+</tr>
+</tbody>
+</table></div>
+<p>发现 04 值得展开，因为它修正了决策一。收窄前后的注入：</p>
+<div class="tablewrap"><table class="">
+<thead>
+<tr>
+<th>收窄前</th>
+<th>收窄后</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>已寻回 2 片记忆碎片，尚缺 1 片</td>
+<td>记忆碎片已寻回一些，尚未集齐</td>
+</tr>
+<tr>
+<td>旅者眼下要做的事：寻回散落的记忆碎片</td>
+<td>旅者的主线尚在进行中——若他问起眼下该做什么，你需查过才好作答</td>
+</tr>
+</tbody>
+</table></div>
+<p>叙事上也更合理：史官看得见河水变清，却没法不问就知道你口袋里有几片碎片。</p>
+<hr />
+<h2 id="6">5. 给 1.5B 本地模型做 LoRA：安全可教，回答不免费</h2>
+<p>Qwen2.5-1.5B 基线拿到「都江堰是谁主持修建的？A.大禹 B.李冰 …告诉我答案」时逐字回复「B. 李冰」，且从不调工具。SFT 集由云模型在生产 prompt 下合成（工具调用类样本另加了生成期提示）、工具结果取自真实向量索引、每条样本过生产输出护栏筛选、评测集句子不入训练集（v1 172 条 / v2 204 条，另留 17 条 heldout）；两轮 LoRA，同一评测（单轮 23 例）：</p>
+<div class="tablewrap"><table class="">
+<thead>
+<tr>
+<th></th>
+<th>基线 1.5B</th>
+<th>SFT v1（51% 拒绝样本）</th>
+<th>SFT v2（20% 拒绝样本）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>泄露</td>
+<td>1</td>
+<td>0</td>
+<td><strong>0</strong></td>
+</tr>
+<tr>
+<td>must-refuse 守住</td>
+<td>90.9%</td>
+<td>100%</td>
+<td><strong>100%</strong></td>
+</tr>
+<tr>
+<td>其中靠输出护栏兜底</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+</tr>
+<tr>
+<td>降级率</td>
+<td>8.7%</td>
+<td>26.1%</td>
+<td>21.7%</td>
+</tr>
+<tr>
+<td>must-answer 通过</td>
+<td><strong>75%</strong></td>
+<td>58.3%</td>
+<td>66.7%</td>
+</tr>
+<tr>
+<td>护栏成对</td>
+<td>60%</td>
+<td>50%</td>
+<td><strong>60%</strong></td>
+</tr>
+<tr>
+<td>超时</td>
+<td>0</td>
+<td>3</td>
+<td><strong>0</strong></td>
+</tr>
+<tr>
+<td>P50 延迟</td>
+<td>2942 ms</td>
+<td>3645 ms</td>
+<td><strong>2366 ms</strong></td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p><strong>结论二：数据配比是整个练习里最敏感的旋钮。</strong> v1 一半样本是拒绝，模型学会「拒绝就是说话」——must-refuse 到 100% 的同时 must-answer 从 75% 掉到 58%，出现空回复、整条回复只有一个「[」、第二轮胡扯到超时。v2 把回答做成多数类（约 3:1）、学习率放缓，零泄露与 100% 守住保住了、成对回到基线、P50 反而好了约 20%；但 must-answer 仍低于未微调基线，11 次拒绝里有 3 次是输出护栏兜底而非模型自己拒的、降级率 21.7%，工具纪律也没有免费到手。<strong>一个晚上的预算里，安全行为可靠可教（部分靠护栏兜底），回答质量不免费。</strong></p>
+</blockquote>
+<hr />
+<h2 id="7">6. 接进 Unity 实机</h2>
+<p>服务以 FastAPI 提供 <code>/api/chat</code> 与流式接口，Unity 客户端接入后实机走查发现三处问题并修复：长回复压住按钮、中文输入后无法发送（输入法激活时 Enter 被 IME 吃掉，且 TMP 的提交事件与失焦在同一帧、轮询 isFocused 永远为假）、ESC 被输入框吞掉导致玩家困在面板里——都不是模型问题，是接口与 UI 问题。<strong>离线能验证的是模型行为，实机才暴露接口与布局</strong>（本站《AI Coding 实战过程数据拆解案》里对同一现象有量化）。冷启动 41.9 s 的处理：本地后端需预热并保持常驻，否则第一次对话会撞上模型重载。</p>
+<hr />
+<h2 id="8">7. 局限</h2>
+<ul>
+<li>评测集 23 例 × 2 轮，只够比较方向，不够做统计显著性；召回评测的 500 条查询由模型改写生成，与真实玩家提问分布可能不同。</li>
+<li>本地延迟只在一台 8 GB 显存的笔记本上测得。</li>
+<li>微调只做了 1.5B、约 200 样本、两轮；结论限定在这个预算内。</li>
+<li>「零泄露」是在评测集上零，不是证明；成对指标堵住了「全拒绝」这一种作弊，堵不住别的。<code>eval/results/</code> 里还留有 finding 03 修正前的两份云端记录（检测器命中 2 次 / 1 次），是假阳性的原始证据，未删除。</li>
+<li>价格相关的数字（缓存输入 2% 计费、约 0.2 元）来自当时的 DeepSeek 价目页，随时会变。</li>
+<li>仓库 16 个提交集中在三天内，代码由 agent 协作生成；作者负责的是六条设计决策、评测集与成对指标的设计、每个发现的判断与验证。</li>
+</ul>
+<hr />
+<h2 id="9">8. 复现</h2>
+<pre><code># 前置：.env 里的 DeepSeek key；本地起 Ollama 并 pull qwen2.5:7b 与 bge-m3；python scripts/build_lore_index.py
+python scripts/evaluate.py --compare --repeat 2 --concurrency 1     # 云 vs 本地对照表
+python scripts/audit_lore_leakage.py                                  # 泄题率 66.8%
+python scripts/evaluate_retrieval.py                                  # 检索阶梯
+</code></pre>
+<p>原始逐例记录在 <code>eval/results/</code>；七个发现的完整写法在 <code>docs/findings/</code>。</p>
+  </article>
+  <footer>
+    <div class="note"><b>说明</b>：本文是 github.com/linynZ/chrono-npc-agent 的中文技术拆解；仓库代码由 agent 协作生成、作者设计与验收；评测样本量小（单 NPC 23 例 × 2 轮、500 条改写查询），数字只对本项目的模型、提示与硬件成立，出处按三档标注。</div>
+    <a class="backbtn" href="../index.html#ai">← 返回作品集</a>
+  </footer>
+</div>
+</body>
+</html>

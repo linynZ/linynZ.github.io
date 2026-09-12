@@ -459,7 +459,7 @@ footer .logo{font-size:1rem;margin-bottom:8px;display:inline-block}
 <section id="ai"><div class="wrap">
   <div class="reveal"><div class="eyebrow">Differentiation</div>
     <h2 class="sec">LLM Agent 开发 · AIGC 管线</h2>
-    <p class="proj-desc">不只是"用"AI——为自己游戏的 NPC 开发了自由对话 Agent 并接入实机，同时以多模态 AIGC 管线单人产出整款游戏的美术 / 音频 / 演出资产。</p>
+    <p class="proj-desc">不只是"用"AI——为自己游戏的 NPC 开发了自由对话 Agent 并接入实机，用自己项目的过程数据拆解 AI Coding 的返工与摩擦，同时以多模态 AIGC 管线单人产出整款游戏的美术 / 音频 / 演出资产。</p>
   </div>
 
   <div class="reveal d1" style="margin-top:36px">
@@ -485,6 +485,15 @@ footer .logo{font-size:1rem;margin-bottom:8px;display:inline-block}
       <div class="hl-card reveal d3"><h4>假阳性比漏报更危险</h4><p>子串匹配分不清"使用"与"提及"，三次误报同一根因——误报会诱导你去修改本来正确的行为。</p></div>
     </div>
     <a class="repo" href="https://github.com/linynZ/chrono-npc-agent" target="_blank" rel="noopener">↗ 开源仓库（代码 / 评测 / 发现文档公开可查）</a>
+  </div>
+
+  <div class="reveal d2" style="margin-top:44px">
+    <div class="dec-h">两份 AI 向拆解</div>
+    <div class="dec-note">一份把开源 Agent 项目的决策与评测讲清楚；一份把自己项目的 git 历史与会话日志当原材料，回答 AI Coding 工具下一步该补什么。</div>
+  </div>
+  <div class="cases three" style="margin-top:18px">
+    <a class="case reveal d1" href="cases/npc-agent-tech.html"><div class="num">AI</div><div class="dir">AI 应用开发 · LLM Agent / 评测向</div><h4>游戏内 LLM NPC Agent 技术拆解</h4><p>chrono-npc-agent 的中文拆解：六条设计决策、成对护栏指标、云 vs 本地 7B 实测（100% vs 80% 成对通过、752 ms vs 1588 ms P50）、向量检索 recall@1 95.8% 而等权混合反而低 14 个点、流式 1.5×、1.5B LoRA 两轮对照；七个被评测推翻的发现全部写进仓库。</p><div class="tags"><span>LLM Agent</span><span>评测设计</span><span>RAG / LoRA</span></div><span class="go">阅读全文 →</span></a>
+    <a class="case reveal d2" href="cases/ai-coding-process-data.html"><div class="num">AI</div><div class="dir">AI 产品 · 过程数据向</div><h4>AI Coding 实战过程数据拆解</h4><p>480 次提交 + 1,236 次工具调用：只有 5% 的返工是编译器能报出的、七成只能靠看，空间 / 视觉类是最大一类；修复间隔双峰——一小时内被 agent 自己修掉，或等到几天后的下一轮走查；25% 的工具出错是接口摩擦。一条结论在双口径重算后反转，已撤回写明；三个产品机会各附过程指标与「我已做的部分」。</p><div class="tags"><span>过程数据</span><span>失效分析</span><span>产品机会</span></div><span class="go">阅读全文 →</span></a>
   </div>
 
   <div class="reveal d2" style="margin-top:44px">
