@@ -8,7 +8,7 @@
 - **Cyber Stealth** — 7 人团队谍报潜行游戏（PC + PS5），负责 UI 架构 / 战役积分评级 / 道具装备实装 / 对话系统
 - **策划案 × 5**（`cases/`）— 两份 ChronoTraveler 系统策划案、一份 Cyber Stealth 系统策划案、三消十关关卡包、合成游戏七天活动
 - **拆解案 × 8**（`cases/`）— 三消关卡步数预算、鸣潮战斗 / 声骸、崩铁遗器、原神新手关卡、合成生成器经济、天刀战斗属性 / 身份日常
-- **引擎与底层** — C++ / OpenGL 渲染引擎、自研物理 / 网络 / AI
+- **引擎与底层** — C++ / OpenGL 渲染课程作业（源码公开：linynZ/CSC8502-final-coursework）、课程框架上的物理 / 网络 / AI 作业
 - **LLM NPC Agent 与 AIGC 管线** — chrono-npc-agent（开源）
 
 ## analysis/
