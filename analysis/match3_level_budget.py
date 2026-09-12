@@ -189,7 +189,7 @@ mix_rank = [r["rank"] for r in rated if r["type"] == "Mixed"]; nonmix = [r["rank
 print(f"  混合关均值 {st.mean(mix_rank):.2f} vs 单目标关 {st.mean(nonmix):.2f}")
 summary["type_share"] = dict(tc); summary["mixed_vs_single"] = {"mixed": st.mean(mix_rank), "single": st.mean(nonmix)}
 json.dump(summary, open(os.path.join(HERE, "data/m3_budget_summary.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1, default=float)
-print("\ncharts →", OUT)
+print("\ncharts → charts/")
 
 # ---------- 6. 新鲜感节奏：新元素（障碍/机制）引入间隔 ----------
 import re as _re

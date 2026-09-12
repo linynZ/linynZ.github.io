@@ -96,4 +96,4 @@ for i, v in enumerate(vals): ax.text(v + .15, i, f"{v} 个活动名", va="center
 ax.invert_yaxis(); ax.set_xlabel("同一模板下的活动名数量（wiki 总览页 + 存档页，下限）")
 ax.set_title(f"模板复用：6 个玩法模板承载了 {sum(vals)} 个活动名", color=INK, fontsize=12)
 style(ax); fig.tight_layout(); fig.savefig(os.path.join(OUT, "gh_template_reuse.png"), dpi=170); plt.close(fig)
-print("\ncharts →", OUT)
+print("\ncharts → charts/")

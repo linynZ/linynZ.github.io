@@ -127,4 +127,4 @@ ax.axhline(need["缘材·进"], color=ICE, ls="--", lw=1); ax.text(0.2, need["�
 ax.set_xlabel("周"); ax.set_ylabel("累计缘材·进"); ax.set_title(f"养成周期（混合口径）：免费约 {need['缘材·进']/jin_free:.0f} 周，加商城约 {need['缘材·进']/jin_paid:.1f} 周", color=INK, fontsize=12)
 ax.legend(frameon=False, fontsize=9); style(ax)
 fig.tight_layout(); fig.savefig(os.path.join(OUT, "ty_daily_ascension.png"), dpi=170); plt.close(fig)
-print("\ncharts →", OUT)
+print("\ncharts → charts/")

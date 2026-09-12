@@ -231,4 +231,4 @@ for lo, hi in tiers:
     print(f"    韧劲 {100*lo:2.0f}–{100*hi:2.0f}%: 每 1% 边际 ΔM {v:.4f} → 等 ΔM 价格指数 {idx:.2f}（官方阶梯为递增，目标不同：压极端堆叠）")
 S["tier_pricing"] = price
 json.dump(S, open(os.path.join(HERE, "data/ty_attr_summary.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1, default=float)
-print("\ncharts →", OUT)
+print("\ncharts → charts/")

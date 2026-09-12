@@ -214,4 +214,4 @@ rank 难度                  n      通关率均值   slack中位      近失率
    8 Extremely hard      5      0.389     1.714      0.105
    9 Nearly impossible   3      0.989     2.167      0.481
 
-总耗时 715s；输出 D:\Career pursuit plan\04-拆解案\策划-游戏拆解案\03-我的拆解案\analysis\data\m3_calibration.json 与 D:\Career pursuit plan\04-拆解案\策划-游戏拆解案\03-我的拆解案\analysis\charts\m3_sim_vs_rating.png
+总耗时 715s；输出 data/m3_calibration.json 与 charts/m3_sim_vs_rating.png

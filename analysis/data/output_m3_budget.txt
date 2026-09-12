@@ -71,7 +71,7 @@
 ## 5 类型占比 {'Order': 343, 'Jelly': 597, 'Mixed': 179, 'Ingredients': 370, 'Unknown': 16}
   混合关均值 5.64 vs 单目标关 4.58
 
-charts → D:\Career pursuit plan\04-拆解案\策划-游戏拆解案\03-我的拆解案\analysis\charts
+charts → charts/
 
 ## 6 新元素引入点 44 个；引入间隔中位 8 关，均值 33.6
      1- 300  新元素 30 个  平均每 10 关一个
