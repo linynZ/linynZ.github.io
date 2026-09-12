@@ -4,7 +4,7 @@
 
 | 案子 | 脚本 | 数据 / 输出 |
 |---|---|---|
-| 《鸣潮》战斗 / 声骸 | wuwa_combat_math.py · wuwa_echo_cost.py | output.txt · output_echo.txt |
+| 《鸣潮》战斗 / 声骸 | wuwa_combat_math.py · wuwa_echo_cost.py | output_wuwa.txt · output_echo.txt |
 | 《崩坏：星穹铁道》遗器 | hsr_relic_math.py | output_hsr.txt |
 | 《原神》新手关卡 | genshin_onboarding_funnel.py | output_genshin.txt |
 | 合成游戏生成器经济模型 | merge_generator_economy.py | output_merge.txt |

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>谍报潜行游戏「道具 / 装备系统」与「战役积分评级系统」策划案 · 赵鹏淦</title>
+<title>谍报潜行游戏「战役积分评级系统」与「道具装备实装」策划案 · 赵鹏淦</title>
 <style>
 :root{--bg:#0b0a1a;--ink:#e8e5f4;--muted:#a09ac0;--gold:#e3c07a;--ice:#9fd8f0;
   --violet:#9d8ff0;--line:rgba(157,143,240,.18);--card:rgba(20,16,42,.65)}
@@ -24,7 +24,7 @@ nav .back:hover{color:var(--gold)}
 .eyebrow{font-size:.78rem;letter-spacing:.28em;color:var(--gold);text-transform:uppercase;margin-bottom:14px}
 h1.title{font-size:2rem;line-height:1.35;margin-bottom:10px}
 .subtitle{font-size:1.05rem;color:var(--violet);margin-bottom:18px}
-.meta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
+.meta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:40px}
 .meta span{font-size:.78rem;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:3px 12px}
 article h2{font-size:1.35rem;color:var(--gold);margin:52px 0 16px;padding-bottom:8px;border-bottom:1px solid var(--line)}
 article h3{font-size:1.1rem;color:var(--ice);margin:34px 0 12px}
@@ -48,6 +48,8 @@ article td{border-bottom:1px solid var(--line);padding:8px 12px;color:#cdc9e0}
 article tr:hover td{background:rgba(157,143,240,.05)}
 article hr{border:0;border-top:1px solid var(--line);margin:40px 0}
 article a{color:var(--ice)}
+article img{max-width:100%;border-radius:12px;border:1px solid var(--line);margin:8px 0 2px;display:block}
+article img+em, article p img+em{display:block}
 .toc{border:1px solid var(--line);border-radius:12px;padding:14px 22px;background:var(--card);font-size:.86rem;margin-bottom:6px}
 .toc ul{margin:0 0 0 1.1em;color:var(--muted)}
 .toc li{margin-bottom:3px}
@@ -61,51 +63,35 @@ footer .note b{color:var(--gold)}
   padding:8px 22px;text-decoration:none;font-size:.88rem}
 .backbtn:hover{background:rgba(227,192,122,.1)}
 
-/* —— 策划案页补充（沿用模板变量） —— */
-.docinfo{display:grid;grid-template-columns:auto 1fr;gap:6px 18px;border:1px solid var(--line);border-radius:12px;
-  background:var(--card);padding:16px 22px;margin-bottom:16px;font-size:.9rem}
-.docinfo .k{color:var(--gold);font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;white-space:nowrap;padding-top:3px}
-.docinfo .v{color:#cdc9e0}
-@media(max-width:560px){.docinfo{grid-template-columns:1fr;gap:2px 0}.docinfo .v{margin-bottom:8px}}
-.tldr{border-left:3px solid var(--ice);background:rgba(159,216,240,.06);border-radius:0 10px 10px 0;padding:12px 18px;margin-bottom:40px;
-  color:var(--ink);font-size:1rem;line-height:1.7}
-.tldr b{color:var(--ice);font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;margin-right:10px}
-article pre.diagram code{white-space:pre;font-size:.82rem;line-height:1.5}
-article details.pending{border:1px solid var(--line);border-radius:12px;background:var(--card);padding:0 20px;margin-top:40px}
-article details.pending summary{cursor:pointer;list-style:none;padding:14px 0;color:var(--gold);font-size:1.02rem;font-weight:600;display:flex;align-items:center;gap:10px}
-article details.pending summary::-webkit-details-marker{display:none}
-article details.pending summary::before{content:"▸";font-size:.9rem;transition:.25s;color:var(--muted)}
-article details.pending[open] summary::before{transform:rotate(90deg)}
-article details.pending .pend-note{font-size:.86rem;color:var(--muted);margin:0 0 12px}
-article details.pending ol{margin-bottom:18px}
-article .pend{color:var(--gold);font-size:.85em;border:1px dashed rgba(227,192,122,.45);border-radius:6px;padding:0 6px}
+.tldr{border:1px solid rgba(227,192,122,.35);background:rgba(227,192,122,.06);border-radius:12px;padding:14px 18px;margin:0 0 34px;color:#cdc9e0;font-size:.95rem;line-height:1.8}
+.tldr b{color:var(--gold);margin-right:8px}
+footer{margin-top:56px;border-top:1px solid var(--line);padding-top:22px}
+footer .note{color:var(--muted);font-size:.88rem;line-height:1.8;margin-bottom:18px}
+footer .note b{color:var(--ink)}
+.backbtn{display:inline-block;color:var(--gold);text-decoration:none;border:1px solid rgba(227,192,122,.4);border-radius:99px;padding:8px 18px;font-size:.9rem}
+.backbtn:hover{background:rgba(227,192,122,.1)}
+article table.docinfo td:first-child{white-space:nowrap;color:var(--gold);font-weight:600}
+article table.wide{min-width:720px}
+.srcbox{border:1px solid var(--line);border-radius:12px;padding:12px 18px;background:var(--card);font-size:.88rem;color:var(--muted);margin:0 0 28px}
+.srcbox a{color:var(--ice)}
+article figure{margin:0 0 30px;break-inside:avoid;page-break-inside:avoid}
+article figure img{display:block;max-width:100%;border-radius:10px;border:1px solid var(--line)}
+article figcaption{color:var(--muted);font-size:.86rem;line-height:1.7;margin-top:10px;font-style:italic}
 </style>
 </head>
 <body>
 <nav><a class="logo" href="../index.html">赵鹏<b>淦</b></a><a class="back" href="../index.html#designdocs">← 返回作品集</a></nav>
 <div class="wrap">
-  <div class="eyebrow">Design Doc · 系统策划案</div>
-  <h1 class="title">谍报潜行游戏「道具 / 装备系统」与「战役积分评级系统」策划案</h1>
-  <div class="subtitle">Cyber Stealth · MGS 式道具装备与扣减制战役计分——团队项目中的个人系统设计</div>
-  <div class="meta"><span>系统策划案 · 道具 / 评级向</span><span>v1.0 · 2026-09</span><span>分工诚实标注 · 以远程 master 源码为准</span></div>
-  <div class="docinfo"><span class="k">项目</span><span class="v">Cyber Stealth — 反乌托邦网络安全题材谍报潜行游戏（7 人团队 · PC + PS5 · C++20 自研 ECS）</span><span class="k">系统</span><span class="v">① 道具 / 装备系统（MGS 风格） ② 战役积分与评级系统</span><span class="k">角色</span><span class="v">UI/UX 系统负责人 + 游戏系统开发（第 4–8 周 · 235 提交 / 9 个合并 PR）</span><span class="k">状态</span><span class="v">已交付 · 对应 PR #49 / #59 / #67 / #72，本文 v1.0 整理于 2026-09</span></div>
-  <div class="tldr"><b>TL;DR</b>道具操纵注意力而非造成伤害；纯扣减制计分让「不被发现」成为唯一最优解，出发前的配装是决策而非仪式。</div>
+  <div class="eyebrow">Design Doc · 系统策划案 03</div>
+  <h1 class="title">谍报潜行游戏「战役积分评级系统」与「道具装备实装」策划案</h1>
+  <div class="subtitle">Cyber Stealth · 扣减制战役计分与 MGS 式道具装备实装——团队项目中的个人系统设计</div>
+  <div class="meta"><span>系统策划案 · 评级 / 道具向</span><span>v1.0 · 2026-09</span><span>分工诚实标注 · 以远程 master 源码为准</span></div>
+  <div class="tldr"><b>TL;DR</b>纯扣减制计分（1000 起、每秒 −1、击杀 −10、用道具 −5）让「不被发现」成为唯一最优解；道具操纵注意力而非造成伤害，武器 2 槽 + 默认锁定让「带不带武器」成为出发前的真实决策。</div>
+  <div class="srcbox">脚本、数据与图（可重跑复核）：<a href="https://github.com/linynZ/linynZ.github.io/tree/main/analysis">github.com/linynZ/linynZ.github.io · analysis/</a></div>
   <article>
-<div class="toc"><span class="toctitle">目录 · Contents</span><ul>
-<li><a href="#1">1. 文档信息</a></li>
-<li><a href="#2">2. 设计目标与体验目标</a></li>
-<li><a href="#3">3. 系统概述与使用循环</a></li>
-<li><a href="#4">4. 道具/装备规则详述</a></li>
-<li><a href="#5">5. 道具效果表</a></li>
-<li><a href="#6-pr-59">6. 战役积分与评级（PR #59）</a></li>
-<li><a href="#7">7. 与警戒度系统的耦合</a></li>
-<li><a href="#8">8. 配置与数据</a></li>
-<li><a href="#9">9. 验证与迭代（实机走查记录）</a></li>
-<li><a href="#10">10. 设计取舍与局限</a></li>
-<li><a href="#11">11. 附录</a></li></ul>
-</div>
+<div class="toc"><span class="toctitle">目录 · Contents</span><ul><li><a href="#1">1. 文档信息</a></li><li><a href="#2">2. 设计目标与体验目标</a></li><li><a href="#3">3. 系统概述与使用循环</a></li><li><a href="#4">4. 道具/装备规则详述</a></li><li><a href="#5">5. 道具效果表</a></li><li><a href="#6">6. 战役积分与评级（PR #59）</a></li><li><a href="#7">7. 与警戒度系统的耦合</a></li><li><a href="#8">8. 配置与数据</a></li><li><a href="#9">9. 验证与迭代（实机走查记录）</a></li><li><a href="#10">10. 设计取舍与局限</a></li><li><a href="#11">11. 附录</a></li><li><a href="#12">已知不一致与处理决定（团队项目，部分需与团队核对）</a></li></ul></div>
 <h2 id="1">1. 文档信息</h2>
-<div class="tablewrap"><table>
+<div class="tablewrap"><table class="docinfo">
 <thead>
 <tr>
 <th>项</th>
@@ -123,7 +109,7 @@ article .pend{color:var(--gold);font-size:.85em;border:1px dashed rgba(227,192,1
 </tr>
 <tr>
 <td>本文系统</td>
-<td>① 道具/装备系统（MGS 风格） ② 战役积分与评级系统</td>
+<td>① 战役积分与评级系统（本人设计并实现） ② 道具/装备系统实装（团队设计道具清单，本人实装装备、轮盘、冷却、生成管线）</td>
 </tr>
 <tr>
 <td>本人角色</td>
@@ -144,7 +130,7 @@ article .pend{color:var(--gold);font-size:.85em;border:1px dashed rgba(227,192,1
 </tbody>
 </table></div>
 <p><strong>分工说明（诚实标注）</strong></p>
-<div class="tablewrap"><table>
+<div class="tablewrap"><table class="">
 <thead>
 <tr>
 <th>内容</th>
@@ -154,15 +140,15 @@ article .pend{color:var(--gold);font-size:.85em;border:1px dashed rgba(227,192,1
 <tbody>
 <tr>
 <td>道具清单初版（13 项网络安全主题道具）、携带/库存四条规则、警戒度四态状态机、倒计时归零失败、非暴力约束</td>
-<td><strong>团队设计</strong>（策划文档，Alexander Zaychik 等主笔）</td>
+<td><strong>团队设计</strong>（策划文档，团队策划主笔）</td>
 </tr>
 <tr>
 <td><code>Res_ItemInventory2</code> / <code>Sys_Item</code> / <code>Sys_ItemEffects</code> / <code>C_D_Item</code> 骨架（5 种道具的基础库存与效果）</td>
-<td><strong>林怡含</strong>首版（03-10，"Items and Equipment"分工），本人后续扩展</td>
+<td><strong>队友 A</strong> 首版（03-10，"Items and Equipment"分工），本人后续扩展</td>
 </tr>
 <tr>
 <td>存档系统 v1（JSON 读写）</td>
-<td><strong>褚姝良</strong>首版（03-15），本人演进到 v2/v3</td>
+<td><strong>队友 B</strong> 首版（03-15），本人演进到 v2/v3</td>
 </tr>
 <tr>
 <td>Q/E 快捷装备、HUD 双面板、TAB 径向轮盘、独立冷却、<code>.itemspawns</code> 生成管线与 NavMesh 吸附、拾取/解锁通知、仓库装备/卸装、maxCarry 调整、PhotonRadar 移除与 ID 重映射、跨关卡持久化</td>
@@ -170,13 +156,13 @@ article .pend{color:var(--gold);font-size:.85em;border:1px dashed rgba(227,192,1
 </tr>
 <tr>
 <td>战役积分规则、评级阈值、结算明细 UI、击杀流程 ECS 规范化、警戒阈值/Hunt 增量对齐</td>
-<td><strong>本人设计并实现</strong>（PR #59；积分常量随后由褚姝良提取到 <code>Res_ScoreConfig</code> 配置资源，数值未变）</td>
+<td><strong>本人设计并实现</strong>（PR #59；积分常量随后由队友 B 提取到 <code>Res_ScoreConfig</code> 配置资源，数值未变）</td>
 </tr>
 </tbody>
 </table></div>
 <h2 id="2">2. 设计目标与体验目标</h2>
 <p><strong>一句话核心体验：潜行 = 信息战 + 空间博弈——玩家变强不是因为数值高，而是"信息多 + 判断准 + 操作稳"。</strong>（本人在头脑风暴阶段提出并写入团队设计文档）</p>
-<div class="tablewrap"><table>
+<div class="tablewrap"><table class="">
 <thead>
 <tr>
 <th>目标</th>
@@ -209,7 +195,7 @@ article .pend{color:var(--gold);font-size:.85em;border:1px dashed rgba(227,192,1
 </table></div>
 <h2 id="3">3. 系统概述与使用循环</h2>
 <p>道具系统的核心状态只有一份：<code>Res_ItemInventory2</code>（5 个 <code>ItemSlot</code>：携带数 / 仓库数 / 解锁 / 冷却时长）。所有 UI（HUD 双面板、轮盘、背包、配装页）都是它的纯消费者，通过 <code>Res_GameState.itemSlots/weaponSlots</code> 显示槽同步（<code>ItemEquipSync</code>）。</p>
-<pre class="diagram"><code>[主菜单·配装 MissionSelect]
+<pre><code>[主菜单·配装 MissionSelect]
   ITEMS(MAX 2) / WEAPONS(MAX 2) 两栏 → 写入 missionEquippedItems/Weapons
         │  OnRoundStart：Gadget 携带 = min(maxCarry, 仓库)，仓库同步扣减；
         │                Weapon 已解锁则补满 2，未解锁为 0
@@ -230,8 +216,8 @@ article .pend{color:var(--gold);font-size:.85em;border:1px dashed rgba(227,192,1
 [存档 autosave.save v3]  itemId + storeCount + unlocked
 </code></pre>
 <h2 id="4">4. 道具/装备规则详述</h2>
-<h3 id="41">4.1 分类与数量规则</h3>
-<div class="tablewrap"><table>
+<h3>4.1 分类与数量规则</h3>
+<div class="tablewrap"><table class="">
 <thead>
 <tr>
 <th>规则</th>
@@ -263,7 +249,7 @@ article .pend{color:var(--gold);font-size:.85em;border:1px dashed rgba(227,192,1
 <td>开局扣减</td>
 <td>库存 = 库存 − 携带</td>
 <td><code>OnRoundStart()</code>：Gadget 取 <code>min(maxCarry, storeCount)</code> 并扣库</td>
-<td>团队设计，林怡含/本人实现</td>
+<td>团队设计，队友 A / 本人实现</td>
 </tr>
 <tr>
 <td>结算回库</td>
@@ -286,8 +272,8 @@ article .pend{color:var(--gold);font-size:.85em;border:1px dashed rgba(227,192,1
 </tbody>
 </table></div>
 <p>配装页限制：<code>ITEMS (MAX 2)</code> / <code>WEAPONS (MAX 2)</code> 两栏，未解锁武器不显示；菜单阶段无库存资源时用默认实例 + 存档缓存 <code>savedStoreCount/savedUnlocked</code> 回填。</p>
-<h3 id="42-res_inputconfig-ui_itemwheel-sys_ui">4.2 快捷键与径向轮盘（<code>Res_InputConfig</code> / <code>UI_ItemWheel</code> / <code>Sys_UI</code>）</h3>
-<div class="tablewrap"><table>
+<h3>4.2 快捷键与径向轮盘（<code>Res_InputConfig</code> / <code>UI_ItemWheel</code> / <code>Sys_UI</code>）</h3>
+<div class="tablewrap"><table class="">
 <thead>
 <tr>
 <th>键</th>
@@ -322,20 +308,20 @@ article .pend{color:var(--gold);font-size:.85em;border:1px dashed rgba(227,192,1
 </tbody>
 </table></div>
 <p>轮盘：居中于游戏视区（屏宽减去右侧聊天面板），外径 120 px / 内径 40 px，扇区 0/1 = 武器槽（右半）、2/3 = 道具槽（左半）；鼠标离中心 &gt; 20 px 时按 <code>atan2</code> 角度落扇区并高亮，活跃槽橙色粗弧，各扇区显示名称与实时携带数；开启时显示系统光标并暂停相机旋转。轮盘只切活跃槽、不直接使用，对应团队规则"一次只用一种道具 + 一种武器"，也避免误触。</p>
-<h3 id="43">4.3 独立冷却</h3>
+<h3>4.3 独立冷却</h3>
 <p>每种道具自带 <code>cooldownDuration</code>：HoloBait 3 s、DDoS 8 s、RoamAI 5 s、TargetStrike 10 s、RadarMap 10 s（= 小地图激活时长）。使用时显示槽 <code>cooldown = 1.0</code>，每帧按 <code>dt / duration</code> 递减；冷却中按键被拒绝；HUD 面板显示 READY/WAIT + 进度条，使用瞬间边框闪光 0.3 s。</p>
-<h3 id="44">4.4 地图内生成点（数据驱动 + 可行走面吸附）</h3>
+<h3>4.4 地图内生成点（数据驱动 + 可行走面吸附）</h3>
 <p><code>MapLoader</code> 第 9 步读取地图配置指向的 <code>.itemspawns</code>（<code>ItemSpawnLoader::LoadItemSpawns</code>），逐条 <code>PrefabFactory::CreateItemPickup</code>：武器用胶囊体 fallback、道具用立方体，按道具类型着色并自发光（<code>emissiveStrength = 2.0</code>），绕 Y 轴旋转（90°/s）便于发现；已在存档中解锁的武器不再生成。<code>GameplayBootstrap</code> 加载 NavMesh 后对所有拾取实体 <code>SnapToNavMesh</code>（最近边投影 fallback，替代早期的重心 fallback），Y 加 <code>pickupSnapYOffset</code>，杜绝浮空/穿地。</p>
-<h3 id="45">4.5 拾取与解锁通知</h3>
+<h3>4.5 拾取与解锁通知</h3>
 <ul>
 <li>拾取半径 2.0 m（XZ 平面，不依赖物理 Trigger）；每个生成点带 <code>quantity</code>，逐个入包，耗尽销毁实体；播放 <code>ItemPickup</code> 音效。</li>
 <li>通知走 <code>PushActionNotify</code>：<code>PICKED UP &lt;名称&gt;</code>；武器首拾 <code>UNLOCKED &lt;名称&gt;</code>（3 s）。</li>
 <li>拾取后若 HUD 对应类型槽位为空，自动填入。</li>
 </ul>
-<h3 id="46-pr-72">4.6 跨关卡持久化（PR #72）</h3>
+<h3>4.6 跨关卡持久化（PR #72）</h3>
 <p>战役 = 5 图池随机取 3（HangerA / HangerB / Helipad / Lab / Dock）。<code>NextLevel</code> 时 <code>Main.cpp</code> 把 <code>alertLevel</code> 和 5 项 <code>carriedCount</code> 快照到 <code>Res_UIState.campaignAlertLevel / campaignCarried[5]</code> 并置 <code>campaignContinue = true</code>；下一图 <code>OnEnter</code> 恢复后置回 false 并<strong>跳过 <code>OnRoundStart</code></strong>（避免二次扣库）。<code>static_assert</code> 保证快照数组覆盖 <code>kItemCount</code>。</p>
-<h3 id="47-savemanager">4.7 存档版本演进（<code>SaveManager</code>）</h3>
-<div class="tablewrap"><table>
+<h3>4.7 存档版本演进（<code>SaveManager</code>）</h3>
+<div class="tablewrap"><table class="">
 <thead>
 <tr>
 <th>版本</th>
@@ -347,7 +333,7 @@ article .pend{color:var(--gold);font-size:.85em;border:1px dashed rgba(227,192,1
 <tr>
 <td>v1</td>
 <td><code>version / timestamp / player{score,level,lives,playTime} / inventory[{itemId,storeCount}]</code>，按 itemId 匹配而非下标</td>
-<td>褚姝良</td>
+<td>队友 B</td>
 </tr>
 <tr>
 <td>v2</td>
@@ -362,8 +348,8 @@ article .pend{color:var(--gold);font-size:.85em;border:1px dashed rgba(227,192,1
 </tbody>
 </table></div>
 <h2 id="5">5. 道具效果表</h2>
-<h3 id="51-14-pdf">5.1 团队策划文档原表（14 行，含"纸箱"；PDF 多列错位，按列长对齐还原）</h3>
-<div class="tablewrap"><table>
+<h3>5.1 团队策划文档原表（14 行，含"纸箱"；PDF 多列错位，按列长对齐还原）</h3>
+<div class="tablewrap"><table class="wide">
 <thead>
 <tr>
 <th>ID</th>
@@ -383,7 +369,7 @@ article .pend{color:var(--gold);font-size:.85em;border:1px dashed rgba(227,192,1
 <td>道具</td>
 <td>1</td>
 <td>10</td>
-<td><span class="pend">待核对：原表无此格</span></td>
+<td>【待核：原表无此格】</td>
 <td>站定时不会被发现</td>
 <td>敌方视野</td>
 </tr>
@@ -484,7 +470,7 @@ article .pend{color:var(--gold);font-size:.85em;border:1px dashed rgba(227,192,1
 <td>3</td>
 <td>6</td>
 <td>对敌方玩家聊天界面禁言 20 s</td>
-<td>全局警戒度无法上涨 5 s<span class="pend">待核对：线下使用者/目标列为"无"，与此效果矛盾</span></td>
+<td>全局警戒度无法上涨 5 s【待核：线下使用者/目标列为"无"，与此效果矛盾】</td>
 <td>对话界面</td>
 </tr>
 <tr>
@@ -513,15 +499,15 @@ article .pend{color:var(--gold);font-size:.85em;border:1px dashed rgba(227,192,1
 <td>武器</td>
 <td>3</td>
 <td>99</td>
-<td><span class="pend">待核对：原表右缘被裁切，仅见"击…敌…后方接…亡"</span></td>
+<td>【待核：原表右缘被裁切，仅见"击…敌…后方接…亡"】</td>
 <td>同上</td>
 <td>敌方销毁</td>
 </tr>
 </tbody>
 </table></div>
-<p>获取途径列（地图内获取 / 开局选取）在 PDF 中无法与行一一对应，整列<span class="pend">待核对</span>。</p>
-<h3 id="52-5-res_iteminventory2-sys_itemeffects">5.2 实装版（5 项，<code>Res_ItemInventory2</code> 构造函数 + <code>Sys_ItemEffects</code>）</h3>
-<div class="tablewrap"><table>
+<p>获取途径列（地图内获取 / 开局选取）在 PDF 中无法与行一一对应，整列【待核】。</p>
+<h3>5.2 实装版（5 项，<code>Res_ItemInventory2</code> 构造函数 + <code>Sys_ItemEffects</code>）</h3>
+<div class="tablewrap"><table class="wide">
 <thead>
 <tr>
 <th>ID</th>
@@ -587,9 +573,9 @@ article .pend{color:var(--gold);font-size:.85em;border:1px dashed rgba(227,192,1
 </tr>
 </tbody>
 </table></div>
-<h2 id="6-pr-59">6. 战役积分与评级（PR #59）</h2>
-<h3 id="61-res_scoreconfig">6.1 逐动作计分规则（<code>Res_ScoreConfig</code> 默认值，纯扣减制）</h3>
-<div class="tablewrap"><table>
+<h2 id="6">6. 战役积分与评级（PR #59）</h2>
+<h3>6.1 逐动作计分规则（<code>Res_ScoreConfig</code> 默认值，纯扣减制）</h3>
+<div class="tablewrap"><table class="">
 <thead>
 <tr>
 <th>事件</th>
@@ -644,8 +630,8 @@ article .pend{color:var(--gold);font-size:.85em;border:1px dashed rgba(227,192,1
 </tbody>
 </table></div>
 <p>每次扣分同时写入分项 <code>scoreLost_time / kills / items / countdown / failure</code> 与计数 <code>scoreKillCount / scoreItemUseCount</code>，供结算明细。</p>
-<h3 id="62-getscorerating">6.2 评级阈值（<code>GetScoreRating</code>）</h3>
-<div class="tablewrap"><table>
+<h3>6.2 评级阈值（<code>GetScoreRating</code>）</h3>
+<div class="tablewrap"><table class="wide">
 <thead>
 <tr>
 <th>分数</th>
@@ -674,22 +660,22 @@ article .pend{color:var(--gold);font-size:.85em;border:1px dashed rgba(227,192,1
 </tbody>
 </table></div>
 <p>每帧比较档位，降级时弹 <code>RATING DROP  S &gt; A</code> 通知——玩家在关内就能感知"这次击杀让我掉了一档"。</p>
-<h3 id="63">6.3 跨关累积与重置</h3>
+<h3>6.3 跨关累积与重置</h3>
 <ul>
 <li><code>campaignScore</code> 存于 Session 级 <code>Res_UIState</code>，三关连续扣减；<code>NextLevel</code> 只重置两个"每关一次"惩罚标记，不重置分数。</li>
 <li><code>StartGame / 返回主菜单 / 重开</code> 调用 <code>ResetCampaignScore</code> 归零所有分项。</li>
 <li>多人模式复用同一套规则，终局按 <code>&gt; passThreshold</code> 判胜/败。</li>
 </ul>
-<h3 id="64">6.4 结算界面</h3>
+<h3>6.4 结算界面</h3>
 <p>Victory（<code>CAMPAIGN COMPLETE</code>）：TOTAL TIME、CLEARED MAPS 三行、<code>FINAL SCORE: N [评级]</code>（评级色）+ BREAKDOWN：TIME (−1/s)、KILLS (×n)、ITEMS (×n)、COUNTDOWN，扣分项统一用独立"扣减红"。GameOver 页额外显示 FAILURE 行，并对"通关但 ≤500"改标题为 <code>MISSION FAILED / INSUFFICIENT SCORE</code>。</p>
-<h3 id="65">6.5 设计意图</h3>
+<h3>6.5 设计意图</h3>
 <ul>
 <li><strong>潜行是唯一最优策略</strong>：满分只能靠"少做事"守住；击杀 −10 看似便宜，但 SSS 只容 30 分损耗，一次击杀或三次道具即掉档。</li>
 <li><strong>击杀有代价但不禁止</strong>：非暴力不靠禁用武器，而是让武器"贵"——默认锁定 + 图内拾取 + 携带 2 + 击杀扣分。</li>
 <li><strong>时间压力来自分数而非警戒条</strong>：−1/s 让玩家不敢无限蹲守，形成"等待 vs 冒险"的持续博弈。</li>
 </ul>
 <h2 id="7">7. 与警戒度系统的耦合</h2>
-<div class="tablewrap"><table>
+<div class="tablewrap"><table class="">
 <thead>
 <tr>
 <th>项</th>
@@ -702,7 +688,7 @@ article .pend{color:var(--gold);font-size:.85em;border:1px dashed rgba(227,192,1
 <tr>
 <td>单敌检测值阈值</td>
 <td>Search ≥20 / Alert ≥40 / Hunt ≥80，Hunt 退出计时 3 s</td>
-<td><code>Res_AIConfig</code>（AI 负责人维护）<span class="pend">待核对：实装阈值未读取</span></td>
+<td><code>Res_AIConfig</code>（AI 负责人维护）【待核：实装阈值未读取】</td>
 <td>团队 / AI 负责人</td>
 </tr>
 <tr>
@@ -727,7 +713,7 @@ article .pend{color:var(--gold);font-size:.85em;border:1px dashed rgba(227,192,1
 </table></div>
 <h2 id="8">8. 配置与数据</h2>
 <p><strong><code>.itemspawns</code> 格式</strong>（<code>Assets/Meshes/&lt;Map&gt;.itemspawns</code>，6 个文件：Dock / HangerA / HangerB / Helipad / Lab / TutorialMap）</p>
-<pre class="diagram"><code># Item spawns for Dock
+<pre><code># Item spawns for Dock
 # Map range: X ~[-15, 16], Z ~[-16, 27], Y ~5.9
 spawnCount 4
 
@@ -742,7 +728,7 @@ quantity 1
 <p><strong>积分常量</strong>（<code>Res_ScoreConfig</code>）：<code>initialScore 1000 · penaltyCountdownSurge 200 · penaltyCountdownExpire 500 · penaltyCapture 500 · penaltyKill 10 · penaltyItemUse 5 · passThreshold 500 · ratingThresholds {500,599,699,799,899,949,969}</code>。</p>
 <p><strong>关联资源</strong>：<code>Res_ItemInventory2</code>（库存真源）→ <code>Res_GameState.itemSlots/weaponSlots</code>（显示槽）→ <code>Res_InventoryState</code>（背包 4×3）；<code>Res_UIState</code>（配装选择、轮盘状态、战役快照、积分）；事件 <code>Evt_Item_Pickup{player, pickupEntity, itemId}</code> / <code>Evt_Item_Use{user, target, itemId, targetPos, isOnline}</code>。</p>
 <h2 id="9">9. 验证与迭代（实机走查记录）</h2>
-<div class="tablewrap"><table>
+<div class="tablewrap"><table class="">
 <thead>
 <tr>
 <th>日期</th>
@@ -814,18 +800,20 @@ quantity 1
 <h2 id="11">11. 附录</h2>
 <p><strong>本人拥有文件</strong>：<code>ItemEquipSync.*</code>、<code>ItemSpawnLoader.*</code>、<code>UI_ItemWheel.*</code>、<code>UI_Victory.*</code>、<code>UI_HUD_Equipment.cpp</code>、<code>UI_ItemIcons.*</code>、<code>UI_Inventory.*</code>、<code>UI_MissionSelect.*</code>、<code>Sys_Countdown.*</code>、<code>Main.cpp</code> 战役逻辑、<code>*.itemspawns</code>；扩展 <code>Res_ItemInventory2.h</code>、<code>Sys_Item.cpp</code>、<code>Sys_ItemEffects.cpp</code>、<code>SaveManager.cpp</code>、<code>Res_UIState.h</code>。</p>
 <p><strong>相关 PR</strong>：#49（03-17→18）道具装备系统 · #59（03-18）积分系统 · #67（03-19）仓库装备 · #72（03-20）跨关卡持久化。</p>
-<details class="pending"><summary>待核对项</summary><p class="pend-note">以下条目为整理时未能逐一核实的口径 / 数据，<strong>待与团队 / 资产核对</strong>后补正；保留原文不删。</p><ol>
-<li><strong>积分方案口径冲突</strong>：贡献矩阵与作品集网站写的是"潜行未被发现 +100 / 击杀 −50 / 倒计时未触发 +200，S≥900 A≥700 B≥500 C≥300"，但 PR #59 diff 与当前 <code>master</code> 实装均为<strong>扣减制</strong>（初始 1000，−1/s，击杀 −10，道具 −5，倒计时 −200，失败 −500，F–SSS 八档）。本文以代码为准；作品集与贡献矩阵需改口径。PR #49 阶段的 GameOver 曾按累计警戒值给 S(&lt;30)/A(&lt;75)/B 评级，已被 #59 取代。</li>
-<li><strong>Q/E 语义</strong>：贡献矩阵写"Q 键切换道具、E 键切换武器"，代码为 Q/E <strong>使用</strong>当前活跃槽、TAB 轮盘切换；请确认作品集措辞。</li>
+<hr />
+<h2 id="12">已知不一致与处理决定（团队项目，部分需与团队核对）</h2>
+<ol>
+<li><strong>积分方案口径冲突</strong>：贡献矩阵与作品集网站写的是"潜行未被发现 +100 / 击杀 −50 / 倒计时未触发 +200，S≥900 A≥700 B≥500 C≥300"，但 PR #59 diff 与当前 <code>master</code> 实装均为<strong>扣减制</strong>（初始 1000，−1/s，击杀 −10，道具 −5，倒计时 −200，失败 −500，F–SSS 八档）。本文以代码为准；作品集、简历与贡献矩阵已改为扣减制口径（2026-09）。PR #49 阶段的 GameOver 曾按累计警戒值给 S(&lt;30)/A(&lt;75)/B 评级，已被 #59 取代。</li>
+<li><strong>Q/E 语义</strong>：贡献矩阵写"Q 键切换道具、E 键切换武器"，代码为 Q/E <strong>使用</strong>当前活跃槽、TAB 轮盘切换；作品集与简历已统一为代码口径。</li>
 <li>团队道具表"获取途径"整列无法对齐；"纸箱"行 ID 与线上效果格缺失；"靶向打击"线上效果被页边裁切。</li>
 <li>"对话干扰插件"线下使用者/目标为"无"但线下效果列有"全局警戒度无法上涨 5 s"，原表可能错行。</li>
 <li>单敌检测值实装阈值（<code>Res_AIConfig</code> 之外的 <code>Sys_EnemyAI</code> 内部数值）未读取，本文仅引用团队文档的 20/40/80。</li>
-<li>TargetStrike 环绕三角形弹射体（PR #73，褚姝良"OrbitTriangle + DDoS 增强"）为他人后续改动，本文效果表仅按当前代码描述。</li>
+<li>TargetStrike 环绕三角形弹射体（PR #73，队友 B "OrbitTriangle + DDoS 增强"）为他人后续改动，本文效果表仅按当前代码描述。</li>
 <li>本地仓库副本停在 PR #14 时期，本文所有代码引用来自远程 <code>master</code>（2026-03-30）；<code>ScoreUtils.h/.cpp</code>、<code>Res_CampaignState.h</code>、<code>Scene_CampaignLevel</code> 在最终代码中不存在（前者被 <code>Res_ScoreConfig</code> 取代，后二者在 #49 审查中删除）。</li>
-</ol></details>
+</ol>
   </article>
   <footer>
-    <div class="note"><b>文档说明</b>：本策划案为团队项目的<b>回溯整理稿</b>：团队设计与本人设计 / 实现逐项标注归属，规则与数值以远程 <code>master</code> 源码为准，团队原始策划文档中无法对齐的格位不猜测、列为待核对项。</div>
+    <div class="note"><b>说明</b>：本策划案为团队项目的<b>回溯整理稿</b>：团队设计与本人设计 / 实现逐项标注归属，规则与数值以远程 <code>master</code> 源码为准，团队原始策划文档中无法对齐的格位不猜测、列于文末待核对。</div>
     <a class="backbtn" href="../index.html#designdocs">← 返回作品集</a>
   </footer>
 </div>

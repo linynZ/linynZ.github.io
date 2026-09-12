@@ -71,9 +71,12 @@ footer .note b{color:var(--ink)}
 .backbtn{display:inline-block;color:var(--gold);text-decoration:none;border:1px solid rgba(227,192,122,.4);border-radius:99px;padding:8px 18px;font-size:.9rem}
 .backbtn:hover{background:rgba(227,192,122,.1)}
 article table.docinfo td:first-child{white-space:nowrap;color:var(--gold);font-weight:600}
-article table.wide{min-width:760px}
+article table.wide{min-width:720px}
 .srcbox{border:1px solid var(--line);border-radius:12px;padding:12px 18px;background:var(--card);font-size:.88rem;color:var(--muted);margin:0 0 28px}
 .srcbox a{color:var(--ice)}
+article figure{margin:0 0 30px;break-inside:avoid;page-break-inside:avoid}
+article figure img{display:block;max-width:100%;border-radius:10px;border:1px solid var(--line)}
+article figcaption{color:var(--muted);font-size:.86rem;line-height:1.7;margin-top:10px;font-style:italic}
 </style>
 </head>
 <body>
@@ -83,13 +86,13 @@ article table.wide{min-width:760px}
   <h1 class="title">《天涯明月刀》战斗属性转换与论剑数值拆解案</h1>
   <div class="subtitle">双曲减伤的血防配平、十二门派五维派生功力重算与核对、韧劲双重抵消模型与敏感度、论剑段位分布与九局五胜、自定义模板韧劲定价方案</div>
   <div class="meta"><span>拆解案 · 机制 + 数值向（MMO）</span><span>v1.1 · 2026-09 · 两路审核后修订</span><span>官方公告 / 百晓集 / 玩家实测 · 逐条标年份 · 可复现脚本</span></div>
-  <div class="tldr"><b>TL;DR</b>端游会心 / 韧劲是线性百分比，饱和曲线只有防御减伤——固定气血下有效生命严格线性，但血防是乘法关系、相对气血必然递减，功力'1 防 = 5 血'的平衡点是 HP = 5(D+K)。功力体系内部不自洽：五维名义 0.8、按其自身权重折算 0.16–1.37，重算顺带裁决了韧劲系数 9 vs 10。1% 韧劲 ≈ 1.1% 会心且目标值就是对手会心率；功力对会伤的高估随面板在 1.1–5.4 倍之间。论剑造极 773 人是瓶颈、化境 5,382 人不稀缺（机制待定）；九局五胜把 20 个百分点的胜率差放大成 47 个百分点。附自定义模板韧劲等边际定价方案。</div>
+  <div class="tldr"><b>TL;DR</b>端游会心 / 韧劲是线性百分比，饱和曲线只有防御减伤——固定气血下有效生命严格线性，但血防是乘法关系、相对气血必然递减，功力「1 防 = 5 血」的平衡点是 HP = 5(D+K)。功力体系内部不自洽：五维名义 0.8、按其自身权重折算 0.16–1.37，重算顺带裁决了韧劲系数 9 vs 10。1% 韧劲 ≈ 1.1% 会心且目标值就是对手会心率；功力对会伤的高估随面板在 1.1–5.4 倍之间。论剑造极 773 人是瓶颈、化境 5,382 人不稀缺（机制待定）；九局五胜把 20 个百分点的胜率差放大成 47 个百分点。附自定义模板韧劲等边际定价方案。</div>
   <div class="srcbox">脚本、数据与图（可重跑复核）：<a href="https://github.com/linynZ/linynZ.github.io/tree/main/analysis">github.com/linynZ/linynZ.github.io · analysis/</a>：tianya_attr_math.py；数据源档案 data/tianya_sources.md（105 页缓存索引）</div>
   <article>
 <div class="toc"><span class="toctitle">目录 · Contents</span><ul><li><a href="#1">关于本拆解案的方法说明（请先读）</a></li><li><a href="#2">1. 选题说明</a></li><li><a href="#3">2. 防御减伤：固定气血下有效生命线性，血防之间是乘法关系</a></li><li><a href="#4">3. 功力体系内部不自洽：五维名义 0.8，按其自身属性权重折算 0.16–1.37</a></li><li><a href="#5">4. 韧劲的双重抵消：1% 韧劲 ≈ 1.1% 会心 ≈ 7.5% 会伤（基准点）</a></li><li><a href="#6">5. 论剑：造极是瓶颈，化境不稀缺</a></li><li><a href="#7">6. 设计动作：自定义模板下韧劲的等边际定价（示意）</a></li><li><a href="#8">7. 对照：作者本人的 460 小时，和看数据前写下的直觉</a></li><li><a href="#9">8. 可以直接拿走的设计规则</a></li><li><a href="#10">9. 未做与可证伪之处</a></li><li><a href="#11">10. 参考</a></li></ul></div>
 <h2 id="1">关于本拆解案的方法说明（请先读）</h2>
 <p>天刀端游 2015 年上线至今数值改过很多轮，公开资料里 2015、2016、2023、2024 四个年份的口径混在一起。本文的做法：</p>
-<div class="tablewrap"><table class="docinfo">
+<div class="tablewrap"><table class="">
 <thead>
 <tr>
 <th>层</th>
@@ -176,7 +179,7 @@ article table.wide{min-width:760px}
 </tr>
 </tbody>
 </table></div>
-<p><img src="img/ty_mitigation.png" alt="图 1：面板减伤（左）；固定气血下的有效生命倍率与&quot;1 防折算气血&quot;（右）"><em>图 1：面板减伤（左）；固定气血下的有效生命倍率与&quot;1 防折算气血&quot;（右）</em></p>
+<figure><img src="img/ty_mitigation.png" alt="图 1：面板减伤（左）；固定气血下的有效生命倍率与&quot;1 防折算气血&quot;（右）"><figcaption>图 1：面板减伤（左）；固定气血下的有效生命倍率与&quot;1 防折算气血&quot;（右）</figcaption></figure>
 <p>三层意思要分开说：</p>
 <ol>
 <li><strong>固定气血下，有效生命对防御严格线性。</strong> EHP = HP ÷ (1 − R) = HP × (D + K) / K，D 是线性项，每 1 点防御恒增加 HP / K 点<strong>有效生命</strong>。面板减伤从 50% 到 80% 看起来边际收益掉了六倍，有效生命的增量一点没变。</li>
@@ -217,8 +220,8 @@ article table.wide{min-width:760px}
 <p><strong>如果这条错了会怎么看出来</strong>：若减伤不是双曲型（例如线性封顶或分段），有效生命对防御就不会是直线；三个年份三组独立实测都拟合出近似同族的双曲线，线性化成立。</p>
 <h2 id="4">3. 功力体系内部不自洽：五维名义 0.8，按其自身属性权重折算 0.16–1.37</h2>
 <p>官方设定<strong>每点五维 = 0.8 功力</strong>（2016 逍遥客栈原文），但五维给的是不同属性，属性再按功力换算表折算，每点五维的"派生功力"并不平。2023.02 有作者公布了十二门派的五维加成表和一张"五维实际功力收益表"。我用加成表 × 换算表重算了全部 60 格：</p>
-<p><img src="img/ty_five_dim_value.png" alt="图 2：十二门派每点五维按功力权重折算（重算）"><em>图 2：十二门派每点五维按功力权重折算（重算）</em></p>
-<div class="tablewrap"><table class="">
+<figure><img src="img/ty_five_dim_value.png" alt="图 2：十二门派每点五维按功力权重折算（重算）"><figcaption>图 2：十二门派每点五维按功力权重折算（重算）</figcaption></figure>
+<div class="tablewrap"><table class="wide">
 <thead>
 <tr>
 <th>门派</th>
@@ -293,7 +296,7 @@ article table.wide{min-width:760px}
 </blockquote>
 <p><strong>建模假设</strong>（公告原文有两处可作两种读法，本文取前者，并给出后者的数值）：① "降低至 50%"取会伤属性的绝对下限 50 个百分点；② "0.8%"取绝对百分点抵消。若取相对抵消 CD × (1 − 0.8 t)，基准点的会伤当量从 7.5% 变为 8.9%，结论方向不变。另有 2016 玩家帖称技能自带约 5% 不受韧劲影响的底暴，本文未纳入——若成立，t 超过 c 之后韧劲仍通过压会伤保留少量收益。</p>
 <p>在"会心 40% / 会伤 150% / 对方韧劲 20%"的基准点：M = 1.268；+1% 会心 → +0.0134；+1% 会伤 → +0.0020；对方 +1% 韧劲 → −0.0149。</p>
-<p><img src="img/ty_resilience.png" alt="图 3：韧劲双重抵消（左）；以功力为计价单位时会心 / 会伤的每功力收益比（右）"><em>图 3：韧劲双重抵消（左）；以功力为计价单位时会心 / 会伤的每功力收益比（右）</em></p>
+<figure><img src="img/ty_resilience.png" alt="图 3：韧劲双重抵消（左）；以功力为计价单位时会心 / 会伤的每功力收益比（右）"><figcaption>图 3：韧劲双重抵消（左）；以功力为计价单位时会心 / 会伤的每功力收益比（右）</figcaption></figure>
 <ul>
 <li><strong>1% 韧劲的防御价值 ≈ 1.11% 会心 ≈ 7.5% 会伤。</strong> 功力表给韧劲 9、会心 10（比 0.9），与实战的 1.11 同量级、方向相反（功力说韧劲略便宜，模型说韧劲略贵）。功力给会伤 4（即 1% 会伤 = 0.4% 会心），实战在基准点只有 0.15% 会心——<strong>功力对会伤的高估随面板变化</strong>：</li>
 </ul>
@@ -361,7 +364,7 @@ article table.wide{min-width:760px}
 </tr>
 </tbody>
 </table></div>
-<p><img src="img/ty_ladder.png" alt="图 4：段位分布（左）与剑荡初赛晋级概率（右）"><em>图 4：段位分布（左）与剑荡初赛晋级概率（右）</em></p>
+<figure><img src="img/ty_ladder.png" alt="图 4：段位分布（左）与剑荡初赛晋级概率（右）"><figcaption>图 4：段位分布（左）与剑荡初赛晋级概率（右）</figcaption></figure>
 <ul>
 <li>心剑到造极逐段递减（37% / 14% / 48% / 44% / 27%），<strong>造极只有 773 人，是真正的瓶颈</strong>；但化境有 5,382 人，是造极的 7 倍。三种解释并存：终点段天然堆积（能进去的人没有下一段可去）、化境无保段战、代练送分（数据作者原话"化境的人数特别水，高功力和 DD 横行，还有一部分半夜送上去的"）。<strong>本文只能确认"顶段不稀缺"这个现象，不能确认机制。</strong> 2015 年热身赛季官方公布"化境 0.9%"，分母是参与玩家、赛季很短，与 2018 榜内口径不可比，不作趋势解读。</li>
 <li>赛季节奏：S1 2015-09-23 开启，S19 剑荡八荒 2024-11，19 个完整赛季端点平均约 5.8 个月一季（早期赛季更短）；赛季末剑荡八荒四天（初赛 9 局 5 胜 → 复赛 15 局取 64 强 → 淘汰赛）。</li>

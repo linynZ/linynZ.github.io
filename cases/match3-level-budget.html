@@ -71,15 +71,18 @@ footer .note b{color:var(--ink)}
 .backbtn{display:inline-block;color:var(--gold);text-decoration:none;border:1px solid rgba(227,192,122,.4);border-radius:99px;padding:8px 18px;font-size:.9rem}
 .backbtn:hover{background:rgba(227,192,122,.1)}
 article table.docinfo td:first-child{white-space:nowrap;color:var(--gold);font-weight:600}
-article table.wide{min-width:760px}
+article table.wide{min-width:720px}
 .srcbox{border:1px solid var(--line);border-radius:12px;padding:12px 18px;background:var(--card);font-size:.88rem;color:var(--muted);margin:0 0 28px}
 .srcbox a{color:var(--ice)}
+article figure{margin:0 0 30px;break-inside:avoid;page-break-inside:avoid}
+article figure img{display:block;max-width:100%;border-radius:10px;border:1px solid var(--line)}
+article figcaption{color:var(--muted);font-size:.86rem;line-height:1.7;margin-top:10px;font-style:italic}
 </style>
 </head>
 <body>
 <nav><a class="logo" href="../index.html">赵鹏<b>淦</b></a><a class="back" href="../index.html#cases">← 返回作品集</a></nav>
 <div class="wrap">
-  <div class="eyebrow">Case Study · 原创拆解 06</div>
+  <div class="eyebrow">Case Study · 原创拆解 01</div>
   <h1 class="title">三消关卡「步数预算与难度曲线」拆解案</h1>
   <div class="subtitle">Candy Crush Saga 1–1505 关公开数据 → 章内难度锯齿、隐含需求速率、卡点密度、新鲜感节奏，以及一次增量解释力很小的模拟器校准</div>
   <div class="meta"><span>拆解案 · 关卡 / 难度节奏向</span><span>v1.1 · 2026-09 · 三路审核后修订</span><span>1,505 关数据 · 三消模拟器 · 可复现脚本</span></div>
@@ -89,7 +92,7 @@ article table.wide{min-width:760px}
 <div class="toc"><span class="toctitle">目录 · Contents</span><ul><li><a href="#1">关于本拆解案的方法说明（请先读）</a></li><li><a href="#2">1. 选题说明</a></li><li><a href="#3">2. 章内难度锯齿：第 5 / 10 / 15 关是三个峰</a></li><li><a href="#4">3. 隐含需求速率：官方跨档调难度，主要动的是目标量</a></li><li><a href="#5">4. 卡点密度与间隔：难关不是稀有事件</a></li><li><a href="#6">5. 新鲜感节奏：前 300 关每 10 关一个新元素，之后每 50–150 关一个</a></li><li><a href="#7">6. 模拟器校准：增量解释力很小，以及它教会我的事</a></li><li><a href="#8">7. 对照：作者本人的 300 关，和看数据前写下的直觉</a></li><li><a href="#9">8. 可以直接拿走的设计规则</a></li><li><a href="#10">9. 未做与可证伪之处</a></li><li><a href="#11">10. 参考</a></li><li><a href="#12">附录 A · 44 个新元素引入点</a></li></ul></div>
 <h2 id="1">关于本拆解案的方法说明（请先读）</h2>
 <p>三消的关卡数据是公开的：每关的步数、目标、障碍写在关卡开局界面上，社区 wiki 逐关记录了十几年。但"公开"不等于"有结论"。本文的输入分三层：</p>
-<div class="tablewrap"><table class="docinfo">
+<div class="tablewrap"><table class="">
 <thead>
 <tr>
 <th>层</th>
@@ -224,7 +227,7 @@ article table.wide{min-width:760px}
 </tr>
 </tbody>
 </table></div>
-<p><img src="img/m3_episode_sawtooth.png" alt="图 1：章内位置 → 难度均值与难关占比（21–1505 关，99 章对齐）"><em>图 1：章内位置 → 难度均值与难关占比（21–1505 关，99 章对齐）</em></p>
+<figure><img src="img/m3_episode_sawtooth.png" alt="图 1：章内位置 → 难度均值与难关占比（21–1505 关，99 章对齐）"><figcaption>图 1：章内位置 → 难度均值与难关占比（21–1505 关，99 章对齐）</figcaption></figure>
 <ul>
 <li>5 / 10 / 15 位的均值 5.98，其余位 4.45，Mann-Whitney 单侧 p = 3×10⁻²¹。<strong>平均而言</strong>每 5 关一个峰、峰后一关回落（第 5→6、10→11 关平均回落 1.74 档；第 15 关→下章第 1 关回落 2.99 档，因跨章另计）。</li>
 <li>逐章看，这条规律成立于多数章而非全部：第 6 关低于第 5 关的章占 67%、第 11 关低于第 10 关的占 64%、下章第 1 关低于第 15 关的占 76%；全章最高关落在 5/10/15 位的章占 44%（随机期望 20%）。它是一条<strong>均值层面的节奏规律</strong>，不是每章都严格执行的模板。</li>
@@ -268,7 +271,7 @@ article table.wide{min-width:760px}
 </tr>
 </tbody>
 </table></div>
-<p><img src="img/m3_demand_rate.png" alt="图 2：果冻关需求速率随关卡序号漂移（左）与按评级档的中位数（右）"><em>图 2：果冻关需求速率随关卡序号漂移（左）与按评级档的中位数（右）</em></p>
+<figure><img src="img/m3_demand_rate.png" alt="图 2：果冻关需求速率随关卡序号漂移（左）与按评级档的中位数（右）"><figcaption>图 2：果冻关需求速率随关卡序号漂移（左）与按评级档的中位数（右）</figcaption></figure>
 <p>四个发现：</p>
 <ol>
 <li><strong>三段难度区制</strong>。201 关起需求速率翻倍（3.2→6.2），801 关起又腰斩回 3.5。这与社区记录的产品史一致（2013–2014 年的"地狱期"，之后大规模削弱），但这里是从关卡参数里直接读出来的，不需要知道历史。</li>
@@ -310,7 +313,7 @@ article table.wide{min-width:760px}
 </tr>
 </tbody>
 </table></div>
-<p><img src="img/m3_wall_gaps.png" alt="图 3：相邻卡点间隔分布"><em>图 3：相邻卡点间隔分布</em></p>
+<figure><img src="img/m3_wall_gaps.png" alt="图 3：相邻卡点间隔分布"><figcaption>图 3：相邻卡点间隔分布</figcaption></figure>
 <ul>
 <li>近三成关卡被社区评为"很难"以上，中位间隔只有 2 关。<strong>卡点不是每章一两个的稀有事件，而是常态</strong>；付费加步的机会点密度远高于"每章一个付费墙"的直觉。</li>
 <li>一个被证伪的直觉（我在看数据前预写的，见 §7.2）："卡点之后会给一关喘息"。第一次核对时我用"卡点后一关均值 4.95 高于全体 4.71"当证据，审核指出这个数被混杂了——卡点常连续出现，后一关有三分之一自己就是卡点。去掉混杂后：连续卡点段结束后的第一关均值 3.56，与其余非卡点关的 3.46 没有差别；卡点后一关再出卡点的概率（32.9%）还略高于位置基线（27.5%）。结论不变但证据换了：<strong>官方不按"上一关难不难"给喘息，喘息只按固定位置（第 1/3/6/11 关）给。</strong></li>
@@ -421,7 +424,7 @@ article table.wide{min-width:760px}
 </tr>
 </tbody>
 </table></div>
-<p><img src="img/m3_wall_density.png" alt="图 4：每 100 关的难关数"><em>图 4：每 100 关的难关数</em></p>
+<figure><img src="img/m3_wall_density.png" alt="图 4：每 100 关的难关数"><figcaption>图 4：每 100 关的难关数</figcaption></figure>
 <p>601–800 关每 100 关有 55 个"很难"以上，随后 801–1100 骤降到 14–17，与 §3 的需求速率区制完全对应。混合目标关（两种目标同时要求）均值 5.64，单目标关 4.58；混合关集中在 301–900 关，分段内差距仍在（1–300：4.33 vs 3.34；301–600：5.21 vs 4.50；601–900：6.73 vs 4.94）——<strong>混合目标本身就是一档难度</strong>。</p>
 <p><strong>如果这条错了会怎么看出来</strong>：若"卡点后给喘息"成立，连续卡点段结束后第一关的均值应显著低于其余非卡点关；数据是 3.56 vs 3.46。</p>
 <h2 id="6">5. 新鲜感节奏：前 300 关每 10 关一个新元素，之后每 50–150 关一个</h2>
@@ -462,7 +465,7 @@ article table.wide{min-width:760px}
 </tr>
 </tbody>
 </table></div>
-<p><img src="img/m3_novelty_timeline.png" alt="图 5：新元素引入点（上）与极难以上关（下）的分布"><em>图 5：新元素引入点（上）与极难以上关（下）的分布</em></p>
+<figure><img src="img/m3_novelty_timeline.png" alt="图 5：新元素引入点（上）与极难以上关（下）的分布"><figcaption>图 5：新元素引入点（上）与极难以上关（下）的分布</figcaption></figure>
 <p>前 300 关把几乎所有机制教完，之后 1,200 关主要靠已有元素的排列组合与难度撑内容。</p>
 <p><strong>数据的偏差要先说</strong>：wiki 对早期关卡的备注更完整，后期引入的元素可能漏记，这个表是下限。第一版判定规则漏掉了"was introduced"等写法，301–600 关只数出 1 个，审核后修正为 3 个——量级说法从"每 300 关一个"改成"每 100 关一个"，方向不变。</p>
 <p><strong>如果这条错了会怎么看出来</strong>：若后期引入点被大量漏记，按 wiki 备注长度（后期备注并不更短）应能看到系统性差异；同时 601 关后引入点重新出现，说明记录并未中断。</p>
@@ -513,7 +516,7 @@ article table.wide{min-width:760px}
 </tr>
 </tbody>
 </table></div>
-<p><img src="img/m3_sim_vs_rating.png" alt="图 6：模拟通关率 vs 社区难度评级（每关 300 局）"><em>图 6：模拟通关率 vs 社区难度评级（每关 300 局）</em></p>
+<figure><img src="img/m3_sim_vs_rating.png" alt="图 6：模拟通关率 vs 社区难度评级（每关 300 局）"><figcaption>图 6：模拟通关率 vs 社区难度评级（每关 300 局）</figcaption></figure>
 <ul>
 <li>果冻关（n=72）：Spearman ρ（通关率 vs 评级）= <strong>−0.45</strong>，自助 95% 置信区间 [−0.65, −0.22]。趋势在，但档内离散极大，中间几档基本持平，72 关里 17 关在 3 倍步数内都跑不到 50% 通关。（半量口径：ρ = −0.50，[−0.67, −0.28]。）</li>
 <li>更要紧的是：模拟通关率与"目标量÷步数"的 ρ = −0.80；控制该量后，通关率与评级的偏相关只剩 <strong>−0.12</strong>（半量口径 −0.17）。也就是说模拟器几乎没有提供超出这两个数的解释力——<strong>它接近一个昂贵的除法器</strong>。校准子集里"目标量÷步数"与评级的 ρ = +0.44（与 §3 全样本的 +0.37 同向，子集偏难关）。</li>

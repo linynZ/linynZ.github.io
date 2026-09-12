@@ -24,7 +24,7 @@ nav .back:hover{color:var(--gold)}
 .eyebrow{font-size:.78rem;letter-spacing:.28em;color:var(--gold);text-transform:uppercase;margin-bottom:14px}
 h1.title{font-size:2rem;line-height:1.35;margin-bottom:10px}
 .subtitle{font-size:1.05rem;color:var(--violet);margin-bottom:18px}
-.meta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
+.meta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:40px}
 .meta span{font-size:.78rem;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:3px 12px}
 article h2{font-size:1.35rem;color:var(--gold);margin:52px 0 16px;padding-bottom:8px;border-bottom:1px solid var(--line)}
 article h3{font-size:1.1rem;color:var(--ice);margin:34px 0 12px}
@@ -48,6 +48,8 @@ article td{border-bottom:1px solid var(--line);padding:8px 12px;color:#cdc9e0}
 article tr:hover td{background:rgba(157,143,240,.05)}
 article hr{border:0;border-top:1px solid var(--line);margin:40px 0}
 article a{color:var(--ice)}
+article img{max-width:100%;border-radius:12px;border:1px solid var(--line);margin:8px 0 2px;display:block}
+article img+em, article p img+em{display:block}
 .toc{border:1px solid var(--line);border-radius:12px;padding:14px 22px;background:var(--card);font-size:.86rem;margin-bottom:6px}
 .toc ul{margin:0 0 0 1.1em;color:var(--muted)}
 .toc li{margin-bottom:3px}
@@ -61,50 +63,35 @@ footer .note b{color:var(--gold)}
   padding:8px 22px;text-decoration:none;font-size:.88rem}
 .backbtn:hover{background:rgba(227,192,122,.1)}
 
-/* —— 策划案页补充（沿用模板变量） —— */
-.docinfo{display:grid;grid-template-columns:auto 1fr;gap:6px 18px;border:1px solid var(--line);border-radius:12px;
-  background:var(--card);padding:16px 22px;margin-bottom:16px;font-size:.9rem}
-.docinfo .k{color:var(--gold);font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;white-space:nowrap;padding-top:3px}
-.docinfo .v{color:#cdc9e0}
-@media(max-width:560px){.docinfo{grid-template-columns:1fr;gap:2px 0}.docinfo .v{margin-bottom:8px}}
-.tldr{border-left:3px solid var(--ice);background:rgba(159,216,240,.06);border-radius:0 10px 10px 0;padding:12px 18px;margin-bottom:40px;
-  color:var(--ink);font-size:1rem;line-height:1.7}
-.tldr b{color:var(--ice);font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;margin-right:10px}
-article pre.diagram code{white-space:pre;font-size:.82rem;line-height:1.5}
-article details.pending{border:1px solid var(--line);border-radius:12px;background:var(--card);padding:0 20px;margin-top:40px}
-article details.pending summary{cursor:pointer;list-style:none;padding:14px 0;color:var(--gold);font-size:1.02rem;font-weight:600;display:flex;align-items:center;gap:10px}
-article details.pending summary::-webkit-details-marker{display:none}
-article details.pending summary::before{content:"▸";font-size:.9rem;transition:.25s;color:var(--muted)}
-article details.pending[open] summary::before{transform:rotate(90deg)}
-article details.pending .pend-note{font-size:.86rem;color:var(--muted);margin:0 0 12px}
-article details.pending ol{margin-bottom:18px}
-article .pend{color:var(--gold);font-size:.85em;border:1px dashed rgba(227,192,122,.45);border-radius:6px;padding:0 6px}
+.tldr{border:1px solid rgba(227,192,122,.35);background:rgba(227,192,122,.06);border-radius:12px;padding:14px 18px;margin:0 0 34px;color:#cdc9e0;font-size:.95rem;line-height:1.8}
+.tldr b{color:var(--gold);margin-right:8px}
+footer{margin-top:56px;border-top:1px solid var(--line);padding-top:22px}
+footer .note{color:var(--muted);font-size:.88rem;line-height:1.8;margin-bottom:18px}
+footer .note b{color:var(--ink)}
+.backbtn{display:inline-block;color:var(--gold);text-decoration:none;border:1px solid rgba(227,192,122,.4);border-radius:99px;padding:8px 18px;font-size:.9rem}
+.backbtn:hover{background:rgba(227,192,122,.1)}
+article table.docinfo td:first-child{white-space:nowrap;color:var(--gold);font-weight:600}
+article table.wide{min-width:720px}
+.srcbox{border:1px solid var(--line);border-radius:12px;padding:12px 18px;background:var(--card);font-size:.88rem;color:var(--muted);margin:0 0 28px}
+.srcbox a{color:var(--ice)}
+article figure{margin:0 0 30px;break-inside:avoid;page-break-inside:avoid}
+article figure img{display:block;max-width:100%;border-radius:10px;border:1px solid var(--line)}
+article figcaption{color:var(--muted);font-size:.86rem;line-height:1.7;margin-top:10px;font-style:italic}
 </style>
 </head>
 <body>
 <nav><a class="logo" href="../index.html">赵鹏<b>淦</b></a><a class="back" href="../index.html#designdocs">← 返回作品集</a></nav>
 <div class="wrap">
-  <div class="eyebrow">Design Doc · 系统策划案</div>
+  <div class="eyebrow">Design Doc · 系统策划案 02</div>
   <h1 class="title">记忆修复与任务进度系统策划案</h1>
   <div class="subtitle">ChronoTraveler · 记忆修复度 · Boss 双条件门 · 时代主线任务 · 时代链与星晶 · 存档</div>
   <div class="meta"><span>系统策划案 · 进度 / 任务向</span><span>v1.0 · 2026-09</span><span>17 条防软锁设计逐项对应机制</span></div>
-  <div class="docinfo"><span class="k">项目</span><span class="v">ChronoTraveler《编年旅者》— 二次元教育 RPG（Unity URP，已收官）</span><span class="k">系统</span><span class="v">记忆修复度 · 记忆碎片 · Boss 双条件门 · 时代主线任务 · 时代链与记忆星晶 · 存档点</span><span class="k">角色</span><span class="v">系统策划 / 独立开发（AI 辅助管线）</span><span class="k">状态</span><span class="v">已上线 · 场景序列化值以六张时代图为准，GDD 与实装不一致处已在表中标注</span></div>
-  <div class="tldr"><b>TL;DR</b>探索中的一切动作汇入同一根记忆修复条；任务补记与经济超供保证任意顺序不死锁，每颗星晶都有星醒演出。</div>
+  <div class="tldr"><b>TL;DR</b>探索中的一切动作汇入同一根记忆修复条；任务补记与经济超供（供给 ÷ 目标 1.67× / 2×）保证任意顺序不死锁，每颗星晶都有星醒演出。</div>
+  <div class="srcbox">脚本、数据与图（可重跑复核）：<a href="https://github.com/linynZ/linynZ.github.io/tree/main/analysis">github.com/linynZ/linynZ.github.io · analysis/</a></div>
   <article>
-<div class="toc"><span class="toctitle">目录 · Contents</span><ul>
-<li><a href="#1">1. 文档信息</a></li>
-<li><a href="#2">2. 设计目标与体验目标</a></li>
-<li><a href="#3">3. 系统概述与循环</a></li>
-<li><a href="#4">4. 规则详述</a></li>
-<li><a href="#5">5. 数值与配置</a></li>
-<li><a href="#6">6. 交互与表现</a></li>
-<li><a href="#7">7. 防软锁与容错设计</a></li>
-<li><a href="#8">8. 验证与迭代</a></li>
-<li><a href="#9">9. 设计取舍与局限</a></li>
-<li><a href="#10">10. 附录：字段与接口</a></li></ul>
-</div>
+<div class="toc"><span class="toctitle">目录 · Contents</span><ul><li><a href="#1">1. 文档信息</a></li><li><a href="#2">2. 设计目标与体验目标</a></li><li><a href="#3">3. 系统概述与循环</a></li><li><a href="#4">4. 规则详述</a></li><li><a href="#5">5. 数值与配置</a></li><li><a href="#6">6. 交互与表现</a></li><li><a href="#7">7. 防软锁与容错设计</a></li><li><a href="#8">8. 验证与迭代</a></li><li><a href="#9">9. 设计取舍与局限</a></li><li><a href="#10">10. 附录：字段与接口</a></li><li><a href="#11">已知不一致与处理决定</a></li></ul></div>
 <h2 id="1">1. 文档信息</h2>
-<div class="tablewrap"><table>
+<div class="tablewrap"><table class="docinfo">
 <thead>
 <tr>
 <th>项</th>
@@ -135,7 +122,7 @@ article .pend{color:var(--gold);font-size:.85em;border:1px dashed rgba(227,192,1
 </tbody>
 </table></div>
 <h2 id="2">2. 设计目标与体验目标</h2>
-<div class="tablewrap"><table>
+<div class="tablewrap"><table class="">
 <thead>
 <tr>
 <th>目标</th>
@@ -162,7 +149,7 @@ article .pend{color:var(--gold);font-size:.85em;border:1px dashed rgba(227,192,1
 </tbody>
 </table></div>
 <h2 id="3">3. 系统概述与循环</h2>
-<pre class="diagram"><code>枢纽·星引宫 ──进入已苏醒的时代门──▶ 时代浮岛（探索）
+<pre><code>枢纽·星引宫 ──进入已苏醒的时代门──▶ 时代浮岛（探索）
    ▲                                   ├─ 与 NPC 对话 → 任务阶段 / 日志
    │                                   ├─ 拾取记忆碎片（+20）─┐
    │                                   ├─ 净化错乱体（+30/+40）├─▶ 记忆修复度 0→target
@@ -174,8 +161,8 @@ article .pend{color:var(--gold);font-size:.85em;border:1px dashed rgba(227,192,1
 </code></pre>
 <p>系统之间只通过事件耦合：<code>碎片拾取</code> / <code>战斗结束</code> / <code>对话完成</code> / <code>记忆满</code> 四类事件广播，任务、门、HUD、存档各自订阅。</p>
 <h2 id="4">4. 规则详述</h2>
-<h3 id="41">4.1 记忆修复度</h3>
-<div class="tablewrap"><table>
+<h3>4.1 记忆修复度</h3>
+<div class="tablewrap"><table class="">
 <thead>
 <tr>
 <th>规则</th>
@@ -206,7 +193,7 @@ article .pend{color:var(--gold);font-size:.85em;border:1px dashed rgba(227,192,1
 </tbody>
 </table></div>
 <p><strong>经济超供（防软锁核心）</strong>：每图可得记忆总量都显著高于 target，玩家不必"做完所有事"就能开门。</p>
-<div class="tablewrap"><table>
+<div class="tablewrap"><table class="wide">
 <thead>
 <tr>
 <th>时代</th>
@@ -269,8 +256,8 @@ article .pend{color:var(--gold);font-size:.85em;border:1px dashed rgba(227,192,1
 <blockquote>
 <p>GDD §9 写的是"0–100、经济超供 ≥140"，实装后华夏保留 100、后四图降到 80 并各多放一只 30 分错乱体，超供比从 1.4× 提到 2×。但主线任务第二阶段指定净化那只 40 分错乱体，所以<strong>实际最短路径 = 3 碎片 + 任务指定错乱体</strong>，其余错乱体全是可选内容。</p>
 </blockquote>
-<h3 id="42">4.2 碎片系统</h3>
-<div class="tablewrap"><table>
+<h3>4.2 碎片系统</h3>
+<div class="tablewrap"><table class="">
 <thead>
 <tr>
 <th>规则</th>
@@ -297,7 +284,7 @@ article .pend{color:var(--gold);font-size:.85em;border:1px dashed rgba(227,192,1
 </tbody>
 </table></div>
 <p><strong>悬浮碎片边界与坠落救援</strong>（世界观：每张时代图是漂在"之海"上的记忆碎片）</p>
-<div class="tablewrap"><table>
+<div class="tablewrap"><table class="">
 <thead>
 <tr>
 <th>层</th>
@@ -323,8 +310,8 @@ article .pend{color:var(--gold);font-size:.85em;border:1px dashed rgba(227,192,1
 </tr>
 </tbody>
 </table></div>
-<h3 id="43-boss">4.3 Boss 双条件门</h3>
-<div class="tablewrap"><table>
+<h3>4.3 Boss 双条件门</h3>
+<div class="tablewrap"><table class="">
 <thead>
 <tr>
 <th>规则</th>
@@ -358,8 +345,8 @@ article .pend{color:var(--gold);font-size:.85em;border:1px dashed rgba(227,192,1
 </tr>
 </tbody>
 </table></div>
-<h3 id="44">4.4 任务系统</h3>
-<div class="tablewrap"><table>
+<h3>4.4 任务系统</h3>
+<div class="tablewrap"><table class="">
 <thead>
 <tr>
 <th>规则</th>
@@ -397,8 +384,8 @@ article .pend{color:var(--gold);font-size:.85em;border:1px dashed rgba(227,192,1
 </tr>
 </tbody>
 </table></div>
-<h3 id="45">4.5 时代链与记忆星晶</h3>
-<div class="tablewrap"><table>
+<h3>4.5 时代链与记忆星晶</h3>
+<div class="tablewrap"><table class="">
 <thead>
 <tr>
 <th>规则</th>
@@ -440,8 +427,8 @@ article .pend{color:var(--gold);font-size:.85em;border:1px dashed rgba(227,192,1
 </tr>
 </tbody>
 </table></div>
-<h3 id="46">4.6 存档点与持久化</h3>
-<div class="tablewrap"><table>
+<h3>4.6 存档点与持久化</h3>
+<div class="tablewrap"><table class="">
 <thead>
 <tr>
 <th>存档时机</th>
@@ -481,8 +468,8 @@ article .pend{color:var(--gold);font-size:.85em;border:1px dashed rgba(227,192,1
 </table></div>
 <p>写入方式：临时文件 → 原子替换 → 保留 <code>.bak</code>；主档损坏自动用备份恢复；版本号不符（当前 "1.1"）不读不删、改名备份。</p>
 <h2 id="5">5. 数值与配置</h2>
-<h3 id="51">5.1 每时代内容标准包</h3>
-<div class="tablewrap"><table>
+<h3>5.1 每时代内容标准包</h3>
+<div class="tablewrap"><table class="">
 <thead>
 <tr>
 <th>项</th>
@@ -528,8 +515,8 @@ article .pend{color:var(--gold);font-size:.85em;border:1px dashed rgba(227,192,1
 </tr>
 </tbody>
 </table></div>
-<h3 id="52">5.2 记忆经济表</h3>
-<div class="tablewrap"><table>
+<h3>5.2 记忆经济表</h3>
+<div class="tablewrap"><table class="">
 <thead>
 <tr>
 <th>来源</th>
@@ -577,8 +564,8 @@ article .pend{color:var(--gold);font-size:.85em;border:1px dashed rgba(227,192,1
 </tr>
 </tbody>
 </table></div>
-<h3 id="53">5.3 任务阶段表（五条主线同构，以华夏为例）</h3>
-<div class="tablewrap"><table>
+<h3>5.3 任务阶段表（五条主线同构，以华夏为例）</h3>
+<div class="tablewrap"><table class="wide">
 <thead>
 <tr>
 <th>阶段</th>
@@ -625,8 +612,8 @@ article .pend{color:var(--gold);font-size:.85em;border:1px dashed rgba(227,192,1
 </tbody>
 </table></div>
 <p>其余四条：NPC 分别为书记官·塞莎 / 哲人·苏格 / 元老·马可 / 商队首领·阿罗；指定错乱体 <code>egypt_sand</code> / <code>greece_sophist</code> / <code>rome_rumor</code> / <code>trade_rumor</code>；Boss <code>&lt;era&gt;_boss</code>。</p>
-<h3 id="54">5.4 存档字段清单（进度相关）</h3>
-<div class="tablewrap"><table>
+<h3>5.4 存档字段清单（进度相关）</h3>
+<div class="tablewrap"><table class="">
 <thead>
 <tr>
 <th>字段</th>
@@ -708,7 +695,7 @@ article .pend{color:var(--gold);font-size:.85em;border:1px dashed rgba(227,192,1
 </tbody>
 </table></div>
 <h2 id="6">6. 交互与表现</h2>
-<div class="tablewrap"><table>
+<div class="tablewrap"><table class="">
 <thead>
 <tr>
 <th>触点</th>
@@ -747,7 +734,7 @@ article .pend{color:var(--gold);font-size:.85em;border:1px dashed rgba(227,192,1
 </tbody>
 </table></div>
 <h2 id="7">7. 防软锁与容错设计</h2>
-<div class="tablewrap"><table>
+<div class="tablewrap"><table class="">
 <thead>
 <tr>
 <th>#</th>
@@ -844,7 +831,7 @@ article .pend{color:var(--gold);font-size:.85em;border:1px dashed rgba(227,192,1
 </tbody>
 </table></div>
 <h2 id="8">8. 验证与迭代</h2>
-<div class="tablewrap"><table>
+<div class="tablewrap"><table class="">
 <thead>
 <tr>
 <th>时间</th>
@@ -880,7 +867,7 @@ article .pend{color:var(--gold);font-size:.85em;border:1px dashed rgba(227,192,1
 </tr>
 <tr>
 <td>07-05</td>
-<td>用户报告：星醒在每次回枢纽都全部重放</td>
+<td>实机发现：星醒在每次回枢纽都全部重放</td>
 <td>见证标记提前到演出开始帧</td>
 </tr>
 <tr>
@@ -900,9 +887,9 @@ article .pend{color:var(--gold);font-size:.85em;border:1px dashed rgba(227,192,1
 </tr>
 </tbody>
 </table></div>
-<p>自动化验证：<code>BattleGate</code> 7 用例、<code>EraCompletion</code> 28 用例（EditMode，Roslyn 离线编译可跑）；记忆/任务/存档链路依赖实机 Play，由用户走查。</p>
+<p>自动化验证：<code>BattleGate</code> 7 用例、<code>EraCompletion</code> 28 用例（EditMode，Roslyn 离线编译可跑）；记忆 / 任务 / 存档链路依赖实机 Play，由本人走查（07-22 走查表 12/12）</p>
 <h2 id="9">9. 设计取舍与局限</h2>
-<div class="tablewrap"><table>
+<div class="tablewrap"><table class="">
 <thead>
 <tr>
 <th>取舍</th>
@@ -941,7 +928,7 @@ article .pend{color:var(--gold);font-size:.85em;border:1px dashed rgba(227,192,1
 </tbody>
 </table></div>
 <h2 id="10">10. 附录：字段与接口</h2>
-<div class="tablewrap"><table>
+<div class="tablewrap"><table class="">
 <thead>
 <tr>
 <th>接口 / 字段</th>
@@ -1027,17 +1014,19 @@ article .pend{color:var(--gold);font-size:.85em;border:1px dashed rgba(227,192,1
 </tr>
 </tbody>
 </table></div>
-<details class="pending"><summary>待核对项</summary><p class="pend-note">以下条目为整理时未能逐一核实的口径 / 数据，<strong>待与团队 / 资产核对</strong>后补正；保留原文不删。</p><ol>
-<li>星醒演出的具体时长与阶段节拍（灰变彩/法阵展开各几秒）——源码只读到 <code>PortalVisual.Awaken()</code> 调用，未读 PortalVisual 内部。</li>
-<li>主线 4 阶段以外是否存在支线任务资产——<code>Resources/Quests</code> 仅 5 个 <code>*_main</code>，视为无支线，需用户确认。</li>
-<li>勘误展台（ErrataProp）是否在华夏以外时代有部署——场景扫描仅华夏 9 台，丝路"10 石碑/9 混元道具"为 lore 石碑而非勘误站，需确认。</li>
-<li>玩家等级经验值曲线与终局 ≈Lv6 的具体数值——本案只引用 GDD 结论，未读 PlayerProgression。</li>
-<li>"07-22 论文提交版 12/12 走查项"具体条目——引自记忆库 dev-progress 摘要，未逐条核对走查清单原文。</li>
-<li>GDD §9 的"经济超供 ≥140"与实装（华夏 167、其余 160）——本案按实装写，GDD 是否需回改由用户定。</li>
-</ol></details>
+<hr />
+<h2 id="11">已知不一致与处理决定</h2>
+<ol>
+<li><strong>星醒演出节拍</strong>：<code>PortalVisual.AwakenRoutine</code> 分四段协程（灰变彩 / 法阵展开 / 粒子爆发 1.4 s / 白闪淡出），总长约 5 秒；具体秒数以脚本为准，本案不再复述。</li>
+<li><strong>支线任务</strong>：<code>Resources/Quests</code> 只有 5 个 <code>*_main</code>，<strong>确认无支线</strong>；设计上主线即全部任务。</li>
+<li><strong>勘误展台部署</strong>：场景扫描华夏 9 台，其余时代 0；丝路的 10 石碑为 lore 石碑，不是勘误站——确认只在华夏部署。</li>
+<li><strong>玩家等级曲线</strong>：<code>CombatMath.ExpToNextLevel = 50 + 25L + 5L²</code>，敌人经验 = base + 5 × 敌人等级；实机全流程到达 Lv13（见《知识对决战斗系统策划案》），GDD 的 ≈Lv6 已过时。</li>
+<li><strong>07-22 走查 12/12</strong>：条目见 <code>docs/eval/final_walkthrough_checklist.md</code>（12 个检查点全部勾选，2026-07-22 11:18–11:36，同场录屏）。</li>
+<li><strong>GDD "经济超供 ≥140" vs 实装</strong>：本案按实装写（华夏 167、其余 160）；决定 GDD 回改为实装值。</li>
+</ol>
   </article>
   <footer>
-    <div class="note"><b>文档说明</b>：本策划案为已上线项目的<b>回溯整理稿</b>：规则、数值与字段逐项核对自 GDD、源码与场景 / 资产序列化文件；GDD 口径与实装不一致处按实装写并在表中标注。未能逐一核实的口径列于文末「待核对项」，不删不改。</div>
+    <div class="note"><b>说明</b>：本策划案为已完成项目的<b>回溯整理稿</b>：规则、数值与字段逐项核对自 GDD、源码与场景 / 资产序列化文件；GDD 口径与实装不一致处按实装写并在文末「已知不一致与处理决定」列出。</div>
     <a class="backbtn" href="../index.html#designdocs">← 返回作品集</a>
   </footer>
 </div>

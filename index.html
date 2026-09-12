@@ -89,6 +89,8 @@ nav.solid{background:rgba(8,6,15,.82);border-bottom:1px solid var(--line)}
 .hero .role{margin-top:15px;font-size:clamp(1rem,2.6vw,1.35rem);color:var(--ink);letter-spacing:.28em;
   opacity:0;animation:rise 1s .55s forwards}
 .hero .role span{color:var(--gold)}
+.hero .role{white-space:nowrap}
+@media(max-width:480px){.hero .role{letter-spacing:.12em;font-size:.92rem}}
 .hero .lead{margin-top:26px;max-width:640px;color:var(--muted);font-size:1.02rem;
   font-family:var(--serif);font-style:italic;font-size:1.28rem;line-height:1.6;
   opacity:0;animation:rise 1s .75s forwards}
@@ -206,7 +208,7 @@ a.case{display:block;color:inherit;text-decoration:none}
 
 /* ---------- 桥接叙事表 ---------- */
 .bridge-wrap{overflow-x:auto;margin-top:24px}
-.bridge-tbl{width:100%;border-collapse:collapse;font-size:.94rem;min-width:420px}
+.bridge-tbl{width:100%;border-collapse:collapse;font-size:.94rem}
 .bridge-tbl th{text-align:left;padding:11px 16px;font-family:var(--display);font-size:.7rem;font-weight:500;
   letter-spacing:.15em;text-transform:uppercase;color:var(--gold);border-bottom:1px solid var(--line)}
 .bridge-tbl td{padding:11px 16px;border-bottom:1px solid rgba(157,143,240,.08);color:var(--muted);transition:.3s}
@@ -240,9 +242,9 @@ footer .logo{font-size:1rem;margin-bottom:8px;display:inline-block}
   <div class="navlinks">
     <a href="#chrono">ChronoTraveler</a>
     <a href="#stealth">谍报潜行</a>
-    <a href="#engine">引擎技术</a>
     <a href="#designdocs">策划案</a>
     <a href="#cases">拆解案</a>
+    <a href="#engine">引擎技术</a>
     <a href="#ai">AI 管线</a>
     <a href="#bridge">我的视角</a>
     <a href="#contact">联系</a>
@@ -271,7 +273,7 @@ footer .logo{font-size:1rem;margin-bottom:8px;display:inline-block}
     <div class="chip">副校长 <b>未来领袖奖学金</b></div>
     <div class="chip">信管 / 经济金融 <b>双学位本科</b></div>
     <div class="chip">一年半 <b>AI 安全产品经理</b>（另一年在读实习）</div>
-    <div class="chip">Steam <b>500+</b> 深度体验</div>
+    <div class="chip">累计 <b>500+</b> 款跨平台游戏阅历</div>
   </div>
 </div></section>
 
@@ -279,7 +281,7 @@ footer .logo{font-size:1rem;margin-bottom:8px;display:inline-block}
 <section id="chrono"><div class="wrap">
   <div class="reveal"><div class="eyebrow">Flagship · 毕业设计</div>
     <div class="proj-title"><span class="en">ChronoTraveler</span><span class="badge">个人独立开发</span></div>
-    <div class="proj-sub">时空穿越 · 二次元回合制 RPG —— 系统 / 数值 / 关卡 / 叙事 / 上线全经手</div>
+    <div class="proj-sub">时空穿越 · 二次元回合制 RPG —— 系统 / 数值 / 关卡 / 叙事全流程 · 可玩构建已完成</div>
   </div>
   <div class="reveal d1 video-frame"><div class="ratio">
     <iframe src="https://player.bilibili.com/player.html?bvid=BV1hrbY6sE2W&amp;page=2&amp;autoplay=0&amp;danmaku=0&amp;high_quality=1" title="ChronoTraveler 实机演示（中文版）" scrolling="no" allowfullscreen></iframe>
@@ -290,7 +292,7 @@ footer .logo{font-size:1rem;margin-bottom:8px;display:inline-block}
     <div class="hl-card reveal d1"><h4>「知识对决」回合战斗</h4><p>5 大知识域映射五元素、五边形克制环（1.25/1.0/0.8）驱动技能切换决策；答题速度与正误决定伤害倍率（快答 1.5× / 答错 0.2× 保底）——使知识掌握度直接决定战斗表现。</p></div>
     <div class="hl-card reveal d2"><h4>成长与 Boss 设计</h4><p>记忆修复度（碎片 + 净化累积驱动进度）、Boss 双条件门、终局觉醒二阶段真形决战。</p></div>
     <div class="hl-card reveal d3"><h4>数据驱动架构</h4><p>五时代加性加载 + 传送门顺序解锁；500 道双语题库 + 对话 / 过场 / 任务全 JSON 配置化。</p></div>
-    <div class="hl-card reveal d4"><h4>AI 协同开发管线</h4><p>以 LLM / AI Coding 工作流单人完成 130+ 运行时脚本 + 37 编辑器工具，打通生图→立绘→图生 3D→音频→图生视频的全流程。</p></div>
+    <div class="hl-card reveal d4"><h4>AI 协同开发管线</h4><p>以 LLM / AI Coding 工作流单人完成 130+ 运行时脚本 + 36 个编辑器工具，打通生图→立绘→图生 3D→音频→图生视频的全流程。</p></div>
   </div>
 
   <div class="dec-wrap reveal">
@@ -301,7 +303,7 @@ footer .logo{font-size:1rem;margin-bottom:8px;display:inline-block}
     <div class="dec">
       <div class="row p"><span class="k">问题</span><p>终局 Boss 实测 4~5 回合即被击杀，"最终决战"没有决战感。</p></div>
       <div class="row d"><span class="k">决策</span><p>不凭感觉加血——按玩家觉醒后的期望伤害逐回合检算，重设 HP 与攻击：良好作答者残血通关，低级失误者战败重试。</p></div>
-      <div class="row o"><span class="k">结果</span><p>战斗时长控制在 <b style="color:var(--ice)">11~16 回合</b>、玩家血线被压至 <b style="color:var(--ice)">22~46%</b>——险胜成为终局的默认体验。</p></div>
+      <div class="row o"><span class="k">结果</span><p>终局 Boss 检算落在 <b style="color:var(--ice)">11~16 回合</b>、玩家血线检算压至 <b style="color:var(--ice)">22~46%</b>——险胜成为终局的默认体验（实机 Lv13 走查回合数在检算区间内）。</p></div>
     </div>
 
     <div class="dec">
@@ -344,12 +346,12 @@ footer .logo{font-size:1rem;margin-bottom:8px;display:inline-block}
   <div class="reveal d1 stats">
     <div class="stat"><div class="n">235</div><div class="l">个人提交（第 4–8 周）</div></div>
     <div class="stat"><div class="n">9</div><div class="l">合并 PR</div></div>
-    <div class="stat"><div class="n">+22,383</div><div class="l">新增代码行</div></div>
-    <div class="stat"><div class="n">7,149</div><div class="l">UI 框架行数 / 47 文件</div></div>
+    <div class="stat"><div class="n">9 + 7 + 2</div><div class="l">全屏页 / HUD 子模块 / 覆盖系统</div></div>
+    <div class="stat"><div class="n">F–SSS</div><div class="l">八档扣减制评级 · 三关累积</div></div>
   </div>
   <div class="hl">
     <div class="hl-card reveal d1"><h4>UI 系统架构（UX）</h4><p>从零搭建：<b style="color:var(--ice)">9 个全屏页面 + 7 个 HUD 子模块 + 2 套覆盖系统</b>。严格遵循 ECS 数据流——状态只存在 registry ctx 资源里，UI 渲染函数是纯消费者，禁止系统间直呼。</p></div>
-    <div class="hl-card reveal d2"><h4>道具 / 装备系统</h4><p>MGS 风格——网络安全主题道具（木马 / DDOS / 哈希混淆 / 防火墙诱导等）、快捷切换、<b style="color:var(--ice)">径向四扇区道具轮盘</b>（鼠标角度检测 + 冷却可视化）、数据驱动（<code style="color:var(--ice)">.itemspawns</code>）的地图内生成与拾取。</p></div>
+    <div class="hl-card reveal d2"><h4>道具 / 装备系统</h4><p>MGS 风格——网络安全主题道具（木马 / DDoS / 哈希混淆 / 防火墙诱导等）、快捷切换、<b style="color:var(--ice)">径向四扇区道具轮盘</b>（鼠标角度检测 + 冷却可视化）、数据驱动（<code style="color:var(--ice)">.itemspawns</code>）的地图内生成与拾取。</p></div>
     <div class="hl-card reveal d3"><h4>战役积分与评级（数值）</h4><p>扣减制计分：开局 1000 分，逐秒 −1 / 击杀 −10 / 用道具 −5 / 触发倒计时 −200，F 至 SSS 八档评级并实时提示降档；分数跨三关累积，终关 &gt;500 才算通关。<b style="color:var(--ice)">用记分规则把"潜行"而非"清场"变成唯一最优解。</b></p></div>
     <div class="hl-card reveal d4"><h4>对话系统（为手柄设计）</h4><p>方向键组合序列（↑↓←→）+ 前缀匹配的分支对话，配倒计时与可视化输入槽、发言者标记——玩法上正好对应"黑客敲指令麻痹管理员"。</p></div>
     <div class="hl-card reveal d1"><h4>HUD 七模块</h4><p>生命/护甲、小地图（NavMesh 世界坐标 → 屏幕空间投影）、装备栏、罗盘、动作通知（Toast 六条队列）、交互提示（3D → 2D 投影）、聊天叠层——各读各的 ctx 资源，独立渲染。</p></div>
@@ -392,11 +394,45 @@ footer .logo{font-size:1rem;margin-bottom:8px;display:inline-block}
   <div class="shots reveal d2">
     <a class="shot filled" data-slot="stealth-1" href="images/stealth-hud.jpg" target="_blank" style="background-image:url('images/stealth-hud.jpg')"><small>潜行玩法 · 警戒条 / COMMS 终端 / 噪音圈</small></a>
     <a class="shot filled" data-slot="stealth-2" href="images/stealth-wheel.jpg" target="_blank" style="background-image:url('images/stealth-wheel.jpg')"><small>径向道具轮盘 · GADGETS / WEAPONS</small></a>
-    <a class="shot filled" data-slot="stealth-3" href="images/stealth-score.jpg" target="_blank" style="background-image:url('images/stealth-score.jpg')"><small>战役积分结算 · 逐项拆解与 S–D 评级</small></a>
+    <a class="shot filled" data-slot="stealth-3" href="images/stealth-score.jpg" target="_blank" style="background-image:url('images/stealth-score.jpg')"><small>战役积分结算 · 逐项拆解与 F–SSS 评级</small></a>
   </div>
 </div></section>
 
 <!-- 引擎技术 -->
+
+<!-- 系统策划案（已完成 / 已交付项目） -->
+<section id="designdocs"><div class="wrap">
+  <div class="reveal"><div class="eyebrow">Design Docs</div>
+    <h2 class="sec">策划案</h2>
+    <p class="proj-desc">三份来自已完成 / 已交付项目的系统策划案（规则、数值、字段逐项对照源码与资产，迭代记录对应真实提交），加两份休闲品类的关卡 / 活动策划案（步数由模拟器反解、活动数值由脚本预算）；未能核实的口径不删不猜，列为待核对项。</p>
+  </div>
+  <div class="cases three">
+    <a class="case reveal d1" href="cases/ct-battle-design.html"><div class="num">01</div><div class="dir">战斗系统 · 规则 + 数值向</div><h4>《ChronoTraveler》知识对决战斗系统</h4><p>答题即攻击：五知识域映射五元素克制环，答题质量直接乘进伤害公式；含专注经济、四层抽题过滤、终局 Boss 调参复算与六轮迭代记录。</p><div class="tags"><span>回合制战斗</span><span>伤害公式</span><span>数值迭代</span></div><span class="go">阅读全文 →</span></a>
+    <a class="case reveal d2" href="cases/ct-progress-design.html"><div class="num">02</div><div class="dir">进度系统 · 任务 + 存档向</div><h4>《ChronoTraveler》记忆修复与任务进度</h4><p>一根进度条统合全部探索动作；Boss 双条件门、任务阶段补记与链式跳阶、时代链星晶——17 条防软锁场景逐项对应机制。</p><div class="tags"><span>进度系统</span><span>防软锁</span><span>存档持久化</span></div><span class="go">阅读全文 →</span></a>
+    <a class="case reveal d3" href="cases/cs-gadget-score-design.html"><div class="num">03</div><div class="dir">评级 + 道具 · 团队项目向</div><h4>《Cyber Stealth》战役积分评级与道具装备实装</h4><p>扣减制战役计分 F–SSS 八档（本人设计并实现）与 MGS 式道具装备实装（配装 2+2 槽、默认锁定武器槽、径向轮盘、独立冷却、数据驱动生成点）；团队设计与个人实现逐项标注归属。</p><div class="tags"><span>道具系统</span><span>扣减制计分</span><span>团队协作</span></div><span class="go">阅读全文 →</span></a>
+    <a class="case reveal d4" href="cases/m3-level-pack-design.html"><div class="num">04</div><div class="dir">关卡策划案 · 三消 / 模拟器反解向</div><h4>三消新章「灯塔湾」十关关卡包</h4><p>棋盘、目标、障碍手工设计，步数由三消模拟器按目标通关率反解（每关 1,000 局，附随机策略下限与安全余量）：三个卡点 0.38 / 0.31 / 0.22、两次喘息、一个新元素；"棋盘切割与位置的杠杆远大于目标量""底行果冻是一次性资源"两条规律连同对照变体入库。</p><div class="tags"><span>关卡设计</span><span>难度曲线</span><span>机器人调关</span></div><span class="go">阅读全文 →</span></a>
+    <a class="case reveal d5" href="cases/gh-event-redesign.html"><div class="num">05</div><div class="dir">活动策划案 · 合成游戏 / 减负向</div><h4>给弃坑玩家的活动重设计</h4><p>Gossip Harbor 活动疲劳三命题验证（模板复用 6→27、需操作窗口日均 5.7 个、竞争活动奖励只发前三）+ 7 天活动《潮汐合成》：换玩法不换皮、里程碑替代排行、每日一次三分钟闭环；产出链按 wiki 的"订单给棋子"建模，五档里程碑由脚本算出。</p><div class="tags"><span>活动设计</span><span>留存</span><span>经济预算</span></div><span class="go">阅读全文 →</span></a>
+  </div>
+</div></section>
+
+<!-- 拆解案 -->
+<section id="cases"><div class="wrap">
+  <div class="reveal"><div class="eyebrow">Deconstructions</div>
+    <h2 class="sec">游戏拆解案</h2>
+    <p class="proj-desc">八份原创拆解案——解析求解 / 组合优化 / 概率建模 / 漏斗建模 / 经济折算 / 关卡数据统计 + 模拟器校准 / MMO 属性与评分权重反推 / 长线时间预算。公开数据只当原材料，每个结论都是推导出来的；拆解案与策划案的计算脚本、数据与图全部公开在本站 analysis/ 目录（共 4100+ 行 Python）。</p>
+  </div>
+  <div class="cases">
+    <a class="case reveal d1" href="cases/match3-level-budget.html"><div class="num">01</div><div class="dir">关卡 · 难度节奏 + 模拟器校准向</div><h4>三消关卡步数预算与难度曲线</h4><p>Candy Crush 1,505 关公开数据：每 5 关一峰的章内锯齿（错位检验证实）；官方跨档调难度主要动目标量而非步数；三成关卡是卡点、喘息按位置给而不跟随卡点；以及一次增量解释力很小的三消模拟器校准——失败原因就是设计结论。</p><span class="go">阅读全文 →</span></a>
+    <a class="case reveal d2" href="cases/wuwa-combat.html"><div class="num">02</div><div class="dir">战斗系统 · 机制 + 数值向</div><h4>《鸣潮》战斗系统</h4><p>乘区结构数值反推：双爆 1:2 的解析解与适用边界（角点在可达面板之外）、抗性系数 k=5 唯一性反解，以及一个被自己推翻并保留在正文的防御区假设。</p><span class="go">阅读全文 →</span></a>
+    <a class="case reveal d3" href="cases/wuwa-echo.html"><div class="num">03</div><div class="dir">数值养成 · 组合优化向</div><h4>《鸣潮》声骸系统</h4><p>COST 预算的组合最优化：可行域 Pareto 前沿三点；43311 配置的正确性来自首位声骸技能——临界值 4.55% 的定量证明。</p><span class="go">阅读全文 →</span></a>
+    <a class="case reveal d4" href="cases/hsr-relic.html"><div class="num">04</div><div class="dir">数值养成 · 概率建模向</div><h4>《崩坏：星穹铁道》遗器系统</h4><p>配速阈值第一性原理推导（复现 133.3 / 142.9 / 160）、速度词条锯齿性，以及一次概率链高估 5.9 倍的模型错误与修正。</p><span class="go">阅读全文 →</span></a>
+    <a class="case reveal d5" href="cases/genshin-onboarding.html"><div class="num">05</div><div class="dir">关卡 · 引导 + 留存向</div><h4>《原神》新手关卡</h4><p>蒙德教学序列的留存漏斗建模：优先修流失率最高而非最早的环节、环节数即留存预算、教学间隔的遗忘判据。</p><span class="go">阅读全文 →</span></a>
+    <a class="case reveal d6" href="cases/merge-generator-economy.html"><div class="num">06</div><div class="dir">经济 · 数值折算向</div><h4>合成游戏生成器经济模型</h4><p>Merge-2 权重表到体力定价的折算：直掉口径高估 3 倍的证明、B2 定价区间 [7.7, 16.7] 的分摊推导，以及"耗 2 体力产高一级"改动的价值不变性与设计意图反推。</p><span class="go">阅读全文 →</span></a>
+    <a class="case reveal d7" href="cases/tianya-combat-attr.html"><div class="num">07</div><div class="dir">MMO 战斗 · 机制 + 数值向</div><h4>《天涯明月刀》战斗属性转换与论剑数值</h4><p>双曲减伤：固定气血下有效生命线性，但血防是乘法关系、平衡点 HP = 5(D+K)；功力体系内部不自洽（五维名义 0.8，按其自身权重折算 0.16–1.37）；1% 韧劲 ≈ 1.1% 会心、目标值就是对手会心率，功力对会伤的高估随面板 1.1–5.4 倍；论剑造极是瓶颈、化境不稀缺，九局五胜把 20 个百分点胜率差放大成 47；附自定义模板韧劲定价方案。</p><span class="go">阅读全文 →</span></a>
+    <a class="case reveal d8" href="cases/tianya-daily-budget.html"><div class="num">08</div><div class="dir">MMO 系统 · 长线运营向</div><h4>《天涯明月刀》身份与日常时间预算</h4><p>官方"必做"按估时约 1.1 小时（估计项砍半约 0.6 小时）、减负令说明最小闭环是产品参数；同名身份时间成本差一个量级（缉拿两种读法并列）、押镖有 APP 入口；一天约 13 个打卡窗口是合成游戏的 2.3 倍；紫神兵可量化免费口径约 18 周、加商城约 4.5 周——付费买的是等待不是上限；附减负改版建议。</p><span class="go">阅读全文 →</span></a>
+  </div>
+</div></section>
+
 <section id="engine"><div class="wrap">
   <div class="reveal"><div class="eyebrow">Engineering</div>
     <h2 class="sec">引擎与底层技术</h2>
@@ -416,39 +452,6 @@ footer .logo{font-size:1rem;margin-bottom:8px;display:inline-block}
     <div class="proj-sub">物理引擎与联网游戏 —— 碰撞 / 同步 / 敌人 AI 全自研</div>
     <div class="projmeta"><span><b>独立开发</b></span><span>C++ / ENet</span><span>2025.10 – 2025.12</span></div>
     <p class="proj-desc">自研碰撞检测（AABB / OBB / 球体的宽相 + 窄相，SAT 分离轴检测、Sequential Impulse 约束求解）；服务器权威网络同步（固定 Tick 快照 + 客户端预测与插值）；NavMesh + A* 寻路配状态机驱动的敌人巡逻 / 追击。<b style="color:var(--ice)">敌人 AI 与延迟补偿这两件事，恰好是"手感"的技术根源。</b></p>
-  </div>
-</div></section>
-
-<!-- 系统策划案（已上线项目） -->
-<section id="designdocs"><div class="wrap">
-  <div class="reveal"><div class="eyebrow">Design Docs</div>
-    <h2 class="sec">策划案</h2>
-    <p class="proj-desc">三份来自已上线 / 已交付项目的系统策划案（规则、数值、字段逐项对照源码与资产，迭代记录对应真实提交），加两份休闲品类的关卡 / 活动策划案（步数由模拟器反解、活动数值由脚本预算）；未能核实的口径不删不猜，列为待核对项。</p>
-  </div>
-  <div class="cases three">
-    <a class="case reveal d1" href="cases/ct-battle-design.html"><div class="num">01</div><div class="dir">战斗系统 · 规则 + 数值向</div><h4>《ChronoTraveler》知识对决战斗系统</h4><p>答题即攻击：五知识域映射五元素克制环，答题质量直接乘进伤害公式；含专注经济、四层抽题过滤、终局 Boss 调参复算与六轮迭代记录。</p><div class="tags"><span>回合制战斗</span><span>伤害公式</span><span>数值迭代</span></div><span class="go">阅读全文 →</span></a>
-    <a class="case reveal d2" href="cases/ct-progress-design.html"><div class="num">02</div><div class="dir">进度系统 · 任务 + 存档向</div><h4>《ChronoTraveler》记忆修复与任务进度</h4><p>一根进度条统合全部探索动作；Boss 双条件门、任务阶段补记与链式跳阶、时代链星晶——17 条防软锁场景逐项对应机制。</p><div class="tags"><span>进度系统</span><span>防软锁</span><span>存档持久化</span></div><span class="go">阅读全文 →</span></a>
-    <a class="case reveal d3" href="cases/cs-gadget-score-design.html"><div class="num">03</div><div class="dir">道具 + 评级 · 团队项目向</div><h4>《Cyber Stealth》道具装备与积分评级</h4><p>MGS 式道具系统（配装 2+2 槽、径向轮盘、独立冷却、数据驱动生成点）与扣减制战役计分 F–SSS 八档；团队设计与个人实现逐项标注归属。</p><div class="tags"><span>道具系统</span><span>扣减制计分</span><span>团队协作</span></div><span class="go">阅读全文 →</span></a>
-    <a class="case reveal d4" href="cases/m3-level-pack-design.html"><div class="num">04</div><div class="dir">关卡策划案 · 三消 / 模拟器反解向</div><h4>三消新章「灯塔湾」十关关卡包</h4><p>棋盘、目标、障碍手工设计，步数由三消模拟器按目标通关率反解（每关 1,000 局，附随机策略下限与安全余量）：三个卡点 0.38 / 0.31 / 0.22、两次喘息、一个新元素；"棋盘切割与位置的杠杆远大于目标量""底行果冻是一次性资源"两条规律连同对照变体入库。</p><div class="tags"><span>关卡设计</span><span>难度曲线</span><span>机器人调关</span></div><span class="go">阅读全文 →</span></a>
-    <a class="case reveal d5" href="cases/gh-event-redesign.html"><div class="num">05</div><div class="dir">活动策划案 · 合成游戏 / 减负向</div><h4>给弃坑玩家的活动重设计</h4><p>Gossip Harbor 活动疲劳三命题验证（模板复用 6→27、需操作窗口日均 5.7 个、竞争活动奖励只发前三）+ 7 天活动《潮汐合成》：换玩法不换皮、里程碑替代排行、每日一次三分钟闭环；产出链按 wiki 的"订单给棋子"建模，五档里程碑由脚本算出。</p><div class="tags"><span>活动设计</span><span>留存</span><span>经济预算</span></div><span class="go">阅读全文 →</span></a>
-  </div>
-</div></section>
-
-<!-- 拆解案 -->
-<section id="cases"><div class="wrap">
-  <div class="reveal"><div class="eyebrow">Deconstructions</div>
-    <h2 class="sec">游戏拆解案</h2>
-    <p class="proj-desc">八份原创拆解案——解析求解 / 组合优化 / 概率建模 / 漏斗建模 / 经济折算 / 关卡数据统计 + 模拟器校准 / MMO 属性与评分权重反推 / 长线时间预算。公开数据只当原材料，每个结论都是推导出来的；拆解案与策划案的计算脚本、数据与图全部公开在本站 analysis/ 目录（共 4100+ 行 Python）。</p>
-  </div>
-  <div class="cases">
-    <a class="case reveal d1" href="cases/wuwa-combat.html"><div class="num">01</div><div class="dir">战斗系统 · 机制 + 数值向</div><h4>《鸣潮》战斗系统</h4><p>乘区结构数值反推：双爆 1:2 的解析解与失效边界、抗性系数 k=5 唯一性反解，以及一个被自己推翻并保留在正文的防御区假设。</p><span class="go">阅读全文 →</span></a>
-    <a class="case reveal d2" href="cases/wuwa-echo.html"><div class="num">02</div><div class="dir">数值养成 · 组合优化向</div><h4>《鸣潮》声骸系统</h4><p>COST 预算的组合最优化：可行域 Pareto 前沿三点；43311 配置的正确性来自首位声骸技能——临界值 4.55% 的定量证明。</p><span class="go">阅读全文 →</span></a>
-    <a class="case reveal d3" href="cases/hsr-relic.html"><div class="num">03</div><div class="dir">数值养成 · 概率建模向</div><h4>《崩坏：星穹铁道》遗器系统</h4><p>配速阈值第一性原理推导（复现 133.3 / 142.9 / 160）、速度词条锯齿性，以及一次概率链高估 5.9 倍的模型错误与修正。</p><span class="go">阅读全文 →</span></a>
-    <a class="case reveal d4" href="cases/genshin-onboarding.html"><div class="num">04</div><div class="dir">关卡 · 引导 + 留存向</div><h4>《原神》新手关卡</h4><p>蒙德教学序列的留存漏斗建模：优先修流失率最高而非最早的环节、环节数即留存预算、教学间隔的遗忘判据。</p><span class="go">阅读全文 →</span></a>
-    <a class="case reveal d5" href="cases/merge-generator-economy.html"><div class="num">05</div><div class="dir">经济 · 数值折算向</div><h4>合成游戏生成器经济模型</h4><p>Merge-2 权重表到体力定价的折算：直掉口径高估 3 倍的证明、B2 定价区间 [7.7, 16.7] 的分摊推导，以及"耗 2 体力产高一级"改动的价值不变性与设计意图反推。</p><span class="go">阅读全文 →</span></a>
-    <a class="case reveal d6" href="cases/match3-level-budget.html"><div class="num">06</div><div class="dir">关卡 · 难度节奏 + 模拟器校准向</div><h4>三消关卡步数预算与难度曲线</h4><p>Candy Crush 1,505 关公开数据：每 5 关一峰的章内锯齿（错位检验证实）；官方跨档调难度主要动目标量而非步数；三成关卡是卡点、喘息按位置给而不跟随卡点；以及一次增量解释力很小的三消模拟器校准——失败原因就是设计结论。</p><span class="go">阅读全文 →</span></a>
-    <a class="case reveal d7" href="cases/tianya-combat-attr.html"><div class="num">07</div><div class="dir">MMO 战斗 · 机制 + 数值向</div><h4>《天涯明月刀》战斗属性转换与论剑数值</h4><p>双曲减伤：固定气血下有效生命线性，但血防是乘法关系、平衡点 HP = 5(D+K)；功力体系内部不自洽（五维名义 0.8，按其自身权重折算 0.16–1.37）；1% 韧劲 ≈ 1.1% 会心、目标值就是对手会心率，功力对会伤的高估随面板 1.1–5.4 倍；论剑造极是瓶颈、化境不稀缺，九局五胜把 20 个百分点胜率差放大成 47；附自定义模板韧劲定价方案。</p><span class="go">阅读全文 →</span></a>
-    <a class="case reveal d8" href="cases/tianya-daily-budget.html"><div class="num">08</div><div class="dir">MMO 系统 · 长线运营向</div><h4>《天涯明月刀》身份与日常时间预算</h4><p>官方"必做"按估时 0.7–1.3 小时、减负令说明最小闭环是产品参数；同名身份时间成本差一个量级（缉拿两种读法并列）、押镖有 APP 入口；一天约 13 个打卡窗口是合成游戏的 2.3 倍；紫神兵可量化免费口径约 18 周、加商城约 4.5 周——付费买的是等待不是上限；附减负改版建议。</p><span class="go">阅读全文 →</span></a>
   </div>
 </div></section>
 
@@ -517,7 +520,7 @@ footer .logo{font-size:1rem;margin-bottom:8px;display:inline-block}
   </div>
   <p class="reveal d2 proj-desc" style="margin-top:30px;max-width:820px">工具换了，思维方式是同一套：先搞懂用户要什么，为这个需求做设计，拿数据迭代，然后按期把东西交出来。在 7 人团队的潜行游戏里，这段经验最直接的体现不是我写了多少行 C++，而是我能把 UI 拆成 7 个谁都不踩谁的模块、把设计取舍讲成"问题 → 决策 → 结果"让队友听懂。</p>
   <p class="reveal d2 em" style="font-family:var(--serif);font-style:italic;font-size:1.32rem;color:var(--ink);max-width:820px;margin-top:26px;line-height:1.55">
-    我不是团队里 C++ 最强的，也不是最会画的。<br>但把一个想法变成能交付的功能，我大概是最快的那个——<br><span style="color:var(--gold)">因为这件事我已经专业地做了三年。</span>
+    我不是团队里 C++ 最强的，也不是最会画的。<br>但把一个想法变成能交付的功能，我大概是最快的那个——<br><span style="color:var(--gold)">因为这件事我已经专业地做了近三年。</span>
   </p>
 </div></section>
 

@@ -2,9 +2,17 @@
 
 线上地址：https://linynz.github.io
 
-- **ChronoTraveler** — 独立设计并完成的二次元回合制 RPG（纽卡斯尔大学游戏工程硕士毕业设计）
-- **Cyber Stealth** — 7 人团队反乌托邦网络安全主题谍报潜行游戏，负责 UI 架构 / 道具 / 积分评级 / 对话系统
-- **Real-Time Rendering Engine** — C++ / OpenGL 前向 + 延迟双管线渲染引擎
-- **Physics · Net · AI** — 自研碰撞检测、网络同步与敌人 AI
+## 内容
 
-单页静态站，无构建步骤。
+- **ChronoTraveler** — 独立设计并完成的二次元回合制 RPG（纽卡斯尔大学游戏工程硕士毕业设计，可玩构建已完成，实机演示见站内视频）
+- **Cyber Stealth** — 7 人团队谍报潜行游戏（PC + PS5），负责 UI 架构 / 战役积分评级 / 道具装备实装 / 对话系统
+- **策划案 × 5**（`cases/`）— 两份 ChronoTraveler 系统策划案、一份 Cyber Stealth 系统策划案、三消十关关卡包、合成游戏七天活动
+- **拆解案 × 8**（`cases/`）— 三消关卡步数预算、鸣潮战斗 / 声骸、崩铁遗器、原神新手关卡、合成生成器经济、天刀战斗属性 / 身份日常
+- **引擎与底层** — C++ / OpenGL 渲染引擎、自研物理 / 网络 / AI
+- **LLM NPC Agent 与 AIGC 管线** — chrono-npc-agent（开源）
+
+## analysis/
+
+拆解案与策划案的全部计算脚本、数据与图表（Python：numpy / scipy / matplotlib）。每个脚本可独立重跑，`output_*.txt` 为脚本输出、`charts/` 为图、`data/` 为抓取 / 整理后的数据。说明见 `analysis/README.md`。
+
+单页静态站，无构建步骤；`cases/*.html` 由站外脚本从 Markdown 生成。

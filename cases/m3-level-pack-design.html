@@ -71,22 +71,25 @@ footer .note b{color:var(--ink)}
 .backbtn{display:inline-block;color:var(--gold);text-decoration:none;border:1px solid rgba(227,192,122,.4);border-radius:99px;padding:8px 18px;font-size:.9rem}
 .backbtn:hover{background:rgba(227,192,122,.1)}
 article table.docinfo td:first-child{white-space:nowrap;color:var(--gold);font-weight:600}
-article table.wide{min-width:760px}
+article table.wide{min-width:720px}
 .srcbox{border:1px solid var(--line);border-radius:12px;padding:12px 18px;background:var(--card);font-size:.88rem;color:var(--muted);margin:0 0 28px}
 .srcbox a{color:var(--ice)}
+article figure{margin:0 0 30px;break-inside:avoid;page-break-inside:avoid}
+article figure img{display:block;max-width:100%;border-radius:10px;border:1px solid var(--line)}
+article figcaption{color:var(--muted);font-size:.86rem;line-height:1.7;margin-top:10px;font-style:italic}
 </style>
 </head>
 <body>
 <nav><a class="logo" href="../index.html">赵鹏<b>淦</b></a><a class="back" href="../index.html#designdocs">← 返回作品集</a></nav>
 <div class="wrap">
-  <div class="eyebrow">Design Doc · 关卡策划案</div>
+  <div class="eyebrow">Design Doc · 关卡策划案 04</div>
   <h1 class="title">三消新章「灯塔湾」十关关卡包策划案</h1>
   <div class="subtitle">棋盘 / 目标 / 障碍手工设计，步数由三消模拟器按目标通关率反解；三个卡点、两次喘息、一个新元素</div>
   <div class="meta"><span>关卡策划案 · 三消</span><span>v1.1 · 2026-09</span><span>每关 1,000 局模拟验证 · 通关率阶梯</span></div>
   <div class="tldr"><b>TL;DR</b>十关的步数全部是算出来的：先定每关想要的通关率（教学 0.90 → 卡点 0.30 → 章末 0.20），再让机器人在真实棋盘上跑 1,000 局反解步数，非卡点关加 2 步安全余量。验证过程中撞上的两条规律——棋盘切割与位置对通关率的杠杆远大于目标量、底行果冻是一次性资源——连同对照变体数据一起入库。</div>
   <div class="srcbox">脚本、数据与图（可重跑复核）：<a href="https://github.com/linynZ/linynZ.github.io/tree/main/analysis">github.com/linynZ/linynZ.github.io · analysis/</a>：m3_level_pack.py · m3_level_pack_variants.py · match3_sim.py；结果 data/m3_level_pack.json</div>
   <article>
-<div class="toc"><span class="toctitle">目录 · Contents</span><ul><li><a href="#1">1. 文档信息</a></li><li><a href="#2">2. 设计目标</a></li><li><a href="#3">3. 章节节奏总表</a></li><li><a href="#4">4. 逐关设计</a></li><li><a href="#5">5. 步数是怎么算出来的</a></li><li><a href="#6">6. 设计发现（做这十关时验证到的，全部入库可复现）</a></li><li><a href="#7">7. 验收标准（上线后）</a></li><li><a href="#8">8. 风险与取舍</a></li><li><a href="#9">9. 待核清单</a></li></ul></div>
+<div class="toc"><span class="toctitle">目录 · Contents</span><ul><li><a href="#1">1. 文档信息</a></li><li><a href="#2">2. 设计目标</a></li><li><a href="#3">3. 章节节奏总表</a></li><li><a href="#4">4. 逐关设计</a></li><li><a href="#5">5. 步数是怎么算出来的</a></li><li><a href="#6">6. 设计发现（做这十关时验证到的，全部入库可复现）</a></li><li><a href="#7">7. 验收标准（上线后）</a></li><li><a href="#8">8. 风险与取舍</a></li><li><a href="#9">9. 上线后校正项</a></li></ul></div>
 <h2 id="1">1. 文档信息</h2>
 <div class="tablewrap"><table class="docinfo">
 <thead>
@@ -317,7 +320,7 @@ article table.wide{min-width:760px}
 </tbody>
 </table></div>
 <p>步数敏感度（反解步数下，贪心机器人 1,000 局；随机策略 333 局）：</p>
-<div class="tablewrap"><table class="">
+<div class="tablewrap"><table class="wide">
 <thead>
 <tr>
 <th>关</th>
@@ -411,7 +414,7 @@ article table.wide{min-width:760px}
 </tr>
 </tbody>
 </table></div>
-<p><img src="img/m3_level_pack_staircase.png" alt="图 1：十关通关率阶梯（贪心 / 少 2 步 / 多 5 步 / 随机策略）"><em>图 1：十关通关率阶梯（贪心 / 少 2 步 / 多 5 步 / 随机策略）</em></p>
+<figure><img src="img/m3_level_pack_staircase.png" alt="图 1：十关通关率阶梯（贪心 / 少 2 步 / 多 5 步 / 随机策略）"><figcaption>图 1：十关通关率阶梯（贪心 / 少 2 步 / 多 5 步 / 随机策略）</figcaption></figure>
 <p>三个峰（L4 / L8 / L10）分别比前一关低 38 / 25 / 66 个百分点，峰后一关（L5 / L9）回到 0.85 以上。"多给 5 步"一列是加步付费后的通关率：三个峰关买一次加步分别升到 0.54 / 0.47 / 0.34，<strong>买了有明显感觉、但不保证过</strong>，这是加步付费点的标准手感。</p>
 <p><strong>关于机器人与真人</strong>：贪心机器人每步都选目标推进最大的交换，比"随机乱点"强得多（随机策略各关几乎 0%），比会铺垫组合特效的高手弱；刚过教学章的普通玩家大概率在两者之间，<strong>对低难度关而言机器人可能比他们强</strong>。所以非卡点关在反解步数上加 2 步安全余量作为上线值（表中"上线步数"列），卡点关按反解值上线——付费点宁紧勿松，教学与喘息关宁松勿紧；上线后用真实首通率回校"设计通关率"列，流程不变。</p>
 <p><strong>10 关压缩的取舍</strong>：拆解案的官方节奏是 15 关三峰（5/10/15）。压到 10 关后峰放 4/8/10 而不是 5/10：章末必须是峰，第二峰放 8 是为了保持"每 4 关一峰"的等间隔，代价是 L8 与 L10 之间只有 L9 一关缓冲。若上线数据显示 L10 流失超标（§7），第一调整动作是把第二峰前移到 L7。</p>
@@ -650,7 +653,7 @@ article table.wide{min-width:760px}
 <li><strong>两个付费点只隔一关</strong>：见 §3 取舍，L10 流失超标时把第二峰前移。</li>
 <li><strong>模拟器无多步前瞻、无巧克力等增殖障碍</strong>：本章不使用这些元素，正好回避。后续章节若引入增殖障碍，模拟器需先扩展再反解。</li>
 </ul>
-<h2 id="9">9. 待核清单</h2>
+<h2 id="9">9. 上线后校正项</h2>
 <ul>
 <li>三个付费点的"剩余目标量阈值"（≤6 / ≤8 层）与"条件弹 vs 必弹"是设计值，需上线后按弹窗购买率校正。</li>
 <li>目标通关率梯度（0.90→0.20）为设计假设；产品有自己的历史首通率数据时应替换。</li>

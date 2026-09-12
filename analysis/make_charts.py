@@ -133,8 +133,8 @@ def chart_hsr_staircase():
 # 与 hsr_relic_math.py §3/§3b 同源
 def chart_hsr_expectation():
     tiers = ["可用", "良品", "高分", "完美"]
-    strict = [550, 721, 5313, 35200]
-    fixed = [55, 79, 897, 8800]
+    strict = [1100, 1442, 10626, 70400]
+    fixed = [110, 158, 1794, 17600]
     ys = list(range(len(tiers)))[::-1]
     fig, ax = plt.subplots(figsize=(8.6, 4.2))
     for y, s, f in zip(ys, strict, fixed):

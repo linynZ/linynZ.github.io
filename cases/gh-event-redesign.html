@@ -71,15 +71,18 @@ footer .note b{color:var(--ink)}
 .backbtn{display:inline-block;color:var(--gold);text-decoration:none;border:1px solid rgba(227,192,122,.4);border-radius:99px;padding:8px 18px;font-size:.9rem}
 .backbtn:hover{background:rgba(227,192,122,.1)}
 article table.docinfo td:first-child{white-space:nowrap;color:var(--gold);font-weight:600}
-article table.wide{min-width:760px}
+article table.wide{min-width:720px}
 .srcbox{border:1px solid var(--line);border-radius:12px;padding:12px 18px;background:var(--card);font-size:.88rem;color:var(--muted);margin:0 0 28px}
 .srcbox a{color:var(--ice)}
+article figure{margin:0 0 30px;break-inside:avoid;page-break-inside:avoid}
+article figure img{display:block;max-width:100%;border-radius:10px;border:1px solid var(--line)}
+article figcaption{color:var(--muted);font-size:.86rem;line-height:1.7;margin-top:10px;font-style:italic}
 </style>
 </head>
 <body>
 <nav><a class="logo" href="../index.html">赵鹏<b>淦</b></a><a class="back" href="../index.html#designdocs">← 返回作品集</a></nav>
 <div class="wrap">
-  <div class="eyebrow">Design Doc · 活动策划案</div>
+  <div class="eyebrow">Design Doc · 活动策划案 05</div>
   <h1 class="title">给弃坑玩家的活动重设计</h1>
   <div class="subtitle">Gossip Harbor 活动疲劳三命题验证 + 7 天减负活动《潮汐合成》：换玩法不换皮、里程碑替代排行、每日一次三分钟闭环</div>
   <div class="meta"><span>活动分析 + 活动策划案 · 合成游戏</span><span>v1.1 · 2026-09</span><span>79 个活动 · 周历窗口计数 · 体力预算脚本</span></div>
@@ -195,7 +198,7 @@ article table.wide{min-width:760px}
 </tr>
 </tbody>
 </table></div>
-<p><img src="img/gh_template_reuse.png" alt="图 1：6 个玩法模板承载了 27 个活动名"><em>图 1：6 个玩法模板承载了 27 个活动名</em></p>
+<figure><img src="img/gh_template_reuse.png" alt="图 1：6 个玩法模板承载了 27 个活动名"><figcaption>图 1：6 个玩法模板承载了 27 个活动名</figcaption></figure>
 <ul>
 <li>明确归类的 15 个合成板活动全部落在 4 个模板里，每个模板平均复用 3.8 次；9 个装饰活动是同一个模板。6 个模板承载了 27 个活动名。</li>
 <li>更新日志显示 2025-04 到 2025-10 约 6.5 个月出现了 35 个总览页没有的新活动名，<strong>每月约 5 个新名字</strong>；同期 wiki 分类页新增的玩法子类是 0 个（以 wiki 分类为准，可能低估真实新玩法）。</li>
@@ -276,7 +279,7 @@ article table.wide{min-width:760px}
 </tr>
 </tbody>
 </table></div>
-<p><img src="img/gh_weekly_windows.png" alt="图 2：一周需操作的并行活动窗口"><em>图 2：一周需操作的并行活动窗口</em></p>
+<figure><img src="img/gh_weekly_windows.png" alt="图 2：一周需操作的并行活动窗口"><figcaption>图 2：一周需操作的并行活动窗口</figcaption></figure>
 <ul>
 <li>需每日操作的窗口日均 5.7 个；只算确定会有的常驻 + 周期也有 3.6 个。命题设的阈值 3 是作者经验值（一天里超过三件"必须做"就开始像清单），不是行业标准。</li>
 <li>三个常驻窗口里，赛季通行证自带"24 小时限时任务"，周任务清单（Restaurant Goals）本身就是一张清单——<strong>清单套清单</strong>。</li>
@@ -382,7 +385,7 @@ article table.wide{min-width:760px}
 </table></div>
 <h2 id="7">7. 数值</h2>
 <p>假设参数（公开资料无官方值，全部可改，脚本 <code>gh_tide_event_budget.py</code>）：完成一单平均耗 20 体力；每单给 1.5 个活动棋子，60% 为 1 级、40% 为 2 级（wiki 只说"1 或 2 个、1 级或 2 级"）→ 每单 2.1 个 B1 等价物，<strong>每体力 0.105 个</strong>；每日一次 3 分钟可花 60 体力；每日免费赠送 40；自然回复 720/天；涨潮每日净增按下限 2 个计。</p>
-<div class="tablewrap"><table class="">
+<div class="tablewrap"><table class="wide">
 <thead>
 <tr>
 <th>画像</th>
@@ -421,7 +424,7 @@ article table.wide{min-width:760px}
 </tbody>
 </table></div>
 <p>里程碑按轻度玩家 7 日期望的 40 / 70 / 100 / 140 / 200% 设：</p>
-<div class="tablewrap"><table class="">
+<div class="tablewrap"><table class="wide">
 <thead>
 <tr>
 <th>档</th>
@@ -475,7 +478,7 @@ article table.wide{min-width:760px}
 </tr>
 </tbody>
 </table></div>
-<p><img src="img/gh_tide_milestones.png" alt="图 3：三类玩家累计曲线 vs 五档里程碑（示例参数）"><em>图 3：三类玩家累计曲线 vs 五档里程碑（示例参数）</em></p>
+<figure><img src="img/gh_tide_milestones.png" alt="图 3：三类玩家累计曲线 vs 五档里程碑（示例参数）"><figcaption>图 3：三类玩家累计曲线 vs 五档里程碑（示例参数）</figcaption></figure>
 <ul>
 <li>轻度玩家"只做每日三分钟"恰好到第三档一半概率——这是刻意的：第三档是"我认真玩了七天"的心理终点，达成一半的人会满足，另一半在 D6 收到冲刺提示后多花一次赠送体力即可越线（+40 体力 ≈ +4.2 B1，正好一个 σ）。</li>
 <li>IV 给中度，V 给重度；没有任何一档需要付费才能到。</li>

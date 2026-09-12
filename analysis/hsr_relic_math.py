@@ -226,6 +226,7 @@ P_INIT_4 = 0.20        # 初始 4 条副词条的概率 [需核验]
 N_UPGRADES_4 = 5       # 初始 4 条时的强化次数
 MAIN_CRIT_WEIGHT = 1000 / 10000   # 躯干暴击率主属性权重 [需核验]
 N_SLOTS_CAVERN = 4     # 侵蚀隧洞掉落部位数
+P_SET = 0.5            # 侵蚀隧洞每本掉 2 套，目标 1 套（v1.1 审核后补入）
 
 
 def section_3_graduation_chain():
@@ -255,6 +256,7 @@ def section_3_graduation_chain():
     print(SUB)
     print("【逐环概率】")
     print(SUB)
+    print(f"  P(掉落为目标套装)              = {P_SET:.4f}   （每本 2 套取 1）")
     print(f"  P(掉落为躯干)                  = 1/{N_SLOTS_CAVERN}     = {p_slot:.4f}")
     print(f"  P(主属性为暴击率)              = {MAIN_CRIT_WEIGHT * 10000:.0f}/10000 = {p_main:.4f}")
     print(f"  P(初始 4 条)                   = {P_INIT_4:.4f}   [需核验]")
@@ -286,7 +288,7 @@ def section_3_graduation_chain():
     results = []
     for label, kmin in tiers:
         p_up = sum(binom[j] for j in range(kmin, N_UPGRADES_4 + 1))
-        p_total = p_slot * p_main * P_INIT_4 * p_sub4 * p_up
+        p_total = P_SET * p_slot * p_main * P_INIT_4 * p_sub4 * p_up
         results.append((label, p_total))
         print(f"{label:>32} {p_up:>9.4f} {p_total:>11.6f} {1 / p_total:>10.0f}")
 
@@ -296,7 +298,7 @@ def section_3_graduation_chain():
 {SUB}
 
   没有任何一环的概率低得离谱 —— 最低的是主属性 10%。
-  但五环相乘之后，"毕业"标准的期望件数达到 {1 / results[2][1]:.0f} 件。
+  但六环相乘之后，"毕业"标准的期望件数达到 {1 / results[2][1]:.0f} 件。
 
   这是**乘法链**的典型特征：设计师可以通过增删一个环节，
   在不改动任何单项概率的前提下，把养成周期改变一个数量级。
@@ -372,7 +374,7 @@ def section_3b_path_correction(strict_results):
         g5 = binom_ge(5, kmin)
         g4 = binom_ge(4, kmin)
         gw = P_INIT_4 * g5 + (1 - P_INIT_4) * g4
-        p_total = p_slot * p_main * n_paths * p_final_has * gw
+        p_total = P_SET * p_slot * p_main * n_paths * p_final_has * gw
         corrected.append((label, p_total))
         print(f"{label:>28} {g5:>10.4f} {g4:>10.4f} {gw:>9.4f} "
               f"{p_total:>10.6f} {1 / p_total:>10.0f}")
@@ -427,7 +429,7 @@ def section_4_stamina(results):
     print(f"""
 【参数】[全部需核验，故一并给出敏感度]
     每日开拓力 {DAILY_STAMINA}，单次隧洞 {COST_PER_RUN} 点，期望掉落 {DROP_PER_RUN} 件
-    ==> 每日期望产出 {per_day:.1f} 件（**仅指定部位的话还要再除以 {N_SLOTS_CAVERN}**）
+    ==> 每日期望产出 {per_day:.1f} 件（部位与套装已计入概率链，此处不再除）
 """)
     print(SUB)
     print(f"{'标准':>32} {'期望件数':>10} {'期望天数':>10} {'折合月数':>10}")

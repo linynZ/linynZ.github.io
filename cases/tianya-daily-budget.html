@@ -71,9 +71,12 @@ footer .note b{color:var(--ink)}
 .backbtn{display:inline-block;color:var(--gold);text-decoration:none;border:1px solid rgba(227,192,122,.4);border-radius:99px;padding:8px 18px;font-size:.9rem}
 .backbtn:hover{background:rgba(227,192,122,.1)}
 article table.docinfo td:first-child{white-space:nowrap;color:var(--gold);font-weight:600}
-article table.wide{min-width:760px}
+article table.wide{min-width:720px}
 .srcbox{border:1px solid var(--line);border-radius:12px;padding:12px 18px;background:var(--card);font-size:.88rem;color:var(--muted);margin:0 0 28px}
 .srcbox a{color:var(--ice)}
+article figure{margin:0 0 30px;break-inside:avoid;page-break-inside:avoid}
+article figure img{display:block;max-width:100%;border-radius:10px;border:1px solid var(--line)}
+article figcaption{color:var(--muted);font-size:.86rem;line-height:1.7;margin-top:10px;font-style:italic}
 </style>
 </head>
 <body>
@@ -83,13 +86,13 @@ article table.wide{min-width:760px}
   <h1 class="title">《天涯明月刀》身份与日常时间预算拆解案</h1>
   <div class="subtitle">官方必做清单的时间预算（估计项明标）、九种身份的时间-产出效率、打卡窗口计数、紫神兵养成周期与付费替代率、日常减负改版建议</div>
   <div class="meta"><span>拆解案 · 系统 / 长线运营向（MMO）</span><span>v1.1 · 2026-09 · 两路审核后修订</span><span>官方清单 + 次数上限 · 估计项明标 · 附减负改版建议</span></div>
-  <div class="tldr"><b>TL;DR</b>官方'必做'按作者估时 0.7–1.3 小时，减负令的存在说明最小闭环被当作产品参数在卖；同名'身份'时间成本差一个量级（缉拿 20 vs 80 分钟两种读法并列），押镖有 APP 入口；一天约 13 个打卡窗口，是 Gossip Harbor 的 2.3 倍；一件紫神兵可量化免费口径约 18 周、加商城约 4.5 周——付费买的是等待不是上限。附日常减负改版建议。</div>
+  <div class="tldr"><b>TL;DR</b>官方「必做」按作者估时约 1.1 小时（估计项砍半约 0.6 小时），减负令的存在说明最小闭环被当作产品参数在卖；同名「身份」时间成本差一个量级（缉拿 20 vs 80 分钟两种读法并列），押镖有 APP 入口；一天约 13 个打卡窗口，是 Gossip Harbor 的 2.3 倍；一件紫神兵可量化免费口径约 18 周、加商城约 4.5 周——付费买的是等待不是上限。附日常减负改版建议。</div>
   <div class="srcbox">脚本、数据与图（可重跑复核）：<a href="https://github.com/linynZ/linynZ.github.io/tree/main/analysis">github.com/linynZ/linynZ.github.io · analysis/</a>：tianya_daily_budget.py；数据源档案 data/tianya_sources.md</div>
   <article>
-<div class="toc"><span class="toctitle">目录 · Contents</span><ul><li><a href="#1">关于本拆解案的方法说明（请先读）</a></li><li><a href="#2">1. 选题说明</a></li><li><a href="#3">2. 时间预算：官方"必做"按估时 0.7–1.3 小时，"全做"按身份 2–4 小时</a></li><li><a href="#4">3. 身份效率：次数上限是官方旋钮，单次时长是估计</a></li><li><a href="#5">4. 打卡窗口：一天约 13 个，是 Gossip Harbor 的 2.3 倍</a></li><li><a href="#6">5. 养成周期：免费约 18 周、加商城约 4.5 周（混合口径）</a></li><li><a href="#7">6. 设计动作：日常减负改版建议</a></li><li><a href="#8">7. 对照：作者本人的 460 小时，和看数据前写下的直觉</a></li><li><a href="#9">8. 可以直接拿走的设计规则</a></li><li><a href="#10">9. 未做与可证伪之处</a></li><li><a href="#11">10. 参考</a></li></ul></div>
+<div class="toc"><span class="toctitle">目录 · Contents</span><ul><li><a href="#1">关于本拆解案的方法说明（请先读）</a></li><li><a href="#2">1. 选题说明</a></li><li><a href="#3">2. 时间预算：官方"必做"按估时约 1.1 小时（估计项砍半约 0.6 小时），"全做"按身份 2–4 小时</a></li><li><a href="#4">3. 身份效率：次数上限是官方旋钮，单次时长是估计</a></li><li><a href="#5">4. 打卡窗口：一天约 13 个，是 Gossip Harbor 的 2.3 倍</a></li><li><a href="#6">5. 养成周期：免费约 18 周、加商城约 4.5 周（混合口径）</a></li><li><a href="#7">6. 设计动作：日常减负改版建议</a></li><li><a href="#8">7. 对照：作者本人的 460 小时，和看数据前写下的直觉</a></li><li><a href="#9">8. 可以直接拿走的设计规则</a></li><li><a href="#10">9. 未做与可证伪之处</a></li><li><a href="#11">10. 参考</a></li></ul></div>
 <h2 id="1">关于本拆解案的方法说明（请先读）</h2>
 <p>MMO 的"日常"是留存与付费的骨架，但公开资料里<strong>没有任何一条"完整日常要多少分钟"的官方口径</strong>。本文的处理：</p>
-<div class="tablewrap"><table class="docinfo">
+<div class="tablewrap"><table class="">
 <thead>
 <tr>
 <th>层</th>
@@ -128,7 +131,7 @@ article table.wide{min-width:760px}
 <p><strong>数据时效</strong>：2023-04 清单是 155 级上限（2024-10）与 2025-11 周活跃 / 话本调整之前的口径，现版本可能已变；本文以它为基线。</p>
 <h2 id="2">1. 选题说明</h2>
 <p>天刀 2023 年官方给出了一份"每日必做 / 每日必买 / 每周勿忘 / 每周玩法"清单，身份系统从 7 种扩到 8 种再到 2026 年的第 9 种"市井"。把这份清单按时间、窗口数、产出稀缺度、可替代性四个维度拆开，能回答四个策划问题：<strong>一个中度玩家一天大约要花多久？哪些身份值得做？一天要打开多少个界面？付费买掉的是什么？</strong>——并给一个减负方案。</p>
-<h2 id="3">2. 时间预算：官方"必做"按估时 0.7–1.3 小时，"全做"按身份 2–4 小时</h2>
+<h2 id="3">2. 时间预算：官方"必做"按估时约 1.1 小时（估计项砍半约 0.6 小时），"全做"按身份 2–4 小时</h2>
 <p>2023 官方每日必做九项，加每周内容摊到每日，再加一个身份：</p>
 <div class="tablewrap"><table class="">
 <thead>
@@ -223,7 +226,7 @@ article table.wide{min-width:760px}
 </tbody>
 </table></div>
 <p><strong>敏感性</strong>：把全部估计项砍半，必做小计 34 分钟，中度重身份档 1.4 小时——<strong>画像之间的量级差来自身份和周常的取舍，不来自估计精度；但绝对小时数依赖估计。</strong></p>
-<p><img src="img/ty_daily_budget.png" alt="图 1：四种画像的每日时间预算（左）与身份日耗时 vs 产出稀缺度（右）"><em>图 1：四种画像的每日时间预算（左）与身份日耗时 vs 产出稀缺度（右）</em></p>
+<figure><img src="img/ty_daily_budget.png" alt="图 1：四种画像的每日时间预算（左）与身份日耗时 vs 产出稀缺度（右）"><figcaption>图 1：四种画像的每日时间预算（左）与身份日耗时 vs 产出稀缺度（右）</figcaption></figure>
 <ul>
 <li>官方"必做"是给"上班族"的最小闭环；官方同时卖"上班族减负令"一键完成打坐与阅历。<strong>最小闭环的时长是被当作产品参数在卖的</strong>——这是从"减负令存在、打坐可存 3 日、阅历可叠 7 日"推断的，不是官方表述。</li>
 <li>"全做"取决于身份。捕快的时长在公开资料里有歧义：2018 攻略说"带上合格飞机 20 分钟足以"，同文又称捕快"用时少无消耗回报高"——按每次 20 分钟读是 80 分钟/日，按四次总计读是 20 分钟/日。本文两种读法并列，重身份档用游侠（8 次 × 估 6 分钟）作代表。</li>
@@ -232,7 +235,7 @@ article table.wide{min-width:760px}
 <p><strong>如果这条错了会怎么看出来</strong>：若官方公布任一日常的实际时长与估计差 2 倍以上，对应画像要重算；若周活跃 2025-11 调整后必做项减少，基线整体下移。</p>
 <h2 id="4">3. 身份效率：次数上限是官方旋钮，单次时长是估计</h2>
 <p>每日次数上限是官方数据，单次时长除缉拿外为估计；产出稀缺度按 2023 官方产出描述定性打分（砭石 / 心法残页 / 神兵材料 = 4，修为 / 珍本 = 3，银两 / 碎银 = 2）：</p>
-<div class="tablewrap"><table class="">
+<div class="tablewrap"><table class="wide">
 <thead>
 <tr>
 <th>身份</th>
@@ -376,7 +379,7 @@ article table.wide{min-width:760px}
 </tr>
 </tbody>
 </table></div>
-<p><img src="img/ty_daily_ascension.png" alt="图 2：一件紫神兵的缘材·进累积曲线，免费 vs 加商城"><em>图 2：一件紫神兵的缘材·进累积曲线，免费 vs 加商城</em></p>
+<figure><img src="img/ty_daily_ascension.png" alt="图 2：一件紫神兵的缘材·进累积曲线，免费 vs 加商城"><figcaption>图 2：一件紫神兵的缘材·进累积曲线，免费 vs 加商城</figcaption></figure>
 <ul>
 <li>可量化口径下，免费玩家的瓶颈不在大宗材料，在<strong>稀有材料缘材·进</strong>；商城周限 50 个把等待从 18 周压到 4.5 周。<strong>付费买掉的是约 75% 的等待时间，不是产出上限</strong>——上限被周限锁死，付费玩家也要 4.5 周。前提是缘材·进不可交易（档案未见拍卖行条目）。</li>
 <li>2018 需求 × 2025 产出是混合口径，中间七年神兵系统改过；本节的价值在"周限 + 商城 = 卖时间不卖上限"这个结构，不在 18 / 4.5 这两个数。</li>
@@ -490,7 +493,7 @@ article table.wide{min-width:760px}
 </ul>
   </article>
   <footer>
-    <div class="note"><b>说明</b>：公开资料没有任何'完整日常 X 分钟'的口径，单项时长为作者估计并在脚本中标'估'，结论只写区间与方向；作者本人的口述与模型有约一小时分歧，两种解释并列写在正文。</div>
+    <div class="note"><b>说明</b>：公开资料没有任何「完整日常 X 分钟」的口径，单项时长为作者估计并在脚本中标「估」，结论只写区间与方向；作者本人的口述与模型有约一小时分歧，两种解释并列写在正文。</div>
     <a class="backbtn" href="../index.html#cases">← 返回作品集</a>
   </footer>
 </div>
