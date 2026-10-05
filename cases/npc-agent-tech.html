@@ -86,6 +86,7 @@ article figcaption{color:var(--muted);font-size:.86rem;line-height:1.7;margin-to
   <h1 class="title">游戏内 LLM NPC Agent：设计决策、评测与七个发现</h1>
   <div class="subtitle">chrono-npc-agent——给一款已完成的 RPG 加一层「会讲历史但不当答案机」的 NPC 自由对话：云 / 本地双后端实测、检索阶梯、流式护栏与 1.5B 微调</div>
   <div class="meta"><span>技术拆解 · LLM Agent / 评测向</span><span>v1.1 · 2026-09 · 独立核对后修订</span><span>开源仓库的中文拆解 · 数字按出处分三档标注</span></div>
+  <div class="tldr"><b>2026-10 更新</b>本文的护栏数字（云 100% / 本地 7B 80% 成对通过、must-refuse 全守住）来自开发集：23 例，是边调护栏边写的。之后我另写了一套 46 例的留出集，盲写、先提交、跑完不再改护栏，按语义判泄露并逐条人工复核。四个模型的拒答守住率降到 <b style="margin:0">45–64%</b>，失守集中在「只要一部分答案」的问法。完整结果见论文 <a href="https://doi.org/10.5281/zenodo.23150869" target="_blank" rel="noopener">doi:10.5281/zenodo.23150869</a>。下文保留原始开发集记录，没有改动。</div>
   <div class="tldr"><b>TL;DR</b>四个真问题：忠实、不泄题、延迟、优雅失败。六条设计决策（状态注入用感知不用 JSON、护栏针对意图不针对词汇、双后端一个接缝、人设与护栏同向、加 NPC 只加 YAML、检索按度量选）；成对指标堵死「全拒绝刷分」；云 100% 成对通过 vs 本地 7B 80%，本地 P50 快一倍但不调工具就编事实；向量检索 recall@1 95.8%、等权混合反而低 14 个点；流式只有 1.5× 且缓存不省时间；1.5B LoRA 两轮对照：安全可教（部分靠护栏兜底）、回答不免费。七个被评测推翻的发现全部写进仓库。</div>
   <div class="srcbox">脚本、数据与图（可重跑复核）：<a href="https://github.com/linynZ/linynZ.github.io/tree/main/analysis">github.com/linynZ/linynZ.github.io · analysis/</a>：本案脚本与原始记录在开源仓库 scripts/ · eval/results/ · docs/findings/（不在本站 analysis/ 目录）</div>
   <article>

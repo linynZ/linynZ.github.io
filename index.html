@@ -469,8 +469,8 @@ footer .logo{font-size:1rem;margin-bottom:8px;display:inline-block}
       <span>双后端：<b>DeepSeek 云 / Ollama 本地</b></span><span><b>RAG</b> 语义检索</span><span><b>LoRA</b> 微调</span><span>已接入 <b>Unity 实机</b></span><span><b>134</b> 项离线测试</span>
     </div>
     <div class="stats">
-      <div class="stat"><div class="n">100%</div><div class="l">护栏成对测试通过率</div></div>
-      <div class="stat"><div class="n">0</div><div class="l">must-refuse 泄露</div></div>
+      <div class="stat"><div class="n">82–100%→45–64%</div><div class="l">拒答守住率 · 开发集→冻结留出集</div></div>
+      <div class="stat"><div class="n">140/140</div><div class="l">非求答攻击全部守住</div></div>
       <div class="stat"><div class="n">71.2→95.8%</div><div class="l">RAG 召回率升级</div></div>
       <div class="stat"><div class="n">&lt;2s</div><div class="l">P50 延迟 · 超时降级保底</div></div>
     </div>
@@ -488,11 +488,20 @@ footer .logo{font-size:1rem;margin-bottom:8px;display:inline-block}
   </div>
 
   <div class="reveal d2" style="margin-top:44px">
+    <div class="dec-h">两篇预印本论文（Zenodo · 带 DOI）</div>
+    <div class="dec-note">把上面的项目写成英文论文：评测计划先提交再跑、数据与每条裁定全部公开，结果不好看的地方也照写。</div>
+  </div>
+  <div class="cases" style="margin-top:18px">
+    <a class="case reveal d1" href="https://doi.org/10.5281/zenodo.23150869" target="_blank" rel="noopener"><div class="num">P1</div><div class="dir">LLM NPC 护栏 · 评测方法</div><h4>Feature or Leak? Guarding an LLM-Driven NPC Against Answer Leakage in an Educational Game</h4><p>开发集上护栏守住 82–100%，换成盲写并冻结的 46 例留出集、按语义判泄露再逐条人工复核后，四个模型只剩 45–64%。不要答案的攻击 140 次全部守住；失守集中在「只要一部分」的问法（排除法、首字、藏头、确认猜测），关键词匹配漏掉了其中大半。</p><div class="tags"><span>Guardrails</span><span>留出集评测</span><span>DOI 10.5281/zenodo.23150869</span></div><span class="go">阅读论文 →</span></a>
+    <a class="case reveal d2" href="https://doi.org/10.5281/zenodo.23150165" target="_blank" rel="noopener"><div class="num">P2</div><div class="dir">LLM 生成内容审计 · 教育测评</div><h4>Counting What Inspection Misses: Auditing an LLM-Generated Quiz Bank for an Educational Game</h4><p>审计游戏里 AI 生成的 500 道双语题：两家模型做题正确率 98.8–100%，0 道错键；但遮住题干只看选项，猜对率仍有 56–59%（随机 25%）。答案位置偏置 χ²=868、答案常是最长选项、约 80 题被别的题题干泄题——这些单题审读都看不出来。</p><div class="tags"><span>内容审计</span><span>预注册</span><span>DOI 10.5281/zenodo.23150165</span></div><span class="go">阅读论文 →</span></a>
+  </div>
+
+  <div class="reveal d2" style="margin-top:44px">
     <div class="dec-h">两份 AI 向拆解</div>
     <div class="dec-note">一份把开源 Agent 项目的决策与评测讲清楚；一份把自己项目的 git 历史与会话日志当原材料，回答 AI Coding 工具下一步该补什么。</div>
   </div>
   <div class="cases three" style="margin-top:18px">
-    <a class="case reveal d1" href="cases/npc-agent-tech.html"><div class="num">AI</div><div class="dir">AI 应用开发 · LLM Agent / 评测向</div><h4>游戏内 LLM NPC Agent 技术拆解</h4><p>chrono-npc-agent 的中文拆解：六条设计决策、成对护栏指标、云 vs 本地 7B 实测（100% vs 80% 成对通过、752 ms vs 1588 ms P50）、向量检索 recall@1 95.8% 而等权混合反而低 14 个点、流式 1.5×、1.5B LoRA 两轮对照；七个被评测推翻的发现全部写进仓库。</p><div class="tags"><span>LLM Agent</span><span>评测设计</span><span>RAG / LoRA</span></div><span class="go">阅读全文 →</span></a>
+    <a class="case reveal d1" href="cases/npc-agent-tech.html"><div class="num">AI</div><div class="dir">AI 应用开发 · LLM Agent / 评测向</div><h4>游戏内 LLM NPC Agent 技术拆解</h4><p>chrono-npc-agent 的中文拆解：六条设计决策、成对护栏指标、云 vs 本地 7B 开发集实测（100% vs 80% 成对通过、752 ms vs 1588 ms P50；冻结留出集复测降到 45–64%，见论文）、向量检索 recall@1 95.8% 而等权混合反而低 14 个点、流式 1.5×、1.5B LoRA 两轮对照；七个被评测推翻的发现全部写进仓库。</p><div class="tags"><span>LLM Agent</span><span>评测设计</span><span>RAG / LoRA</span></div><span class="go">阅读全文 →</span></a>
     <a class="case reveal d2" href="cases/ai-coding-process-data.html"><div class="num">AI</div><div class="dir">AI 产品 · 过程数据向</div><h4>AI Coding 实战过程数据拆解</h4><p>480 次提交 + 1,236 次工具调用：只有 5% 的返工是编译器能报出的、七成只能靠看，空间 / 视觉类是最大一类；修复间隔双峰——一小时内被 agent 自己修掉，或等到几天后的下一轮走查；25% 的工具出错是接口摩擦。一条结论在双口径重算后反转，已撤回写明；三个产品机会各附过程指标与「我已做的部分」。</p><div class="tags"><span>过程数据</span><span>失效分析</span><span>产品机会</span></div><span class="go">阅读全文 →</span></a>
   </div>
 
