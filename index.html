@@ -119,6 +119,7 @@ nav.solid{background:rgba(8,6,15,.82);border-bottom:1px solid var(--line)}
 .proj-title .badge.team{background:var(--ice)}
 .proj-sub{color:var(--gold-soft);font-size:1rem;margin-bottom:22px;letter-spacing:.02em}
 .proj-desc{color:var(--muted);max-width:760px;margin-bottom:30px;font-size:1.02rem}
+.nw{white-space:nowrap}
 
 /* 视频 */
 .video-frame{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--line);
@@ -242,6 +243,7 @@ footer .logo{font-size:1rem;margin-bottom:8px;display:inline-block}
   <div class="navlinks">
     <a href="#chrono">ChronoTraveler</a>
     <a href="#stealth">谍报潜行</a>
+    <a href="#papers">论文</a>
     <a href="#designdocs">策划案</a>
     <a href="#cases">拆解案</a>
     <a href="#engine">引擎技术</a>
@@ -287,7 +289,7 @@ footer .logo{font-size:1rem;margin-bottom:8px;display:inline-block}
     <iframe src="https://player.bilibili.com/player.html?bvid=BV1hrbY6sE2W&amp;page=2&amp;autoplay=0&amp;danmaku=0&amp;high_quality=1" title="ChronoTraveler 实机演示（中文版）" scrolling="no" allowfullscreen></iframe>
   </div></div>
   <p class="reveal d1" style="text-align:right;font-size:.78rem;color:var(--dim);margin-top:8px">中文版完整实机演示 12 分钟 ｜ <a href="https://www.bilibili.com/video/BV1Y2b56uEs4/" target="_blank" rel="noopener" style="color:var(--gold)">开场 PV 94 秒（AI 图生视频 + 脚本化剪辑，独立成片）</a> · <a href="https://www.bilibili.com/video/BV1hrbY6sE2W/" target="_blank" rel="noopener" style="color:var(--dim)">B 站原页（P1 为 18 分钟英文版）</a> · <a href="https://youtu.be/6Jd2jqOS7E8" target="_blank" rel="noopener" style="color:var(--dim)">YouTube（海外备用）</a></p>
-  <p class="reveal d1 proj-desc">一人完成从立项、系统设计、数值、关卡、叙事到上线的完整流程：五时代世界观、序章开场弧、终局二段式决战，音频 / CG / 立绘全覆盖。</p>
+  <p class="reveal d1 proj-desc">一人完成从立项、系统设计、数值、关卡、叙事到上线的完整流程：<br><span class="nw">五时代世界观</span>、<span class="nw">序章开场弧</span>、<span class="nw">终局二段式决战</span>，<span class="nw">音频 / CG / 立绘全覆盖</span>。</p>
   <div class="hl">
     <div class="hl-card reveal d1"><h4>「知识对决」回合战斗</h4><p>5 大知识域映射五元素、五边形克制环（1.25/1.0/0.8）驱动技能切换决策；答题速度与正误决定伤害倍率（快答 1.5× / 答错 0.2× 保底）——使知识掌握度直接决定战斗表现。</p></div>
     <div class="hl-card reveal d2"><h4>成长与 Boss 设计</h4><p>记忆修复度（碎片 + 净化累积驱动进度）、Boss 双条件门、终局觉醒二阶段真形决战。</p></div>
@@ -400,6 +402,18 @@ footer .logo{font-size:1rem;margin-bottom:8px;display:inline-block}
 
 <!-- 引擎技术 -->
 
+<!-- 论文 -->
+<section id="papers"><div class="wrap">
+  <div class="reveal"><div class="eyebrow">Papers</div>
+    <h2 class="sec">论文</h2>
+    <p class="proj-desc">把 ChronoTraveler 和它的 NPC 对话层拿出来，各写成一篇英文论文，发布在 Zenodo（带 DOI 的预印本）。两篇的做法一样：评测计划先提交再跑，数据、提示词和每一条人工裁定都公开在仓库里；结果不好看的地方也照写。</p>
+  </div>
+  <div class="cases">
+    <a class="case reveal d1" href="https://doi.org/10.5281/zenodo.23150869" target="_blank" rel="noopener"><div class="num">P1</div><div class="dir">LLM NPC 护栏 · 评测方法</div><h4>Feature or Leak? Guarding an LLM-Driven NPC Against Answer Leakage in an Educational Game</h4><p>开发集上护栏守住 82–100%，换成盲写并冻结的 46 例留出集、按语义判泄露再逐条人工复核后，四个模型只剩 45–64%。不要答案的攻击 140 次全部守住；失守集中在「只要一部分」的问法（排除法、首字、藏头、确认猜测），关键词匹配漏掉了其中大半。</p><div class="tags"><span>Guardrails</span><span>留出集评测</span><span>DOI 10.5281/zenodo.23150869</span></div><span class="go">阅读论文 →</span></a>
+    <a class="case reveal d2" href="https://doi.org/10.5281/zenodo.23150165" target="_blank" rel="noopener"><div class="num">P2</div><div class="dir">LLM 生成内容审计 · 教育测评</div><h4>Counting What Inspection Misses: Auditing an LLM-Generated Quiz Bank for an Educational Game</h4><p>审计游戏里 AI 生成的 500 道双语题：两家模型做题正确率 98.8–100%，0 道错键；但遮住题干只看选项，猜对率仍有 56–59%（随机 25%）。答案位置偏置 χ²=868、答案常是最长选项、约 80 题被别的题题干泄题——这些单题审读都看不出来。</p><div class="tags"><span>内容审计</span><span>预注册</span><span>DOI 10.5281/zenodo.23150165</span></div><span class="go">阅读论文 →</span></a>
+  </div>
+</div></section>
+
 <!-- 系统策划案（已完成 / 已交付项目） -->
 <section id="designdocs"><div class="wrap">
   <div class="reveal"><div class="eyebrow">Design Docs</div>
@@ -485,15 +499,6 @@ footer .logo{font-size:1rem;margin-bottom:8px;display:inline-block}
       <div class="hl-card reveal d3"><h4>假阳性比漏报更危险</h4><p>子串匹配分不清"使用"与"提及"，三次误报同一根因——误报会诱导你去修改本来正确的行为。</p></div>
     </div>
     <a class="repo" href="https://github.com/linynZ/chrono-npc-agent" target="_blank" rel="noopener">↗ 开源仓库（代码 / 评测 / 发现文档公开可查）</a>
-  </div>
-
-  <div class="reveal d2" style="margin-top:44px">
-    <div class="dec-h">两篇预印本论文（Zenodo · 带 DOI）</div>
-    <div class="dec-note">把上面的项目写成英文论文：评测计划先提交再跑、数据与每条裁定全部公开，结果不好看的地方也照写。</div>
-  </div>
-  <div class="cases" style="margin-top:18px">
-    <a class="case reveal d1" href="https://doi.org/10.5281/zenodo.23150869" target="_blank" rel="noopener"><div class="num">P1</div><div class="dir">LLM NPC 护栏 · 评测方法</div><h4>Feature or Leak? Guarding an LLM-Driven NPC Against Answer Leakage in an Educational Game</h4><p>开发集上护栏守住 82–100%，换成盲写并冻结的 46 例留出集、按语义判泄露再逐条人工复核后，四个模型只剩 45–64%。不要答案的攻击 140 次全部守住；失守集中在「只要一部分」的问法（排除法、首字、藏头、确认猜测），关键词匹配漏掉了其中大半。</p><div class="tags"><span>Guardrails</span><span>留出集评测</span><span>DOI 10.5281/zenodo.23150869</span></div><span class="go">阅读论文 →</span></a>
-    <a class="case reveal d2" href="https://doi.org/10.5281/zenodo.23150165" target="_blank" rel="noopener"><div class="num">P2</div><div class="dir">LLM 生成内容审计 · 教育测评</div><h4>Counting What Inspection Misses: Auditing an LLM-Generated Quiz Bank for an Educational Game</h4><p>审计游戏里 AI 生成的 500 道双语题：两家模型做题正确率 98.8–100%，0 道错键；但遮住题干只看选项，猜对率仍有 56–59%（随机 25%）。答案位置偏置 χ²=868、答案常是最长选项、约 80 题被别的题题干泄题——这些单题审读都看不出来。</p><div class="tags"><span>内容审计</span><span>预注册</span><span>DOI 10.5281/zenodo.23150165</span></div><span class="go">阅读论文 →</span></a>
   </div>
 
   <div class="reveal d2" style="margin-top:44px">
