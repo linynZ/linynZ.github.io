@@ -406,11 +406,12 @@ footer .logo{font-size:1rem;margin-bottom:8px;display:inline-block}
 <section id="papers"><div class="wrap">
   <div class="reveal"><div class="eyebrow">Papers</div>
     <h2 class="sec">论文</h2>
-    <p class="proj-desc">把 ChronoTraveler 和它的 NPC 对话层拿出来，各写成一篇英文论文，发布在 Zenodo（带 DOI 的预印本）。两篇的做法一样：评测计划先提交再跑，数据、提示词和每一条人工裁定都公开在仓库里；结果不好看的地方也照写。</p>
+    <p class="proj-desc">把 ChronoTraveler、它的 NPC 对话层和它的 AI 生成 3D 资产拿出来，各写成一篇英文论文，发布在 Zenodo（带 DOI 的预印本）。三篇的做法一样：评测计划先提交再跑，数据、提示词和每一条人工裁定都公开在仓库里；结果不好看的地方也照写。</p>
   </div>
   <div class="cases">
     <a class="case reveal d1" href="https://doi.org/10.5281/zenodo.23150869" target="_blank" rel="noopener"><div class="num">P1</div><div class="dir">LLM NPC 护栏 · 评测方法</div><h4>Feature or Leak? Guarding an LLM-Driven NPC Against Answer Leakage in an Educational Game</h4><p>开发集上护栏守住 82–100%，换成盲写并冻结的 46 例留出集、按语义判泄露再逐条人工复核后，四个模型只剩 45–64%。不要答案的攻击 140 次全部守住；失守集中在「只要一部分」的问法（排除法、首字、藏头、确认猜测），关键词匹配漏掉了其中大半。</p><div class="tags"><span>Guardrails</span><span>留出集评测</span><span>DOI 10.5281/zenodo.23150869</span></div><span class="go">阅读论文 →</span></a>
     <a class="case reveal d2" href="https://doi.org/10.5281/zenodo.23150165" target="_blank" rel="noopener"><div class="num">P2</div><div class="dir">LLM 生成内容审计 · 教育测评</div><h4>Counting What Inspection Misses: Auditing an LLM-Generated Quiz Bank for an Educational Game</h4><p>审计游戏里 AI 生成的 500 道双语题：两家模型做题正确率 98.8–100%，0 道错键；但遮住题干只看选项，猜对率仍有 56–59%（随机 25%）。答案位置偏置 χ²=868、答案常是最长选项、约 80 题被别的题题干泄题——这些单题审读都看不出来。</p><div class="tags"><span>内容审计</span><span>预注册</span><span>DOI 10.5281/zenodo.23150165</span></div><span class="go">阅读论文 →</span></a>
+    <a class="case reveal d3" href="https://doi.org/10.5281/zenodo.23228592" target="_blank" rel="noopener"><div class="num">P3</div><div class="dir">AI 图生 3D · 引擎资产审计</div><h4>Fit for the Engine? Image-to-3D Meshes, Their Pipeline, and an AI Assistant's Explanations in a Completed Unity Game</h4><p>审计已完成游戏里 24 个 AI 图生 3D 网格进引擎后的真实状况：出货构建里 24 张底色图都是 4096² 未压缩，占全部贴图 70%。再拿测量结果核对 AI 编码助手当时对这些问题的解释：39 条能核对的诊断里错了 8 条，其中 4 条把自家管线的问题怪到了生成器头上。</p><div class="tags"><span>图生 3D</span><span>AI 归因审计</span><span>DOI 10.5281/zenodo.23228592</span></div><span class="go">阅读论文 →</span></a>
   </div>
 </div></section>
 
